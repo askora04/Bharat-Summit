@@ -1,0 +1,153 @@
+/* Speakers page */
+
+.sp-hero {
+  position: relative;
+  height: 290px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 61px max(16px, calc((100% - 1280px) / 2)) 0; /* text on the content edge */
+  background:
+    radial-gradient(60% 90% at 15% 10%, rgba(57, 207, 220, .28), transparent 60%),
+    radial-gradient(50% 80% at 70% 100%, rgba(239, 112, 71, .25), transparent 60%),
+    linear-gradient(135deg, #13345f, #0b1f3a);
+  color: #fff;
+}
+/* soft blurred glow in the top-right corner */
+.sp-hero::after {
+  content: ''; position: absolute; top: -90px; right: 90px; width: 520px; height: 260px;
+  background: radial-gradient(closest-side, rgba(57, 207, 220, .32), rgba(251, 170, 18, .14) 60%, transparent);
+  filter: blur(36px); pointer-events: none;
+}
+.sp-hero-monuments {
+  /* running out to the right edge */
+  position: absolute; z-index: 1; right: 14px; bottom: 0;
+  display: flex; align-items: flex-end; gap: 18px;
+  pointer-events: none;
+}
+.sp-hero-monuments img {
+  display: block; /* no inline gap under the image: stands right on the bottom edge */
+  width: auto;
+  /* crisp solid white line art, static */
+  filter: brightness(0) invert(1) drop-shadow(0 1px 3px rgba(11, 31, 58, .55));
+  opacity: .95;
+}
+.sp-hero-copy { position: relative; z-index: 1; max-width: 640px; animation: rise 1s ease-out both; }
+.sp-hero-kicker { font: 700 14px/1 var(--font-body); letter-spacing: .32em; color: #fbaa12; }
+.sp-hero-kicker + h1 { margin-top: 10px; }
+.sp-hero h1 { font: 700 56px/1.05 var(--font-display); letter-spacing: -1.2px; }
+.sp-hero-copy > p:last-child { margin-top: 10px; font-size: 17px; line-height: 1.5; color: rgba(255, 255, 255, .82); }
+
+.sp-page { width: min(1280px, 100% - 32px); margin: 0 auto; padding: 48px 0 80px; }
+
+/* Sessions, grouped under the two parts of the programme. Each session: details on the left,
+   its speakers on the right, so every session lines up on the same two columns. */
+/* Filter bar: session dropdown + speaker count */
+.sp-filters {
+  display: grid; grid-template-columns: minmax(0, 420px) auto; justify-content: space-between; gap: 12px; align-items: center;
+  margin-bottom: 40px; padding: 16px; border: 1px solid #e6ebf1; border-radius: 14px; background: #f7f9fc;
+}
+.sp-select select {
+  height: 48px; border: 1px solid #d6dee4; border-radius: 10px; background: #fff; color: var(--navy);
+  font: 500 15px/1.2 var(--font-body);
+}
+.sp-select select:focus-visible { border-color: var(--navy); box-shadow: 0 0 0 3px rgba(8, 40, 82, .12); outline: 0; }
+.sp-select select {
+  width: 100%; padding: 0 40px 0 14px; cursor: pointer; appearance: none;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23082852' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center;
+}
+.sp-count { display: flex; align-items: center; gap: 10px; padding: 0 6px; white-space: nowrap; font-size: 14px; font-weight: 600; color: var(--navy); }
+.sp-count button { padding: 6px 12px; border: 0; border-radius: 999px; background: var(--navy); color: #fff; font: 600 13px/1 var(--font-body); cursor: pointer; }
+
+.sp-part + .sp-part { margin-top: 80px; }
+.sp-part-title {
+  display: flex; flex-direction: column; gap: 14px;
+  padding-bottom: 18px; border-bottom: 2px solid var(--navy);
+  font: 400 36px/1.2 var(--font-display); letter-spacing: -.6px; color: var(--navy);
+}
+.sp-session { padding: 40px 0; border-bottom: 1px solid #e6ebf1; }
+.sp-session-when {
+  display: inline-block; padding: 4px 12px; border-radius: 999px;
+  background: #eaf0f7; color: var(--navy); font-size: 13px; font-weight: 600; letter-spacing: .02em;
+}
+.sp-session h3 { margin-top: 12px; font: 700 22px/1.3 var(--font-display); color: var(--navy); }
+.sp-session-about { margin-top: 12px; font-size: 16px; line-height: 1.65; color: #3d5477; }
+
+/* Speakers: three cards across, as the original roster: colour panel with initials, details beneath */
+.sp-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px 20px; margin-top: 28px; }
+.sp-card {
+  display: flex; flex-direction: column; overflow: hidden;
+  border: 1px solid #e6ebf1; border-radius: 10px; background: #f5f7fa;
+  color: inherit; text-align: center;
+  transition: transform .35s cubic-bezier(.2, .8, .2, 1), box-shadow .35s, border-color .3s;
+  animation: sp-card-in .6s cubic-bezier(.2, .8, .2, 1) both; animation-delay: calc(var(--i) * 40ms);
+}
+@keyframes sp-card-in { from { opacity: 0; transform: translateY(16px); } }
+.sp-card:hover, .sp-card:focus-visible { transform: translateY(-4px); border-color: transparent; box-shadow: 0 14px 30px rgba(19, 52, 95, .14); }
+.sp-card-photo { position: relative; display: block; aspect-ratio: 4 / 3; overflow: hidden; }
+.sp-card-body { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 14px 16px 18px; }
+.sp-card-name { font: 700 17px/1.3 var(--font-display); color: var(--navy); }
+.sp-card-role { font-size: 14px; line-height: 1.4; color: #3d5477; text-align: center; text-align-last: center; }
+.sp-mod {
+  width: fit-content; padding: 2px 10px; border-radius: 999px;
+  background: var(--navy); color: #fff; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+}
+.sp-detail-info .sp-mod { display: inline-block; margin-top: 10px; }
+
+.sp-band { position: absolute; top: 0; bottom: 0; }
+.sp-band-1 { left: 0; width: 22%; background: rgba(255, 255, 255, .12); }
+.sp-band-2 { left: 22%; width: 13%; background: rgba(255, 255, 255, .06); }
+.sp-band-3 { right: 0; width: 25%; background: rgba(255, 255, 255, .18); }
+.sp-initials {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  font: 700 clamp(36px, 5vw, 64px)/1 var(--font-display); letter-spacing: .04em; color: rgba(255, 255, 255, .95);
+}
+.sp-detail-when { margin-top: 4px; font-size: 15px; color: #3d5477; }
+/* cut-out photos stand on the bottom edge of their colour panel; black & white until hovered */
+.sp-card-photo img, .sp-detail-photo img {
+  position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 100%;
+  object-fit: contain; object-position: center bottom;
+}
+.sp-card-photo img { filter: grayscale(1); transform-origin: bottom; transition: filter .5s ease, transform .5s ease; }
+.sp-card:hover .sp-card-photo img, .sp-card:focus-visible .sp-card-photo img { filter: none; transform: scale(1.04); }
+
+/* Speaker page: photo left, details right */
+.sp-detail { width: min(1080px, 100% - 32px); margin: 0 auto; padding: 28px 0 96px; scroll-margin-top: 61px; } /* opens just below the fixed header */
+.sp-back { display: inline-flex; align-items: center; gap: 8px; font-size: 15px; color: #3d5477; transition: color .2s; }
+.sp-back:hover { color: #13345f; }
+.sp-detail-grid { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 48px; align-items: start; margin-top: 28px; }
+.sp-detail-photo { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 14px; }
+.sp-detail-socials { display: flex; gap: 8px; margin-top: 16px; }
+.sp-detail-socials a { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 999px; transition: background .2s; }
+.sp-detail-socials a:hover { background: rgba(19, 52, 95, .08); }
+.sp-detail-info h1 { font: 700 44px/1.1 var(--font-display); letter-spacing: -.8px; color: #13345f; }
+.sp-detail-role { margin-top: 12px; font-size: 19px; line-height: 1.4; color: #3d5477; }
+.sp-detail-country { margin-top: 8px; font-size: 14px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--navy); }
+.sp-detail-rule { display: block; width: 80px; height: 4px; margin: 24px 0; border-radius: 2px; background: var(--navy); }
+.sp-detail-bio { max-width: 640px; font-size: 17px; line-height: 1.7; color: #3d5477; }
+
+@media (max-width: 1100px) {
+  .sp-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sp-hero { padding: 61px 16px 0; }
+  .sp-hero-monuments { right: 16px; opacity: .7; }
+}
+@media (max-width: 700px) {
+  .sp-hero { height: 250px; }
+  .sp-hero-monuments { display: none; }
+  .sp-hero h1 { font-size: 42px; }
+  .sp-part-title { font-size: 28px; }
+  .sp-filters { grid-template-columns: minmax(0, 1fr); padding: 12px; }
+  .sp-session h3 { font-size: 20px; }
+  .sp-session { padding: 32px 0; }
+  .sp-grid { grid-template-columns: minmax(0, 1fr); }
+  .sp-detail-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .sp-detail-photo { width: min(280px, 100%); }
+  .sp-detail-info h1 { font-size: 34px; }
+}
+
+/* Printing / saving as PDF: top bar scrolls away instead of repeating on every page; cards never split */
+@media print {
+  .header { position: absolute; }
+  .to-top { display: none; }
+  .sp-card { break-inside: avoid; }
+}
