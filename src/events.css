@@ -1,19 +1,8 @@
 /* Events page: the summit photo gallery (photos served from S3, see gallery.js) */
 
-/* One content width for the hero, the video band and the gallery, so every edge lines up */
+/* One content width for the video band and the gallery, so every edge lines up */
 :root { --ev-width: min(1280px, 100% - 32px); } /* same as .container and the header */
 @media (max-width: 560px) { :root { --ev-width: calc(100% - 32px); } }
-
-.ev-wrap { width: var(--ev-width); margin: 0 auto; }
-
-/* Hero, in the same style as the Schedule page */
-.ev-hero { padding: 112px 0 64px; background: var(--navy); color: #fff; }
-.ev-hero-kicker { font: 700 14px/1 var(--font-body); letter-spacing: .32em; color: #fbaa12; animation: rise .8s ease-out both; }
-.ev-hero h1 { margin-top: 10px; font: 400 48px/1.18 var(--font-display); letter-spacing: -1.2px; animation: rise .8s ease-out both; }
-.ev-hero h1 strong { font-weight: 700; }
-.ev-hero h1 + p { max-width: 640px; margin-top: 16px; font-size: 18px; line-height: 1.55; color: rgba(255, 255, 255, .78); animation: rise .8s ease-out .1s both; }
-/* the intro stays on one line wherever it fits (wraps on phones) */
-@media (min-width: 800px) { .ev-hero h1 + p { max-width: none; white-space: nowrap; } }
 
 .ev-page { width: var(--ev-width); margin: 0 auto; padding: 72px 0 88px; }
 
@@ -64,7 +53,6 @@
 .ev-tile:hover .ev-photo img { transform: scale(1.04); }
 .ev-photo:focus-visible { outline: 3px solid #fbaa12; outline-offset: -3px; }
 /* the day, in a white band under the photo */
-.ev-day { padding: 12px 16px 14px; background: #fff; font-size: 14px; font-weight: 600; color: var(--navy); }
 /* the photo's button covers the whole card, so a click on the caption opens it too */
 .ev-photo::after { content: ''; position: absolute; inset: 0; z-index: 1; }
 .ev-tile { cursor: zoom-in; }
@@ -116,8 +104,6 @@
   .ev-gallery { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 700px) {
-  .ev-hero { padding: 96px 0 48px; }
-  .ev-hero h1 { font-size: 34px; }
   .ev-lightbox { padding: 64px 8px 16px; }
   .ev-lb-step { top: auto; bottom: 16px; translate: none; }
   .ev-lb-figure img { max-height: calc(100vh - 160px); }

@@ -240,8 +240,7 @@ const RAW = [
   },
 ]
 
-const NO_PHOTO = new Set(['Eduardo Zanatta', 'Oh Song', 'Amitabh Dubey', 'Jonas Kalambayi Katshiobo', 'Basem Kamel',
-  'Bhangya Bhukya', 'K. Raju', 'Manish Sharma', 'SDJM Prasad'])
+const NO_PHOTO = new Set([])
 // "María José Pizarro" -> "maria-jose-pizarro", the photo's file name
 const slug = (name) => name.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 

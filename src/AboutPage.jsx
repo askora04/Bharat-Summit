@@ -4,53 +4,21 @@ import { Link } from './router.jsx'
 import { SPEAKERS } from './speakersData.js'
 import MediaCoverage from './MediaCoverage.jsx'
 
-// Line doodles (24×24 grid, stroked) that orbit in each topic ring's margin
-const dot = (x, y, r) => `M${x - r} ${y}a${r} ${r} 0 1 0 ${2 * r} 0a${r} ${r} 0 1 0 ${-2 * r} 0`
-const DOODLES = {
-  hand: 'M8 13V6a1.5 1.5 0 0 1 3 0v5M11 11V4.5a1.5 1.5 0 0 1 3 0V11M14 11V6a1.5 1.5 0 0 1 3 0v6M8 11.5a1.5 1.5 0 0 0-3 0V14a7 7 0 0 0 7 7h.5a5.5 5.5 0 0 0 5.5-5.5V10',
-  scales: 'M12 3v17M7 20h10M5 7h14M5 7l-3 7M5 7l3 7M19 7l-3 7M19 7l3 7M2 14a3 3 0 0 0 6 0M16 14a3 3 0 0 0 6 0',
-  ballot: 'M4 12h16v8H4zM8 12V4h8v8M10 7h4M10 16h4',
-  star: 'M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4l-5.3 3 1.2-6-4.5-4.1 6-.7z',
-  sun: `${dot(12, 12, 4)}M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4`,
-  leaf: 'M5 19C5 10 10 5 20 4c0 10-5 15-15 15zM5 19l8-8',
-  tower: 'M5 21V5l7-2v18M12 9h7v12M3 21h18M8 8v0M8 12v0M8 16v0M15.5 13v0M15.5 17v0',
-  solar: 'M4 5h16l-2 9H6zM5 9.5h14M10 5l-1 9M14 5l1 9M12 14v5M8 19h8',
-  fist: 'M7 11V8a1.5 1.5 0 0 1 3 0v2M10 10V7a1.5 1.5 0 0 1 3 0v3M13 10V7.5a1.5 1.5 0 0 1 3 0V10M16 10a1.5 1.5 0 0 1 3 0v2.5A6.5 6.5 0 0 1 12.5 19h0A5.5 5.5 0 0 1 7 13.5V11M9.5 19v3M15.5 19v3',
-  heart: 'M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z',
-  venus: `${dot(12, 9, 5)}M12 14v7M9 18h6`,
-  speech: 'M4 5h16v10H9l-5 4zM8 9h8M8 12h5',
-  chip: 'M7 7h10v10H7zM10 10h4v4h-4zM9 3v4M15 3v4M9 17v4M15 17v4M3 9h4M3 15h4M17 9h4M17 15h4',
-  cloud: 'M7 18h10a4 4 0 0 0 .5-8A6 6 0 0 0 6 9.5 4.3 4.3 0 0 0 7 18z',
-  circuit: `M6 12h4l3-5h5M13 17h5M10 12l3 5${dot(4.5, 12, 1.5)}${dot(19.5, 7, 1.5)}${dot(19.5, 17, 1.5)}`,
-  pointer: 'M5 3l14 7-6 2-2 6z',
-  flag: 'M5 21V3M5 4h12l-2 4 2 4H5',
-  globe: `${dot(12, 12, 9)}M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18`,
-  shield: 'M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6zM9 12l2 2 4-4',
-  olive: 'M4 20C9 15 14 10 20 4M8 16c-2 0-3-1-3-3 2 0 3 1 3 3zM10 14c0-2 1-3 3-3 0 2-1 3-3 3zM14 10c-2 0-3-1-3-3 2 0 3 1 3 3zM16 8c0-2 1-3 3-3 0 2-1 3-3 3z',
-  chakra: `${dot(12, 12, 9)}${dot(12, 12, 1.5)}M12 3v7.5M12 13.5V21M3 12h7.5M13.5 12H21M5.6 5.6l5.3 5.3M13.1 13.1l5.3 5.3M18.4 5.6l-5.3 5.3M10.9 13.1l-5.3 5.3`,
-  pin: `M12 21s-6-6-6-11a6 6 0 0 1 12 0c0 5-6 11-6 11z${dot(12, 10, 2)}`,
-}
-
 const TOPICS = [
-  { label: ['Political Justice'], img: 'topic-youth.webp', ring: 'ring-1.svg', ink: '#e0705c', doodles: ['hand', 'ballot', 'scales', 'star'] },
-  { label: ['Economic Justice'], img: 'topic-sustainable.webp', ring: 'ring-2.svg', ink: '#3c9aa0', doodles: ['sun', 'tower', 'leaf', 'solar'] },
-  { label: ['Social Justice'], img: 'topic-gender.webp', ring: 'ring-3.svg', ink: '#d39220', doodles: ['fist', 'heart', 'venus', 'speech'] },
-  { label: ['Technology, Cloud', 'Capitalism and AI'], img: 'topic-technology.webp', ring: 'ring-4.svg', ink: '#e0566a', doodles: ['chip', 'cloud', 'circuit', 'pointer'] },
-  { label: ['Security, Multilateralism', 'and Geopolitics'], img: 'topic-multilateralism.webp', ring: 'ring-5.svg', ink: '#2f9fb3', doodles: ['flag', 'globe', 'shield', 'olive'] },
-  { label: ['India and the World'], img: 'topic-climate.webp', ring: 'ring-6.svg', ink: '#d68f24', doodles: ['globe', 'chakra', 'leaf', 'pin'] },
+  { label: ['Political Justice'], img: 'topic-youth.webp', ring: 'ring-1.svg', ink: '#e0705c' },
+  { label: ['Economic Justice'], img: 'topic-sustainable.webp', ring: 'ring-2.svg', ink: '#3c9aa0' },
+  { label: ['Social Justice'], img: 'topic-gender.webp', ring: 'ring-3.svg', ink: '#d39220' },
+  { label: ['Technology, Cloud', 'Capitalism and AI'], img: 'topic-technology.webp', ring: 'ring-4.svg', ink: '#e0566a' },
+  { label: ['Security, Multilateralism', 'and Geopolitics'], img: 'topic-multilateralism.webp', ring: 'ring-5.svg', ink: '#2f9fb3' },
+  { label: ['India and the World'], img: 'topic-climate.webp', ring: 'ring-6.svg', ink: '#d68f24' },
 ]
 
-// Eight doodles (the topic's four, twice) evenly round the ring's 14px margin, a dot between each
-function TopicDoodles({ names, ink }) {
-  const icons = [...names, ...names]
+// Eight dots evenly round the ring's 14px margin
+function TopicDots({ ink }) {
   return (
-    <svg className="topic-doodles" viewBox="0 0 252 252" aria-hidden
-      fill="none" stroke={ink} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      {icons.map((n, i) => (
-        <g key={i} transform={`rotate(${i * 45} 126 126)`}>
-          <path d={DOODLES[n]} transform="translate(118.5 -0.5) scale(.625)" />
-          <circle cx="126" cy="7" r="1.4" fill={ink} stroke="none" transform="rotate(22.5 126 126)" />
-        </g>
+    <svg className="topic-dots" viewBox="0 0 252 252" aria-hidden fill={ink}>
+      {Array.from({ length: 8 }, (_, i) => (
+        <circle key={i} cx="126" cy="7" r="1.4" transform={`rotate(${i * 45 + 22.5} 126 126)`} />
       ))}
     </svg>
   )
@@ -150,8 +118,7 @@ function Crop({ crop, className }) {
 function Hero() {
   return (
     <section className="hero" id="top">
-      <div className="hero-bg" aria-hidden />
-      <div className="hero-stripes" aria-hidden><span /><span /><span /><span /><span /></div>
+      <img className="hero-img" src="/assets/about-hero.webp" alt="" />
       <div className="hero-content">
         <div className="announcement">
           <h1 className="announcement-title"><Letters text="BHARAT SUMMIT 2026" /></h1>
@@ -200,11 +167,13 @@ export default function AboutPage() {
           <Title light="PANEL" bold="DISCUSSION" />
           <div className="topics">
             {TOPICS.map((t, i) => (
-              <div className="topic" key={t.img} style={{ '--i': i }}>
+              <div className="topic" key={t.img} style={{ '--i': i, '--ink': t.ink }}>
                 <div className="topic-graphic">
+                  <span className="topic-halo" aria-hidden />
+                  <span className="topic-orbit" aria-hidden />
                   <img className="topic-ring" src={a(t.ring)} width="252" height="252" alt="" />
                   <img className="topic-img" src={a(t.img)} width="224" height="224" alt="" />
-                  <TopicDoodles names={t.doodles} ink={t.ink} />
+                  <TopicDots ink={t.ink} />
                 </div>
                 <h3><Lines lines={t.label} /></h3>
               </div>

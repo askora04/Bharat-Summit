@@ -42,11 +42,3 @@ export function useGallery() {
 
 export const photoUrl = (photo, width) => `${GALLERY_URL}/${photo.id}-${width}.webp`
 export const photoSrcSet = (photo, sizes) => sizes.map((w) => `${photoUrl(photo, w)} ${w}w`).join(', ')
-
-// "Day 2 · 25 April 2025": the summit's day from the album's date (Day 1 = 24 April 2025)
-const DATE = new Intl.DateTimeFormat('en-IN', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
-const dayOf = (iso) => Math.round((Date.parse(iso) - Date.parse('2025-04-24')) / 864e5) + 1
-export const albumDay = (album) => album.dateEnd
-  ? `Day ${dayOf(album.date)}–${dayOf(album.dateEnd)} · ${DATE.formatRange(new Date(album.date), new Date(album.dateEnd))}`
-  : `Day ${dayOf(album.date)} · ${DATE.format(new Date(album.date))}`
-

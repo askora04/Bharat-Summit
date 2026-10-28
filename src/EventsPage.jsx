@@ -1,9 +1,12 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { useGallery, photoUrl, photoSrcSet, albumDay } from './gallery.js'
+import { useGallery, photoUrl, photoSrcSet } from './gallery.js'
 import { Title, TriBar } from './shared.jsx'
+import { MonumentHero } from './SpeakersPage.jsx'
 import EventVideos from './EventVideos.jsx'
 import './events.css'
 
+// The only albums offered as filters, besides "All photos"
+const FILTER_ALBUMS = ['day-1', 'day-2', 'day-3', 'final-session']
 const PAGE = 24 // photos added per step as the visitor scrolls (divides evenly into 4, 3 and 2 columns)
 // Image width per viewport, matching the grid columns in events.css. Every tile is the same 3:2 frame
 // (nearly all the photos are 3:2; the few square or upright ones are cropped here and shown whole in
@@ -20,7 +23,7 @@ const Icon = ({ name }) => (
     strokeLinecap="round" strokeLinejoin="round" aria-hidden>{ICONS[name]}</svg>
 )
 
-function Tile({ photo, album, sizes, order, onOpen }) {
+function Tile({ photo, sizes, order, onOpen }) {
   return (
     <figure className="ev-tile" style={{ '--i': order % PAGE }}>
       <button className="ev-photo" type="button" onClick={onOpen} aria-label={`View photo: ${photo.caption}`}
@@ -28,7 +31,6 @@ function Tile({ photo, album, sizes, order, onOpen }) {
         <img src={photoUrl(photo, sizes[0])} srcSet={photoSrcSet(photo, sizes.slice(0, 2))} sizes={GRID_SIZES}
           width={photo.w} height={photo.h} alt={photo.caption} loading="lazy" decoding="async" />
       </button>
-      <figcaption className="ev-day">{albumDay(album)}</figcaption>
     </figure>
   )
 }
@@ -115,13 +117,9 @@ export default function EventsPage() {
 
   return (
     <>
-      <section className="ev-hero">
-        <div className="ev-wrap">
-          <p className="ev-hero-kicker">BHARAT SUMMIT 2025</p>
-          <h1>RELIEVE <strong>BHARAT SUMMIT</strong></h1>
-          <p>A glimpse into the ideas, conversations, and people shaping a stronger, smarter India.</p>
-        </div>
-      </section>
+      <MonumentHero kicker="BHARAT SUMMIT 2025" title="SUMMIT ARCHIVES">
+        <p>A glimpse into the ideas, conversations, and people shaping a stronger, smarter India.</p>
+      </MonumentHero>
 
       {/* Videos get their own band, ahead of the photo gallery */}
       <EventVideos />
@@ -133,7 +131,7 @@ export default function EventsPage() {
         </div>
         {gallery && (
           <div className="ev-albums" role="group" aria-label="Albums">
-            {[{ id: 'all', title: 'All photos', count: gallery.photos.length }, ...gallery.albums].map((al) => (
+            {[{ id: 'all', title: 'All photos' }, ...FILTER_ALBUMS.map((id) => gallery.albumById[id]).filter(Boolean)].map((al) => (
               <button key={al.id} type="button" className="ev-album" aria-pressed={albumId === al.id} onClick={() => pick(al.id)}>
                 {al.title}
               </button>
@@ -146,7 +144,7 @@ export default function EventsPage() {
         <div className="ev-gallery" aria-busy={!gallery && !error}>
           {gallery
             ? visible.map((p, index) => (
-                <Tile key={p.id} photo={p} album={gallery.albumById[p.album]} sizes={gallery.sizes} order={index}
+                <Tile key={p.id} photo={p} sizes={gallery.sizes} order={index}
                   onOpen={() => setOpen(index)} />
               ))
             : !error && Array.from({ length: 8 }, (_, i) => <div className="ev-skeleton" key={i} aria-hidden />)}

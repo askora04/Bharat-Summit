@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { a, TriBar } from './shared.jsx'
 import { Link, usePath } from './router.jsx'
 import { PARTS, SPEAKERS } from './speakersData.js'
@@ -13,6 +13,39 @@ const HERO_MONUMENTS = [
   ['skyline', 'qutub-minar', 184],
   ['landmarks', 'charminar', 120],
 ]
+
+// Page banner with the monuments along its lower right; the Summit Archives page uses it too
+export function MonumentHero({ kicker, title, children }) {
+  const row = useRef(null)
+  // the monuments drift after the pointer (-1..1 across the banner); taller ones are "nearer" and move more
+  const follow = (e) => {
+    const r = e.currentTarget.getBoundingClientRect()
+    row.current?.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 2 - 1).toFixed(3))
+    row.current?.style.setProperty('--my', ((e.clientY - r.top) / r.height * 2 - 1).toFixed(3))
+  }
+  const settle = () => { row.current?.style.setProperty('--mx', 0); row.current?.style.setProperty('--my', 0) }
+
+  return (
+    <section className="sp-hero" onPointerMove={follow} onPointerLeave={settle}>
+      <div className="sp-hero-stars" aria-hidden>
+        {[[8, 30], [22, 70], [38, 15], [55, 55], [70, 25], [86, 62], [95, 10]].map(([x, y], s) => (
+          <span key={s} style={{ left: `${x}%`, top: `${y}%`, '--s': s }} />
+        ))}
+      </div>
+      <div className="sp-hero-monuments" ref={row} aria-hidden>
+        {HERO_MONUMENTS.map(([folder, id, height], i) => (
+          <img key={id} src={a(`footer/${folder}/${id}-hero.webp`)} alt=""
+            style={{ '--h': `${height}px`, '--i': i, '--depth': Math.round(height / 12) }} />
+        ))}
+      </div>
+      <div className="sp-hero-copy">
+        <p className="sp-hero-kicker">{kicker}</p>
+        <h1>{title}</h1>
+        {children}
+      </div>
+    </section>
+  )
+}
 
 // The speaker's cut-out photo on a brand colour, or their initials where there's no photo
 function Initials({ speaker, className }) {
@@ -76,17 +109,7 @@ export default function SpeakersPage() {
 
   return (
     <>
-      <section className="sp-hero">
-        <div className="sp-hero-monuments" aria-hidden>
-          {HERO_MONUMENTS.map(([folder, id, height]) => (
-            <img key={id} src={a(`footer/${folder}/${id}-hero.webp`)} alt="" style={{ height }} />
-          ))}
-        </div>
-        <div className="sp-hero-copy">
-          <p className="sp-hero-kicker">BHARAT SUMMIT 2026</p>
-          <h1>SPEAKERS</h1>
-        </div>
-      </section>
+      <MonumentHero kicker="BHARAT SUMMIT 2026" title="SPEAKERS" />
 
       {speaker ? <SpeakerDetail speaker={speaker} /> : (
         <main className="sp-page" id="speakers">

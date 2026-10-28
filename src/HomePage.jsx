@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { a, Title, Portrait, TriBar, Letters } from './shared.jsx'
 import { Link } from './router.jsx'
 import './home.css'
@@ -49,9 +49,16 @@ function Icon({ name, size = 20, strokeWidth = 2 }) {
 }
 
 function HomeHero() {
+  const video = useRef(null)
+  // plays once per visit, starting as the page curtain lifts so the opening isn't hidden under it
+  useEffect(() => {
+    const t = setTimeout(() => video.current?.play().catch(() => {}), 900)
+    return () => clearTimeout(t)
+  }, [])
+
   return (
     <section className="h-hero" id="top">
-      {/* the banner image carries its own colour stripes */}
+      <video className="hero-media" ref={video} src="/videos/hero-banner.mp4" muted playsInline preload="auto" aria-hidden />
       <div className="h-announce">
         <div className="h-pill">
           <h1><Letters text="BHARAT SUMMIT 2026" /></h1>
@@ -135,7 +142,7 @@ function CuratedBy() {
 }
 
 // The gallery's featured photos (from S3); the bundled moment-01 … moment-16 until it loads, or if it can't
-const LOCAL_MOMENTS = Array.from({ length: 16 }, (_, i) => ({ src: h(`moment-${String(i + 1).padStart(2, '0')}.jpg`), alt: '' }))
+const LOCAL_MOMENTS = Array.from({ length: 16 }, (_, i) => ({ src: h(`moment-${String(i + 1).padStart(2, '0')}.webp`), alt: '' }))
 
 function Moments() {
   const { gallery } = useGallery()
@@ -217,7 +224,7 @@ function Venue() {
             <div className="h-venue-actions">
               <a className="h-maps-btn" href={MAPS_URL} target="_blank" rel="noreferrer">
                 <Icon name="navigation" size={18} strokeWidth={1.75} /> Open in Google Maps
-                <img src={h('external.png')} width="14" height="14" alt="" />
+                <img src={h('external.webp')} width="14" height="14" alt="" />
               </a>
               <button className="h-copy" onClick={copy} aria-label={copied ? 'Address copied' : 'Copy address'}>
                 <Icon name={copied ? 'check' : 'copy'} size={20} strokeWidth={1.75} />

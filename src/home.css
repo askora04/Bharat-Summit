@@ -18,6 +18,8 @@
   overflow: hidden;
   background: #0f151c; /* the image itself is on ::before, so it can drift as you scroll (motion.css) */
 }
+/* the video's logo and dates sit near its left edge: crop from the right (blank margin) instead */
+.h-hero .hero-media { object-position: left center; }
 .h-announce {
   position: absolute;
   top: calc(61px + 12vh); /* below the header, in the open sky */
@@ -101,12 +103,8 @@
 }
 .h-speaker:hover, .h-speaker:focus-visible { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(36, 35, 33, .14); }
 .h-portrait { flex: none; height: 215px; }
-/* Background stays in colour; only the person goes black & white until hovered */
-.h-portrait img {
-  filter: grayscale(1); transform-origin: bottom;
-  transition: filter .5s ease, transform .5s ease;
-}
-.h-speaker:hover .h-portrait img, .h-speaker:focus-visible .h-portrait img { filter: none; transform: scale(1.04); }
+.h-portrait img { transform-origin: bottom; transition: transform .5s ease; }
+.h-speaker:hover .h-portrait img, .h-speaker:focus-visible .h-portrait img { transform: scale(1.04); }
 .h-portrait .band-1 { left: 0; width: 49px; background: rgba(255, 255, 255, .12); }
 .h-portrait .band-2 { left: 49px; width: 27px; background: rgba(255, 255, 255, .06); }
 .h-portrait .band-3 { right: 0; width: 67px; background: rgba(255, 255, 255, .2); }
@@ -172,10 +170,9 @@
 @keyframes h-gallery-up { to { transform: translateY(calc((-100% - 10px) / 3)); } }
 .h-gallery img {
   width: 100%; object-fit: cover; border-radius: 6px;
-  filter: grayscale(.85) brightness(.97);
-  transition: filter .45s ease, transform .45s ease, box-shadow .45s ease;
+  transition: transform .45s ease, box-shadow .45s ease;
 }
-.h-gallery img:hover { filter: none; transform: scale(1.03); box-shadow: 0 10px 22px rgba(9, 25, 78, .22); }
+.h-gallery img:hover { transform: scale(1.03); box-shadow: 0 10px 22px rgba(9, 25, 78, .22); }
 
 /* Venue */
 .h-venue { padding: 22px 0 40px; background: #fff; display: flex; flex-direction: column; align-items: center; }
