@@ -22,7 +22,7 @@ export default function OrganizedBy({ sectionId = 'organised' }) {
           <img src={a('telangana-emblem.webp')} width="150" height="150" alt="Government of Telangana" />
         </span>
         {/* a looping strip, like the speakers row; the list is doubled so one copy is wider than the screen */}
-        <Marquee className="container org-marquee" clickableCopy items={[...ORGANIZERS, ...ORGANIZERS]} render={(o, copy) => {
+        <Marquee className="container org-marquee" clickableCopy drag items={[...ORGANIZERS, ...ORGANIZERS]} render={(o, copy) => {
           const i = ORGANIZERS.indexOf(o)
           return (
             <button

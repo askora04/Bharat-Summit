@@ -88,6 +88,9 @@
 /* Keeps moving on hover by design; the half-gap keeps the two copies' seam exact */
 .h-marquee-track { display: flex; gap: 20px; width: max-content; animation: h-marquee 70s linear infinite; }
 .h-marquee-row.is-reverse .h-marquee-track { animation-direction: reverse; }
+/* draggable by hand (dragMarquee); vertical swipes still scroll the page */
+.h-marquee-track { cursor: grab; touch-action: pan-y; user-select: none; }
+.h-marquee-track:active { cursor: grabbing; }
 @keyframes h-marquee { to { transform: translateX(calc(-50% - 10px)); } }
 
 .h-speaker {

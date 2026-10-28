@@ -35,3 +35,6 @@ dist-ssr
 
 # Vercel CLI project link
 .vercel
+
+# Photographers' full-size originals for the gallery (npm run gallery -- gallery-originals ...)
+gallery-originals/

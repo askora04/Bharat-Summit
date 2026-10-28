@@ -185,7 +185,7 @@ export default function AboutPage() {
           <Title light="WORLD" bold="LEADERS, VISIONARIES, CHANGEMAKERS" />
           <p className="lede">Global leaders, renowned scholars, and change makers from across the world.</p>
           <div className="container">
-            <Marquee className="speakers" items={SPEAKERS.slice(0, 10)} render={(s) => (
+            <Marquee className="speakers" drag items={SPEAKERS.slice(0, 10)} render={(s) => (
               <Link className="speaker" to={`/speakers/${s.id}`}
                 aria-label={`${s.name}, ${s.role}. View profile`}>
                 <Portrait bg={s.bg} src={s.img} className="speaker-portrait">{!s.img && <span className="sp-initials">{s.initials}</span>}</Portrait>

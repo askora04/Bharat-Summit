@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { a, TriBar } from './shared.jsx'
 import { Link, usePath } from './router.jsx'
 import { PARTS, SPEAKERS } from './speakersData.js'
@@ -73,6 +73,80 @@ function SpeakerCard({ speaker, index }) {
   )
 }
 
+// A session's card row that glides along on its own at a steady pace, like the homepage marquee:
+// the cards repeat once, and the row jumps back by one set as it reaches the copy, so the loop is
+// seamless. It's a real scrolling row, so visitors can still move it themselves (trackpad, wheel,
+// swipe) and it carries on from wherever they leave it. It holds still while the pointer is over it,
+// while it has keyboard focus, while a finger is on it, while it's off screen, and for visitors who
+// ask for reduced motion. Rows that already fit don't move or repeat.
+const GLIDE = 40 // px per second
+
+function AutoScrollRow({ children }) {
+  const row = useRef(null)
+  const [loop, setLoop] = useState(false)
+
+  // repeat the cards only when one set is wider than the row
+  useEffect(() => {
+    const el = row.current
+    const count = Array.isArray(children) ? children.length : 1
+    const measure = () => {
+      const card = el.firstElementChild
+      if (!card) return
+      const gap = parseFloat(getComputedStyle(el).columnGap) || 0
+      setLoop(count * card.getBoundingClientRect().width + (count - 1) * gap > el.clientWidth + 1)
+    }
+    measure()
+    const ro = new ResizeObserver(measure)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [children])
+
+  useEffect(() => {
+    const el = row.current
+    if (!loop || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    let visible = false, touching = false, last = 0, pos = el.scrollLeft, written = pos, prev = 0, frame
+    const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting })
+    io.observe(el)
+    const down = () => { touching = true }
+    const up = () => { touching = false; last = performance.now() }
+    const wheel = () => { last = performance.now() }
+    const events = [['touchstart', down], ['touchend', up], ['touchcancel', up], ['wheel', wheel]]
+    events.forEach(([t, f]) => el.addEventListener(t, f, { passive: true }))
+
+    const tick = (now) => {
+      frame = requestAnimationFrame(tick)
+      const dt = prev ? Math.min(now - prev, 100) / 1000 : 0
+      prev = now
+      // the visitor scrolled it themselves: carry on from there
+      if (Math.abs(el.scrollLeft - written) > 1) pos = el.scrollLeft
+      written = el.scrollLeft
+      // hold off while they're on it, and for a moment after, so a swipe's momentum plays out
+      if (!visible || document.hidden || touching || now - last < 800 || el.matches(':hover') || el.querySelector(':focus-visible')) return
+      // one set's width: how far the copy's first card sits from the first card
+      const set = el.lastElementChild.firstElementChild.offsetLeft - el.firstElementChild.offsetLeft
+      pos += GLIDE * dt
+      if (pos >= set) pos -= set
+      el.scrollLeft = pos
+      written = el.scrollLeft
+    }
+    frame = requestAnimationFrame(tick)
+
+    return () => {
+      cancelAnimationFrame(frame)
+      io.disconnect()
+      events.forEach(([t, f]) => el.removeEventListener(t, f))
+    }
+  }, [loop])
+
+  return (
+    <div className="sp-grid sp-grid-auto" ref={row}>
+      {children}
+      {/* the repeat: out of the tab order and hidden from screen readers */}
+      {loop && <div className="sp-grid-copy" inert aria-hidden>{children}</div>}
+    </div>
+  )
+}
+
 // One speaker: initials panel on the left, name, title, session and bio on the right
 function SpeakerDetail({ speaker }) {
   return (
@@ -143,9 +217,16 @@ export default function SpeakersPage() {
                     <h3>{se.title}</h3>
                     {se.about && <p className="sp-session-about">{se.about}</p>}
                   </div>
-                  <div className="sp-grid">
-                    {se.speakers.map((sp, i) => <SpeakerCard key={sp.id} speaker={sp} index={i} />)}
-                  </div>
+                  {/* Part I's rows also scroll on their own; the rest scroll by hand only */}
+                  {part === PARTS[0].part ? (
+                    <AutoScrollRow>
+                      {se.speakers.map((sp, i) => <SpeakerCard key={sp.id} speaker={sp} index={i} />)}
+                    </AutoScrollRow>
+                  ) : (
+                    <div className="sp-grid">
+                      {se.speakers.map((sp, i) => <SpeakerCard key={sp.id} speaker={sp} index={i} />)}
+                    </div>
+                  )}
                 </section>
               ))}
             </section>

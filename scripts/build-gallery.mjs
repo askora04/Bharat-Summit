@@ -3,10 +3,12 @@
 //   public/gallery/gallery.json             what the site reads: albums, photos, captions
 //   public/gallery/<album>/<photo>-<w>.webp  each photo at every width in SIZES
 // Usage: npm run gallery -- <folder with album folders> [<another folder with album folders> ...]
+//   e.g. npm run gallery -- "D:/govt/Photos for the website-20261028T204223Z-1-001/Photos for the website"
 // Re-running skips photos already converted, so new photos can be added to an album at any time.
 import { readdir, mkdir, readFile, writeFile, access } from 'node:fs/promises'
 import { join } from 'node:path'
 import { availableParallelism } from 'node:os'
+import { createHash } from 'node:crypto'
 import sharp from 'sharp'
 
 const SOURCES = process.argv.slice(2)
@@ -18,23 +20,12 @@ const CREDIT = '© Maurice Weiss/Ostkreuz' // unless the album names its own pho
 // One album per source folder, in the order the site lists them. `caption` is the photo's one line;
 // `dateEnd` marks an album that spans several days.
 const ALBUMS = [
-  { folder: '250422Familypicture', id: 'gender-working-group', title: 'Gender Working Group', date: '2025-04-24',
-    caption: 'Delegates gather for the Gender Working Group family photo' },
-  { folder: '250424Arabmeeting', id: 'arab-meeting', title: 'Arab Regional Meeting', date: '2025-04-24',
-    caption: 'Delegates in discussion at the Arab regional meeting' },
-  { folder: '250424Day1', id: 'day-1', title: 'Day 1', date: '2025-04-24',
-    caption: 'Working sessions and an evening welcome on the opening day' },
-  { folder: '250425Day2', id: 'day-2', title: 'Day 2', date: '2025-04-25',
-    caption: 'Panels, conversations and a heritage visit on day two' },
-  { folder: '250426Day3', id: 'day-3', title: 'Day 3', date: '2025-04-26',
-    caption: 'Plenary sessions and conversations on the final day' },
-  { folder: '250426Boardmeeting', id: 'board-meeting', title: 'Board Meeting', date: '2025-04-26',
-    caption: 'Members of the Progressive Alliance at the board meeting' },
-  { folder: '250426FinalsessionRaoul', id: 'final-session', title: 'Final Session', date: '2025-04-26',
-    caption: 'The closing plenary with Rahul Gandhi on the main stage at HICC' },
-  // Every photo here has its own line in gallery-captions.json
-  { folder: 'pictures', id: 'around-the-summit', title: 'Around the Summit', date: '2025-04-25', dateEnd: '2025-04-26',
-    caption: 'Scenes from around Bharat Summit 2025 at HICC', credit: '© Santhosh (@thinkingtrack)' },
+  { folder: 'Day 1', id: 'day-1', title: 'Day 1', date: '2025-04-24',
+    caption: 'Panels and conversations on the opening day' },
+  { folder: 'Day 2', id: 'day-2', title: 'Day 2', date: '2025-04-25',
+    caption: 'Panels and conversations on day two' },
+  { folder: 'Final Day', id: 'final-day', title: 'Final Day', date: '2025-04-26',
+    caption: 'The final day, with Rahul Gandhi on the main stage at HICC' },
 ]
 
 // Optional per-photo lines, replacing the album caption: { "day-2/250425mw0154": "..." }
@@ -42,10 +33,9 @@ const CAPTIONS_FILE = 'scripts/gallery-captions.json'
 // Photos shown in the home page's Moments section; the first FEATURED_COUNT spread across albums if empty.
 // Pinned so adding photos doesn't reshuffle the home page; each has its own caption.
 const FEATURED = [
-  'arab-meeting/250424mw778743', 'day-1/250424mw0034', 'day-1/250424mw0076', 'day-1/250424mw0117',
-  'day-2/250425mw0042', 'day-2/250425mw0083', 'day-2/250425mw0125', 'day-2/250425mw0169',
-  'day-3/250426mw0004', 'board-meeting/250426mw0001', 'board-meeting/250426mw0049', 'board-meeting/250426mw0090',
-  'board-meeting/250426mw0132', 'final-session/250426mw782005', 'final-session/250426mw782402', 'final-session/250426mw782700',
+  'day-1/dsc_1047', 'day-1/dsc_1591', 'day-1/dsc_1870', 'day-1/dsc_1295', 'day-1/dsc_1132',
+  'day-2/cvp03642', 'day-2/dsc_1779', 'day-2/dsc_2030', 'day-2/dsc01304', 'day-2/cvp03808', 'day-2/dsc_2150',
+  'final-day/dsc02063', 'final-day/dsc_2229', 'final-day/dsc02193', 'final-day/dsc02381', 'final-day/dsc_2284',
 ]
 const FEATURED_COUNT = 16
 
@@ -93,7 +83,13 @@ for (const album of ALBUMS) {
     console.error(`Album folder "${album.folder}" not found in: ${SOURCES.join(', ')}`)
     process.exit(1)
   }
-  const files = (await readdir(dir)).filter((f) => /\.jpe?g$/i.test(f)).sort()
+  // a byte-identical copy of an earlier file (e.g. "DSC_1764 (1).JPG" beside "DSC_1764.JPG") is left out
+  const seen = new Set()
+  const files = []
+  for (const f of (await readdir(dir)).filter((f) => /\.jpe?g$/i.test(f)).sort()) {
+    const hash = createHash('md5').update(await readFile(join(dir, f))).digest('hex')
+    if (!seen.has(hash)) { seen.add(hash); files.push(f) }
+  }
   await mkdir(join(OUT, album.id), { recursive: true })
 
   // a few at a time: each conversion already uses several cores

@@ -48,14 +48,46 @@ export function Portrait({ bg, src, className, children }) {
   )
 }
 
+// onPointerDown for an auto-scrolling track: dragging scrubs its CSS animation, so auto scroll carries on from there.
+export function dragMarquee(e) {
+  const track = e.currentTarget, anim = track.getAnimations()[0]
+  if (!anim || e.button !== 0) return
+  if (e.pointerType === 'mouse') e.preventDefault() // no text selection or native image drag
+  const dur = anim.effect.getTiming().duration
+  // one loop moves the track by half its width plus half a gap (see @keyframes marquee)
+  const dist = (track.offsetWidth + parseFloat(getComputedStyle(track).columnGap)) / 2
+  const sign = getComputedStyle(track).animationDirection === 'reverse' ? -1 : 1
+  const x0 = e.clientX, t0 = anim.currentTime
+  let moved = false
+  const move = (ev) => {
+    const dx = ev.clientX - x0
+    if (Math.abs(dx) > 5) moved = true
+    anim.currentTime = (((t0 - sign * dx / dist * dur) % dur) + dur) % dur
+  }
+  const up = () => {
+    removeEventListener('pointermove', move)
+    removeEventListener('pointerup', up)
+    removeEventListener('pointercancel', up)
+    if (!moved) return
+    // a drag that ends on a card must not open it
+    const eat = (ev) => { ev.stopPropagation(); ev.preventDefault() }
+    track.addEventListener('click', eat, { capture: true, once: true })
+    setTimeout(() => track.removeEventListener('click', eat, { capture: true }))
+  }
+  addEventListener('pointermove', move)
+  addEventListener('pointerup', up)
+  addEventListener('pointercancel', up)
+}
+
 // A row that drifts sideways forever; pauses on hover/focus. Rendered twice for a seamless loop,
 // the second copy hidden from screen readers and keyboard. `secs` is the time per item.
 // `clickableCopy` keeps the second copy clickable (inert would block the mouse too); render(item, copy)
 // must then take its controls out of the tab order when copy is 1.
-export function Marquee({ items, render, className = '', secs = 6, clickableCopy = false }) {
+// `drag` lets the row be dragged by hand (see dragMarquee).
+export function Marquee({ items, render, className = '', secs = 6, clickableCopy = false, drag = false }) {
   return (
-    <div className={`marquee ${className}`} style={{ '--dur': `${items.length * secs}s` }}>
-      <div className="marquee-track">
+    <div className={`marquee ${drag ? 'is-drag' : ''} ${className}`} style={{ '--dur': `${items.length * secs}s` }}>
+      <div className="marquee-track" onPointerDown={drag ? dragMarquee : undefined}>
         {[0, 1].map((copy) => items.map((item, i) => (
           <div className="marquee-item" key={`${copy}-${i}`} aria-hidden={copy === 1 || undefined}
             inert={(copy === 1 && !clickableCopy) || undefined}>

@@ -6,7 +6,7 @@ import EventVideos from './EventVideos.jsx'
 import './events.css'
 
 // The only albums offered as filters, besides "All photos"
-const FILTER_ALBUMS = ['day-1', 'day-2', 'day-3', 'final-session']
+const FILTER_ALBUMS = ['day-1', 'day-2', 'final-day']
 const PAGE = 24 // photos added per step as the visitor scrolls (divides evenly into 4, 3 and 2 columns)
 // Image width per viewport, matching the grid columns in events.css. Every tile is the same 3:2 frame
 // (nearly all the photos are 3:2; the few square or upright ones are cropped here and shown whole in

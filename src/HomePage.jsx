@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { a, Title, Portrait, TriBar, Letters } from './shared.jsx'
+import { a, Title, Portrait, TriBar, Letters, dragMarquee } from './shared.jsx'
 import { Link } from './router.jsx'
 import './home.css'
 import SummitNumbers from './SummitNumbers.jsx'
@@ -102,7 +102,7 @@ function Speakers() {
       <div className="h-marquee">
         {SPEAKER_ROWS.map((row, r) => (
           <div className={r ? 'h-marquee-row is-reverse' : 'h-marquee-row'} key={r}>
-            <div className="h-marquee-track">
+            <div className="h-marquee-track" onPointerDown={dragMarquee}>
               {[0, 1].map((copy) =>
                 row.map((sp, i) => (
                   <SpeakerCard key={`${copy}-${i}`} speaker={sp} copy={copy === 1} />
@@ -141,14 +141,10 @@ function CuratedBy() {
   )
 }
 
-// The gallery's featured photos (from S3); the bundled moment-01 … moment-16 until it loads, or if it can't
-const LOCAL_MOMENTS = Array.from({ length: 16 }, (_, i) => ({ src: h(`moment-${String(i + 1).padStart(2, '0')}.webp`), alt: '' }))
-
+// The gallery's featured photos; the columns stay empty until it loads
 function Moments() {
   const { gallery } = useGallery()
-  const moments = gallery?.featured.length
-    ? gallery.featured.map((p) => ({ src: photoUrl(p, gallery.sizes[0]), alt: p.caption, color: p.color }))
-    : LOCAL_MOMENTS
+  const moments = (gallery?.featured ?? []).map((p) => ({ src: photoUrl(p, gallery.sizes[0]), alt: p.caption, color: p.color }))
 
   return (
     <section className="h-moments reveal" id="moments">
@@ -166,7 +162,7 @@ function Moments() {
           return (
             <div className={c % 2 ? 'h-gallery-col is-down' : 'h-gallery-col'} key={c} style={{ '--dur': `${48 + c * 7}s` }}>
               <div className="h-gallery-track">
-                {[0, 1, 2].map((copy) =>
+                {moments.length > 0 && [0, 1, 2].map((copy) =>
                   heights.map((ht, i) => {
                     const m = moments[(first + i) % moments.length]
                     return (

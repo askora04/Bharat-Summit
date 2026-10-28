@@ -351,9 +351,12 @@ section[id] { scroll-margin-top: 61px; }
   mask-image: linear-gradient(90deg, transparent, #000 40px, #000 calc(100% - 40px), transparent);
 }
 .marquee-track { display: flex; gap: var(--gap); width: max-content; animation: marquee var(--dur, 40s) linear infinite; }
-.marquee:is(:hover, :focus-within) .marquee-track { animation-play-state: paused; }
+.marquee:is(:hover, :has(:focus-visible)) .marquee-track { animation-play-state: paused; }
 /* speakers and hashtags scroll left to right */
 :is(.speakers, .hashtags) .marquee-track { animation-direction: reverse; }
+/* draggable rows: vertical swipes still scroll the page */
+.marquee.is-drag .marquee-track { cursor: grab; touch-action: pan-y; user-select: none; }
+.marquee.is-drag .marquee-track:active { cursor: grabbing; }
 .marquee-item { flex: none; display: flex; }
 .marquee-item > * { width: 100%; }
 @keyframes marquee { to { transform: translateX(calc(-50% - var(--gap) / 2)); } }
@@ -483,7 +486,7 @@ html { scroll-behavior: smooth; }
   /* the auto-scrolling rows keep moving, at half speed */
   .marquee-track { animation: marquee calc(var(--dur, 40s) * 2) linear infinite !important; }
   :is(.speakers, .hashtags) .marquee-track { animation-direction: reverse !important; }
-  .marquee:is(:hover, :focus-within) .marquee-track { animation-play-state: paused !important; }
+  .marquee:is(:hover, :has(:focus-visible)) .marquee-track { animation-play-state: paused !important; }
 }
 
 /* Narrow screens: design is desktop-only, keep content reachable */
