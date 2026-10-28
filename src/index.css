@@ -235,7 +235,8 @@ section[id] { scroll-margin-top: 61px; }
 @keyframes emblem-orbit { to { rotate: 360deg; } }
 @keyframes emblem-pulse { 50% { scale: 1.12; opacity: .55; } }
 @keyframes emblem-fade { from { opacity: 0; } }
-.org-cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin-top: 25px; }
+.org-marquee { margin-top: 13px; }
+.org-marquee .marquee-item { width: 300px; } /* four to a desktop row, as before */
 .org-card {
   position: relative;
   container-type: inline-size;
@@ -475,9 +476,8 @@ html { scroll-behavior: smooth; }
   .nav { display: none; }
   .icon-btn { display: grid; }
   .menu-close { right: 16px; }
-  .card-row, .org-cards, .venue-grid { justify-content: center; }
+  .card-row, .venue-grid { justify-content: center; }
   .post { flex: 0 1 410px; } /* too narrow for three: wrap, centred */
-  .org-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .hero-stripes { display: none; }
   .facts { grid-template-columns: repeat(2, 1fr); row-gap: 16px; }
 }
@@ -491,7 +491,7 @@ html { scroll-behavior: smooth; }
   .stats-divider { width: 64px; height: 1px; }
   .stat { width: min(100%, 420px); justify-content: flex-start; }
   .about-lede { padding-inline: 20px; }
-  .org-cards { grid-template-columns: minmax(0, 1fr); }
+  .org-marquee .marquee-item { width: 260px; }
   .speakers .marquee-item { width: 220px; }
   .venue-grid { flex-direction: column; }
   .venue-media, .venue-panel { flex: none; }

@@ -69,7 +69,7 @@
 
 /* ---------- Card groups scroll sideways: one row, snapping card by card ----------
    --per is how many cards fit in view; the padding leaves room for the hover lift and shadow. */
-:is(.org-cards, .sp-grid) {
+.sp-grid {
   --per: 4; --gap: 24px;
   display: grid; grid-auto-flow: column; grid-template-columns: none;
   grid-auto-columns: calc((100% - (var(--per) - 1) * var(--gap)) / var(--per));
@@ -79,10 +79,9 @@
   padding: 12px 4px 40px;
   scrollbar-width: thin; scrollbar-color: #2f477b transparent;
 }
-:is(.org-cards, .sp-grid) > * { scroll-snap-align: start; min-width: 0; }
-:is(.org-cards, .sp-grid)::-webkit-scrollbar { height: 6px; }
-:is(.org-cards, .sp-grid)::-webkit-scrollbar-thumb { background: #2f477b; border-radius: 6px; }
-.org-cards { margin-top: 13px; }
+.sp-grid > * { scroll-snap-align: start; min-width: 0; }
+.sp-grid::-webkit-scrollbar { height: 6px; }
+.sp-grid::-webkit-scrollbar-thumb { background: #2f477b; border-radius: 6px; }
 .sp-grid { --per: 3; --gap: 20px; margin-top: 16px; }
 /* the Speakers page's "All" view lists everyone at once, as a grid */
 .sp-grid.sp-grid-all {
@@ -92,11 +91,11 @@
 .is-dragging { scroll-snap-type: none !important; cursor: grabbing; user-select: none; }
 .is-dragging a, .is-dragging button { pointer-events: none; }
 @media (max-width: 1100px) {
-  .org-cards, .sp-grid { --per: 2; }
+  .sp-grid { --per: 2; }
   .sp-grid.sp-grid-all { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 700px) {
-  :is(.org-cards, .sp-grid) { --per: 1.15; --gap: 14px; }
+  .sp-grid { --per: 1.15; --gap: 14px; }
   .sp-grid.sp-grid-all { grid-template-columns: minmax(0, 1fr); }
 }
 

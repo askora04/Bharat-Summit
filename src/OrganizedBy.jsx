@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { a, Title, Lines, Portrait } from './shared.jsx'
+import { a, Title, Lines, Portrait, Marquee } from './shared.jsx'
 import { ORGANIZERS, ORGANIZER_PROFILES } from './organizersData.js'
 import Profile from './Profile.jsx'
 
@@ -11,6 +11,7 @@ export default function OrganizedBy({ sectionId = 'organised' }) {
     []
   )
 
+
   return (
     <>
       <section className="organised reveal" id={sectionId}>
@@ -20,12 +21,14 @@ export default function OrganizedBy({ sectionId = 'organised' }) {
           <span className="gov-emblem-orbit" aria-hidden />
           <img src={a('telangana-emblem.webp')} width="150" height="150" alt="Government of Telangana" />
         </span>
-        <div className="container org-cards">
-          {ORGANIZERS.map((o, i) => (
+        {/* a looping strip, like the speakers row; the list is doubled so one copy is wider than the screen */}
+        <Marquee className="container org-marquee" clickableCopy items={[...ORGANIZERS, ...ORGANIZERS]} render={(o, copy) => {
+          const i = ORGANIZERS.indexOf(o)
+          return (
             <button
               className="org-card"
               type="button"
-              key={o.name}
+              tabIndex={copy ? -1 : undefined}
               aria-label={`${o.name}, ${o.role.join(' ')}. View profile`}
               onClick={() => setOpen({ people: ORGANIZER_PROFILES, index: i, label: 'ORGANISER', hash: sectionId })}
             >
@@ -36,8 +39,8 @@ export default function OrganizedBy({ sectionId = 'organised' }) {
               </span>
               <img className="org-arrow" src={a('card-arrow.svg')} width="30" height="30" alt="" />
             </button>
-          ))}
-        </div>
+          )
+        }} />
       </section>
 
       {open && (

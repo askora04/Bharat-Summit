@@ -26,7 +26,7 @@ export function startMotion() {
 
   if (finePointer()) {
     // Mouse users can't swipe: let them drag the card rows sideways (touch and trackpads scroll natively)
-    const ROWS = '.org-cards, .sp-grid:not(.sp-grid-all)'
+    const ROWS = '.sp-grid:not(.sp-grid-all)'
     let drag = null, swallow = false
     on(window, 'pointerdown', (e) => {
       const row = e.pointerType === 'mouse' && e.button === 0 && e.target.closest?.(ROWS)
