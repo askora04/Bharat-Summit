@@ -9,13 +9,13 @@ const EXPO = 'expo' // the tab after the days: Expo & Exhibitions
 
 // Rows take their theme's colour for the hover accent; untagged ones use navy.
 // data-label names each cell when rows stack into cards on phones (see schedule.css)
-function Row({ time, timeLabel, label, title, theme, desc, color = '#082852', ink = '#082852' }) {
+function Row({ time, timeLabel, label, title, theme, desc, showTheme, color = '#082852', ink = '#082852' }) {
   const t = THEMES[theme]
   return (
     <tr className="sc-row" style={{ '--c': t?.color ?? color, '--ink': t?.ink ?? ink }}>
       <td className="sc-row-time" data-label={timeLabel}>{time}</td>
       <td className="sc-row-session" data-label="Session"><span>{label}:</span> {title}</td>
-      <td className="sc-row-theme" data-label="Theme">{t?.name}</td>
+      {showTheme && <td className="sc-row-theme" data-label="Theme">{t?.name}</td>}
       <td className="sc-row-desc" data-label="Description">{desc}</td>
     </tr>
   )
@@ -51,6 +51,8 @@ function ExpoTable() {
 export default function SchedulePage() {
   const [tab, setTab] = useState(DAYS[0].id) // opens on the first day, Day 0
   const day = DAYS.find((d) => d.id === tab)
+  // a day with no themed sessions (Day 0) has no Theme column
+  const showTheme = day?.sessions.some((s) => s.theme)
 
   return (
     <>
@@ -82,17 +84,17 @@ export default function SchedulePage() {
         </h2>
 
         {day ? (
-          <table className="sc-table" aria-labelledby="sc-heading">
+          <table className={showTheme ? 'sc-table' : 'sc-table sc-no-theme'} aria-labelledby="sc-heading">
             <thead>
               <tr>
                 <th scope="col">Time</th>
                 <th scope="col">Session</th>
-                <th scope="col">Theme</th>
+                {showTheme && <th scope="col">Theme</th>}
                 <th scope="col">Description</th>
               </tr>
             </thead>
             <tbody key={tab}>
-              {day.sessions.map((s) => <Row key={s.label + s.title} timeLabel="Time" {...s} />)}
+              {day.sessions.map((s) => <Row key={s.label + s.title} timeLabel="Time" showTheme={showTheme} {...s} />)}
             </tbody>
           </table>
         ) : <ExpoTable />}

@@ -57,8 +57,8 @@
 .sc-row-theme { width: 22%; font-size: 13px; font-weight: 700; color: var(--ink); }
 .sc-row-desc { color: #525252; }
 
-/* Expo & Exhibitions tab: no theme column, so the exhibition name takes a little more room */
-.sc-expo-table .sc-row-session { width: 32%; }
+/* Expo & Exhibitions tab and Day 0: no theme column, so the session name takes a little more room */
+:is(.sc-expo-table, .sc-no-theme) .sc-row-session { width: 32%; }
 
 
 

@@ -51,7 +51,7 @@ const RAW = [
         speakers: [
           ['Alice Bernard-Montini', 'Secretary General, Young Democrats for Europe', 'Alice Bernard-Montini is Secretary General of Young Democrats for Europe (YDE), the youth organisation of the European Democratic Party. She was elected to the post at the organisation\'s congress in Bilbao in November 2022, having represented the French youth group JDem. Her role as Secretary General is listed on the organisation\'s public profile.'],
           ['Dariana Polo', 'Coordinator, Progressive Alliance Gender Equality Working Group, Venezuela', 'Dariana Polo is Coordinator of the Progressive Alliance Gender Equality Working Group.'],
-          ['Eduardo Zanatta', 'City Councillor (Vereador), Balneario Camboriu, Brazil', 'Eduardo Zanatta is a city councillor (vereador) in Balneario Camboriu, Santa Catarina, Brazil. He holds a degree in International Relations and a master\'s degree in Territorial Planning.'],
+          ['Eduardo Zanatta', 'City Councillor (Vereador), Balneario Camboriu, Brazil', 'Eduardo Zanatta is a city councillor (vereador) in Balneario Camboriu, Santa Catarina, Brazil. He holds a degree in International Relations and a master\'s degree in Territorial Planning. Public sources differ on his party affiliation, so it is not stated here.'],
           ['Jessali Andrea de Jesus Zarazua Ramirez', 'Secretary General, International Union of Socialist Youth (IUSY)', 'Jessali Zarazua is Secretary General of the International Union of Socialist Youth (IUSY), an international youth organisation with about 136 member organisations. She is a youth leader from Mexico who was elected to lead the union at its congress.'],
           ['María José Pizarro', 'Former Senator, Historic Pact, Colombia', 'María José Pizarro is a Colombian politician who served in the Chamber of Representatives from 2018 to 2022 and as a Senator for the Historic Pact from 2022 until her departure from Congress in 2026. She is the daughter of Carlos Pizarro Leongómez, former leader of the M-19 guerrilla movement, who later stood as a presidential candidate before his assassination in 1990.'],
           ['Yves Bunkulu Zola', 'Member, Union pour la Démocratie et le Progrès Social (UDPS), DR Congo; former Minister of Tourism', 'Yves Bunkulu Zola is a member of the Union pour la Démocratie et le Progrès Social (UDPS) in the Democratic Republic of the Congo and a member of parliament. He was appointed Minister of Tourism in the Ilunga government, which served from September 2019 to April 2021, and is listed as Minister of Youth from 2021.'],
@@ -141,7 +141,7 @@ const RAW = [
           ['Basem Kamel', 'Architect and former Member of Parliament, Egypt', 'Basem Kamel is an Egyptian architect and politician. He is a founding member of the Egyptian Social Democratic Party and a former Member of Parliament. He was active in the political movement that followed the 2011 revolution, working towards democratic elections. He has been described in international press coverage as an architect with his own practice.'],
           ['Chung Eui-yong', 'Former Minister of Foreign Affairs, Republic of Korea', 'Chung Eui-yong is a South Korean diplomat and politician. He served as Director of the National Security Office from 2017 to 2020 under President Moon Jae-in, and took part in the 2018 diplomatic engagement with North Korea. He was elected to the National Assembly in 2004 as a proportional representative of the Uri Party. He served as Minister of Foreign Affairs from 2021 to 2022, and earlier as South Korea\'s Ambassador to the United Nations in Geneva and as Deputy Minister for Trade.'],
           ['Clara López Obregón', 'National Co-Chair, Alianza por la Vida, Colombia', 'Clara López Obregón is a Colombian economist and politician. She served as Acting Mayor of Bogotá from 2011 to 2012 and was president of the Democratic Pole party. She was previously active in the Patriotic Union party. She is National Co-Chair of Alianza por la Vida, Colombia.'],
-          ['Damian Murphy', '', ''],
+          ['Damian Murphy', 'Senior Vice President for National Security and International Policy, Center for American Progress, USA', 'Damian Murphy is the senior vice president for National Security and International Policy at American Progress. He is also a lecturer in International Affairs at George Washington University. He has more than 25 years of international affairs experience as a chief policy adviser, program director, analyst, and political party trainer.'],
           ['Manish Tewari', 'Member of Parliament, Lok Sabha (Chandigarh); Indian National Congress', 'Manish Tewari is a Member of the Lok Sabha representing Chandigarh for the Indian National Congress, a seat he has held since 2024. He previously represented Anandpur Sahib from 2019 to 2024 and Ludhiana from 2009 to 2014. He served as Minister of State (Independent Charge) for Information and Broadcasting from 2012 to 2014, and was earlier President of the Indian Youth Congress. He holds degrees in law from the University of Delhi.', MOD],
         ],
       },
@@ -237,6 +237,8 @@ const RAW = [
 ]
 
 const NO_PHOTO = new Set([])
+// cards that keep a set colour instead of taking the next one in turn
+const BG = { 'Damian Murphy': SPEAKER_COLOURS[1] } // navy
 // "María José Pizarro" -> "maria-jose-pizarro", the photo's file name
 const slug = (name) => name.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 
@@ -253,7 +255,7 @@ export const PARTS = RAW.map(({ part, sessions }) => ({
       n += 1
       return { id: n, name, role, bio, moderator: !!moderator, session: s.title, when: s.when, initials: initials(name),
         img: NO_PHOTO.has(name) ? null : a(`speakers/${slug(name)}.webp`),
-        bg: SPEAKER_COLOURS[(n - 1) % SPEAKER_COLOURS.length] }
+        bg: BG[name] ?? SPEAKER_COLOURS[(n - 1) % SPEAKER_COLOURS.length] }
     }),
   })),
 }))

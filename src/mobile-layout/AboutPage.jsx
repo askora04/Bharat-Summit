@@ -13,17 +13,6 @@ const TOPICS = [
   { label: ['India and the World'], img: 'topic-climate.webp', ring: 'ring-6.svg', ink: '#d68f24' },
 ]
 
-// Eight dots evenly round the ring's 14px margin
-function TopicDots({ ink }) {
-  return (
-    <svg className="topic-dots" viewBox="0 0 252 252" aria-hidden fill={ink}>
-      {Array.from({ length: 8 }, (_, i) => (
-        <circle key={i} cx="126" cy="7" r="1.4" transform={`rotate(${i * 45 + 22.5} 126 126)`} />
-      ))}
-    </svg>
-  )
-}
-
 // Real posts, shown with each platform's own embed (see SocialEmbed)
 const POSTS = [
   { platform: 'X', url: 'https://x.com/BharatSummit_25/status/1917447562639876256' },
@@ -164,7 +153,6 @@ export default function AboutPage() {
                   <span className="topic-orbit" aria-hidden />
                   <img className="topic-ring" src={a(t.ring)} width="252" height="252" alt="" />
                   <img className="topic-img" src={a(t.img)} width="224" height="224" alt="" />
-                  <TopicDots ink={t.ink} />
                 </div>
                 <h3><Lines lines={t.label} /></h3>
               </div>

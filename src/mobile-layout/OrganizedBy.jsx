@@ -48,7 +48,6 @@ export default function OrganizedBy({ sectionId = 'organised' }) {
           people={open.people}
           index={open.index}
           label={open.label}
-          shareHash={open.hash}
           onClose={close}
           onStep={step}
         />

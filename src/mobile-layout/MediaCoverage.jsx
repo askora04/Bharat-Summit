@@ -33,10 +33,11 @@ function Poster({ video }) {
 }
 
 // Every card opens the video on YouTube (or the clip on X) in a new tab
-function VideoCard({ video }) {
+function VideoCard({ video, copy }) {
   const site = video.x ? 'X' : 'YouTube'
   return (
     <a className="mc-video" href={video.x ?? `https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noreferrer"
+      tabIndex={copy ? -1 : undefined}
       aria-label={`${video.title}, ${video.channel}. Watch on ${site} (opens in a new tab)`}>
       <span className="mc-frame">
         <Poster video={video} />
@@ -57,9 +58,9 @@ function monogram(name) {
 }
 const markColor = (name) => MARK_COLORS[[...name].reduce((h, c) => h + c.charCodeAt(0), 0) % MARK_COLORS.length]
 
-function Article({ article }) {
+function Article({ article, copy }) {
   return (
-    <a className="mc-article" href={article.url} target="_blank" rel="noreferrer">
+    <a className="mc-article" href={article.url} target="_blank" rel="noreferrer" tabIndex={copy ? -1 : undefined}>
       <span className="mc-article-head">
         <span className="mc-mark" style={{ background: markColor(article.publication) }} aria-hidden>{monogram(article.publication)}</span>
         <span>
@@ -83,7 +84,8 @@ export default function MediaCoverage() {
         <div className="mc-block-head">
           <p className="eyebrow eyebrow-sm">Video coverage</p>
         </div>
-        <Marquee className="mc-videos" items={VIDEOS} render={(v) => <VideoCard video={v} />} />
+        {/* both rows drift on their own and can be dragged by hand; the second copy stays clickable after a drag */}
+        <Marquee className="mc-videos" items={VIDEOS} drag clickableCopy render={(v, copy) => <VideoCard video={v} copy={copy} />} />
       </div>
 
       <div className="container mc-block">
@@ -108,7 +110,7 @@ export default function MediaCoverage() {
           </ul>
         </div>
 
-        <Marquee className="mc-articles" items={ARTICLES} render={(ar) => <Article article={ar} />} />
+        <Marquee className="mc-articles" items={ARTICLES} drag clickableCopy render={(ar, copy) => <Article article={ar} copy={copy} />} />
       </div>
     </section>
   )

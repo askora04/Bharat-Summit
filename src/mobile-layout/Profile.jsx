@@ -22,8 +22,8 @@ function Icon({ name, size = 20 }) {
 }
 
 // Full-screen profile over a deep, blurred backdrop: photo on the left, details on the right.
-// people: [{ name, role, bio, bg, img }]; shareHash: section the share links point back to.
-export default function Profile({ people, index, label, shareHash, onClose, onStep }) {
+// people: [{ name, role, bio, bg, img }]. No share links on phones.
+export default function Profile({ people, index, label, onClose, onStep }) {
   const p = people[index]
   const closeRef = useRef(null)
 
@@ -43,15 +43,6 @@ export default function Profile({ people, index, label, shareHash, onClose, onSt
       opener?.focus?.()
     }
   }, [onClose, onStep])
-
-  const url = `${window.location.origin}${window.location.pathname}#${shareHash}`
-  const text = `${p.name} · Bharat Summit 2026`
-  const share = async () => {
-    try {
-      if (navigator.share) await navigator.share({ title: text, url })
-      else await navigator.clipboard.writeText(url)
-    } catch { /* share sheet dismissed or clipboard blocked: nothing to do */ }
-  }
 
   return createPortal(
     <div className="sp-profile" role="dialog" aria-modal="true" aria-labelledby="sp-name" onClick={(e) => e.target === e.currentTarget && onClose()}>
@@ -76,12 +67,6 @@ export default function Profile({ people, index, label, shareHash, onClose, onSt
           <h3 id="sp-name">{p.name}</h3>
           <p className="sp-role">{p.role}</p>
           <p className="sp-bio">{p.bio}</p>
-          <div className="sp-share">
-            <span>SHARE</span>
-            <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`} target="_blank" rel="noreferrer" aria-label="Share on Facebook"><Icon name="facebook" /></a>
-            <a href={`https://wa.me/?text=${encodeURIComponent(`${text} ${url}`)}`} target="_blank" rel="noreferrer" aria-label="Share on WhatsApp"><Icon name="chat" /></a>
-            <button onClick={share} aria-label="Share link"><Icon name="share" /></button>
-          </div>
         </div>
       </div>
     </div>,

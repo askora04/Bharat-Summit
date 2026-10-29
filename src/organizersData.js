@@ -4,7 +4,7 @@ import { a } from './shared.jsx'
 export const ORGANIZERS = [
   { name: 'SRI ANUMULA REVANTH REDDY', role: ['Chief Minister of Telangana'], bg: '#db5f3d', img: 'organizers/revanth-reddy.webp' },
   { name: 'SRI BHATTI VIKRAMARKA MALLU', role: ['Deputy Chief Minister, Telangana'], bg: '#c8a046', img: 'organizers/bhatti-vikramarka.webp' },
-  { name: 'SRI DUDDILLA SRIDHAR BABU', role: ['Minister for Information', 'Technology, Telangana'], bg: '#105755', img: 'organizers/sridhar-babu.webp' },
+  { name: 'SRI DUDDILLA SRIDHAR BABU', role: ['Minister for Information Technology,', 'Electronics & Communications,', 'Industries & Commerce, and', 'Legislative Affairs, Telangana'], bg: '#105755', img: 'organizers/sridhar-babu.webp' },
   { name: 'SRI NALAMADA UTTAM KUMAR REDDY', role: ['Minister for Irrigation and CAD,', 'Telangana'], bg: '#13345f', img: 'organizers/uttam-kumar-reddy.webp' },
 ]
 

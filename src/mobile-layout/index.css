@@ -299,28 +299,15 @@ section[id] { scroll-margin-top: 61px; }
 .topic-ring { position: absolute; inset: 0; animation: ring-breathe 6s ease-in-out infinite; animation-delay: calc(var(--i) * -.85s); transition: scale .5s ease; }
 @keyframes ring-breathe { 50% { transform: scale(1.04); } }
 .topic-img { position: absolute; left: 14px; top: 14px; border-radius: 50%; transition: transform .5s cubic-bezier(.2, .8, .2, 1), box-shadow .5s; }
-/* dots orbit in the ring's margin (rotate), breathing in step with the ring (transform) */
-.topic-dots {
-  position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none;
-  animation: dots-orbit 48s linear infinite, ring-breathe 6s ease-in-out infinite;
-  animation-delay: 0s, calc(var(--i) * -.85s);
-  transition: scale .5s ease;
-}
-.topic:nth-child(even) .topic-dots { animation-direction: reverse, normal; }
-@keyframes dots-orbit { to { rotate: 360deg; } }
-/* like the organisers' emblem: the circle floats, a dashed orbit with a glowing dot turns round it and a halo pulses behind */
+/* like the organisers' emblem: the circle floats, a dashed orbit turns round it and a halo pulses behind */
 .topic-halo, .topic-orbit { position: absolute; border-radius: 50%; pointer-events: none; }
 .topic-halo { inset: -18px; background: radial-gradient(circle, color-mix(in srgb, var(--ink) 24%, transparent) 60%, transparent 71%); }
 .topic-orbit { inset: -10px; border: 1.5px dashed color-mix(in srgb, var(--ink) 55%, transparent); }
-.topic-orbit::before {
-  content: ''; position: absolute; top: -4px; left: 50%; width: 7px; height: 7px; margin-left: -3.5px;
-  border-radius: 50%; background: var(--ink); box-shadow: 0 0 8px var(--ink);
-}
 .panel.is-visible .topic-graphic { animation: emblem-float 5s ease-in-out infinite; animation-delay: calc(var(--i) * -.8s); }
 .panel.is-visible .topic-orbit { animation: emblem-fade .8s ease-out .5s both, emblem-orbit 18s linear infinite; }
 .panel.is-visible .topic:nth-child(even) .topic-orbit { animation-direction: normal, reverse; }
 .panel.is-visible .topic-halo { animation: emblem-fade .8s ease-out .5s both, emblem-pulse 3.2s ease-in-out 1.3s infinite; animation-delay: .5s, calc(var(--i) * -.5s + 1.3s); }
-.topic:hover .topic-ring, .topic:hover .topic-dots { scale: 1.08; }
+.topic:hover .topic-ring { scale: 1.08; }
 .topic:hover .topic-img { transform: scale(1.06) rotate(-3deg); box-shadow: 0 14px 30px rgba(8, 40, 82, .2); }
 .topic h3 { margin-top: 16px; font: 700 20px/1.35 var(--font-display); text-align: center; transition: color .3s, transform .4s; }
 .topic:hover h3 { color: #086b94; transform: translateY(4px); }
