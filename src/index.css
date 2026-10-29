@@ -379,12 +379,20 @@ section[id] { scroll-margin-top: 61px; }
 }
 /* three to a row, each up to 410px wide; the platforms' frames set their own heights */
 .social .card-row { align-items: flex-start; }
-.post-embed { flex: 1 1 0; min-width: 0; max-width: 410px; }
-.post-embed > a { display: block; padding: 24px; border: 1px solid #dce5ee; border-radius: 16px; background: #fff; color: #00549c; font-weight: 700; text-align: center; }
+.post-embed {
+  flex: 1 1 0; min-width: 0; max-width: 410px;
+  /* all three the same size: a longer post scrolls inside its box */
+  height: 640px; overflow: hidden auto; overscroll-behavior: contain;
+  border: 1px solid #dce5ee; border-radius: 16px; background: #fff;
+  scrollbar-width: thin; scrollbar-color: #c3cfdb transparent;
+}
+.post-embed > a { display: grid; place-items: center; height: 100%; color: #00549c; font-weight: 700; }
+/* the box draws the border, so the platforms' own borders are trimmed off */
 .post-embed :is(.twitter-tweet, .instagram-media) { margin: 0 !important; }
-.post-embed .twitter-tweet { margin-top: -10px !important; } /* X adds 10px above its frame */
-.post-embed .instagram-media { min-width: 0 !important; width: 100% !important; }
-.post-embed iframe[src*="facebook.com"] { display: block; width: 100%; max-width: 380px; height: 720px; border: 0; border-radius: 12px; background: #fff; margin-inline: auto; }
+.post-embed .twitter-tweet { margin: -11px -1px 0 !important; width: calc(100% + 2px) !important; max-width: none !important; } /* X adds 10px above its frame */
+.post-embed .twitter-tweet iframe { width: 100% !important; max-width: none !important; }
+.post-embed .instagram-media { min-width: 0 !important; width: 100% !important; max-width: none !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; }
+.post-embed iframe[src*="facebook.com"] { display: block; width: 100%; height: 100%; border: 0; }
 
 /* Venue */
 .venue { padding: 54px 0 27px; background: #fafbfd; }

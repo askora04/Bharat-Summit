@@ -100,7 +100,7 @@ function SocialEmbed({ platform, url }) {
       )}
       {platform === 'Facebook' && (
         <iframe title="Bharat Summit on Facebook" loading="lazy" allow="encrypted-media; clipboard-write"
-          src={`https://www.facebook.com/plugins/post.php?href=${encodeURIComponent(url)}&show_text=true&width=380`} />
+          src={`https://www.facebook.com/plugins/post.php?href=${encodeURIComponent(url)}&show_text=true&width=400&height=638`} />
       )}
     </div>
   )
