@@ -73,7 +73,7 @@
 .h-speaker {
   position: relative; flex: none;
   display: flex; flex-direction: column; justify-content: flex-start;
-  width: 300px; height: 305px; padding: 0;
+  width: 300px; min-height: 305px; padding: 0; /* grows for long names and titles; a row's cards share one height */
   overflow: hidden;
   border: 1px solid #e7dfd0; border-radius: 10px;
   background: #fff; box-shadow: 0 2px 8px rgba(36, 35, 33, .06);
@@ -88,7 +88,7 @@
 .h-portrait .band-1 { left: 0; width: 49px; background: rgba(255, 255, 255, .12); }
 .h-portrait .band-2 { left: 49px; width: 27px; background: rgba(255, 255, 255, .06); }
 .h-portrait .band-3 { right: 0; width: 67px; background: rgba(255, 255, 255, .2); }
-.h-speaker-body { display: block; padding: 18px 20px; }
+.h-speaker-body { display: block; padding: 18px 56px 18px 20px; } /* right padding keeps text clear of the arrow */
 .h-speaker-name { display: block; font: 700 16px/1.2 var(--font-display); color: var(--text-primary); }
 .h-role { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; margin-top: 6px; font-size: 14px; color: #3d5477; } /* long titles: 2 lines here, full on the profile */
 .h-note { display: block; margin-top: 6px; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--navy); }
