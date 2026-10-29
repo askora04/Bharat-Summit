@@ -7,11 +7,7 @@ import { a } from './shared.jsx'
 // Brand colours (from the colour sheet). Each card's background is one of these, in turn.
 export const SPEAKER_COLOURS = [
   'linear-gradient(180deg, #fbaa12, #ee870b)', // saffron
-  '#ef7047', // coral
-  '#39cfdc', // sky
-  '#24afa0', // teal
   '#13345f', // navy
-  '#231f20', // charcoal
 ]
 
 const FRI = 'Friday, 13 November 2026'

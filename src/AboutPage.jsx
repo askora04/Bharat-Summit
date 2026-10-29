@@ -24,26 +24,11 @@ function TopicDots({ ink }) {
   )
 }
 
-// Social post thumbnails are crops of one sprite image, positioned exactly as in the design.
+// Real posts, shown with each platform's own embed (see SocialEmbed)
 const POSTS = [
-  {
-    platform: 'X', color: '#006bd6', handle: '@BharatSummit · Apr 25',
-    text: ['A global dialogue for a more inclusive, just and sustainable world.'],
-    stats: '♡ 120    ⟳ 420    ♡ 2.1K',
-    crop: { height: '1097.14%', left: '-20.22%', top: '-659.29%', width: '369.68%' },
-  },
-  {
-    platform: 'Instagram', color: '#cf2677', handle: '@bharatsummit',
-    text: ['Bringing together leaders, thinkers and changemakers for a better tomorrow.', '#BharatSummit #Telangana #YouthForChange'],
-    stats: '♥ 1.5K    ◯ 80',
-    crop: { height: '1129.41%', left: '-151.94%', top: '-680.15%', width: '396.9%' },
-  },
-  {
-    platform: 'Facebook', color: '#006bd6', handle: '@BharatSummit',
-    text: ['Join the conversation on global justice, democracy and sustainable development.', '#BharatSummit'],
-    stats: '♥ 2.3K    ◯ 200    ↗ 450',
-    crop: { height: '1074.13%', left: '-266.17%', top: '-646.85%', width: '384.96%' },
-  },
+  { platform: 'X', url: 'https://x.com/BharatSummit_25/status/1917447562639876256' },
+  { platform: 'Instagram', url: 'https://www.instagram.com/p/DI6Ua6TOjhS/' },
+  { platform: 'Facebook', url: 'https://www.facebook.com/photo?fbid=122109985046838327&set=a.122099998124838327' },
 ]
 
 const HASHTAGS = ['#BharatSummit', '#GlobalJustice', '#InclusiveFuture', '#TelanganaGlobal', '#YouthForChange']
@@ -54,32 +39,6 @@ const FACTS = [
 ]
 
 const DIRECTIONS_URL = 'https://www.google.com/maps/dir/?api=1&destination=17.4730,78.3740'
-
-// Platform marks in their brand colours
-const BRAND_ICONS = {
-  X: (
-    <svg viewBox="0 0 24 24" aria-hidden><rect width="24" height="24" rx="6" fill="#000" />
-      <path fill="#fff" d="M16.8 5h2.4l-5.3 6 6.2 8.1h-4.8l-3.8-4.9-4.3 4.9H4.8l5.6-6.4L4.4 5h4.9l3.4 4.5zm-.8 12.7h1.3L8.7 6.3H7.3z" /></svg>
-  ),
-  Instagram: (
-    <svg viewBox="0 0 24 24" aria-hidden>
-      <defs>
-        <radialGradient id="ig-grad" cx="0.3" cy="1.05" r="1.25">
-          <stop offset="0" stopColor="#fdf497" /><stop offset=".1" stopColor="#fdf497" /><stop offset=".45" stopColor="#fd5949" />
-          <stop offset=".6" stopColor="#d6249f" /><stop offset=".9" stopColor="#285aeb" />
-        </radialGradient>
-      </defs>
-      <rect width="24" height="24" rx="6" fill="url(#ig-grad)" />
-      <rect x="5.5" y="5.5" width="13" height="13" rx="4" fill="none" stroke="#fff" strokeWidth="1.7" />
-      <circle cx="12" cy="12" r="3.1" fill="none" stroke="#fff" strokeWidth="1.7" />
-      <circle cx="15.9" cy="8.1" r="1" fill="#fff" />
-    </svg>
-  ),
-  Facebook: (
-    <svg viewBox="0 0 24 24" aria-hidden><circle cx="12" cy="12" r="12" fill="#1877f2" />
-      <path fill="#fff" d="M13.3 24v-8.4h2.8l.4-3.3h-3.2v-2.1c0-.9.3-1.6 1.6-1.6h1.7V5.7c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.1v3.3h2.8V24z" /></svg>
-  ),
-}
 
 // Counts up from zero the first time the element scrolls into view
 function useCountUp(target, duration = 1800) {
@@ -107,10 +66,42 @@ function useCountUp(target, duration = 1800) {
   return [ref, value, started]
 }
 
-function Crop({ crop, className }) {
+// Each platform's embed script, loaded once, the first time a post needs it
+const scripts = {}
+const loadScript = (src) => (scripts[src] ??= new Promise((resolve, reject) => {
+  const el = document.createElement('script')
+  el.src = src
+  el.async = true
+  el.onload = resolve
+  el.onerror = reject
+  document.body.append(el)
+}))
+
+// One post in its platform's official embed. X and Instagram turn a blockquote into a self-sizing frame;
+// Facebook's post plugin is a plain frame. Until a frame loads, or if it's blocked, the link to the post shows.
+function SocialEmbed({ platform, url }) {
+  const box = useRef(null)
+  useEffect(() => {
+    if (platform === 'X') {
+      loadScript('https://platform.twitter.com/widgets.js').then(() => window.twttr?.widgets.load(box.current), () => {})
+    } else if (platform === 'Instagram') {
+      loadScript('https://www.instagram.com/embed.js').then(() => window.instgrm?.Embeds.process(), () => {})
+    }
+  }, [platform])
+
+  const fallback = <a href={url} target="_blank" rel="noopener noreferrer">View this post on {platform}</a>
   return (
-    <div className={`crop ${className}`}>
-      <img src={a('media-sprite.webp')} alt="" style={crop} />
+    <div className="post-embed" ref={box}>
+      {platform === 'X' && <blockquote className="twitter-tweet" data-dnt="true">{fallback}</blockquote>}
+      {platform === 'Instagram' && (
+        <blockquote className="instagram-media" data-instgrm-permalink={url} data-instgrm-version="14" data-instgrm-captioned>
+          {fallback}
+        </blockquote>
+      )}
+      {platform === 'Facebook' && (
+        <iframe title="Bharat Summit on Facebook" loading="lazy" allow="encrypted-media; clipboard-write"
+          src={`https://www.facebook.com/plugins/post.php?href=${encodeURIComponent(url)}&show_text=true&width=380`} />
+      )}
     </div>
   )
 }
@@ -208,22 +199,7 @@ export default function AboutPage() {
             <Marquee className="hashtags" items={[...HASHTAGS, ...HASHTAGS]} secs={3} render={(h) => <span className="hashtag">{h}</span>} />
           </div>
           <div className="container card-row">
-            {POSTS.map((p) => (
-              <article className="post" key={p.platform}>
-                <div className="post-head">
-                  <span className="post-platform" style={{ color: p.color }}>
-                    <span className="post-icon">{BRAND_ICONS[p.platform]}</span>{p.platform}
-                  </span>
-                  <div>
-                    <h3>Bharat Summit</h3>
-                    <p className="post-handle">{p.handle}</p>
-                  </div>
-                </div>
-                <p className="post-text"><Lines lines={p.text} /></p>
-                <Crop crop={p.crop} className="post-img" />
-                <p className="post-stats">{p.stats}</p>
-              </article>
-            ))}
+            {POSTS.map((p) => <SocialEmbed key={p.platform} {...p} />)}
           </div>
         </section>
 

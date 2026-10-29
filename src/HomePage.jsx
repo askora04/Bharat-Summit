@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { a, Title, Portrait, TriBar, Letters, dragMarquee } from './shared.jsx'
+import { a, Title, Portrait, TriBar, dragMarquee } from './shared.jsx'
 import { Link } from './router.jsx'
 import './home.css'
 import SummitNumbers from './SummitNumbers.jsx'
@@ -59,11 +59,7 @@ function HomeHero() {
   return (
     <section className="h-hero" id="top">
       <video className="hero-media" ref={video} src="/videos/hero-banner.mp4" muted playsInline preload="auto" aria-hidden />
-      <div className="h-announce">
-        <div className="h-pill">
-          <h1><Letters text="BHARAT SUMMIT 2026" /></h1>
-        </div>
-      </div>
+      <h1 className="sr-only">Bharat Summit 2026</h1>
       <figure className="h-quote">
         <blockquote>“We meet here not to discuss our past history and contacts but to forge links for the future.”</blockquote>
         <figcaption>— Jawaharlal Nehru</figcaption>

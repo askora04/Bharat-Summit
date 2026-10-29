@@ -30,13 +30,11 @@
 }
 @media (max-width: 700px) { .h-hero::before { background-position: 28% center; } } /* keep Nehru in frame */
 @keyframes hero-zoom { from { scale: 1.12; filter: brightness(.6); } to { scale: 1.02; } }
-.h-announce, .hero-content { translate: 0 calc(var(--sy) * -.18px); opacity: calc(1 - var(--sy) / 700); }
+.hero-content { translate: 0 calc(var(--sy) * -.18px); opacity: calc(1 - var(--sy) / 700); }
 /* their entrance animations must let go of opacity once done, or the scroll fade can't apply */
-.h-announce, .hero-content, .announcement { animation-fill-mode: backwards; }
+.hero-content, .announcement { animation-fill-mode: backwards; }
 .h-quote { translate: 0 calc(var(--sy) * -.08px); }
 .hero-bg { translate: 0 calc(var(--sy) * .3px); }
-.h-pill { animation: pill-in 1.2s var(--ease-out) .2s backwards; }
-@keyframes pill-in { from { clip-path: inset(0 50% 0 50% round 67px); opacity: .4; } to { clip-path: inset(0 0 0 0 round 67px); } }
 
 /* ---------- Images unmask as they scroll into view ---------- */
 .img-reveal { clip-path: inset(14% 10% 14% 10% round 16px); transition: clip-path 1.3s var(--ease-out); }
@@ -47,25 +45,25 @@
 /* ---------- Cards: one calm, consistent hover ----------
    The card lifts on a long ease into a deep, soft navy shadow, its photo eases in a touch closer,
    and a thin brand-colour line draws across its foot from left to right. */
-:is(.org-card, .sp-card, .speaker, .h-speaker, .post, .mc-article, .mc-video, .vd-card, .ev-tile) {
+:is(.org-card, .sp-card, .speaker, .h-speaker, .mc-article, .mc-video, .vd-card, .ev-tile) {
   position: relative; overflow: hidden;
   transition: transform .7s var(--ease-out), box-shadow .7s var(--ease-out), border-color .5s ease;
 }
-:is(.org-card, .sp-card, .speaker, .h-speaker, .post, .mc-article, .mc-video, .vd-card, .ev-tile):is(:hover, :focus-visible) {
+:is(.org-card, .sp-card, .speaker, .h-speaker, .mc-article, .mc-video, .vd-card, .ev-tile):is(:hover, :focus-visible) {
   transform: translateY(-8px);
   box-shadow: 0 2px 6px rgba(8, 40, 82, .06), 0 28px 56px -18px rgba(8, 40, 82, .35);
 }
-:is(.org-card, .sp-card, .speaker, .h-speaker, .post, .mc-article, .mc-video, .vd-card, .ev-tile)::after {
+:is(.org-card, .sp-card, .speaker, .h-speaker, .mc-article, .mc-video, .vd-card, .ev-tile)::after {
   content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; z-index: 3; pointer-events: none;
   background: linear-gradient(90deg, #e09c42, #d85a34 25%, #3ab4b3 50%, #70c9c8 75%, #2f477b);
   transform: scaleX(0); transform-origin: right; transition: transform .7s var(--ease-out);
 }
-:is(.org-card, .sp-card, .speaker, .h-speaker, .post, .mc-article, .mc-video, .vd-card, .ev-tile):is(:hover, :focus-visible)::after {
+:is(.org-card, .sp-card, .speaker, .h-speaker, .mc-article, .mc-video, .vd-card, .ev-tile):is(:hover, :focus-visible)::after {
   transform: scaleX(1); transform-origin: left;
 }
 /* photos ease in slowly, on top of each card's own colour change */
-:is(.org-card, .sp-card, .speaker, .h-speaker, .post) img { transition: filter .7s ease, scale 1.2s var(--ease-out); }
-:is(.org-card, .sp-card, .speaker, .h-speaker, .post):is(:hover, :focus-visible) img { scale: 1.03; }
+:is(.org-card, .sp-card, .speaker, .h-speaker) img { transition: filter .7s ease, scale 1.2s var(--ease-out); }
+:is(.org-card, .sp-card, .speaker, .h-speaker):is(:hover, :focus-visible) img { scale: 1.03; }
 
 /* ---------- Card groups scroll sideways: one row, snapping card by card ----------
    --per is how many cards fit in view; the padding leaves room for the hover lift and shadow. */
@@ -111,6 +109,6 @@
   .curtain { display: none; }
   .section-title .wi { transform: none; }
   .h-hero::before { transform: none; }
-  .h-announce, .hero-content, .h-quote, .hero-bg { translate: none; opacity: 1; }
+  .hero-content, .h-quote, .hero-bg { translate: none; opacity: 1; }
   .img-reveal, .img-reveal img { clip-path: none; scale: 1; }
 }

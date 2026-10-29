@@ -20,29 +20,6 @@
 }
 /* the video's logo and dates sit near its left edge: crop from the right (blank margin) instead */
 .h-hero .hero-media { object-position: left center; }
-.h-announce {
-  position: absolute;
-  top: calc(61px + 12vh); /* below the header, in the open sky */
-  right: max(16px, calc((100% - 1280px) / 2)); /* ends on the content edge, under CONTACT */
-  width: min(710px, 100% - 32px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  animation: rise 1s ease-out both;
-}
-.h-pill {
-  width: 100%;
-  height: 134px;
-  margin-top: 16px;
-  display: grid;
-  place-items: center;
-  border: 1px solid rgba(255, 255, 255, .28);
-  border-radius: 67px;
-  background: linear-gradient(rgba(255, 255, 255, .06), rgba(255, 255, 255, .06)), var(--gradient-c);
-  backdrop-filter: blur(7px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .08), 0 12px 32px rgba(0, 0, 0, .16);
-}
-.h-pill h1 { font: 700 56px/1.2 var(--font-display); color: #fff; white-space: nowrap; animation: glow 1.6s ease-out .4s both; }
 .h-quote {
   position: absolute;
   /* bottom-left corner, over the Parliament building, clear of Nehru */
@@ -262,8 +239,6 @@
 
 /* Narrow screens: the PDF is desktop-only, so stack the absolutely placed pieces. */
 @media (max-width: 1100px) {
-  .h-announce { left: 16px; right: 16px; width: auto; }
-  .h-pill h1 { font-size: clamp(26px, 6vw, 56px); }
   .h-quote { left: 16px; right: 16px; width: auto; height: auto; padding-bottom: 16px; }
   .h-moments-inner { grid-template-columns: minmax(0, 1fr); gap: 40px; padding: 64px 0; max-width: 690px; }
   .h-venue-grid { grid-template-columns: minmax(0, 1fr); max-width: 856px; }
