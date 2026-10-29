@@ -171,6 +171,9 @@ section[id] { scroll-margin-top: 61px; }
 .hero-stripes span:nth-child(4) { background: #70c9c8; }
 .hero-stripes span:nth-child(5) { background: #2f477b; }
 .hero-content { position: relative; display: flex; flex-direction: column; align-items: center; gap: 16px; margin-top: 30px; }
+/* About Us banner: the capsule sits against the right edge (on phones it's full width, so centred) */
+#top.hero .hero-content { justify-self: end; margin-right: 16px; }
+@media (min-width: 701px) { #top.hero .hero-content { margin-top: -6vw; } } /* a little above centre */
 .announcement {
   width: min(720px, calc(100vw - 32px));
   padding: 20px 32px;
