@@ -1,0 +1,99 @@
+/* Events page: the summit photo gallery (photos served from S3, see gallery.js) */
+
+/* One content width for the video band and the gallery, so every edge lines up */
+:root { --ev-width: min(1280px, 100% - 32px); } /* same as .container and the header */
+
+.ev-page { width: var(--ev-width); margin: 0 auto; padding: 72px 0 88px; }
+
+/* Section title, matching the video band above */
+.ev-photos-head { display: flex; flex-direction: column; align-items: center; margin-bottom: 36px; text-align: center; }
+.ev-photos-head .lede { margin-top: 12px; font-size: 18px; }
+.ev-photos-head .section-title { margin-top: 14px; }
+
+/* Album filter: one pill per album, with its photo count */
+/* one row; on screens too narrow for all albums it scrolls sideways instead of wrapping */
+.ev-albums {
+  display: flex; gap: 8px; margin-bottom: 36px; padding: 2px;
+  overflow-x: auto; scrollbar-width: none;
+}
+.ev-albums::-webkit-scrollbar { display: none; }
+.ev-album { flex: none; white-space: nowrap; }
+.ev-album:first-child { margin-left: auto; } /* centred while it fits */
+.ev-album:last-child { margin-right: auto; }
+.ev-album {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 13px; border: 1px solid #d6dee4; border-radius: 999px;
+  background: #fff; font: 600 13.5px/1.2 var(--font-body); color: var(--navy); cursor: pointer;
+  transition: background .25s, border-color .25s, color .25s;
+}
+.ev-album:hover { border-color: var(--navy); }
+.ev-album[aria-pressed='true'] { background: var(--navy); border-color: var(--navy); color: #fff; }
+
+/* A regular grid: equal 3:2 photo frames and equal caption bands, so every row lines up */
+.ev-gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px 20px; }
+
+.ev-tile {
+  position: relative; margin: 0; overflow: hidden; display: flex; flex-direction: column;
+  border-radius: 10px; background: #fff;
+  box-shadow: 0 2px 10px rgba(19, 52, 95, .06);
+  transition: transform .45s cubic-bezier(.2, .8, .2, 1), box-shadow .45s;
+  animation: ev-in .7s cubic-bezier(.2, .8, .2, 1) both;
+  animation-delay: calc(var(--i) * 30ms);
+}
+@keyframes ev-in { from { opacity: 0; transform: translateY(18px); } }
+.ev-tile:hover { transform: translateY(-4px); box-shadow: 0 16px 32px rgba(19, 52, 95, .16); }
+
+/* The photo is a button that opens the full-screen view; its average colour shows while it loads */
+.ev-photo { display: block; width: 100%; aspect-ratio: 3 / 2; padding: 0; border: 0; overflow: hidden; cursor: zoom-in; }
+.ev-photo img {
+  display: block; width: 100%; height: 100%; object-fit: cover;
+  transition: transform .8s cubic-bezier(.2, .8, .2, 1);
+}
+.ev-tile:hover .ev-photo img { transform: scale(1.04); }
+.ev-photo:focus-visible { outline: 3px solid #fbaa12; outline-offset: -3px; }
+/* the day, in a white band under the photo */
+/* the photo's button covers the whole card, so a click on the caption opens it too */
+.ev-photo::after { content: ''; position: absolute; inset: 0; z-index: 1; }
+.ev-tile { cursor: zoom-in; }
+
+.ev-skeleton { aspect-ratio: 3 / 2.6; border-radius: 10px; background: linear-gradient(100deg, #eef1f4 40%, #f8f9fb 50%, #eef1f4 60%) 0 0 / 300% 100%; animation: ev-shimmer 1.4s linear infinite; }
+@keyframes ev-shimmer { to { background-position: -150% 0; } }
+.ev-status { padding: 48px 0; text-align: center; color: #627088; }
+
+.ev-more { display: flex; justify-content: center; padding-top: 40px; }
+.ev-more-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 13px 26px; border: 0; border-radius: 6px;
+  background: var(--navy); color: #fff; font: 600 15px/1.2 var(--font-body); cursor: pointer;
+}
+.ev-more-btn span { font-weight: 500; color: rgba(255, 255, 255, .7); }
+
+/* Full-screen view */
+.ev-lightbox {
+  position: fixed; inset: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: center;
+  padding: 56px 72px 24px;
+  background: rgba(6, 14, 28, .94);
+  animation: ev-fade .25s ease-out both;
+}
+@keyframes ev-fade { from { opacity: 0; } }
+.ev-lb-figure { margin: 0; display: flex; flex-direction: column; align-items: center; max-width: 100%; max-height: 100%; animation: ev-fade .35s ease-out both; }
+.ev-lb-figure img { display: block; max-width: 100%; max-height: calc(100vh - 100px); width: auto; height: auto; border-radius: 4px; }
+
+.ev-lb-close, .ev-lb-step {
+  position: absolute; display: grid; place-items: center;
+  width: 48px; height: 48px; border: 0; border-radius: 50%;
+  background: rgba(255, 255, 255, .1); color: #fff; cursor: pointer;
+  transition: background .2s;
+}
+.ev-lb-close:hover, .ev-lb-step:hover { background: rgba(255, 255, 255, .22); }
+.ev-lb-close { top: 16px; right: 16px; }
+.ev-lb-step { top: 50%; translate: 0 -50%; }
+.ev-lb-prev { left: 12px; }
+.ev-lb-next { right: 12px; }
+
+.ev-gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ev-tile, .ev-lightbox, .ev-lb-figure, .ev-skeleton { animation: none; }
+}

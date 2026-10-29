@@ -1,3 +1,4 @@
+import './index.css'
 import { useEffect, useState } from 'react'
 import { a } from './shared.jsx'
 import { Link, usePath } from './router.jsx'

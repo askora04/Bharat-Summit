@@ -1,0 +1,99 @@
+/* "Summit in Numbers" section — values from Summit in Numbers — section-html/Main.dc.html */
+
+/* little space above and below: the hero and the speakers section sit close */
+.sin { position: relative; overflow: hidden; padding: 48px 24px 40px; background: #fff; color: #24405f; font-family: 'Outfit', system-ui, sans-serif; }
+.sin-wrap { position: relative; max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 48px; align-items: center; }
+.sin-left { flex: 1 1 360px; min-width: 0; }
+.sin-right { flex: 1.3 1 520px; min-width: 0; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+/* Left column, from the Figma "Bharat Summit in Numbers" frame (node 29:114) */
+.sin-tribar { --w: calc((298px - 8px) / 3); margin-bottom: 39px; }
+.sin-title { margin: 0 0 53px; padding-inline: 0; text-align: left; }
+.sin-intro { max-width: 573px; margin: 0; font: 400 16px/27.15px var(--font-body); color: #40546b; }
+.sin-date { margin-top: 20px; font: 500 18px/1.4 var(--font-body); letter-spacing: .02em; color: var(--navy); }
+.sin-date strong { font-weight: 700; }
+.sin-rule { height: 1px; max-width: 517px; margin-top: 32px; background: #dce2e9; }
+
+/* left column rises in */
+.sin-rise { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .2, 1); }
+.is-in .sin-rise { opacity: 1; transform: none; }
+.is-in .d1 { transition-delay: .1s; }
+.is-in .d2 { transition-delay: .2s; }
+.is-in .d3 { transition-delay: .3s; }
+.is-in .d4 { transition-delay: .45s; }
+
+/* stage */
+.sin-stage { position: relative; width: 100%; max-width: 640px; aspect-ratio: 1 / 1; margin: 0 auto; container-type: inline-size; }
+/* the bubbles leave an empty band ~10% deep above and below them: take back most of it */
+.sin-stage { margin-block: calc(min(640px, 100%) * -0.07) calc(min(640px, 100%) * -0.08); }
+.sin-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.sin-node { position: absolute; aspect-ratio: 1 / 1; transform: translate(-50%, -50%); }
+.sin-text { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+
+/* 1. each bubble is thrown out of the centre as a small seed */
+.sin-fly { position: absolute; inset: 0; opacity: 0; transform: translate(var(--fx), var(--fy)) scale(0); }
+.is-in .sin-fly { opacity: 1; transform: none; transition: opacity 1s ease var(--dl), transform 2.4s cubic-bezier(.22, 1, .36, 1) var(--dl); }
+.sin-bob { position: absolute; inset: 0; }
+.is-in .sin-bob { animation: sinBob var(--bob) ease-in-out 5s infinite; }
+@keyframes sinBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2.4%); } }
+
+/* 2. then its rings emerge outward from the seed, one after another */
+.sin-grow { transform-origin: 50px 50px; transform: scale(var(--s0)); opacity: 0; }
+.is-in .sin-grow { transform: scale(1); opacity: 1; transition: transform 1.3s cubic-bezier(.22, 1, .36, 1) calc(var(--dl) + var(--gd)), opacity .7s ease calc(var(--dl) + var(--gd)); }
+.sin-spin, .sin-spin-r { transform-origin: 50px 50px; }
+.is-in .sin-spin { animation: sinSpin 28s linear calc(var(--dl, 0s) + 3.6s) infinite; }
+.is-in .sin-spin-r { animation: sinSpin 20s linear calc(var(--dl, 0s) + 3.6s) infinite reverse; }
+@keyframes sinSpin { to { transform: rotate(360deg); } }
+.sin-seed { transform-origin: 50px 50px; }
+.is-in .sin-seed { animation: sinSeed 1.2s ease var(--dl) forwards; }
+@keyframes sinSeed { 0% { transform: scale(1); } 55% { transform: scale(1.6); } 100% { transform: scale(1); } }
+
+/* 3. the number rolls in like an odometer */
+.sin-num { display: inline-flex; align-items: center; line-height: 1; font-weight: 800; letter-spacing: -.02em; color: #fff; font-variant-numeric: tabular-nums; opacity: 0; transform: translateY(12%); }
+.is-in .sin-num { opacity: 1; transform: none; transition: opacity .5s ease calc(var(--dl) + 2.3s), transform .6s cubic-bezier(.2, 1.4, .4, 1) calc(var(--dl) + 2.3s); }
+.sin-col { display: inline-block; height: 1em; overflow: hidden; }
+.sin-reel { display: flex; flex-direction: column; will-change: transform; }
+.sin-reel span { display: block; height: 1em; line-height: 1; text-align: center; }
+.sin-ord { align-self: flex-start; margin-top: .12em; font-size: .5em; color: #f4cfa3; }
+.sin-lbl { margin-top: 1cqw; font-weight: 700; opacity: 0; }
+.is-in .sin-lbl { opacity: 1; transition: opacity .6s ease calc(var(--dl) + 2.8s); }
+
+/* connectors draw from the centre */
+.sin-line { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.is-in .sin-line { animation: sinDraw 2.2s cubic-bezier(.22, 1, .36, 1) forwards; }
+@keyframes sinDraw { to { stroke-dashoffset: 0; } }
+
+/* centre: a single small circle that everything comes out of */
+.sin-core { position: absolute; left: 50%; top: 50%; width: 5%; aspect-ratio: 1 / 1; border-radius: 50%; background: #24405f; transform: translate(-50%, -50%) scale(0); }
+.is-in .sin-core { animation: sinFlash 1s cubic-bezier(.2, .9, .3, 1) forwards, sinGlow 2.6s ease-in-out 1.6s infinite; }
+@keyframes sinFlash {
+  0% { transform: translate(-50%, -50%) scale(0); }
+  20% { transform: translate(-50%, -50%) scale(3); }
+  55% { transform: translate(-50%, -50%) scale(.8); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+@keyframes sinGlow { 0%, 100% { box-shadow: 0 0 0 0 rgba(36, 64, 95, .4); } 50% { box-shadow: 0 0 0 2cqw rgba(36, 64, 95, 0); } }
+.sin-halo { position: absolute; left: 50%; top: 50%; aspect-ratio: 1 / 1; border-radius: 50%; transform: translate(-50%, -50%) scale(0); opacity: 0; }
+.is-in .sin-halo { transform: translate(-50%, -50%) scale(1); opacity: 1; transition: transform 1.6s cubic-bezier(.22, 1, .36, 1) var(--hd), opacity .6s ease var(--hd); }
+.sin-wave { position: absolute; left: 50%; top: 50%; width: 10%; aspect-ratio: 1 / 1; border-radius: 50%; border: 2px solid; opacity: 0; transform: translate(-50%, -50%) scale(.1); }
+.is-in .sin-wave { animation: sinWave 1.4s cubic-bezier(.1, .7, .3, 1) forwards; }
+.is-in .w2 { animation-delay: .12s; }
+.is-in .w3 { animation-delay: .24s; }
+@keyframes sinWave { 0% { opacity: .9; transform: translate(-50%, -50%) scale(.1); } 100% { opacity: 0; transform: translate(-50%, -50%) scale(9); } }
+.sin-p { position: absolute; left: 50%; top: 50%; border-radius: 50%; opacity: 0; transform: translate(-50%, -50%); }
+.is-in .sin-p { animation: sinFly 1.3s cubic-bezier(.08, .8, .3, 1) forwards; }
+@keyframes sinFly {
+  0% { opacity: 1; transform: translate(-50%, -50%) rotate(var(--a)) translateX(0) scale(1); }
+  75% { opacity: .85; }
+  100% { opacity: 0; transform: translate(-50%, -50%) rotate(var(--a)) translateX(var(--d)) scale(.3); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sin-rise, .sin-fly, .sin-num, .sin-lbl, .sin-grow { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .sin-halo { opacity: 1 !important; transform: translate(-50%, -50%) scale(1) !important; transition: none !important; }
+  .sin-core { transform: translate(-50%, -50%) scale(1) !important; animation: none !important; }
+  .sin-line { stroke-dashoffset: 0 !important; animation: none !important; }
+  .sin-wave, .sin-p { display: none; }
+  .sin-spin, .sin-spin-r, .is-in .sin-bob, .is-in .sin-seed { animation: none !important; }
+}

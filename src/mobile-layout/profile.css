@@ -1,0 +1,77 @@
+/* Profile view (speakers, organisers, leaders): deep black, blurred backdrop; photo left, details right */
+.sp-profile {
+  position: fixed; inset: 0; z-index: 50;
+  display: grid; place-items: center;
+  padding: 48px 96px;
+  /* everything is sized to fit the screen; this also clips the oversized blurred backdrop */
+  overflow: hidden;
+  background: rgba(6, 8, 10, .82);
+  -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px);
+  color: #fff;
+  animation: sp-in .35s ease;
+}
+@keyframes sp-in { from { opacity: 0; } }
+.sp-backdrop { position: fixed; inset: -10%; z-index: -1; overflow: hidden; filter: blur(70px) brightness(.32) saturate(1.2); }
+.sp-backdrop img { width: 100%; height: 100%; object-fit: cover; opacity: .9; }
+.sp-content {
+  display: grid; grid-template-columns: auto minmax(0, 460px); align-items: center; gap: 56px;
+  animation: sp-rise .45s cubic-bezier(.2, .8, .2, 1);
+}
+@keyframes sp-rise { from { opacity: 0; transform: translateY(16px); } }
+/* Sized from the screen height so the whole profile fits without scrolling */
+.sp-photo {
+  --ph: min(525px, 100dvh - 96px);
+  height: var(--ph); width: calc(var(--ph) * .8);
+  border-radius: 0; box-shadow: 0 30px 60px rgba(0, 0, 0, .5);
+}
+.sp-photo img { object-fit: cover; object-position: center; }
+.sp-meta { font: 700 13px/1 var(--font-body); letter-spacing: .28em; color: #b9bec4; }
+.sp-meta span { margin-inline: 8px; letter-spacing: 0; }
+.sp-info h3 { margin-top: 18px; font: 700 34px/1.15 var(--font-display); color: #fff; }
+.sp-role { margin-top: 10px; font-size: 18px; color: #7cc9c4; }
+.sp-bio { margin-top: 18px; font-size: 17px; line-height: 1.6; color: #d4d8dc; }
+.sp-share { display: flex; align-items: center; gap: 18px; margin-top: 34px; }
+.sp-share > span { font: 700 13px/1 var(--font-body); letter-spacing: .28em; color: #b9bec4; }
+.sp-share a, .sp-share button {
+  display: grid; place-items: center; width: 36px; height: 36px; padding: 0;
+  border: 0; border-radius: 999px; background: transparent; color: #e6e8ea; cursor: pointer;
+  transition: background .2s;
+}
+.sp-share a:hover, .sp-share button:hover { background: rgba(255, 255, 255, .12); }
+.sp-close, .sp-step {
+  position: fixed; display: grid; place-items: center;
+  width: 60px; height: 60px; padding: 0;
+  border: 1px solid rgba(255, 255, 255, .14); border-radius: 999px;
+  background: rgba(255, 255, 255, .12); color: #fff; cursor: pointer;
+  transition: background .2s;
+}
+.sp-close:hover, .sp-step:hover { background: rgba(255, 255, 255, .24); }
+.sp-close { top: 20px; right: 20px; width: 48px; height: 48px; }
+.sp-step { top: 50%; transform: translateY(-50%); }
+.sp-prev { left: 18px; }
+.sp-next { right: 18px; }
+
+.h-view-all { display: flex; flex-direction: column; align-items: flex-end; }
+.h-btn-pill {
+  display: inline-flex; align-items: center; justify-content: center; gap: 22px;
+  width: 242px; height: 56px;
+  border-radius: 999px;
+  background: #051f5e; color: #fff;
+  font: 500 16px var(--font-body);
+}
+/* the home page's View All Speakers: a smaller pill */
+.h-view-all .h-btn-pill { width: auto; height: 46px; padding: 0 24px; gap: 12px; font-size: 15px; }
+.h-btn-pill:hover, .h-btn:hover, .h-maps-btn:hover { filter: brightness(1.2); }
+
+/* Narrow screens: photo above the details, both fitting between the close button and the arrows */
+.sp-profile { padding: 72px 20px 84px; }
+.sp-content { grid-template-columns: minmax(0, 460px); justify-items: center; gap: 22px; text-align: center; }
+.sp-content p { text-align-last: center; }
+.sp-photo { --ph: clamp(100px, 100dvh - 380px, 460px); }
+.sp-info h3 { margin-top: 12px; font-size: 24px; }
+.sp-role { margin-top: 6px; font-size: 16px; }
+.sp-bio { margin-top: 10px; font-size: 15px; line-height: 1.5; }
+.sp-share { justify-content: center; margin-top: 16px; }
+.sp-step { top: auto; bottom: 16px; transform: none; width: 48px; height: 48px; }
+.sp-prev { left: calc(50% - 60px); }
+.sp-next { right: calc(50% - 60px); }

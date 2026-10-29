@@ -1,0 +1,108 @@
+/* Motion layer (see motion.js). Easing throughout: a quick start that settles softly. */
+:root { --ease-out: cubic-bezier(.2, .8, .2, 1); --sy: 0; }
+
+/* ---------- Page transition: the five brand stripes sweep up and away ---------- */
+.curtain { position: fixed; inset: 0; z-index: 400; display: flex; pointer-events: none; }
+.curtain i { flex: 1; transform-origin: top; animation: curtain-out .9s var(--ease-out) both; }
+.curtain i:nth-child(1) { background: #e09c42; animation-delay: 0s; }
+.curtain i:nth-child(2) { background: #d85a34; animation-delay: .06s; }
+.curtain i:nth-child(3) { background: #3ab4b3; animation-delay: .12s; }
+.curtain i:nth-child(4) { background: #70c9c8; animation-delay: .18s; }
+.curtain i:nth-child(5) { background: #2f477b; animation-delay: .24s; }
+@keyframes curtain-out { from { transform: scaleY(1); } to { transform: scaleY(0); } }
+
+/* ---------- Headings: each word rises out of a mask ---------- */
+.section-title .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .12em; margin-bottom: -.12em; }
+.section-title .wi { display: inline-block; transform: translateY(110%); transition: transform 1s var(--ease-out) calc(var(--wi) * 80ms + 120ms); }
+.section-title.is-in .wi { transform: none; }
+
+/* Hero headline: letters rise and sharpen one after another */
+.letters { display: inline-block; white-space: nowrap; }
+.letters .li { display: inline-block; animation: letter-in .9s var(--ease-out) backwards; animation-delay: calc(var(--li) * 35ms + .5s); }
+@keyframes letter-in { from { opacity: 0; transform: translateY(.45em) rotate(6deg); filter: blur(8px); } }
+
+/* ---------- Hero: slow zoom on arrival, parallax on scroll, content lifts away ---------- */
+.h-hero::before {
+  content: ''; position: absolute; inset: -4% 0; pointer-events: none;
+  background: url(/assets/home/home-hero-2026.webp) center 70% / cover;
+  transform: translate3d(0, calc(var(--sy) * .28px), 0);
+  animation: hero-zoom 2.6s var(--ease-out) both;
+}
+ /* keep Nehru in frame */
+@keyframes hero-zoom { from { scale: 1.12; filter: brightness(.6); } to { scale: 1.02; } }
+.hero-content { translate: 0 calc(var(--sy) * -.18px); opacity: calc(1 - var(--sy) / 700); }
+/* their entrance animations must let go of opacity once done, or the scroll fade can't apply */
+.hero-content, .announcement { animation-fill-mode: backwards; }
+.h-quote { translate: 0 calc(var(--sy) * -.08px); }
+.hero-bg { translate: 0 calc(var(--sy) * .3px); }
+
+/* ---------- Images unmask as they scroll into view ---------- */
+.img-reveal { clip-path: inset(14% 10% 14% 10% round 16px); transition: clip-path 1.3s var(--ease-out); }
+.img-reveal img { scale: 1.18; transition: scale 1.6s var(--ease-out); }
+.img-reveal.is-in { clip-path: inset(0 0 0 0 round 16px); }
+.img-reveal.is-in img { scale: 1; }
+
+/* ---------- Cards: one calm, consistent hover ----------
+   The card lifts on a long ease into a deep, soft navy shadow, its photo eases in a touch closer,
+   and a thin brand-colour line draws across its foot from left to right. */
+:is(.org-card, .sp-card, .speaker, .h-speaker, .mc-article, .mc-video, .vd-card, .ev-tile) {
+  position: relative; overflow: hidden;
+  transition: transform .7s var(--ease-out), box-shadow .7s var(--ease-out), border-color .5s ease;
+}
+:is(.org-card, .sp-card, .speaker, .h-speaker, .mc-article, .mc-video, .vd-card, .ev-tile):is(:hover, :focus-visible) {
+  transform: translateY(-8px);
+  box-shadow: 0 2px 6px rgba(8, 40, 82, .06), 0 28px 56px -18px rgba(8, 40, 82, .35);
+}
+:is(.org-card, .sp-card, .speaker, .h-speaker, .mc-article, .mc-video, .vd-card, .ev-tile)::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; z-index: 3; pointer-events: none;
+  background: linear-gradient(90deg, #e09c42, #d85a34 25%, #3ab4b3 50%, #70c9c8 75%, #2f477b);
+  transform: scaleX(0); transform-origin: right; transition: transform .7s var(--ease-out);
+}
+:is(.org-card, .sp-card, .speaker, .h-speaker, .mc-article, .mc-video, .vd-card, .ev-tile):is(:hover, :focus-visible)::after {
+  transform: scaleX(1); transform-origin: left;
+}
+/* photos ease in slowly, on top of each card's own colour change */
+:is(.org-card, .sp-card, .speaker, .h-speaker) img { transition: filter .7s ease, scale 1.2s var(--ease-out); }
+:is(.org-card, .sp-card, .speaker, .h-speaker):is(:hover, :focus-visible) img { scale: 1.03; }
+
+/* ---------- Card groups scroll sideways: one row, snapping card by card ----------
+   --per is how many cards fit in view; the padding leaves room for the hover lift and shadow. */
+.sp-grid {
+  --per: 4; --gap: 24px;
+  display: grid; grid-auto-flow: column; grid-template-columns: none;
+  grid-auto-columns: calc((100% - (var(--per) - 1) * var(--gap)) / var(--per));
+  gap: var(--gap); justify-content: start;
+  overflow-x: auto; overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory; scroll-padding-inline: 4px;
+  padding: 12px 4px 40px;
+  scrollbar-width: thin; scrollbar-color: #2f477b transparent;
+}
+.sp-grid > * { scroll-snap-align: start; min-width: 0; }
+.sp-grid::-webkit-scrollbar { height: 6px; }
+.sp-grid::-webkit-scrollbar-thumb { background: #2f477b; border-radius: 6px; }
+.sp-grid { --per: 3; --gap: 20px; margin-top: 16px; }
+/* Part I's rows glide on their own (and move by trackpad, wheel or swipe), so they hide the
+   scrollbar and don't snap: snapping would tug against the glide */
+.sp-grid.sp-grid-auto { scrollbar-width: none; scroll-snap-type: none; }
+.sp-grid-copy { display: contents; }
+.sp-grid.sp-grid-auto::-webkit-scrollbar { display: none; }
+/* the Speakers page's "All" view lists everyone at once, as a grid */
+.sp-grid.sp-grid-all {
+  grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px 20px;
+  overflow: visible; padding: 0; margin-top: 28px;
+}
+
+
+
+/* ---------- Small touches ---------- */
+.header .logo .wordmark-name { transition: letter-spacing .5s var(--ease-out); }
+.header .logo:hover .wordmark-name { letter-spacing: 2px; }
+.scroll-progress { transition: transform .15s linear; }
+
+@media (prefers-reduced-motion: reduce) {
+  .curtain { display: none; }
+  .section-title .wi { transform: none; }
+  .h-hero::before { transform: none; }
+  .hero-content, .h-quote, .hero-bg { translate: none; opacity: 1; }
+  .img-reveal, .img-reveal img { clip-path: none; scale: 1; }
+}

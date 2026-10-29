@@ -1,10 +1,17 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+// Phones get their own copy of the layout (src/mobile-layout/); loading only one keeps the two sets of styles apart
+const phone = window.matchMedia('(max-width: 700px)')
+const layout = phone.matches ? import('./mobile-layout/App.jsx') : import('./App.jsx')
+// crossing the breakpoint (rotating a tablet, resizing a window) swaps to the other layout
+phone.addEventListener('change', () => window.location.reload())
+
+layout.then((mod) => {
+  const App = mod.default
+  createRoot(document.getElementById('root')).render(
+    <StrictMode>
+      <App />
+    </StrictMode>,
+  )
+})
