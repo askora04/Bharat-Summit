@@ -50,7 +50,8 @@ function Icon({ name, size = 20, strokeWidth = 2 }) {
 
 function HomeHero() {
   const video = useRef(null)
-  // plays once per visit, starting as the page curtain lifts so the opening isn't hidden under it
+  // plays once per visit, starting as the page curtain lifts so the opening isn't hidden under it.
+  // Bump ?v= in the src when the video is replaced: /videos/ files are cached for a week (vercel.json).
   useEffect(() => {
     const t = setTimeout(() => video.current?.play().catch(() => {}), 900)
     return () => clearTimeout(t)
@@ -58,7 +59,7 @@ function HomeHero() {
 
   return (
     <section className="h-hero" id="top">
-      <video className="hero-media" ref={video} src="/videos/hero-banner.mp4" muted playsInline preload="auto" aria-hidden />
+      <video className="hero-media" ref={video} src="/videos/hero-banner.mp4?v=2" muted playsInline preload="auto" aria-hidden />
       <h1 className="sr-only">Bharat Summit 2026</h1>
       <figure className="h-quote">
         <blockquote>“We meet here not to discuss our past history and contacts but to forge links for the future.”</blockquote>
