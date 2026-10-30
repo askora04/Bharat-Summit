@@ -1,6 +1,6 @@
 import './index.css'
 import { useEffect, useState } from 'react'
-import { a } from './shared.jsx'
+import { a, TriBar } from './shared.jsx'
 import { Link, usePath } from '../router.jsx'
 import HomePage from './HomePage.jsx'
 import AboutPage from './AboutPage.jsx'
@@ -94,13 +94,30 @@ function Header() {
       </button>
 
       {open && (
-        <div className="menu-overlay" role="dialog" aria-modal="true" aria-label="Menu">
-          <button className="menu-close" aria-label="Close menu" onClick={() => setOpen(false)}>×</button>
-          <nav>
-            {MENU.map((n) => (
-              <NavLink key={n} label={n} onClick={() => setOpen(false)} />
-            ))}
-          </nav>
+        // a panel sliding in from the right over the dimmed page; tapping the dimmed part closes it
+        <div className="menu-overlay" role="dialog" aria-modal="true" aria-label="Menu"
+          onClick={(e) => e.target === e.currentTarget && setOpen(false)}>
+          <div className="menu-panel">
+            <div className="menu-head">
+              <span className="menu-brand">
+                <img className="brand-logo" src={a('logo.svg')} width="32" height="32" alt="" />
+                <span className="menu-brand-name"><strong>BHARAT</strong> SUMMIT</span>
+              </span>
+              <button className="menu-close" aria-label="Close menu" onClick={() => setOpen(false)}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden><path d="M18 6 6 18M6 6l12 12" /></svg>
+              </button>
+            </div>
+            <nav className="menu-links">
+              {MENU.map((n) => (
+                <NavLink key={n} label={n} onClick={() => setOpen(false)} />
+              ))}
+            </nav>
+            <div className="menu-foot">
+              <TriBar className="menu-bar" />
+              <p className="menu-date">12–14 November 2026</p>
+              <p className="menu-venue">HICC, Hyderabad, Telangana</p>
+            </div>
+          </div>
         </div>
       )}
     </>
