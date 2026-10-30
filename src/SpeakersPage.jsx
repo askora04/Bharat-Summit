@@ -14,8 +14,8 @@ const HERO_MONUMENTS = [
   ['landmarks', 'charminar', 120],
 ]
 
-// Page banner with the monuments along its lower right; the Summit Archives page uses it too
-export function MonumentHero({ kicker, title, children }) {
+// Page banner with the monuments along its lower right; the Summit Archives and Schedule pages use it too
+export function MonumentHero({ kicker, title, className, children }) {
   const row = useRef(null)
   // the monuments drift after the pointer (-1..1 across the banner); taller ones are "nearer" and move more
   const follow = (e) => {
@@ -26,7 +26,7 @@ export function MonumentHero({ kicker, title, children }) {
   const settle = () => { row.current?.style.setProperty('--mx', 0); row.current?.style.setProperty('--my', 0) }
 
   return (
-    <section className="sp-hero" onPointerMove={follow} onPointerLeave={settle}>
+    <section className={`sp-hero${className ? ` ${className}` : ''}`} onPointerMove={follow} onPointerLeave={settle}>
       <div className="sp-hero-stars" aria-hidden>
         {[[8, 30], [22, 70], [38, 15], [55, 55], [70, 25], [86, 62], [95, 10]].map(([x, y], s) => (
           <span key={s} style={{ left: `${x}%`, top: `${y}%`, '--s': s }} />

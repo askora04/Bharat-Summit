@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { TriBar } from './shared.jsx'
+import { MonumentHero } from './SpeakersPage.jsx'
 import { DAYS, THEMES, EXHIBITIONS } from './scheduleData.js'
 import './schedule.css'
 
@@ -56,15 +57,11 @@ export default function SchedulePage() {
 
   return (
     <>
-      <section className="sc-hero">
-        <div className="sc-wrap">
-          <p className="sc-hero-kicker">BHARAT SUMMIT 2026</p>
-          <h1>AGENDA &amp; <strong>SCHEDULE</strong></h1>
-          <p className="sc-hero-lede">A programme of plenary sessions, panel discussions and exhibitions exploring a more just and inclusive global order.</p>
-          <p className="sc-hero-meta">12–14 November 2026 · HICC, Hyderabad</p>
-          <TriBar className="sc-hero-bar" />
-        </div>
-      </section>
+      <MonumentHero className="sc-hero" kicker="BHARAT SUMMIT 2026" title={<>AGENDA &amp; <strong>SCHEDULE</strong></>}>
+        <p className="sc-hero-lede">A programme of plenary sessions, panel discussions and exhibitions exploring a more just and inclusive global order.</p>
+        <p className="sc-hero-meta">12–14 November 2026 · HICC, Hyderabad</p>
+        <TriBar className="sc-hero-bar" />
+      </MonumentHero>
 
       <main className="sc-page" id="programme">
         <div className="sc-days" role="tablist" aria-label="Programme days">
