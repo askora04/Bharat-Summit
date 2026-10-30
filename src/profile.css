@@ -30,6 +30,7 @@
 .sp-info h3 { margin-top: 18px; font: 700 34px/1.15 var(--font-display); color: #fff; }
 .sp-role { margin-top: 10px; font-size: 18px; color: #7cc9c4; }
 .sp-bio { margin-top: 18px; font-size: 17px; line-height: 1.6; color: #d4d8dc; }
+.sp-bio strong { font-weight: 700; color: #fbaa12; }
 .sp-close, .sp-step {
   position: fixed; display: grid; place-items: center;
   width: 60px; height: 60px; padding: 0;

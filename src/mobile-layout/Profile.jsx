@@ -12,6 +12,12 @@ const ICONS = {
   share: <><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" /><path d="m16 6-4-4-4 4M12 2v13" /></>,
 }
 
+// the bio with each occurrence of `phrase` in bold
+function marked(text, phrase) {
+  if (!phrase) return text
+  return text.split(phrase).flatMap((part, i) => (i ? [<strong key={i}>{phrase}</strong>, part] : [part]))
+}
+
 function Icon({ name, size = 20 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
@@ -22,7 +28,7 @@ function Icon({ name, size = 20 }) {
 }
 
 // Full-screen profile over a deep, blurred backdrop: photo on the left, details on the right.
-// people: [{ name, role, bio, bg, img }]. No share links on phones.
+// people: [{ name, role, bio, highlight?, bg, img }]. No share links on phones.
 export default function Profile({ people, index, label, onClose, onStep }) {
   const p = people[index]
   const closeRef = useRef(null)
@@ -66,7 +72,7 @@ export default function Profile({ people, index, label, onClose, onStep }) {
           <p className="sp-meta">{label} <span>—</span> {index + 1} / {people.length}</p>
           <h3 id="sp-name">{p.name}</h3>
           <p className="sp-role">{p.role}</p>
-          <p className="sp-bio">{p.bio}</p>
+          <p className="sp-bio">{marked(p.bio, p.highlight)}</p>
         </div>
       </div>
     </div>,
