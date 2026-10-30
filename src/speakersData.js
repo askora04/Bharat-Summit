@@ -4,11 +4,8 @@ import { a } from './shared.jsx'
 // 26 October 2026). Photos are the document's, background removed (assets-original/speakers/);
 // speakers it marks "[photo needed]" show their initials instead.
 
-// Brand colours (from the colour sheet). Each card's background is one of these, in turn.
-export const SPEAKER_COLOURS = [
-  'linear-gradient(180deg, #fbaa12, #ee870b)', // saffron
-  '#13345f', // navy
-]
+// Brand navy (from the colour sheet): every card's background.
+export const SPEAKER_BG = '#13345f'
 
 const FRI = 'Friday, 13 November 2026'
 const SAT = 'Saturday, 14 November 2026'
@@ -237,8 +234,6 @@ const RAW = [
 ]
 
 const NO_PHOTO = new Set([])
-// cards that keep a set colour instead of taking the next one in turn
-const BG = { 'Damian Murphy': SPEAKER_COLOURS[1] } // navy
 // "María José Pizarro" -> "maria-jose-pizarro", the photo's file name
 const slug = (name) => name.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 
@@ -255,7 +250,7 @@ export const PARTS = RAW.map(({ part, sessions }) => ({
       n += 1
       return { id: n, name, role, bio, moderator: !!moderator, session: s.title, when: s.when, initials: initials(name),
         img: NO_PHOTO.has(name) ? null : a(`speakers/${slug(name)}.webp`),
-        bg: BG[name] ?? SPEAKER_COLOURS[(n - 1) % SPEAKER_COLOURS.length] }
+        bg: SPEAKER_BG }
     }),
   })),
 }))

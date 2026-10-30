@@ -7,9 +7,6 @@ const ICONS = {
   close: <path d="M18 6 6 18M6 6l12 12" />,
   prev: <path d="m15 18-6-6 6-6" />,
   next: <path d="m9 18 6-6-6-6" />,
-  facebook: <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />,
-  chat: <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />,
-  share: <><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" /><path d="m16 6-4-4-4 4M12 2v13" /></>,
 }
 
 function Icon({ name, size = 20 }) {
@@ -22,8 +19,8 @@ function Icon({ name, size = 20 }) {
 }
 
 // Full-screen profile over a deep, blurred backdrop: photo on the left, details on the right.
-// people: [{ name, role, bio, bg, img }]; shareHash: section the share links point back to.
-export default function Profile({ people, index, label, shareHash, onClose, onStep }) {
+// people: [{ name, role, bio, bg, img }]
+export default function Profile({ people, index, label, onClose, onStep }) {
   const p = people[index]
   const closeRef = useRef(null)
 
@@ -43,15 +40,6 @@ export default function Profile({ people, index, label, shareHash, onClose, onSt
       opener?.focus?.()
     }
   }, [onClose, onStep])
-
-  const url = `${window.location.origin}${window.location.pathname}#${shareHash}`
-  const text = `${p.name} · Bharat Summit 2026`
-  const share = async () => {
-    try {
-      if (navigator.share) await navigator.share({ title: text, url })
-      else await navigator.clipboard.writeText(url)
-    } catch { /* share sheet dismissed or clipboard blocked: nothing to do */ }
-  }
 
   return createPortal(
     <div className="sp-profile" role="dialog" aria-modal="true" aria-labelledby="sp-name" onClick={(e) => e.target === e.currentTarget && onClose()}>
@@ -76,12 +64,6 @@ export default function Profile({ people, index, label, shareHash, onClose, onSt
           <h3 id="sp-name">{p.name}</h3>
           <p className="sp-role">{p.role}</p>
           <p className="sp-bio">{p.bio}</p>
-          <div className="sp-share">
-            <span>SHARE</span>
-            <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`} target="_blank" rel="noreferrer" aria-label="Share on Facebook"><Icon name="facebook" /></a>
-            <a href={`https://wa.me/?text=${encodeURIComponent(`${text} ${url}`)}`} target="_blank" rel="noreferrer" aria-label="Share on WhatsApp"><Icon name="chat" /></a>
-            <button onClick={share} aria-label="Share link"><Icon name="share" /></button>
-          </div>
         </div>
       </div>
     </div>,

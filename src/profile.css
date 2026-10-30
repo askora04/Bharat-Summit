@@ -30,14 +30,6 @@
 .sp-info h3 { margin-top: 18px; font: 700 34px/1.15 var(--font-display); color: #fff; }
 .sp-role { margin-top: 10px; font-size: 18px; color: #7cc9c4; }
 .sp-bio { margin-top: 18px; font-size: 17px; line-height: 1.6; color: #d4d8dc; }
-.sp-share { display: flex; align-items: center; gap: 18px; margin-top: 34px; }
-.sp-share > span { font: 700 13px/1 var(--font-body); letter-spacing: .28em; color: #b9bec4; }
-.sp-share a, .sp-share button {
-  display: grid; place-items: center; width: 36px; height: 36px; padding: 0;
-  border: 0; border-radius: 999px; background: transparent; color: #e6e8ea; cursor: pointer;
-  transition: background .2s;
-}
-.sp-share a:hover, .sp-share button:hover { background: rgba(255, 255, 255, .12); }
 .sp-close, .sp-step {
   position: fixed; display: grid; place-items: center;
   width: 60px; height: 60px; padding: 0;
@@ -72,7 +64,6 @@
   .sp-info h3 { margin-top: 12px; font-size: 24px; }
   .sp-role { margin-top: 6px; font-size: 16px; }
   .sp-bio { margin-top: 10px; font-size: 15px; line-height: 1.5; }
-  .sp-share { justify-content: center; margin-top: 16px; }
   .sp-step { top: auto; bottom: 16px; transform: none; width: 48px; height: 48px; }
   .sp-prev { left: calc(50% - 60px); }
   .sp-next { right: calc(50% - 60px); }

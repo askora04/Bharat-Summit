@@ -25,6 +25,38 @@ const WEBP_FOR = {
   'media-sprite.png': DETAILED,
 }
 
+// Speaker cut-outs come framed tighter or looser; each is rescaled, bottom edge kept and head
+// centred, so the top of every head (or hat) sits the same distance from the top of the frame.
+const SPEAKERS = /^speakers[\\/]/
+const HEAD_TOP = 0.13 // of the frame's height
+
+async function measureHead(src) {
+  const { data, info } = await sharp(src).ensureAlpha().raw().toBuffer({ resolveWithObject: true })
+  const span = (y) => {
+    let a = -1, b = -1
+    for (let x = 0; x < info.width; x++) if (data[(y * info.width + x) * 4 + 3] > 128) { if (a < 0) a = x; b = x }
+    return a < 0 ? null : [a, b]
+  }
+  let top = 0
+  while (top < info.height - 1 && !span(top)) top++
+  const rows = []
+  for (let y = top; y <= Math.min(top + 110, info.height - 1); y += 2) { const r = span(y); if (r) rows.push(r) }
+  return { top, centre: rows.reduce((s, [a, b]) => s + (a + b) / 2, 0) / rows.length }
+}
+
+async function frameSpeaker(src) {
+  const { width: N, height } = await sharp(src).metadata()
+  const head = await measureHead(src)
+  const scale = (height * (1 - HEAD_TOP)) / (height - head.top)
+  const w = Math.round(N * scale), h = Math.round(height * scale)
+  const left = Math.round(N / 2 - head.centre * scale), top = height - h
+  const clear = { r: 0, g: 0, b: 0, alpha: 0 }
+  const placed = await sharp(await sharp(src).resize(w, h).toBuffer())
+    .extend({ top: Math.max(0, top), left: Math.max(0, left), right: Math.max(0, N - left - w), bottom: 0, background: clear })
+    .toBuffer()
+  return sharp(placed).extract({ left: Math.max(0, -left), top: Math.max(0, -top), width: N, height })
+}
+
 async function* walk(dir) {
   for (const entry of await readdir(dir, { withFileTypes: true })) {
     const path = join(dir, entry.name)
@@ -42,7 +74,8 @@ for await (const src of walk(SRC)) {
 
   const { width } = await sharp(src).metadata()
   const max = MAX_WIDTH_FOR[rel] ?? MAX_WIDTH
-  await sharp(src)
+  const input = SPEAKERS.test(rel) ? await (await frameSpeaker(src)).png().toBuffer() : src
+  await sharp(input)
     .resize({ width: Math.min(width, max), withoutEnlargement: true })
     .webp(WEBP_FOR[rel] ?? WEBP)
     .toFile(out)

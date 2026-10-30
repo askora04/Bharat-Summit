@@ -30,7 +30,7 @@ export default function OrganizedBy({ sectionId = 'organised' }) {
               type="button"
               tabIndex={copy ? -1 : undefined}
               aria-label={`${o.name}, ${o.role.join(' ')}. View profile`}
-              onClick={() => setOpen({ people: ORGANIZER_PROFILES, index: i, label: 'ORGANISER', hash: sectionId })}
+              onClick={() => setOpen({ people: ORGANIZER_PROFILES, index: i, label: 'ORGANISER' })}
             >
               <Portrait bg={o.bg} src={a(o.img)} className="org-portrait" />
               <span className="org-body">
@@ -48,7 +48,6 @@ export default function OrganizedBy({ sectionId = 'organised' }) {
           people={open.people}
           index={open.index}
           label={open.label}
-          shareHash={open.hash}
           onClose={close}
           onStep={step}
         />
