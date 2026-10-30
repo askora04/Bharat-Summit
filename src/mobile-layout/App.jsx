@@ -73,7 +73,7 @@ function Header() {
           <Link to="/" className="logo" aria-label="Bharat Summit home">
             <img className="brand-logo" src={a('logo.svg')} width="52" height="52" alt="" />
             <span className="wordmark">
-              <span className="wordmark-name">BHARAT SUMMIT</span>
+              <span className="wordmark-name"><strong>BHARAT</strong> SUMMIT</span>
               <span className="wordmark-tag">FORGING A NEW WORLD ORDER</span>
             </span>
           </Link>

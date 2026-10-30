@@ -91,11 +91,13 @@ section[id] { scroll-margin-top: 61px; }
 .lockup { display: flex; align-items: center; gap: 20px; }
 .logo { display: flex; align-items: center; gap: 12px; color: #fff; }
 .brand-logo { border-radius: 50%; } /* the globe artwork has white corners; show just the circle */
-.wordmark { display: flex; flex-direction: column; gap: 1px; white-space: nowrap; }
-.wordmark-name { font: 700 21px/normal var(--font-display); letter-spacing: 1px; }
+/* as in the hero banner's lockup: bold BHARAT, light SUMMIT, the tagline between a coral and a teal rule */
+.wordmark { display: flex; flex-direction: column; gap: 3px; white-space: nowrap; }
+.wordmark-name { font: 400 21px/normal 'Montserrat', var(--font-body); letter-spacing: .5px; color: #163d88; }
+.wordmark-name strong { font: 800 1em/1 'Orbitron', var(--font-display); letter-spacing: 0; }
 /* the tagline spans exactly the name's width: it adds no width of its own and is justified across it */
 .wordmark-tag, .footer-wordmark-tagline { width: 0; min-width: 100%; text-align: justify; text-align-last: justify; }
-.wordmark-tag { font: 700 10.5px/1.5 var(--font-body); letter-spacing: .06em; }
+.wordmark-tag { padding-block: 2px; border-block: 1px solid #dea28e; border-bottom-color: #99d3ca; color: #1f1f1f; font: 500 10.5px/1.5 'Montserrat', var(--font-body); letter-spacing: .04em; }
 .nav { display: flex; gap: 28px; }
 .nav a {
   position: relative;
