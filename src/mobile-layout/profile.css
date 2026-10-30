@@ -28,7 +28,6 @@
 .sp-meta { font: 700 13px/1 var(--font-body); letter-spacing: .28em; color: #b9bec4; }
 .sp-meta span { margin-inline: 8px; letter-spacing: 0; }
 .sp-info h3 { margin-top: 18px; font: 700 34px/1.15 var(--font-display); color: #fff; }
-.sp-role { margin-top: 10px; font-size: 18px; color: #7cc9c4; }
 .sp-bio { margin-top: 18px; font-size: 17px; line-height: 1.6; color: #d4d8dc; }
 .sp-bio strong { font-weight: 700; color: #fbaa12; }
 .sp-share { display: flex; align-items: center; gap: 18px; margin-top: 34px; }
@@ -70,7 +69,6 @@
 .sp-content p { text-align-last: center; }
 .sp-photo { --ph: clamp(100px, 100dvh - 380px, 460px); }
 .sp-info h3 { margin-top: 12px; font-size: 24px; }
-.sp-role { margin-top: 6px; font-size: 16px; }
 .sp-bio { margin-top: 10px; font-size: 15px; line-height: 1.5; }
 .sp-share { justify-content: center; margin-top: 16px; }
 .sp-step { top: auto; bottom: 16px; transform: none; width: 48px; height: 48px; }

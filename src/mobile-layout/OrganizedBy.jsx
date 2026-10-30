@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { a, Title, Lines, Portrait, Marquee } from './shared.jsx'
+import { a, Title, Portrait, Marquee } from './shared.jsx'
 import { ORGANIZERS, ORGANIZER_PROFILES } from '../organizersData.js'
 import Profile from './Profile.jsx'
 
@@ -29,13 +29,12 @@ export default function OrganizedBy({ sectionId = 'organised' }) {
               className="org-card"
               type="button"
               tabIndex={copy ? -1 : undefined}
-              aria-label={`${o.name}, ${o.role.join(' ')}. View profile`}
+              aria-label={`${o.name}. View profile`}
               onClick={() => setOpen({ people: ORGANIZER_PROFILES, index: i, label: 'ORGANISER', hash: sectionId })}
             >
               <Portrait bg={o.bg} src={a(o.img)} className="org-portrait" />
               <span className="org-body">
                 <span className="org-name">{o.name}</span>
-                <span className="org-role"><Lines lines={o.role} /></span>
               </span>
               <img className="org-arrow" src={a('card-arrow.svg')} width="30" height="30" alt="" />
             </button>
