@@ -55,7 +55,7 @@ export default function Footer() {
               <img className="brand-logo" src={a('logo.svg')} alt="" width="52" height="52" />
               <span className="footer-wordmark">
                 <span className="footer-wordmark-name">BHARAT SUMMIT</span>
-                <span className="footer-wordmark-tagline">FORGING A NEW WORLD ORDER</span>
+                <span className="footer-wordmark-tagline">FORGING A NEW WORLD</span>
               </span>
             </Link>
 
@@ -68,17 +68,17 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
 
-          <nav className="footer-nav" aria-label="Footer">
-            <ul>
-              {NAV_LINKS.map((link) => (
-                <li key={link.label}>
-                  <FooterNavLink {...link} />
-                </li>
-              ))}
-            </ul>
-          </nav>
+            <nav className="footer-nav" aria-label="Footer">
+              <ul>
+                {NAV_LINKS.map((link) => (
+                  <li key={link.label}>
+                    <FooterNavLink {...link} />
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
 
           <address className="footer-contact" id="contact">
             <h2>Connect</h2>

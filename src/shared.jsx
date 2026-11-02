@@ -21,17 +21,6 @@ export function Title({ light, bold, className = '' }) {
   )
 }
 
-// Hero headlines: letters rise in one after another; screen readers get the plain text
-export function Letters({ text }) {
-  return (
-    <span className="letters" aria-label={text}>
-      {[...text].map((ch, i) => (
-        <span key={i} aria-hidden className="li" style={{ '--li': i }}>{ch === ' ' ? '\u00a0' : ch}</span>
-      ))}
-    </span>
-  )
-}
-
 export function Lines({ lines }) {
   return lines.map((l, i) => <span key={i} className="line">{l}</span>)
 }

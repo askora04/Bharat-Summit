@@ -16,11 +16,6 @@
 .section-title .wi { display: inline-block; transform: translateY(110%); transition: transform 1s var(--ease-out) calc(var(--wi) * 80ms + 120ms); }
 .section-title.is-in .wi { transform: none; }
 
-/* Hero headline: letters rise and sharpen one after another */
-.letters { display: inline-block; white-space: nowrap; }
-.letters .li { display: inline-block; animation: letter-in .9s var(--ease-out) backwards; animation-delay: calc(var(--li) * 35ms + .5s); }
-@keyframes letter-in { from { opacity: 0; transform: translateY(.45em) rotate(6deg); filter: blur(8px); } }
-
 /* ---------- Hero: slow zoom on arrival, parallax on scroll, content lifts away ---------- */
 .h-hero::before {
   content: ''; position: absolute; inset: -4% 0; pointer-events: none;
@@ -30,9 +25,6 @@
 }
 @media (max-width: 700px) { .h-hero::before { background-position: 28% center; } } /* keep Nehru in frame */
 @keyframes hero-zoom { from { scale: 1.12; filter: brightness(.6); } to { scale: 1.02; } }
-.hero-content { translate: 0 calc(var(--sy) * -.18px); opacity: calc(1 - var(--sy) / 700); }
-/* their entrance animations must let go of opacity once done, or the scroll fade can't apply */
-.hero-content, .announcement { animation-fill-mode: backwards; }
 .h-quote { translate: 0 calc(var(--sy) * -.08px); }
 .hero-bg { translate: 0 calc(var(--sy) * .3px); }
 
@@ -109,6 +101,6 @@
   .curtain { display: none; }
   .section-title .wi { transform: none; }
   .h-hero::before { transform: none; }
-  .hero-content, .h-quote, .hero-bg { translate: none; opacity: 1; }
+  .h-quote, .hero-bg { translate: none; opacity: 1; }
   .img-reveal, .img-reveal img { clip-path: none; scale: 1; }
 }

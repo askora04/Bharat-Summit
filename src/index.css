@@ -98,7 +98,8 @@ section[id] { scroll-margin-top: 61px; }
 .wordmark-name strong { font: 800 1em/1 'Orbitron', var(--font-display); letter-spacing: 0; }
 /* the tagline spans exactly the name's width: it adds no width of its own and is justified across it */
 .wordmark-tag, .footer-wordmark-tagline { width: 0; min-width: 100%; text-align: justify; text-align-last: justify; }
-.wordmark-tag { color: #1f1f1f; font: 500 10.5px/1.5 'Montserrat', var(--font-body); letter-spacing: .04em; }
+/* sized to the name's width, as in the hero banner's lockup; the justify above closes what's left */
+.wordmark-tag { color: #1f1f1f; font: 500 14.5px/1.25 'Montserrat', var(--font-body); letter-spacing: .02em; }
 .nav { display: flex; gap: 28px; }
 .nav a {
   position: relative;
@@ -173,32 +174,6 @@ section[id] { scroll-margin-top: 61px; }
 .hero-stripes span:nth-child(3) { background: #3ab4b3; }
 .hero-stripes span:nth-child(4) { background: #70c9c8; }
 .hero-stripes span:nth-child(5) { background: #2f477b; }
-.hero-content { position: relative; display: flex; flex-direction: column; align-items: center; gap: 16px; margin-top: 30px; }
-/* About Us banner: the capsule sits against the right edge (on phones it's full width, so centred) */
-#top.hero .hero-content { justify-self: end; margin-right: 16px; }
-@media (min-width: 701px) { #top.hero .hero-content { margin-top: -6vw; } } /* a little above centre */
-.announcement {
-  max-width: calc(100vw - 32px); /* hugs the title */
-  padding: 14px 28px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  color: #fff;
-  text-align: center;
-  white-space: nowrap;
-  border: 1px solid rgba(255, 255, 255, .28);
-  border-radius: 24px;
-  background: linear-gradient(rgba(255, 255, 255, .06), rgba(255, 255, 255, .06)), var(--gradient-c);
-  backdrop-filter: blur(7px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .08), 0 12px 32px rgba(0, 0, 0, .16);
-  animation: rise 1s ease-out both;
-}
-.announcement-title {
-  font: 700 44px/1.18 var(--font-display);
-  letter-spacing: -.8px;
-  animation: glow 1.6s ease-out .4s both;
-}
 
 /* About */
 /* About Us: a readable measure, type that scales with the screen, the two figures on one even grid */
@@ -468,7 +443,6 @@ html { scroll-behavior: smooth; }
 
 @keyframes drift { from { transform: scale(1.04) translateX(-1%); } to { transform: scale(1.04) translateX(1%); } }
 @keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
-@keyframes glow { from { text-shadow: 0 0 0 rgba(255, 255, 255, 0); } 50% { text-shadow: 0 0 24px rgba(255, 255, 255, .6); } to { text-shadow: 0 0 0 rgba(255, 255, 255, 0); } }
 @keyframes fade { from { opacity: 0; } }
 
 @media (prefers-reduced-motion: reduce) {
@@ -492,8 +466,6 @@ html { scroll-behavior: smooth; }
   .facts { grid-template-columns: repeat(2, 1fr); row-gap: 16px; }
 }
 @media (max-width: 700px) {
-  .announcement { white-space: normal; }
-  .announcement-title { font-size: 30px; }
     .section-title { font-size: 34px; padding-inline: 16px; }
   .org-card, .post-embed, .venue-media, .venue-panel { width: 100%; }
   /* figures stacked, each centred, divider becomes a short rule between them */
@@ -510,3 +482,41 @@ html { scroll-behavior: smooth; }
   .venue-actions { flex-direction: column; }
   .wordmark-tag { display: none; }
 }
+
+/* Speaker cards, where a pointer can hover: only the photo until hovered, then the details pop out below it with
+   "Click to view more", floating over whatever is underneath, so no other card moves or leaves a gap.
+   Touch screens keep the details showing, without that line. */
+.sp-more { display: none; }
+@media (hover: hover) {
+  a:is(.sp-card, .speaker, .h-speaker) { position: relative; min-height: 0; padding: 0; overflow: visible; border: 0; background: transparent; }
+  a:is(.sp-card, .speaker, .h-speaker):is(:hover, :focus-visible) { z-index: 5; background: transparent; }
+  a:is(.sp-card, .speaker, .h-speaker)::after { display: none; }
+  :is(.sp-card, .speaker, .h-speaker) :is(.sp-card-photo, .speaker-portrait, .h-portrait) { border-radius: 10px; }
+  :is(.sp-card, .speaker, .h-speaker):is(:hover, :focus-visible) :is(.sp-card-photo, .speaker-portrait, .h-portrait) { border-radius: 10px 10px 0 0; }
+  :is(.sp-card-body, .speaker-body, .h-speaker-body) {
+    position: absolute; top: 100%; left: 0; right: 0; z-index: 5;
+    padding: 12px 16px 14px; border-radius: 0 0 10px 10px;
+    background: linear-gradient(90deg, #e09c42, #d85a34 25%, #3ab4b3 50%, #70c9c8 75%, #2f477b) bottom / 100% 3px no-repeat, #f5f7fa;
+    box-shadow: 0 14px 30px rgba(19, 52, 95, .22);
+    opacity: 0; visibility: hidden; transform: translateY(-10px);
+    transition: opacity .2s ease, transform .25s cubic-bezier(.2, .8, .2, 1), visibility .2s;
+  }
+  :is(.sp-card, .speaker, .h-speaker):is(:hover, :focus-visible) :is(.sp-card-body, .speaker-body, .h-speaker-body) { opacity: 1; visibility: visible; transform: none; }
+  .h-speaker .h-card-arrow { top: 14px; }
+  .sp-more { display: block; margin-top: 8px; font: 700 13px/1.3 var(--font-body); color: var(--navy); }
+
+  /* The rows clip what leaves them, so each gets room below its cards for the details, taken back with a negative
+     margin; that room lets the pointer through to whatever is underneath */
+  .h-speakers .h-marquee { padding-bottom: 200px; margin-bottom: -200px; pointer-events: none; }
+  .h-marquee .h-marquee-row { padding-bottom: 200px; margin-bottom: -194px; }
+  .speakers.marquee { padding-bottom: 240px; margin-bottom: -216px; pointer-events: none; }
+  .sp-grid.sp-grid-auto { padding-bottom: 200px; margin-bottom: -160px; pointer-events: none; }
+  a:is(.speaker, .h-speaker, .sp-card) { pointer-events: auto; }
+  :is(.h-marquee, .speakers.marquee, .sp-grid-auto):is(:hover, :has(:focus-visible)) { position: relative; z-index: 5; }
+  /* rows that scroll by hand would clip the same way, so with a mouse they simply wrap */
+  .sp-grid:not(.sp-grid-auto, .sp-grid-all) {
+    grid-auto-flow: row; grid-template-columns: repeat(var(--per), minmax(0, 1fr));
+    overflow: visible; padding: 12px 4px 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) { :is(.sp-card-body, .speaker-body, .h-speaker-body) { transition: none; } }

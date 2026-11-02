@@ -21,7 +21,7 @@ export const VIDEOS = [
 // The same press release, carried by international outlets
 export const SYNDICATED = {
   date: '2025-05-29',
-  title: 'Bharat Summit brings 450+ delegates from 100 nations to Telangana to rethink global justice; opens with a candlelight vigil condemning the Pahalgam attack',
+  title: 'Bharat Summit brings 450+ delegates from 100 nations to Telangana to rethink global justice',
   outlets: [
     ['AP News', 'https://apnews.com/press-release/marketersmedia/rahul-gandhi-india-argentina-india-government-wayne-swan-33d51b36ccfe9b19438fd1cfcd326ae1'],
     ['Benzinga', 'https://www.benzinga.com/pressreleases/25/05/45669056/bharat-summit-brings-450-delegates-from-100-nations-to-telangana-to-rethink-global-justice-opens-with-a-candlelight-vigil-condemning-the-pahalgam-attack'],

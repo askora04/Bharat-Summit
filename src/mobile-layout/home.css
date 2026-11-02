@@ -62,8 +62,10 @@
   mask-image: linear-gradient(90deg, transparent, #000 60px, #000 calc(100% - 60px), transparent);
 }
 .h-marquee-row { overflow: hidden; padding-block: 6px; }
-/* Keeps moving on hover by design; the half-gap keeps the two copies' seam exact */
+/* the half-gap keeps the two copies' seam exact */
 .h-marquee-track { display: flex; gap: 20px; width: max-content; animation: h-marquee 70s linear infinite; }
+/* holds still while hovered, so a card's details (SpeakerPeek) can be read and clicked */
+.h-marquee-row:is(:hover, :has(:focus-visible)) .h-marquee-track { animation-play-state: paused; }
 .h-marquee-row.is-reverse .h-marquee-track { animation-direction: reverse; }
 /* draggable by hand (dragMarquee); vertical swipes still scroll the page */
 .h-marquee-track { cursor: grab; touch-action: pan-y; user-select: none; }

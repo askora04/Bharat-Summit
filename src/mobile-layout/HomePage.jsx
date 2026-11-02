@@ -59,7 +59,7 @@ function HomeHero() {
 
   return (
     <section className="h-hero" id="top">
-      <video className="hero-media" ref={video} src="/videos/hero-banner.mp4?v=2" muted playsInline preload="auto" aria-hidden />
+      <video className="hero-media" ref={video} src="/videos/hero-banner.mp4?v=4" muted playsInline preload="auto" aria-hidden />
       <h1 className="sr-only">Bharat Summit 2026</h1>
       <figure className="h-quote">
         <blockquote>“We meet here not to discuss our past history and contacts but to forge links for the future.”</blockquote>
@@ -78,6 +78,7 @@ function SpeakerCard({ speaker, copy }) {
         <span className="h-speaker-name">{speaker.name}</span>
         <span className="h-role">{speaker.role}</span>
         <span className="h-note">{speaker.session.split(':')[0]}</span>
+        <span className="sp-more">Click to view more →</span>
         <span className="h-card-arrow" aria-hidden><Icon name="arrowRight" size={16} strokeWidth={1.75} /></span>
       </span>
     </Link>

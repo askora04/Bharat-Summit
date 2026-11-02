@@ -34,11 +34,11 @@
   padding: 0;
 }
 
-/* Top row on the site's content width: brand at the left edge; links and contact together at the right edge.
+/* Top row on the site's content width: brand, socials and links at the left edge; contact at the right edge.
    Starts just under the footer's top border. */
 .footer-main {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: start;
   padding: 24px max(16px, calc((100% - 1280px) / 2)) 0;
   position: relative;
@@ -55,6 +55,7 @@
 }
 
 .footer-brand {
+  justify-self: start; /* only as wide as its content, so the monuments beside it can be hovered */
   padding-bottom: 18px;
 }
 
@@ -80,16 +81,16 @@
   letter-spacing: 1px;
 }
 
-/* sized and spaced to fill the name's width with only a little justification */
+/* sized to the name's width, as in the header's wordmark; justification closes what's left */
 .footer-wordmark-tagline {
-  font-size: 13px;
-  letter-spacing: .17em;
+  font-size: 20.8px;
+  line-height: 1.2;
+  letter-spacing: .02em;
 }
 
 .footer-social {
   display: flex;
   gap: 12px;
-  margin: 26px 0 0 52px;
 }
 
 .footer-social a {
@@ -105,15 +106,20 @@
   background: rgb(6 43 84 / 0.08);
 }
 
+/* In a row under the social links and a navy rule; Home starts directly under the Facebook "f"
+   (the icon's 12px inset in its circle, the "f"'s 6px inset in the icon) */
 .footer-nav {
-  justify-self: end;
-  border-inline: 1px solid var(--navy);
-  padding: 10px 28px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 14px 0 0 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--navy);
 }
 
 .footer-nav ul {
-  display: grid;
-  gap: 19px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
 }
 
 .footer-nav a {
@@ -122,6 +128,7 @@
   padding-bottom: 4px;
   font-size: 17px;
   line-height: 23.8px;
+  white-space: nowrap;
 }
 
 .footer-nav a::after {
@@ -176,8 +183,8 @@
   text-decoration: underline;
 }
 
-/* Scene behind the content: the Figma skyline loops sideways over coloured water;
-   each monument lifts and fills with colour on hover */
+/* Scene behind the content: the skyline loops sideways along a ground line;
+   each monument lifts, fills with colour and shows its name on hover */
 /* Short enough that the text sits over the top of the monuments */
 .footer-stage {
   position: relative;
@@ -186,77 +193,28 @@
 
 .footer-scene {
   --strip-h: 332px;
-  /* Water runs from the horizon line (376 of 468px in the strip) to the bottom */
-  --water-h: calc(var(--strip-h) * 92 / 468);
   position: absolute;
   inset: 0;
   overflow: hidden;
+  /* The ground line for the whole scene */
+  border-bottom: 2px solid var(--navy);
 }
 
 /* Warm glow rising from the horizon */
 .footer-scene::before {
   content: '';
   position: absolute;
-  inset: auto 0 var(--water-h);
+  inset: auto 0 0;
   height: 70%;
   background: radial-gradient(55% 60% at 50% 100%, rgb(255 196 120 / 0.32), transparent 70%);
   pointer-events: none;
-}
-
-.footer-water {
-  position: absolute;
-  inset: auto 0 0;
-  height: var(--water-h);
-  /* The horizon line for the whole scene */
-  border-top: 2px solid var(--navy);
-  background: linear-gradient(180deg, #6fc6df 0%, #a9e0ee 45%, #e2f5fa 100%);
-  overflow: hidden;
-}
-
-/* Small wave crests drifting across the surface */
-.footer-water::before {
-  content: '';
-  position: absolute;
-  inset: 0 -120px 0 0;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='14'%3E%3Cpath d='M6 4q5-3 10 0t10 0M64 11q5-3 10 0t10 0t10 0' fill='none' stroke='%23062b54' stroke-width='1.1' stroke-linecap='round'/%3E%3C/svg%3E")
-    0 0 / 120px 14px;
-  opacity: 0.25;
-  mask-image: linear-gradient(180deg, transparent, #000 25%);
-  animation: water-waves 9s linear infinite;
-}
-
-@keyframes water-waves {
-  to {
-    transform: translateX(-120px);
-  }
-}
-
-/* Light glinting across the water */
-.footer-water::after {
-  content: '';
-  position: absolute;
-  inset: 0 -240px 0 0;
-  background: repeating-linear-gradient(
-    100deg,
-    transparent 0 60px,
-    rgb(255 255 255 / 0.55) 60px 66px,
-    transparent 66px 150px
-  );
-  mask-image: linear-gradient(180deg, transparent, #000 30%, #000 70%, transparent);
-  animation: water-shimmer 6s linear infinite;
-}
-
-@keyframes water-shimmer {
-  to {
-    transform: translateX(-240px);
-  }
 }
 
 /* Mountain ranges and hills behind the skyline, drifting slower than it (parallax) */
 .footer-hills {
   --tile-w: calc(var(--strip-h) * var(--hw) / 468);
   position: absolute;
-  inset: auto 0 var(--water-h);
+  inset: auto 0 0;
   height: calc(var(--strip-h) * var(--hh) / 468);
   background: var(--art) repeat-x 0 100% / var(--tile-w) 100%;
   pointer-events: none;
@@ -290,11 +248,16 @@
   bottom: 0;
   display: flex;
   width: max-content;
-  animation: monument-scroll var(--loop-duration, 200s) linear infinite;
+  animation: monument-scroll var(--loop-duration, 200s) linear infinite paused;
+}
+
+/* Starts when the footer comes into view (FooterScene.jsx) */
+.footer-scene.is-in-view .skyline-track {
+  animation-play-state: running;
 }
 
 /* Hold still while the pointer is in the scene so a monument can actually be hovered */
-.footer-scene:hover .skyline-track {
+.footer-scene.is-in-view:hover .skyline-track {
   animation-play-state: paused;
 }
 
@@ -312,34 +275,17 @@
   height: var(--strip-h);
 }
 
-.skyline-strip {
-  position: relative;
-  flex: none;
-  height: 100%;
-  aspect-ratio: 1438 / 468;
-}
-
 .skyline-tile img {
   user-select: none;
 }
 
-.skyline-base {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
+/* Sized in source pixels, standing on the ground line */
 .skyline-item {
-  position: absolute;
-}
-
-/* State landmarks: sized in source pixels like the strip, standing on the horizon */
-.skyline-landmark {
   position: relative;
   flex: none;
   width: calc(var(--strip-h) * var(--w) / 468);
   height: calc(var(--strip-h) * var(--h) / 468);
-  margin: 0 0 var(--water-h) calc(var(--strip-h) * 26 / 468);
+  margin-left: calc(var(--strip-h) * 26 / 468);
 }
 
 .skyline-item img {
@@ -358,7 +304,7 @@
   opacity: 0;
 }
 
-.skyline-item:hover img:not(.skyline-item-reflection) {
+.skyline-item:hover img {
   transform: translateY(-8px) scale(1.04);
 }
 
@@ -367,90 +313,26 @@
   filter: drop-shadow(0 10px 12px rgb(243 168 43 / 0.45)) saturate(1.15);
 }
 
-/* Pale mirror image of each monument in the river, fading with depth */
-.skyline-item img.skyline-item-reflection {
-  top: 100%;
-  bottom: auto;
-  transform: scaleY(-1);
-  transform-origin: center;
-  opacity: 0.2;
-  mask-image: linear-gradient(to bottom, transparent 55%, #000);
+/* The name, at the monument's foot where the footer's text never covers it; shows at once on hover */
+.skyline-name {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  translate: -50% 0;
+  z-index: 1;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--navy);
+  color: #fff;
+  font: 600 13px/1.2 var(--font-body);
+  white-space: nowrap;
+  opacity: 0;
   pointer-events: none;
+  transition: opacity 0.1s ease-out;
 }
 
-.boat-svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  transform-origin: bottom;
-  transition:
-    transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
-    filter 0.4s ease;
-}
-
-.boat-svg path {
-  fill: transparent;
-  stroke: var(--navy);
-  stroke-width: 1.4;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;
-  transition: fill 0.4s ease;
-}
-
-.skyline-item:hover .boat-svg {
-  transform: translateY(-3px) scale(1.04);
-  filter: drop-shadow(0 6px 8px rgb(0 0 0 / 0.35));
-}
-
-.skyline-item:hover .boat-svg path {
-  fill: var(--fill, transparent);
-}
-
-.skyline-item--boat {
-  animation: boat-bob 2.8s ease-in-out infinite alternate;
-}
-
-.skyline-boat {
-  position: absolute;
-  left: calc(var(--strip-h) * var(--x) / 468);
-  bottom: calc(var(--strip-h) * var(--b) / 468);
-  width: calc(var(--strip-h) * var(--w) / 468);
-  height: calc(var(--strip-h) * var(--h) / 468);
-}
-
-.skyline-boat:nth-of-type(3n) {
-  animation-delay: -1.1s;
-}
-
-.skyline-boat:nth-of-type(3n + 1) {
-  animation-delay: -2s;
-}
-
-.skyline-boat--flip {
-  scale: -1 1;
-}
-
-.skyline-item--boat + .skyline-item--boat {
-  animation-delay: -1.4s;
-}
-
-.skyline-item--boat:hover img:not(.skyline-item-reflection) {
-  transform: translateY(-3px) scale(1.04);
-}
-
-@keyframes boat-bob {
-  from {
-    translate: 0 -2px;
-    rotate: -0.8deg;
-  }
-
-  to {
-    translate: 0 2px;
-    rotate: 0.8deg;
-  }
+.skyline-item:hover .skyline-name {
+  opacity: 1;
 }
 
 .footer-legal {
@@ -507,16 +389,6 @@
     padding: 24px 24px 0;
   }
 
-  .footer-social {
-    margin-left: 0;
-  }
-
-  .footer-nav {
-    justify-self: start;
-    border-inline: 0;
-    padding: 0;
-  }
-
   .footer-contact {
     justify-self: start;
     padding-left: 0;
@@ -551,7 +423,7 @@
   }
 
   .footer-wordmark-tagline {
-    font-size: 10.5px;
+    font-size: 17.2px;
   }
 
   .footer-legal {
@@ -563,10 +435,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .skyline-track,
-  .skyline-item--boat,
-  .footer-hills,
-  .footer-water::before,
-  .footer-water::after {
+  .footer-hills {
     animation: none;
   }
 

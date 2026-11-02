@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { a, Title, Lines, Portrait, Letters, Marquee } from './shared.jsx'
+import { a, Title, Lines, Portrait, Marquee } from './shared.jsx'
 import { Link } from '../router.jsx'
 import { SPEAKERS } from '../speakersData.js'
 import MediaCoverage from './MediaCoverage.jsx'
@@ -99,11 +99,7 @@ function Hero() {
   return (
     <section className="hero" id="top">
       <img className="hero-img" src="/assets/about-hero.webp" alt="" />
-      <div className="hero-content">
-        <div className="announcement">
-          <h1 className="announcement-title"><Letters text="BHARAT SUMMIT 2026" /></h1>
-        </div>
-      </div>
+      <h1 className="sr-only">Bharat Summit 2026</h1>
     </section>
   )
 }
@@ -164,13 +160,16 @@ export default function AboutPage() {
           <Title light="WORLD" bold="LEADERS, VISIONARIES, CHANGEMAKERS" />
           <p className="lede">Global leaders, renowned scholars, and change makers from across the world.</p>
           <div className="container">
-            <Marquee className="speakers" drag items={SPEAKERS.slice(0, 10)} render={(s) => (
-              <Link className="speaker" to={`/speakers/${s.id}`}
+            <Marquee className="speakers" drag clickableCopy items={SPEAKERS.slice(0, 10)} render={(s, copy) => (
+              <Link className="speaker" to={`/speakers/${s.id}`} tabIndex={copy ? -1 : undefined}
                 aria-label={`${s.name}, ${s.role}. View profile`}>
                 <Portrait bg={s.bg} src={s.img} className="speaker-portrait">{!s.img && <span className="sp-initials">{s.initials}</span>}</Portrait>
-                <span className="speaker-name">{s.name}</span>
-                <span className="speaker-role">{s.role}</span>
-                <span className="speaker-country">{s.session.split(':')[0]}</span>
+                <span className="speaker-body">
+                  <span className="speaker-name">{s.name}</span>
+                  <span className="speaker-role">{s.role}</span>
+                  <span className="speaker-country">{s.session.split(':')[0]}</span>
+                  <span className="sp-more">Click to view more →</span>
+                </span>
               </Link>
             )} />
           </div>
