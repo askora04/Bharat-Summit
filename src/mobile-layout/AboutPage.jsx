@@ -130,7 +130,10 @@ export default function AboutPage() {
         <section className="about reveal" id="about">
           <Title light="ABOUT" bold="US" />
           <p className="lede about-lede">
-            The <strong>Bharat Summit</strong> is a global platform bringing together progressive political leaders, policymakers, thinkers, business leaders, and activists to address challenges facing democracy, global governance, and social and economic justice. Hosted by the Government of Telangana in Hyderabad, it aims to develop alternative solutions to rising populism and inequality, strengthen democratic institutions, empower citizens, and build a more just and inclusive world, while shaping India’s role in the global progressive movement.
+            At a pivotal moment in global affairs, the Government of Telangana is convening the second <strong>Bharat Summit</strong> in Hyderabad, Telangana on November 13-14, 2026. Under the theme “Forging a New World,” the Summit builds on the inaugural 2025 edition, and commemorates both the 80th anniversary of India's Independence and the 137th birth anniversary of India's first Prime Minister, Jawaharlal Nehru.
+          </p>
+          <p className="lede about-lede">
+            The Bharat Summit seeks to strengthen partnerships between the Global South and Global North, and provide a platform for progressive forces to collectively forge a just and representative international order. Guided by the enduring Nehruvian conviction that the world must be united through Maitri (friendship), Karuna (compassion), Satya (truth) and Vasudhaiva Kutumbakam (the world is one family), the Summit strives to champion a global vision rooted in peace, shared prosperity and the fullness of life for all peoples. To advance this vision, the Bharat Summit brings together progressive political leaders, policymakers, thinkers, academics, business leaders and civil society representatives from across the world to deliberate on the defining challenges of our time. It also seeks to articulate an alternative vision of India's role in shaping a new global compact, founded on solidarity, sovereign equality and equitable development.
           </p>
           <div className="stats">
             <Stat img="parties.webp" value="100+" label={['Progressive parties']} />
