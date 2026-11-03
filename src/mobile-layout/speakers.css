@@ -119,7 +119,7 @@
 }
 @keyframes sp-card-in { from { opacity: 0; transform: translateY(16px); } }
 .sp-card:hover, .sp-card:focus-visible { transform: translateY(-4px); border-color: transparent; box-shadow: 0 14px 30px rgba(19, 52, 95, .14); }
-.sp-card-photo { position: relative; display: block; aspect-ratio: 4 / 3; overflow: hidden; }
+.sp-card-photo { position: relative; display: block; aspect-ratio: 3 / 2; overflow: hidden; }
 .sp-card-body { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 14px 16px 18px; }
 .sp-card-name { font: 700 17px/1.3 var(--font-display); color: var(--navy); }
 .sp-card-role { font-size: 14px; line-height: 1.4; color: #3d5477; text-align: center; text-align-last: center; }
@@ -146,20 +146,25 @@
 .sp-card-photo img { transform-origin: bottom; transition: transform .5s ease; }
 .sp-card:hover .sp-card-photo img, .sp-card:focus-visible .sp-card-photo img { transform: scale(1.04); }
 
-/* Speaker page: photo left, details right */
-.sp-detail { width: min(1080px, 100% - 32px); margin: 0 auto; padding: 28px 0 96px; scroll-margin-top: 61px; } /* opens just below the fixed header */
-.sp-back { display: inline-flex; align-items: center; gap: 8px; font-size: 15px; color: #3d5477; transition: color .2s; }
+/* Speaker page on phones: photo on top, details centred beneath, equal side margins.
+   Sizes are in the 1100px layout zoomed to the screen (~1/3), so 60px here is ~20px on the phone */
+.sp-detail { width: calc(100% - 120px); margin: 0 auto; padding: 48px 0 120px; scroll-margin-top: 61px; } /* opens just below the fixed header */
+.sp-back { display: inline-flex; align-items: center; gap: 12px; font-size: 36px; color: #3d5477; transition: color .2s; }
 .sp-back:hover { color: #13345f; }
-.sp-detail-grid { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 48px; align-items: start; margin-top: 28px; }
-.sp-detail-photo { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 14px; }
+.sp-detail-grid { display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 56px; margin-top: 48px; text-align: center; }
+.sp-detail-photo { position: relative; width: 500px; aspect-ratio: 1; overflow: hidden; border-radius: 28px; }
+.sp-detail .sp-detail-when { font-size: 36px; margin-top: 12px; }
 .sp-detail-socials { display: flex; gap: 8px; margin-top: 16px; }
 .sp-detail-socials a { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 999px; transition: background .2s; }
 .sp-detail-socials a:hover { background: rgba(19, 52, 95, .08); }
-.sp-detail-info h1 { font: 700 44px/1.1 var(--font-display); letter-spacing: -.8px; color: #13345f; }
-.sp-detail-role { margin-top: 12px; font-size: 19px; line-height: 1.4; color: #3d5477; }
-.sp-detail-country { margin-top: 8px; font-size: 14px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--navy); }
-.sp-detail-rule { display: block; width: 80px; height: 4px; margin: 24px 0; border-radius: 2px; background: var(--navy); }
-.sp-detail-bio { max-width: 640px; font-size: 17px; line-height: 1.7; color: #3d5477; }
+.sp-detail-info { width: 100%; }
+.sp-detail-info h1 { font: 700 72px/1.15 var(--font-display); letter-spacing: -1px; color: #13345f; }
+.sp-detail-info .sp-mod { font-size: 28px; padding: 6px 24px; }
+.sp-detail-info :is(.sp-detail-role, .sp-detail-country, .sp-detail-when) { text-align: center; text-align-last: center; }
+.sp-detail-role { margin-top: 24px; font-size: 40px; line-height: 1.4; color: #3d5477; }
+.sp-detail-country { margin-top: 20px; font-size: 32px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--navy); }
+.sp-detail-rule { display: block; width: 160px; height: 8px; margin: 48px auto; border-radius: 4px; background: var(--navy); }
+.sp-detail-bio { font-size: 40px; line-height: 1.7; color: #3d5477; text-align: justify; }
 
 /* Printing / saving as PDF: top bar scrolls away instead of repeating on every page; cards never split */
 @media print {
