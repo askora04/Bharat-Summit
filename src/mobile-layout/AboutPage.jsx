@@ -98,7 +98,7 @@ function SocialEmbed({ platform, url }) {
 function Hero() {
   return (
     <section className="hero" id="top">
-      <img className="hero-img" src="/assets/about-hero.webp" alt="" />
+      <img className="hero-img" src="/assets/about-hero.jpg" alt="" />
       <h1 className="sr-only">Bharat Summit 2026</h1>
     </section>
   )
