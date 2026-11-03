@@ -151,7 +151,7 @@
 .sp-back { display: inline-flex; align-items: center; gap: 8px; font-size: 15px; color: #3d5477; transition: color .2s; }
 .sp-back:hover { color: #13345f; }
 .sp-detail-grid { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 48px; align-items: start; margin-top: 28px; }
-.sp-detail-photo { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 14px; }
+.sp-detail-photo { position: relative; aspect-ratio: 1; overflow: hidden; border-radius: 14px; }
 .sp-detail-socials { display: flex; gap: 8px; margin-top: 16px; }
 .sp-detail-socials a { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 999px; transition: background .2s; }
 .sp-detail-socials a:hover { background: rgba(19, 52, 95, .08); }
