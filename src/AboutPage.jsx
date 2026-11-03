@@ -171,6 +171,12 @@ export default function AboutPage() {
                   <span className="speaker-name">{s.name}</span>
                   <span className="speaker-role">{s.role}</span>
                   <span className="speaker-country">{s.session.split(':')[0]}</span>
+                </span>
+                {/* on hover: the same details with a short summary and a link line, over the card's lower part */}
+                <span className="speaker-body sp-hover" aria-hidden>
+                  <span className="speaker-name">{s.name}</span>
+                  <span className="speaker-role">{s.role}</span>
+                  {s.bio && <span className="sp-summary">{s.bio}</span>}
                   <span className="sp-more">Click to view more →</span>
                 </span>
               </Link>

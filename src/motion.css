@@ -25,7 +25,6 @@
 }
 @media (max-width: 700px) { .h-hero::before { background-position: 28% center; } } /* keep Nehru in frame */
 @keyframes hero-zoom { from { scale: 1.12; filter: brightness(.6); } to { scale: 1.02; } }
-.h-quote { translate: 0 calc(var(--sy) * -.08px); }
 .hero-bg { translate: 0 calc(var(--sy) * .3px); }
 
 /* ---------- Images unmask as they scroll into view ---------- */
@@ -101,6 +100,6 @@
   .curtain { display: none; }
   .section-title .wi { transform: none; }
   .h-hero::before { transform: none; }
-  .h-quote, .hero-bg { translate: none; opacity: 1; }
+  .hero-bg { translate: none; opacity: 1; }
   .img-reveal, .img-reveal img { clip-path: none; scale: 1; }
 }

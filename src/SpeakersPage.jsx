@@ -68,6 +68,13 @@ function SpeakerCard({ speaker, index }) {
         <span className="sp-card-name">{speaker.name}</span>
         {speaker.moderator && <span className="sp-mod">Moderator</span>}
         {speaker.role && <span className="sp-card-role">{speaker.role}</span>}
+      </span>
+      {/* on hover: the same details with a short summary and a link line, over the card's lower part */}
+      <span className="sp-card-body sp-hover" aria-hidden>
+        <span className="sp-card-name">{speaker.name}</span>
+        {speaker.moderator && <span className="sp-mod">Moderator</span>}
+        {speaker.role && <span className="sp-card-role">{speaker.role}</span>}
+        {speaker.bio && <span className="sp-summary">{speaker.bio}</span>}
         <span className="sp-more">Click to view more →</span>
       </span>
     </Link>
@@ -84,13 +91,7 @@ const GLIDE = 40 // px per second
 
 function AutoScrollRow({ children }) {
   const row = useRef(null)
-  const copy = useRef(null)
   const [loop, setLoop] = useState(false)
-
-  // the repeat stays hoverable and clickable (inert would block the mouse too), but out of the tab order
-  useEffect(() => {
-    copy.current?.querySelectorAll('a').forEach((link) => { link.tabIndex = -1 })
-  }, [loop, children])
 
   // repeat the cards only when one set is wider than the row
   useEffect(() => {
@@ -148,8 +149,8 @@ function AutoScrollRow({ children }) {
   return (
     <div className="sp-grid sp-grid-auto" ref={row}>
       {children}
-      {/* the repeat: hidden from screen readers */}
-      {loop && <div className="sp-grid-copy" ref={copy} aria-hidden>{children}</div>}
+      {/* the repeat: out of the tab order and hidden from screen readers */}
+      {loop && <div className="sp-grid-copy" inert aria-hidden>{children}</div>}
     </div>
   )
 }

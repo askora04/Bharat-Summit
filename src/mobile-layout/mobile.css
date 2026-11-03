@@ -98,18 +98,19 @@ section[id] { scroll-margin-top: 48px; }
 /* iOS zooms into any field under 16px when it is tapped */
 .sp-select select { font-size: 16px; }
 
-/* Home hero: the whole landscape banner video (1920 × 832), not cropped to fill the screen. As on desktop it
-   starts at the very top, under the see-through header, which turns navy once the page scrolls (App.jsx).
-   The still image behind the video (motion.css) is not needed at this height, so it is hidden. */
-.h-hero { height: auto; min-height: 0; }
+/* Home hero: the whole landscape banner video (1920 × 832), not cropped to fill the screen. It starts below the
+   48px header, so the header's name doesn't sit on the video's own logo. The strip behind the see-through header
+   carries on the video's colour stripes on the right (positions and colours read from the video's settled frame)
+   on its white background. The still image behind the video (motion.css) is not needed at this height, so it is
+   hidden. */
+.h-hero {
+  height: auto; min-height: 0; padding-top: 48px;
+  background: linear-gradient(90deg, #fff 70.36%, #04355c 0 73.49%, #03a29e 0 80.26%, #f6a71b 0 86.35%,
+    #fc830c 0 88.65%, #fd590d 0 93.75%, #f4071e 0 98.91%, #fff 0);
+}
 .h-hero::before { display: none; }
 .h-hero .hero-media { position: relative; inset: auto; display: block; height: auto; aspect-ratio: 1920 / 832; object-fit: contain; }
 /* block, above: an inline video sits on the text baseline, leaving a dark strip of the hero's background below it */
-/* the quote keeps its desktop spot, bottom-left over the video, in a miniature card that fits the short video */
-.h-quote { left: 6px; right: auto; bottom: 6px; width: 170px; padding: 4px 7px 5px; border-radius: 6px; }
-/* 7px text in 154px: the desktop card's 21.7em lines, so the quote breaks into the same two lines */
-.h-quote blockquote { font-size: 7px; line-height: 10px; }
-.h-quote figcaption { margin-top: 3px; padding: 0 5px; font-size: 6px; line-height: 10px; letter-spacing: .2px; }
 
 /* Home: Bharat Summit intro. As on desktop: text on the left, the counter graphic on the right,
    split about 45 / 55 so the graphic stays big enough to read; the text is sized down to fit its column */

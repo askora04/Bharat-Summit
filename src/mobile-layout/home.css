@@ -20,32 +20,6 @@
 }
 /* the video's logo and dates sit near its left edge: crop from the right (blank margin) instead */
 .h-hero .hero-media { object-position: left center; }
-.h-quote {
-  position: absolute;
-  /* bottom-left corner, over the Parliament building, clear of Nehru */
-  left: 24px;
-  bottom: 24px;
-  width: 360px;
-  margin: 0;
-  padding: 16px 16px 14px;
-  border: 1px solid rgba(255, 255, 255, .2);
-  border-radius: 16px;
-  background: rgba(12, 12, 12, .45);
-  backdrop-filter: blur(8px);
-  text-align: center;
-}
-.h-quote blockquote { margin: 0; text-align: left; font: 700 15px/21px var(--font-body); color: #fff; }
-.h-quote figcaption {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 0 12px;
-  border: 1px solid rgba(255, 255, 255, .2);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, .08);
-  font: 500 13px/26px var(--font-body);
-  letter-spacing: .4px;
-  color: rgba(255, 255, 255, .9);
-}
 
 /* Speakers */
 .h-speakers .section-title, .h-moments .section-title { text-align: left; }
@@ -62,10 +36,8 @@
   mask-image: linear-gradient(90deg, transparent, #000 60px, #000 calc(100% - 60px), transparent);
 }
 .h-marquee-row { overflow: hidden; padding-block: 6px; }
-/* the half-gap keeps the two copies' seam exact */
+/* Keeps moving on hover by design; the half-gap keeps the two copies' seam exact */
 .h-marquee-track { display: flex; gap: 20px; width: max-content; animation: h-marquee 70s linear infinite; }
-/* holds still while hovered, so a card's details (SpeakerPeek) can be read and clicked */
-.h-marquee-row:is(:hover, :has(:focus-visible)) .h-marquee-track { animation-play-state: paused; }
 .h-marquee-row.is-reverse .h-marquee-track { animation-direction: reverse; }
 /* draggable by hand (dragMarquee); vertical swipes still scroll the page */
 .h-marquee-track { cursor: grab; touch-action: pan-y; user-select: none; }
