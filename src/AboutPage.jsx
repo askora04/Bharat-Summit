@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
-import { a, Title, Lines, Portrait, Marquee } from './shared.jsx'
+import { a, Title, Lines, Portrait, Marquee, measureCover } from './shared.jsx'
 import { Link } from './router.jsx'
 import { SPEAKERS } from './speakersData.js'
 import MediaCoverage from './MediaCoverage.jsx'
 
 const TOPICS = [
-  { label: ['Political Justice'], img: 'topic-youth.webp', ring: 'ring-1.svg', ink: '#e0705c' },
-  { label: ['Economic Justice'], img: 'topic-sustainable.webp', ring: 'ring-2.svg', ink: '#3c9aa0' },
-  { label: ['Social Justice'], img: 'topic-gender.webp', ring: 'ring-3.svg', ink: '#d39220' },
-  { label: ['Technology, Cloud', 'Capitalism and AI'], img: 'topic-technology.webp', ring: 'ring-4.svg', ink: '#e0566a' },
-  { label: ['Security, Multilateralism', 'and Geopolitics'], img: 'topic-multilateralism.webp', ring: 'ring-5.svg', ink: '#2f9fb3' },
-  { label: ['India and the World'], img: 'topic-climate.webp', ring: 'ring-6.svg', ink: '#d68f24' },
+  { label: ['Political Justice'], img: 'topic-political-justice.webp', ring: 'ring-1.svg', ink: '#e0705c' },
+  { label: ['Economic Justice'], img: 'topic-economic-justice.webp', ring: 'ring-2.svg', ink: '#3c9aa0' },
+  { label: ['Social Justice'], img: 'topic-social-justice.webp', ring: 'ring-3.svg', ink: '#d39220' },
+  { label: ['Technology, Cloud', 'Capitalism and AI'], img: 'topic-technology-ai.webp', ring: 'ring-4.svg', ink: '#e0566a' },
+  { label: ['Security, Multilateralism', 'and Geopolitics'], img: 'topic-security.webp', ring: 'ring-5.svg', ink: '#2f9fb3' },
+  { label: ['India and the World'], img: 'topic-india-world.webp', ring: 'ring-6.svg', ink: '#d68f24' },
 ]
 
 // Real posts, shown with each platform's own embed (see SocialEmbed)
@@ -98,7 +98,10 @@ function SocialEmbed({ platform, url }) {
 function Hero() {
   return (
     <section className="hero" id="top">
-      <img className="hero-img" src="/assets/about-hero.jpg" alt="" />
+      {/* the banner video, sized to its own frame; the photo shows until it starts. Bump ?v= in the src when the
+          video is replaced: /videos/ files are cached for a week (vercel.json) */}
+      <video className="hero-img" src="/videos/about-banner.mp4?v=1" poster="/assets/about-hero.jpg"
+        autoPlay muted loop playsInline preload="auto" aria-hidden />
       <h1 className="sr-only">Bharat Summit 2026</h1>
     </section>
   )
@@ -136,9 +139,9 @@ export default function AboutPage() {
             The Bharat Summit seeks to strengthen partnerships between the Global South and Global North, and provide a platform for progressive forces to collectively forge a just and representative international order. Guided by the enduring Nehruvian conviction that the world must be united through Maitri (friendship), Karuna (compassion), Satya (truth) and Vasudhaiva Kutumbakam (the world is one family), the Summit strives to champion a global vision rooted in peace, shared prosperity and the fullness of life for all peoples. To advance this vision, the Bharat Summit brings together progressive political leaders, policymakers, thinkers, academics, business leaders and civil society representatives from across the world to deliberate on the defining challenges of our time. It also seeks to articulate an alternative vision of India's role in shaping a new global compact, founded on solidarity, sovereign equality and equitable development.
           </p>
           <div className="stats">
-            <Stat img="parties.webp" value="100+" label={['Progressive parties']} />
+            <Stat img="about-parties.webp" value="100+" label={['Progressive parties']} />
             <span className="stats-divider" />
-            <Stat img="delegates.webp" value="500+" label={['Delegates from across', 'the world']} />
+            <Stat img="about-delegates.webp" value="500+" label={['Delegates from across', 'the world']} />
           </div>
         </section>
 
@@ -165,18 +168,17 @@ export default function AboutPage() {
           <div className="container">
             <Marquee className="speakers" drag clickableCopy items={SPEAKERS.slice(0, 10)} render={(s, copy) => (
               <Link className="speaker" to={`/speakers/${s.id}`} tabIndex={copy ? -1 : undefined}
-                aria-label={`${s.name}, ${s.role}. View profile`}>
+                aria-label={`${s.name}, ${s.role}. View profile`} onPointerEnter={measureCover} onFocus={measureCover}>
                 <Portrait bg={s.bg} src={s.img} className="speaker-portrait">{!s.img && <span className="sp-initials">{s.initials}</span>}</Portrait>
                 <span className="speaker-body">
                   <span className="speaker-name">{s.name}</span>
-                  <span className="speaker-role">{s.role}</span>
-                  <span className="speaker-country">{s.session.split(':')[0]}</span>
                 </span>
-                {/* on hover: the same details with a short summary and a link line, over the card's lower part */}
+                {/* on hover: the name with the designation, session and time from the profile, over the card's lower part */}
                 <span className="speaker-body sp-hover" aria-hidden>
                   <span className="speaker-name">{s.name}</span>
                   <span className="speaker-role">{s.role}</span>
-                  {s.bio && <span className="sp-summary">{s.bio}</span>}
+                  <span className="speaker-country">{s.session}</span>
+                  {s.when && <span className="sp-card-when">{s.when}</span>}
                   <span className="sp-more">Click to view more →</span>
                 </span>
               </Link>

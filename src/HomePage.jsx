@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { a, Title, Portrait, TriBar, dragMarquee } from './shared.jsx'
+import { a, Title, Portrait, TriBar, dragMarquee, measureCover } from './shared.jsx'
 import { Link } from './router.jsx'
 import './home.css'
 import SummitNumbers from './SummitNumbers.jsx'
@@ -59,7 +59,7 @@ function HomeHero() {
 
   return (
     <section className="h-hero" id="top">
-      <video className="hero-media" ref={video} src="/videos/hero-banner.mp4?v=5" muted playsInline preload="auto" aria-hidden />
+      <video className="hero-media" ref={video} src="/videos/hero-banner.mp4?v=6" muted playsInline preload="auto" aria-hidden />
       <h1 className="sr-only">Bharat Summit 2026</h1>
     </section>
   )
@@ -68,19 +68,19 @@ function HomeHero() {
 function SpeakerCard({ speaker, copy }) {
   return (
     <Link className="h-speaker" to={`/speakers/${speaker.id}`} aria-hidden={copy || undefined} tabIndex={copy ? -1 : undefined}
-      aria-label={copy ? undefined : `${speaker.name}, ${speaker.role}. View profile`}>
+      aria-label={copy ? undefined : `${speaker.name}, ${speaker.role}. View profile`}
+      onPointerEnter={measureCover} onFocus={measureCover}>
       <Portrait bg={speaker.bg} src={speaker.img} className="h-portrait">{!speaker.img && <span className="sp-initials">{speaker.initials}</span>}</Portrait>
       <span className="h-speaker-body">
         <span className="h-speaker-name">{speaker.name}</span>
-        <span className="h-role">{speaker.role}</span>
-        <span className="h-note">{speaker.session.split(':')[0]}</span>
         <span className="h-card-arrow" aria-hidden><Icon name="arrowRight" size={16} strokeWidth={1.75} /></span>
       </span>
-      {/* on hover: the same details with a short summary and a link line, over the card's lower part */}
+      {/* on hover: the name with the designation, session and time from the profile, over the card's lower part */}
       <span className="h-speaker-body sp-hover" aria-hidden>
         <span className="h-speaker-name">{speaker.name}</span>
         <span className="h-role">{speaker.role}</span>
-        {speaker.bio && <span className="sp-summary">{speaker.bio}</span>}
+        <span className="h-note">{speaker.session}</span>
+        {speaker.when && <span className="sp-card-when">{speaker.when}</span>}
         <span className="sp-more">Click to view more →</span>
       </span>
     </Link>

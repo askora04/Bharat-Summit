@@ -89,6 +89,7 @@ section[id] { scroll-margin-top: 61px; }
 @keyframes header-in { from { opacity: 0; transform: translateY(-100%); } }
 .header.is-scrolled { background: rgba(8, 40, 82, .96); box-shadow: 0 4px 16px rgba(0, 0, 0, .25); }
 .header.is-scrolled .wordmark-name, .header.is-scrolled .wordmark-tag { color: #fff; }
+.header.on-dark .wordmark-tag { color: #fff; } /* Speakers, Schedule and Summit Archives: dark banner at the top */
 .lockup { display: flex; align-items: center; gap: 20px; }
 .logo { display: flex; align-items: center; gap: 12px; color: #fff; }
 .brand-logo { border-radius: 50%; } /* the globe artwork has white corners; show just the circle */
@@ -189,7 +190,7 @@ section[id] { scroll-margin-top: 61px; }
 .stat-graphic { position: relative; width: clamp(160px, 18vw, 240px); aspect-ratio: 1; flex-shrink: 0; }
 .stat-accent { position: absolute; inset: 0; width: 100%; height: 100%; }
 /* the photo sits in the ring's opening (200 of 260 px, offset 29/32) */
-.stat-img { position: absolute; left: 11.2%; top: 12.3%; width: 76.9%; height: 76.9%; transition: transform .5s ease; }
+.stat-img { position: absolute; left: 11.2%; top: 12.3%; width: 76.9%; height: 76.9%; border-radius: 50%; object-fit: cover; transition: transform .5s ease; }
 .stat.is-on .stat-accent { animation: stat-revolve 1.8s cubic-bezier(.2, .8, .2, 1) both, stat-orbit 36s linear 1.8s infinite; }
 .stat.is-on .stat-img { animation: stat-pop .9s cubic-bezier(.2, 1.4, .4, 1) .15s both; }
 .stat:hover .stat-img { transform: scale(1.05); }
@@ -302,7 +303,7 @@ section[id] { scroll-margin-top: 61px; }
   transition: transform .4s cubic-bezier(.2, .8, .2, 1), box-shadow .4s, background .4s;
 }
 .speaker:hover, .speaker:focus-visible { transform: translateY(-6px); background: #fff; box-shadow: 0 16px 32px rgba(36, 35, 33, .14); }
-.speaker-portrait { height: 226px; }
+.speaker-portrait { flex: 1 0 226px; } /* fills the card: under it there is only the name */
 .speaker-portrait .band-1 { left: 0; width: 21.4%; background: rgba(255, 255, 255, .12); }
 .speaker-portrait .band-2 { left: 21.4%; width: 12%; background: rgba(255, 255, 255, .06); }
 .speaker-portrait .band-3 { left: 78%; width: 22%; background: rgba(255, 255, 255, .2); }
@@ -492,6 +493,13 @@ html { scroll-behavior: smooth; }
   display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden;
   margin-top: 8px; font: 400 13px/1.45 var(--font-body); color: #3d5477; text-align: justify;
 }
+.sp-card-when { display: block; margin-top: 2px; font-size: 13px; line-height: 1.4; color: #3d5477; } /* the session time under its title */
+/* the details in every speaker card are justified; the last line stays centred where the card is centred */
+.sp-hover :is(.sp-card-role, .sp-card-session, .sp-card-when, .speaker-role, .speaker-country, .h-role, .h-note) {
+  text-align: justify; hyphens: auto;
+}
+:is(.sp-card, .speaker) .sp-hover > * { text-align-last: center; }
+.h-speaker .sp-hover > * { text-align-last: left; }
 .sp-more { display: block; margin-top: 8px; font: 700 13px/1.3 var(--font-body); color: var(--navy); }
 @media (hover: none) {
   :is(.sp-card, .speaker, .h-speaker) > :is(.sp-card-body, .speaker-body, .h-speaker-body):not(.sp-hover) { display: none; }
@@ -505,5 +513,13 @@ html { scroll-behavior: smooth; }
   }
   .speaker-body.sp-hover { padding: 6px 10px 14px; } /* the card's own padding, which the copy doesn't sit inside */
   :is(.sp-card, .speaker, .h-speaker):is(:hover, :focus-visible) .sp-hover { opacity: 1; transform: none; }
+  /* the photo shrinks to the space above the details (--cover, set from the card by measureCover), so the
+     whole speaker stays in view, standing on the details' top edge */
+  :is(.sp-card, .speaker, .h-speaker) :is(.sp-card-photo, .speaker-portrait, .h-portrait) img {
+    transition: filter .7s ease, transform .5s ease, top .35s cubic-bezier(.2, .8, .2, 1), height .35s cubic-bezier(.2, .8, .2, 1), bottom .35s cubic-bezier(.2, .8, .2, 1);
+  }
+  :is(.sp-card, .speaker, .h-speaker):is(:hover, :focus-visible) :is(.sp-card-photo, .speaker-portrait, .h-portrait) img {
+    top: auto; bottom: var(--cover, 0px); height: calc(100% - var(--cover, 0px)); transform: none; scale: 1;
+  }
 }
 @media (prefers-reduced-motion: reduce) { .sp-hover { transition: none; } }

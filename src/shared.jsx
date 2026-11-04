@@ -25,6 +25,16 @@ export function Lines({ lines }) {
   return lines.map((l, i) => <span key={i} className="line">{l}</span>)
 }
 
+// Speaker cards: how much of the photo the hover details cover (the details are the copy marked .sp-hover,
+// right after the plain ones), so the photo can shrink to the space above them and stay fully in view
+export function measureCover(e) {
+  const card = e.currentTarget
+  const hover = card.querySelector('.sp-hover')
+  const plain = hover?.previousElementSibling
+  if (!plain) return
+  card.style.setProperty('--cover', `${Math.max(0, hover.offsetHeight - plain.offsetHeight)}px`)
+}
+
 export function Portrait({ bg, src, className, children }) {
   return (
     <div className={`portrait ${className}`} style={{ background: bg }}>

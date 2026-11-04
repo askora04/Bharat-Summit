@@ -42,7 +42,7 @@ function NavLink({ label, onClick }) {
   return <a href={`#${id}`} onClick={jump}>{label}</a>
 }
 
-function Header() {
+function Header({ page }) {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const [progress, setProgress] = useState(0)
@@ -68,7 +68,8 @@ function Header() {
 
   return (
     <>
-      <header className={`header ${scrolled ? 'is-scrolled' : ''}`}>
+      {/* on-dark: pages whose banner is dark right under the header, so the tagline reads in white */}
+      <header className={`header ${scrolled ? 'is-scrolled' : ''} ${['speakers', 'schedule', 'events'].includes(page) ? 'on-dark' : ''}`}>
         <div className="lockup">
           <Link to="/" className="logo" aria-label="Bharat Summit home">
             <img className="brand-logo" src={a('logo.svg')} width="52" height="52" alt="" />
@@ -172,7 +173,7 @@ export default function App() {
     <div className="page">
       {/* page transition: the brand stripes sweep away on every page change (keyed to replay) */}
       <div className="curtain" key={route} aria-hidden><i /><i /><i /><i /><i /></div>
-      <Header />
+      <Header page={page} />
       {/* every page but home is shown in its desktop layout, zoomed out to the screen width (mobile.css) */}
       {page === 'home' ? <HomePage /> : (
         <div className="dz">

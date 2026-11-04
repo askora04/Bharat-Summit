@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { a, TriBar } from './shared.jsx'
+import { a, TriBar, measureCover } from './shared.jsx'
 import { Link, usePath } from './router.jsx'
 import { PARTS, SPEAKERS } from './speakersData.js'
 import './speakers.css'
@@ -62,19 +62,20 @@ function Initials({ speaker, className }) {
 function SpeakerCard({ speaker, index }) {
   return (
     <Link className="sp-card" style={{ '--i': index % 10 }} to={`/speakers/${speaker.id}`}
+      onPointerEnter={measureCover} onFocus={measureCover}
       aria-label={`${speaker.name}${speaker.moderator ? ' (Moderator)' : ''}${speaker.role ? `, ${speaker.role}` : ''}. View profile`}>
       <Initials speaker={speaker} className="sp-card-photo" />
       <span className="sp-card-body">
         <span className="sp-card-name">{speaker.name}</span>
         {speaker.moderator && <span className="sp-mod">Moderator</span>}
-        {speaker.role && <span className="sp-card-role">{speaker.role}</span>}
       </span>
-      {/* on hover: the same details with a short summary and a link line, over the card's lower part */}
+      {/* on hover: the name with the designation, session and time from the profile, over the card's lower part */}
       <span className="sp-card-body sp-hover" aria-hidden>
         <span className="sp-card-name">{speaker.name}</span>
         {speaker.moderator && <span className="sp-mod">Moderator</span>}
         {speaker.role && <span className="sp-card-role">{speaker.role}</span>}
-        {speaker.bio && <span className="sp-summary">{speaker.bio}</span>}
+        {speaker.session && <span className="sp-card-session">{speaker.session}</span>}
+        {speaker.when && <span className="sp-card-when">{speaker.when}</span>}
         <span className="sp-more">Click to view more →</span>
       </span>
     </Link>
@@ -155,6 +156,12 @@ function AutoScrollRow({ children }) {
   )
 }
 
+// Sparkles for the page margins, [x %, y %] in each side's strip: left side, then right side
+const SIDE_STARS = [
+  [[30, 8], [70, 20], [20, 34], [60, 46], [35, 60], [75, 70], [25, 84], [55, 94]],
+  [[65, 12], [25, 24], [70, 38], [40, 50], [80, 62], [30, 74], [65, 86], [35, 96]],
+]
+
 // One speaker: initials panel on the left, name, title, session and bio on the right
 function SpeakerDetail({ speaker }) {
   return (
@@ -195,6 +202,14 @@ export default function SpeakersPage() {
 
       {speaker ? <SpeakerDetail speaker={speaker} /> : (
         <main className="sp-page" id="speakers">
+          {/* sparkles in the white margins either side of the cards, as in the banner; they stay in view while scrolling */}
+          {SIDE_STARS.map((stars, side) => (
+            <div key={side} className={`sp-side-stars ${side ? 'is-right' : 'is-left'}`} aria-hidden>
+              <div className="sp-side-stars-inner">
+                {stars.map(([x, y], s) => <span key={s} style={{ left: `${x}%`, top: `${y}%`, '--s': s + side * 3 }} />)}
+              </div>
+            </div>
+          ))}
           {/* Filter bar: pick a session */}
           <div className="sp-filters">
             <label className="sp-select">

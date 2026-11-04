@@ -52,7 +52,7 @@
   transition: box-shadow .3s, transform .3s;
 }
 .h-speaker:hover, .h-speaker:focus-visible { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(36, 35, 33, .14); }
-.h-portrait { flex: none; height: 215px; }
+.h-portrait { flex: 1 0 215px; } /* fills the card: under it there is only the name */
 .h-portrait img { transform-origin: bottom; transition: transform .5s ease; }
 .h-speaker:hover .h-portrait img, .h-speaker:focus-visible .h-portrait img { transform: scale(1.04); }
 .h-portrait .band-1 { left: 0; width: 49px; background: rgba(255, 255, 255, .12); }
@@ -63,7 +63,7 @@
 .h-role { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; margin-top: 6px; font-size: 14px; color: #3d5477; } /* long titles: 2 lines here, full on the profile */
 .h-note { display: block; margin-top: 6px; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--navy); }
 .h-card-arrow {
-  position: absolute; right: 13px; top: 243px;
+  position: absolute; right: 13px; bottom: 12px; /* level with the name */
   display: grid; place-items: center;
   width: 32px; height: 32px;
   border: 1px solid #90969a; border-radius: 999px;
