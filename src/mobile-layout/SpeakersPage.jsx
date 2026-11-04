@@ -167,7 +167,7 @@ function SpeakerDetail({ speaker }) {
   return (
     // data-scroll-start: the page opens here, the profile right under the header (see App)
     <main className="sp-detail" data-scroll-start>
-      <Link className="sp-back" to="/speakers">
+      <Link className="sp-back" to="/speakers" back>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
           strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
         Back to Speakers

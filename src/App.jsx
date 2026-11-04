@@ -1,7 +1,7 @@
 import './index.css'
 import { useEffect, useState } from 'react'
-import { a } from './shared.jsx'
-import { Link, usePath } from './router.jsx'
+import { a, watchSpeakerCards, startSpeakerFloat } from './shared.jsx'
+import { Link, usePath, returnScroll } from './router.jsx'
 import HomePage from './HomePage.jsx'
 import AboutPage from './AboutPage.jsx'
 import SchedulePage from './SchedulePage.jsx'
@@ -116,11 +116,17 @@ export default function App() {
     : route === '/events' ? 'events'
     : 'home'
 
+  useEffect(watchSpeakerCards, []) // speaker cards: measure their details (shared.jsx)
+  useEffect(startSpeakerFloat, []) // and open them on hover, floating over the page
+
   useEffect(() => {
-    // New page: jump to the requested section, else to where the page asks to start, else the top.
+    // New page: back where the visitor left it on a return (Back to Speakers, the browser's Back button), else
+    // the requested section, else where the page asks to start, else the top.
+    const kept = returnScroll(window.location.pathname)
     const target = (window.location.hash && document.querySelector(window.location.hash))
       || document.querySelector('[data-scroll-start]')
-    if (target) target.scrollIntoView()
+    if (kept != null) window.scrollTo({ top: kept, behavior: 'instant' })
+    else if (target) target.scrollIntoView()
     else window.scrollTo(0, 0)
     document.title = ({
       about: 'About Us · ',
