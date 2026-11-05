@@ -137,6 +137,33 @@ section[id] { scroll-margin-top: 48px; }
 .dz .sp-hero.sc-hero { height: auto; padding-top: calc(48px / var(--dz, .35) + 51px); }
 .dz :is(section[id], .sp-detail) { scroll-margin-top: calc(48px / var(--dz, .35)); }
 
+/* About: Join the Conversation. The posts are the platforms' own embeds, unreadable zoomed out, so this section
+   is shown at phone size inside the zoomed page (zoom 1 / --dz undoes the page's zoom): one post at a time,
+   swiped sideways, with dots below */
+.dz .social { zoom: calc(1 / var(--dz, .35)); width: calc(1100px * var(--dz, .35)); padding: 32px 0 28px; }
+.dz .social .section-title { font-size: 22px; letter-spacing: -.4px; }
+.dz .social .lede { margin-top: 8px; font-size: 13px; text-align: center; }
+.dz .social .hashtags-box { margin-top: 16px; padding: 0 6px; border-radius: 12px; }
+.dz .social .hashtags { --gap: 8px; padding-block: 8px; }
+.dz .social .hashtag { width: 136px; height: 30px; font-size: 12px; }
+.dz .social .card-row {
+  flex-wrap: nowrap; justify-content: flex-start; gap: 12px;
+  width: 100%; margin: 16px 0 0; padding-inline: 16px;
+  overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 16px;
+  overscroll-behavior-x: contain; scrollbar-width: none;
+}
+.dz .social .card-row::-webkit-scrollbar { display: none; }
+/* 350px: the width the Facebook frame is drawn at (AboutPage.jsx) */
+.dz .social .post-embed { flex: 0 0 min(350px, 100% - 32px); max-width: none; height: 560px; scroll-snap-align: start; }
+.post-dots { display: none; }
+.dz .post-dots { display: flex; justify-content: center; gap: 4px; margin-top: 8px; }
+.post-dots button { width: 24px; height: 24px; padding: 0; border: 0; background: none; cursor: pointer; }
+.post-dots button::before {
+  content: ''; display: block; width: 8px; height: 8px; margin: auto; border-radius: 999px;
+  background: #c3cfdb; transition: width .25s, background .25s;
+}
+.post-dots button.is-on::before { width: 20px; background: var(--navy); }
+
 /* Popups stay full size (portals, outside the zoom), so they keep their phone layout. Photo lightbox: */
 .ev-lightbox { padding: 64px 8px 16px; }
 .ev-lb-step { top: auto; bottom: 16px; translate: none; }

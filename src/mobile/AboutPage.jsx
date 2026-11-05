@@ -90,9 +90,34 @@ function SocialEmbed({ platform, url }) {
       )}
       {platform === 'Facebook' && (
         <iframe title="Bharat Summit on Facebook" loading="lazy" allow="encrypted-media; clipboard-write"
-          src={`https://www.facebook.com/plugins/post.php?href=${encodeURIComponent(url)}&show_text=true&width=400&height=638`} />
+          src={`https://www.facebook.com/plugins/post.php?href=${encodeURIComponent(url)}&show_text=true&width=350&height=560`} />
       )}
     </div>
+  )
+}
+
+// The posts one at a time, swiped sideways (mobile.css); the dots show which one is in view and jump to a post
+function Posts() {
+  const row = useRef(null)
+  const [current, setCurrent] = useState(0)
+  const onScroll = () => {
+    const el = row.current
+    const step = el.scrollWidth / POSTS.length
+    setCurrent(Math.min(POSTS.length - 1, Math.round(el.scrollLeft / step)))
+  }
+  const go = (i) => row.current.children[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
+  return (
+    <>
+      <div className="container card-row" ref={row} onScroll={onScroll}>
+        {POSTS.map((p) => <SocialEmbed key={p.platform} {...p} />)}
+      </div>
+      <div className="post-dots">
+        {POSTS.map((p, i) => (
+          <button key={p.platform} type="button" className={i === current ? 'is-on' : ''}
+            aria-label={`Show the ${p.platform} post`} aria-current={i === current} onClick={() => go(i)} />
+        ))}
+      </div>
+    </>
   )
 }
 
@@ -181,9 +206,7 @@ export default function AboutPage() {
             {/* listed twice so one set always fills the box's width */}
             <Marquee className="hashtags" items={[...HASHTAGS, ...HASHTAGS]} secs={3} render={(h) => <span className="hashtag">{h}</span>} />
           </div>
-          <div className="container card-row">
-            {POSTS.map((p) => <SocialEmbed key={p.platform} {...p} />)}
-          </div>
+          <Posts />
         </section>
 
         <section className="venue reveal" id="about-venue">
