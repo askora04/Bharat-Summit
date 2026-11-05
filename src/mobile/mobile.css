@@ -138,9 +138,9 @@ section[id] { scroll-margin-top: 48px; }
 .dz :is(section[id], .sp-detail) { scroll-margin-top: calc(48px / var(--dz, .35)); }
 
 /* About: Join the Conversation. The posts are the platforms' own embeds, unreadable zoomed out, so this section
-   is shown at phone size inside the zoomed page (zoom 1 / --dz undoes the page's zoom): one post at a time,
+   is shown at phone size inside the zoomed page (--dz-undo = 1 / --dz, set in App.jsx, undoes the page's zoom): one post at a time,
    swiped sideways, with dots below */
-.dz .social { zoom: calc(1 / var(--dz, .35)); width: calc(1100px * var(--dz, .35)); padding: 32px 0 28px; }
+.dz .social { zoom: var(--dz-undo, 2.86); width: calc(1100px / var(--dz-undo, 2.86)); padding: 32px 0 28px; }
 .dz .social .section-title { font-size: 22px; letter-spacing: -.4px; }
 .dz .social .lede { margin-top: 8px; font-size: 13px; text-align: center; }
 .dz .social .hashtags-box { margin-top: 16px; padding: 0 6px; border-radius: 12px; }

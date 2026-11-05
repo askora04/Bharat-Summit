@@ -10,7 +10,17 @@ import EventsPage from './EventsPage.jsx'
 import Footer from './Footer.jsx'
 import { startMotion, watchInView } from '../lib/motion.js'
 import './motion.css'
-import './mobile.css' // last: phone-only adjustments win
+import './mobile.css' // phone-only adjustments
+import './iphone.css' // last: iPhone-only fixes, all scoped to html.iphone (below)
+
+// iPhones get their own section of fixes (iphone.css). ?iphone in the address forces it, to check the iPhone
+// layout in a desktop browser (preview.html does this for its iPhone frames).
+const IPHONE = /iPhone|iPod/.test(navigator.userAgent) || new URLSearchParams(window.location.search).has('iphone')
+if (IPHONE) {
+  document.documentElement.classList.add('iphone')
+  // let the page reach under the notch / home indicator; iphone.css keeps content inside the safe area
+  document.querySelector('meta[name=viewport]')?.setAttribute('content', 'width=device-width, initial-scale=1.0, viewport-fit=cover')
+}
 
 const NAV = ['HOME', 'ABOUT US', 'SCHEDULE', 'SPEAKERS', 'SUMMIT ARCHIVES', 'CONNECT']
 const MENU = ['HOME', 'ABOUT', 'SCHEDULES', 'SPEAKERS', 'SUMMIT ARCHIVES', 'CONNECT']
@@ -167,7 +177,11 @@ export default function App() {
 
   // zoom for the sections shown in their desktop layout (.dz, mobile.css): the 1100px layout fits the screen
   useEffect(() => {
-    const fit = () => document.documentElement.style.setProperty('--dz', document.documentElement.clientWidth / 1100)
+    const fit = () => {
+      const { style, clientWidth } = document.documentElement
+      style.setProperty('--dz', clientWidth / 1100)
+      style.setProperty('--dz-undo', 1100 / clientWidth) // undoes the zoom for sections shown at phone size
+    }
     fit()
     window.addEventListener('resize', fit)
     return () => window.removeEventListener('resize', fit)

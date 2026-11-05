@@ -29,6 +29,7 @@ npm run dev       # http://localhost:5173
 | Script | What it does |
 |---|---|
 | `npm run dev` | Start the dev server with hot reload |
+| `npm run dev:iphone` | The same, reachable from a phone on the same Wi-Fi (open the printed Network URL on the iPhone); iPhone frames at `/src/mobile/preview.html` |
 | `npm run build` | Production build into `dist/` |
 | `npm run preview` | Serve the production build locally |
 | `npm run lint` | Run ESLint (clean with 0 errors/warnings) |

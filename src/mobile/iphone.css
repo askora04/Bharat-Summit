@@ -1,0 +1,36 @@
+/* iPhone layout: fixes for Safari on iPhone, on top of the phone layout (mobile.css). Loaded last; every rule is
+   scoped to html.iphone, which App.jsx sets on iPhones (or with ?iphone in the address, to check it on a desktop).
+   Preview: /src/mobile/preview.html, iPhone frames. */
+
+/* No grey flash over links and buttons when they are tapped */
+.iphone { -webkit-tap-highlight-color: transparent; }
+
+/* Notch and home indicator. App.jsx turns on viewport-fit=cover, so the page runs edge to edge; the header and
+   the fixed controls stay inside the safe area (insets are 0 where there is nothing to avoid, e.g. Safari's
+   portrait view; they matter in landscape and when the site is added to the Home Screen) */
+.iphone .header {
+  height: calc(48px + env(safe-area-inset-top));
+  padding: env(safe-area-inset-top) max(16px, env(safe-area-inset-right)) 0 max(16px, env(safe-area-inset-left));
+}
+.iphone section[id] { scroll-margin-top: calc(48px + env(safe-area-inset-top)); }
+.iphone .h-hero { padding-top: calc(48px + env(safe-area-inset-top)); }
+.iphone .menu-panel { padding-top: env(safe-area-inset-top); padding-right: max(20px, env(safe-area-inset-right)); }
+.iphone .to-top { right: max(16px, env(safe-area-inset-right)); }
+/* the footer is in the zoomed-out layout, so the inset is scaled back up */
+.iphone .site-footer { padding-bottom: calc(env(safe-area-inset-bottom) * var(--dz-undo, 2.86)); }
+
+/* Safari's 100vh is the height with its toolbars hidden, so full-screen views measured with it end up behind the
+   toolbar; svh is the height with the toolbars showing */
+.iphone .ev-lb-figure img { max-height: calc(100svh - 160px); }
+.iphone .ev-lightbox, .iphone .vd-viewer { padding-bottom: max(16px, env(safe-area-inset-bottom)); }
+
+/* Safari before 18 needs the prefixed blur */
+.iphone .h-venue-photo figcaption { -webkit-backdrop-filter: blur(6px); }
+
+/* Safari keeps :hover on whatever was tapped last, so cards would stay lifted and photos zoomed after a tap */
+.iphone :is(.h-speaker, .org-card, .ev-tile, .to-top):hover { transform: none; }
+.iphone :is(.h-portrait, .org-portrait, .speaker-portrait, .ev-photo) img,
+.iphone .h-gallery img:hover, .iphone .stat:hover .stat-img { transform: none !important; }
+
+/* Social posts (About): momentum swiping in the carousel, and the long post inside a card scrolls smoothly */
+.iphone .dz .social .card-row, .iphone .post-embed { -webkit-overflow-scrolling: touch; }
