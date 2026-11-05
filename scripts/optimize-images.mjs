@@ -10,11 +10,11 @@ const OUT = 'public/assets'
 // Never wider than this; 2x the widest the image is shown, so it stays sharp on retina screens
 const MAX_WIDTH = 2000
 const MAX_WIDTH_FOR = {
-  'hicc.png': 1600, // venue photo, shown at most ~660px wide
+  'hicc.png': 1320, // venue photo, shown at most ~660px wide (2x)
 }
 
 // Visually lossless: WebP at these settings is indistinguishable from the original at display size
-const WEBP = { quality: 85, alphaQuality: 90, effort: 6, smartSubsample: true }
+const WEBP = { quality: 78, alphaQuality: 85, effort: 6, smartSubsample: true }
 // Line art, small text and map labels soften at 85, so these get a higher quality
 // (lossless was checked too: no visible gain at 2-3x the size)
 const DETAILED = { ...WEBP, quality: 90, alphaQuality: 95 }

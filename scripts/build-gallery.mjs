@@ -14,7 +14,7 @@ import sharp from 'sharp'
 const SOURCES = process.argv.slice(2)
 const OUT = 'public/gallery'
 const SIZES = [480, 960, 1600] // grid (1x / 2x), and the full-screen view
-const WEBP = { quality: 80, effort: 5, smartSubsample: true }
+const WEBP = { quality: 72, effort: 6, smartSubsample: true } // 25% under q80, no visible difference at display size
 const CREDIT = '© Maurice Weiss/Ostkreuz' // unless the album names its own photographer
 
 // One album per source folder, in the order the site lists them. `caption` is the photo's one line;

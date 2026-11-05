@@ -1,40 +1,28 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
+# Dependencies and build output
 node_modules
 dist
-dist-ssr
 *.local
+
+# Logs
+*.log
 
 # Environment variables (never commit secrets)
 .env
 .env.*
 !.env.example
 
-# Editor directories and files
+# Editors and OS
 .vscode/*
 !.vscode/extensions.json
 .idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
-
-
-# Local editor / Claude Code settings
 .claude/
+.DS_Store
+Thumbs.db
 
 # Vercel CLI project link
 .vercel
 
-# Photographers' full-size originals for the gallery (npm run gallery -- gallery-originals ...)
+# Full-size originals, kept locally and never deployed:
+# assets-original/ -> npm run images, gallery-originals/ -> npm run gallery
+assets-original/
 gallery-originals/

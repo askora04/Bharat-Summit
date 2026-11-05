@@ -39,10 +39,13 @@ const VIDEOS = [
     title: 'Visitors on the exhibition floor' },
 ]
 
-// Films keep full HD for large screens; vertical clips are shown smaller, so 720p and at most 30 fps
-const SIZE = { film: 1920, clip: 1280 } // longest side
-const H264 = ['-c:v', 'libx264', '-preset', 'slow', '-crf', '23', '-profile:v', 'high', '-pix_fmt', 'yuv420p']
-const AAC = ['-c:a', 'aac', '-b:a', '128k', '-ac', '2']
+// Everything is 720p: the films play in a panel (not full screen by default) and the vertical clips are shown
+// smaller still, at most 30 fps. CRF differs by kind: the films are fast-cut promo footage, the clips mostly
+// interviews, which compress far better. Both stay visually close to the originals (SSIM ~0.98-0.99).
+const SIZE = { film: 1280, clip: 1280 } // longest side
+const CRF = { film: '23', clip: '27' }
+const H264 = (kind) => ['-c:v', 'libx264', '-preset', 'slow', '-crf', CRF[kind], '-profile:v', 'high', '-pix_fmt', 'yuv420p']
+const AAC = ['-c:a', 'aac', '-b:a', '96k', '-ac', '2']
 
 if (!SRC) {
   console.error('Usage: npm run videos -- <folder with the original videos>')
@@ -74,9 +77,7 @@ for (const v of VIDEOS) {
     const filters = [rotate && 'transpose=1', `scale='if(gt(iw,ih),min(${long},iw),-2)':'if(gt(iw,ih),-2,min(${long},ih))'`,
       v.kind === 'clip' && 'fps=30'].filter(Boolean).join(',')
     process.stdout.write(`${v.id.padEnd(28)} converting… `)
-    // The films are already web-ready H.264 at full HD: re-encoding only grows them, so their
-    // streams are copied as they are and just reordered to play while downloading
-    const encode = v.kind === 'film' && !rotate ? ['-c', 'copy'] : ['-vf', filters, ...H264, ...AAC]
+    const encode = ['-vf', filters, ...H264(v.kind), ...AAC]
     await run(ffmpeg, ['-v', 'error', '-y', '-i', src, '-map', '0:v:0', '-map', '0:a:0?',
       ...encode, '-movflags', '+faststart', '-map_metadata', '-1', mp4], { maxBuffer: 1 << 26 })
 

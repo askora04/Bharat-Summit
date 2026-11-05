@@ -19,7 +19,7 @@ Every page shares the unified header with scroll-progress tracking and the anima
 
 ## Getting started
 
-Requires Node.js 18 or later.
+Requires Node.js 20 or later.
 
 ```bash
 npm install
@@ -46,12 +46,19 @@ Everything else comes from `vercel.json`:
 - **Build:** Vite, `npm run build`, output `dist/`.
 - **Install:** `npm ci --ignore-scripts`. This skips the download of the ffmpeg binary that `npm run videos` uses locally;
   the website build doesn't need it (verified: clean install + build works with scripts skipped).
-- **Routing:** every page path serves `index.html`, so reloading `/speakers/3` or `/events` works.
-- **Caching:** the hashed JS/CSS bundles are cached for a year; images in `public/assets` for a day;
-  gallery photos and videos for a week (their `gallery.json` / `videos.json` lists for 5 minutes).
+- **Routing:** every page path serves `index.html`, so reloading `/speakers/3` or `/events` works. Paths with a
+  file extension never do, so a missing image or file is a real 404, not the homepage. Trailing slashes redirect
+  to the path without one (`/speakers/` -> `/speakers`).
+- **Caching:** pages always revalidate, so a deploy shows at once; the hashed JS/CSS bundles (`/static/`) are
+  cached for a year; images in `/assets/` for an hour (served stale for a day while revalidating) and the font for
+  30 days; gallery photos and videos for a week (their `gallery.json` / `videos.json` lists for 5 minutes).
+  Replacing a banner video under the same name? Bump its `?v=` in the code so visitors don't get the cached one.
+- **Security headers:** HSTS, no MIME sniffing, no framing by other sites, a strict referrer policy, camera /
+  microphone / location / payment turned off, and a Content-Security-Policy limited to what can't break the
+  Instagram, X and Facebook embeds (frame-ancestors, object-src, base-uri, form-action, HTTPS upgrades).
 
-**No environment variables are needed.** The photo gallery (`public/gallery/`, 148 MB) and the event videos
-(`public/videos/`, 111 MB) are committed with the site and served from `/gallery` and `/videos`.
+**No environment variables are needed.** The photo gallery (`public/gallery/`, 20 MB) and the event videos
+(`public/videos/`, 73 MB) are committed with the site and served from `/gallery` and `/videos`.
 To move them to S3 or a CDN later, upload those folders and set `VITE_GALLERY_URL` / `VITE_VIDEOS_URL`
 (see `.env.example` and the sections below), then redeploy.
 
@@ -59,57 +66,40 @@ To move them to S3 or a CDN later, upload those folders and set `VITE_GALLERY_UR
 
 ```
 bharat-summit/
-├── assets-original/          # Full-size image originals (npm run images makes the WebP versions)
-├── public/
+├── public/                   # Copied into dist/ as is; every image is WebP or SVG
+│   ├── assets/               # Site images, icons and the Jost font
+│   │   ├── footer/           # Skyline monuments and social icons
+│   │   ├── home/             # Home page photos and graphics
+│   │   ├── organizers/       # Background-free organiser portraits
+│   │   └── speakers/         # Speaker cut-outs (file name = speaker's name, slugged)
 │   ├── gallery/              # Event photo gallery (npm run gallery)
-│   ├── videos/               # Event videos (npm run videos)
-│   └── assets/               # Static media and SVG icons (WebP)
-│       ├── footer/           # Skyline monuments, boats, and icons
-│       ├── home/             # Home page photos and graphics
-│       └── organizers/       # Background-free organiser portraits
-├── scripts/
+│   └── videos/               # Event videos and posters (npm run videos)
+├── scripts/                  # Media build tools, run locally (not part of the site build)
 │   ├── optimize-images.mjs   # assets-original/ -> public/assets/ WebP
 │   ├── build-gallery.mjs     # photo albums -> public/gallery/
 │   ├── gallery-captions.json # one-line captions for single photos
 │   └── build-videos.mjs      # event videos -> public/videos/
 ├── src/
-│   ├── main.jsx              # React DOM entry point
-│   ├── App.jsx               # Header, nav, and SPA page router
-│   ├── HomePage.jsx          # / landing page
-│   ├── AboutPage.jsx         # /about-us page
-│   ├── SchedulePage.jsx      # /schedule agenda & programme
-│   ├── SpeakersPage.jsx      # /speakers directory and /speakers/:id detail
-│   ├── EventsPage.jsx        # /events photo gallery and full-screen viewer
-│   ├── EventVideos.jsx       # /events video section and clip player
-│   ├── MediaCoverage.jsx     # About page media coverage (YouTube + press)
-│   ├── OrganizedBy.jsx       # Telangana leadership section
-│   ├── SummitNumbers.jsx     # "Summit in Numbers" interactive odometers
-│   ├── Profile.jsx           # Accessible profile drawer modal
-│   ├── Footer.jsx            # Footer links and contact info
-│   ├── FooterScene.jsx       # Indian landmarks & river animation
-│   ├── router.jsx            # PushState router (Link, usePath, navigate)
-│   ├── shared.jsx            # Shared UI helpers (Title, Portrait, TriBar, a)
-│   ├── organizersData.js     # Leadership profiles
-│   ├── mediaCoverage.js      # Media coverage videos and articles
-│   ├── gallery.js            # Loads the photo gallery from S3 (VITE_GALLERY_URL)
-│   ├── videos.js             # Loads the event videos from S3 (VITE_VIDEOS_URL)
-│   ├── scheduleData.js       # Programme schedule and themes
-│   ├── speakersData.js       # Speaker roster
-│   ├── footerBoats.js        # River boats SVG data
-│   ├── footerHills.js        # Mountain background geometry
-│   └── *.css                 # Modular stylesheets
-├── .env.example              # VITE_GALLERY_URL and VITE_VIDEOS_URL for production
+│   ├── main.jsx              # Entry: loads the desktop or the mobile layout (<= 700px)
+│   ├── desktop/              # Desktop layout: App (header, routes), pages, sections, stylesheets
+│   ├── mobile/               # Phone layout, a tuned copy of desktop/ (preview.html: dev-only phone frame)
+│   ├── data/                 # Content: speakers, schedule, organisers, media coverage, footer hills
+│   └── lib/                  # Shared logic: router, motion, gallery/videos loaders, asset URL helper
+├── .env.example              # Optional VITE_GALLERY_URL / VITE_VIDEOS_URL (S3 or CDN)
 ├── index.html
-├── package.json
+├── vercel.json               # Build, SPA routing, caching and security headers
 └── vite.config.js
 ```
+
+Full-size originals stay on your machine and are git-ignored: `assets-original/` (input for `npm run images`)
+and `gallery-originals/` (input for `npm run gallery`).
 
 ## Content to Replace Before Launch
 
 These are placeholders, marked in the code with `shortcut:` comments:
 
-- **Speakers.** `src/speakersData.js` holds fictional demo speakers. Replace with confirmed participants.
-- **Social links.** Set the real profile URLs in `src/Footer.jsx`.
+- **Speakers.** `src/data/speakersData.js` holds the speaker roster. Check it against confirmed participants.
+- **Social links.** Set the real profile URLs in `src/desktop/Footer.jsx` and `src/mobile/Footer.jsx`.
 - **Terms & Conditions and Privacy Policy.** Add destination content as required.
 
 ## Accessibility
@@ -141,8 +131,8 @@ npm run gallery -- /path/to/mauriceweiss_250400PA_Hydarabad /path/to/folder-cont
 ## Event videos
 
 The video section at the top of `/events` reads `public/videos/`, kept apart from the photos.
-`scripts/build-videos.mjs` builds it from the original files: it turns sideways phone clips upright, makes the
-vertical clips 720p, copies the already web-ready films without re-encoding, and makes a poster for each.
+`scripts/build-videos.mjs` builds it from the original files: it turns sideways phone clips upright, encodes
+everything as 720p H.264 (films at CRF 23, interview clips at CRF 27, 96 kbps audio) and makes a poster for each.
 Titles, roles, order (the first film is featured) and poster frames are set in `VIDEOS` at the top of the script.
 
 ```bash
