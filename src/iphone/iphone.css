@@ -1,0 +1,101 @@
+/* iPhone view: iPhones show the desktop layout (src/desktop/) exactly as on a computer, scaled to the screen.
+   index.html sets the iPhone's viewport to 1200px wide, the width at which only the full desktop rules apply
+   (the desktop stylesheets change layout at 1180px and below), and Safari scales that page to the screen.
+   main.jsx then loads the desktop layout and this stylesheet. Preview: /src/iphone/preview.html.
+
+   Supported models (screen in points; scale = width / 1200):
+     iPhone SE              375 × 667   16 : 9      (1 : 1.78)   scale 0.313
+     iPhone 12 / 13 / 14    390 × 844   19.5 : 9    (1 : 2.16)   scale 0.325
+     iPhone 15 / 16         393 × 852   19.5 : 9    (1 : 2.17)   scale 0.328
+     iPhone 16 Pro Max      440 × 956   19.5 : 9    (1 : 2.17)   scale 0.367
+   Visitors can pinch to zoom in, as on any desktop site. */
+
+/* Text at its set size: Safari otherwise enlarges text it thinks is too small on the phone, breaking the layout.
+   No grey flash over links and buttons when they are tapped. */
+html { -webkit-text-size-adjust: none; text-size-adjust: none; -webkit-tap-highlight-color: transparent; }
+
+/* The page ends at the footer: no rubber-band bounce past the top or the footer, and nothing wider than the page
+   can be scrolled to sideways (older iOS ignores the overflow-x: clip that hides the long moving rows, and would
+   otherwise zoom out to fit them). index.html also stops zooming out past the page's edges. */
+html, body { overscroll-behavior: none; overflow-x: hidden; }
+
+/* Safari keeps :hover on whatever was tapped last, so cards would stay lifted and photos zoomed after a tap */
+:is(.h-speaker, .org-card, .ev-tile, .to-top):hover { transform: none; }
+:is(.h-portrait, .org-portrait, .speaker-portrait, .ev-photo) img,
+.h-gallery img:hover, .stat:hover .stat-img { transform: none !important; }
+
+/* Safari before 18 needs the prefixed blur */
+.h-venue-photo figcaption { -webkit-backdrop-filter: blur(6px); }
+
+/* Home, Our Speakers: the two rows drift in opposite directions (home.css). Safari can stop redrawing moving
+   content inside a CSS mask, so here the rows' faded edges are white overlays instead of a mask (the section is
+   white), and each row moves on its own layer. The Moments photo columns get the same layer. */
+.h-marquee { position: relative; -webkit-mask-image: none; mask-image: none; }
+.h-marquee::before, .h-marquee::after {
+  content: ''; position: absolute; top: 0; bottom: 0; z-index: 3; width: 60px; pointer-events: none;
+}
+.h-marquee::before { left: 0; background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0)); }
+.h-marquee::after { right: 0; background: linear-gradient(270deg, #fff, rgba(255, 255, 255, 0)); }
+.h-marquee-track, .h-gallery-track { will-change: transform; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+
+/* Schedule: as in the mobile layout (src/mobile/schedule.css), each session is a stacked card with readable text
+   (coloured left edge, then time, session, theme and description one under another) instead of the wide table.
+   The mobile sizes are for its 1100px layout; this page is 1200px wide, so they are scaled by 1200 / 1100 to show
+   at the same size on the phone (~1/3: 60px here is ~20px on the screen). */
+.sc-page { width: calc(100% - 130px); padding: 104px 0; }
+.sc-days { gap: 22px; margin-bottom: 61px; }
+.sc-day { padding: 24px 39px; border-radius: 17px; font-size: 33px; }
+.sc-heading { margin-bottom: 44px; font-size: 46px; }
+.sc-table, .sc-table tbody, .sc-table tr, .sc-table td { display: block; width: auto; }
+.sc-table thead { display: none; }
+.sc-table .sc-row {
+  margin-bottom: 39px; padding: 52px 48px; overflow: hidden;
+  border: 2px solid #e6ebf1; border-left: 11px solid var(--c); border-radius: 22px; background: #fff;
+}
+.sc-table .sc-row td, .sc-table .sc-row:nth-child(even) td, .sc-row:hover td { width: auto; padding: 0; border: 0; background: none; box-shadow: none; }
+.sc-table .sc-row td + td { margin-top: 17px; }
+.sc-row-time { font-size: 33px; white-space: normal; }
+.sc-row-session { font-size: 39px; }
+.sc-row-theme { font-size: 33px; }
+.sc-row-desc { font-size: 35px; line-height: 1.6; }
+
+/* Speaker page (/speakers/:id): as in the mobile layout (src/mobile/speakers.css), the photo on top and the details
+   centred beneath it, in large text. The mobile sizes scaled by 1200 / 1100, as for the schedule above. */
+.sp-detail { width: calc(100% - 130px); padding: 52px 0 130px; }
+.sp-back { gap: 13px; font-size: 39px; }
+.sp-detail-grid { grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 61px; margin-top: 52px; text-align: center; }
+.sp-detail-photo { width: 545px; border-radius: 30px; }
+.sp-detail .sp-detail-when { margin-top: 13px; font-size: 39px; }
+.sp-detail-info { width: 100%; }
+.sp-detail-info h1 { font: 700 78px/1.15 var(--font-display); letter-spacing: -1px; }
+.sp-detail-info .sp-mod { padding: 7px 26px; font-size: 30px; }
+.sp-detail-info :is(.sp-detail-role, .sp-detail-country, .sp-detail-when) { text-align: center; text-align-last: center; }
+.sp-detail-role { margin-top: 26px; font-size: 44px; }
+.sp-detail-country { margin-top: 22px; font-size: 35px; }
+.sp-detail-rule { width: 174px; height: 9px; margin: 52px auto; border-radius: 4px; }
+.sp-detail-bio { max-width: none; font-size: 44px; text-align: justify; }
+
+/* Profile popup (speakers, organisers, leaders): as in the mobile layout (src/mobile/profile.css), it fills the
+   screen at phone size: the photo above the details, the close button top right, the arrows below. It is fixed
+   to the screen, so it is sized in screen points times --k (page px per point, set in main.jsx). */
+.sp-profile { padding: calc(72px * var(--k, 3)) calc(20px * var(--k, 3)) calc(84px * var(--k, 3)); }
+.sp-content {
+  grid-template-columns: minmax(0, calc(460px * var(--k, 3))); justify-items: center;
+  gap: calc(22px * var(--k, 3)); text-align: center;
+}
+.sp-content p { text-align-last: center; }
+.sp-photo { --ph: clamp(calc(100px * var(--k, 3)), 100dvh - calc(380px * var(--k, 3)), calc(460px * var(--k, 3))); }
+.sp-photo { box-shadow: 0 calc(30px * var(--k, 3)) calc(60px * var(--k, 3)) rgba(0, 0, 0, .5); }
+.sp-close, .sp-step { border-width: calc(1px * var(--k, 3)); }
+.sp-meta { font-size: calc(13px * var(--k, 3)); }
+.sp-meta span { margin-inline: calc(8px * var(--k, 3)); }
+.sp-info h3 { margin-top: calc(12px * var(--k, 3)); font-size: calc(24px * var(--k, 3)); }
+.sp-bio { margin-top: calc(10px * var(--k, 3)); font-size: calc(15px * var(--k, 3)); line-height: 1.5; }
+.sp-close { top: calc(20px * var(--k, 3)); right: calc(20px * var(--k, 3)); width: calc(48px * var(--k, 3)); height: calc(48px * var(--k, 3)); }
+.sp-step {
+  top: auto; bottom: calc(16px * var(--k, 3)); transform: none;
+  width: calc(48px * var(--k, 3)); height: calc(48px * var(--k, 3));
+}
+.sp-prev { left: calc(50% - 60px * var(--k, 3)); }
+.sp-next { right: calc(50% - 60px * var(--k, 3)); }
+.sp-close svg, .sp-step svg { width: calc(22px * var(--k, 3)); height: calc(22px * var(--k, 3)); }

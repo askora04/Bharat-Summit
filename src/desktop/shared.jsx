@@ -154,6 +154,106 @@ export function startSpeakerFloat() {
 
 // Measures every speaker card on the page, again whenever cards are added (page changes, filters) or the
 // window is resized, and once the fonts have loaded
+// Speaker cards on touch screens (iPhones, which show this layout, and tablets): the same details panel as the
+// hover, opened by a tap, exactly as in the mobile layout (src/mobile/shared.jsx). The first tap on a card opens
+// its details over the card's lower part, unfolding downward; the card lifts. A tap on the open card or on its
+// details opens the profile; a tap anywhere else, or scrolling the page, closes it.
+const TAP_CARDS = '.sp-card'
+export function startSpeakerTaps() {
+  if (window.matchMedia('(hover: hover)').matches) return () => {} // a mouse: startSpeakerFloat opens them on hover
+  const float = document.createElement('div')
+  float.setAttribute('aria-hidden', 'true')
+  let card = null
+  let host = null
+  let frame = 0
+  let closeTimer = 0
+  let down = null
+
+  // the card's details shown by default (name, designation, country): the panel opens exactly over them
+  const base = (c) => c.querySelector(':scope > .sp-card-body:not(.sp-hover)')
+  // the box the panel sits in, and its zoom (1 outside the zoomed layout)
+  const frameOf = () => {
+    if (host === document.body) return { left: -window.scrollX, top: -window.scrollY, zoom: 1 }
+    // the box is 1100px wide (mobile.css): its measured width says whether positions come zoomed or not
+    const r = host.getBoundingClientRect()
+    return { left: r.left, top: r.top, zoom: r.width / 1100 || 1 }
+  }
+  const place = () => {
+    if (!card) return
+    if (!card.isConnected) return close(true)
+    const box = card.getBoundingClientRect()
+    // drifted off the screen (homepage carousel, a gliding row): close. The screen's edges are the zoomed
+    // layout's edges (it spans the screen), measured the same way as the card: browsers differ on whether
+    // positions inside a zoomed box come in screen pixels or in the box's own (unzoomed) pixels
+    const edges = host === document.body ? { left: 0, right: window.innerWidth } : host.getBoundingClientRect()
+    if (box.right < edges.left || box.left > edges.right) return close(true)
+    const f = frameOf()
+    const top = base(card).getBoundingClientRect().top
+    float.style.left = `${(box.left - f.left) / f.zoom}px`
+    float.style.top = `${(top - f.top) / f.zoom}px`
+    float.style.width = `${box.width / f.zoom}px`
+    const look = getComputedStyle(card)
+    float.style.backgroundColor = look.backgroundColor
+    float.style.borderLeftColor = float.style.borderRightColor = float.style.borderBottomColor = look.borderLeftColor
+    frame = requestAnimationFrame(place)
+  }
+  const open = (next) => {
+    close(true)
+    card = next
+    host = card.closest('.dz') || document.body
+    host.append(float)
+    card.classList.add('is-open')
+    // the card's own classes give the copy the card's type, text styles and border
+    float.className = `${[...card.classList].filter((c) => c !== 'is-open').join(' ')} sp-float is-shown`
+    const f = frameOf()
+    float.style.setProperty('--plain-h', `${base(card).getBoundingClientRect().height / f.zoom}px`)
+    float.replaceChildren(card.querySelector('.sp-hover').cloneNode(true))
+    place()
+    float.getBoundingClientRect() // start closed, then open
+    float.classList.add('is-open')
+  }
+  function close(now) {
+    cancelAnimationFrame(frame)
+    card?.classList.remove('is-open')
+    card = null
+    float.classList.remove('is-open')
+    clearTimeout(closeTimer)
+    if (now) float.classList.remove('is-shown')
+    else closeTimer = setTimeout(() => float.classList.remove('is-shown'), 300)
+  }
+
+  // where a touch started, so a swipe (a carousel dragged by hand) isn't taken for a tap
+  const onDown = (e) => { down = { x: e.clientX, y: e.clientY } }
+  // runs before the card's own link (capture, on the document): the first tap opens instead of navigating
+  const onClick = (e) => {
+    if (float.contains(e.target)) {
+      e.preventDefault(); e.stopPropagation()
+      if (card) card.click() // the open card's link: opens the profile
+      return
+    }
+    const tapped = e.target.closest?.(TAP_CARDS)
+    const swiped = down && Math.hypot(e.clientX - down.x, e.clientY - down.y) > 10
+    if (tapped && !swiped && tapped !== card) {
+      e.preventDefault(); e.stopPropagation()
+      open(tapped)
+    } else if (!tapped && card) close()
+  }
+  // scrolling the page closes it (a gliding row doesn't: the panel follows its card)
+  const onScroll = (e) => {
+    if (card && (e.target === document || e.target === document.documentElement)) close(true)
+  }
+  document.addEventListener('pointerdown', onDown, { capture: true, passive: true })
+  document.addEventListener('click', onClick, { capture: true })
+  window.addEventListener('scroll', onScroll, { passive: true, capture: true })
+  return () => {
+    close(true)
+    float.remove()
+    document.removeEventListener('pointerdown', onDown, { capture: true })
+    document.removeEventListener('click', onClick, { capture: true })
+    window.removeEventListener('scroll', onScroll, { capture: true })
+  }
+}
+
 export function watchSpeakerCards() {
   let frame = 0
   const run = () => {

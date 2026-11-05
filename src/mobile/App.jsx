@@ -10,17 +10,7 @@ import EventsPage from './EventsPage.jsx'
 import Footer from './Footer.jsx'
 import { startMotion, watchInView } from '../lib/motion.js'
 import './motion.css'
-import './mobile.css' // phone-only adjustments
-import './iphone.css' // last: iPhone-only fixes, all scoped to html.iphone (below)
-
-// iPhones get their own section of fixes (iphone.css). ?iphone in the address forces it, to check the iPhone
-// layout in a desktop browser (preview.html does this for its iPhone frames).
-const IPHONE = /iPhone|iPod/.test(navigator.userAgent) || new URLSearchParams(window.location.search).has('iphone')
-if (IPHONE) {
-  document.documentElement.classList.add('iphone')
-  // let the page reach under the notch / home indicator; iphone.css keeps content inside the safe area
-  document.querySelector('meta[name=viewport]')?.setAttribute('content', 'width=device-width, initial-scale=1.0, viewport-fit=cover')
-}
+import './mobile.css' // last: phone-only adjustments win
 
 const NAV = ['HOME', 'ABOUT US', 'SCHEDULE', 'SPEAKERS', 'SUMMIT ARCHIVES', 'CONNECT']
 const MENU = ['HOME', 'ABOUT', 'SCHEDULES', 'SPEAKERS', 'SUMMIT ARCHIVES', 'CONNECT']
@@ -177,14 +167,20 @@ export default function App() {
 
   // zoom for the sections shown in their desktop layout (.dz, mobile.css): the 1100px layout fits the screen
   useEffect(() => {
+    // The zoom itself is also written as plain numbers: Safari doesn't reliably zoom text by a zoom given
+    // through a CSS variable (the boxes shrink, the text doesn't)
+    const sheet = document.createElement('style')
+    document.head.append(sheet)
     const fit = () => {
       const { style, clientWidth } = document.documentElement
-      style.setProperty('--dz', clientWidth / 1100)
-      style.setProperty('--dz-undo', 1100 / clientWidth) // undoes the zoom for sections shown at phone size
+      const dz = clientWidth / 1100
+      style.setProperty('--dz', dz)
+      style.setProperty('--dz-undo', 1 / dz) // undoes the zoom for sections shown at phone size
+      sheet.textContent = `html .dz { zoom: ${dz} } html .dz .social { zoom: ${1 / dz}; width: ${clientWidth}px }`
     }
     fit()
     window.addEventListener('resize', fit)
-    return () => window.removeEventListener('resize', fit)
+    return () => { window.removeEventListener('resize', fit); sheet.remove() }
   }, [])
 
   return (

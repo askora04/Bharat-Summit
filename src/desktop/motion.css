@@ -19,7 +19,7 @@
 /* ---------- Hero: slow zoom on arrival, parallax on scroll, content lifts away ---------- */
 .h-hero::before {
   content: ''; position: absolute; inset: -4% 0; pointer-events: none;
-  background: url(/assets/home/home-hero-2026.webp) center 70% / cover;
+  background: url(/assets/home/hero-banner-poster.webp) center / cover; /* the banner video's last frame */
   transform: translate3d(0, calc(var(--sy) * .28px), 0);
   animation: hero-zoom 2.6s var(--ease-out) both;
 }

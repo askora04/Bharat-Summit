@@ -226,6 +226,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .h-marquee-track, .h-gallery-track { animation: none; }
-  .h-marquee-row { overflow-x: auto; }
+  /* the speaker rows and the Moments photo columns keep moving, at half speed, as the auto-scrolling rows
+     elsewhere do (index.css) */
+  .h-gallery-track { animation: h-gallery-up calc(var(--dur, 50s) * 2) linear infinite !important; }
+  .h-gallery-col.is-down .h-gallery-track { animation-direction: reverse !important; }
+  .h-marquee-track { animation: h-marquee 140s linear infinite !important; }
+  .h-marquee-row.is-reverse .h-marquee-track { animation-direction: reverse !important; }
 }

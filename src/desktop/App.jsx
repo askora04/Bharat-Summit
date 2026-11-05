@@ -1,6 +1,6 @@
 import './index.css'
 import { useEffect, useState } from 'react'
-import { a, watchSpeakerCards, startSpeakerFloat } from './shared.jsx'
+import { a, watchSpeakerCards, startSpeakerFloat, startSpeakerTaps } from './shared.jsx'
 import { Link, usePath, returnScroll } from '../lib/router.jsx'
 import HomePage from './HomePage.jsx'
 import AboutPage from './AboutPage.jsx'
@@ -118,6 +118,7 @@ export default function App() {
 
   useEffect(watchSpeakerCards, []) // speaker cards: measure their details (shared.jsx)
   useEffect(startSpeakerFloat, []) // and open them on hover, floating over the page
+  useEffect(startSpeakerTaps, []) // or, on touch screens (iPhone), on a tap, as in the mobile layout
 
   useEffect(() => {
     // New page: back where the visitor left it on a return (Back to Speakers, the browser's Back button), else

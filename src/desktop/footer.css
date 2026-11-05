@@ -225,8 +225,11 @@
   animation-duration: 80s;
 }
 
-.footer-scene:hover .footer-hills {
-  animation-play-state: paused;
+/* (only with a mouse: on a touch screen the last tap counts as hovering, which would freeze the scene) */
+@media (hover: hover) {
+  .footer-scene:hover .footer-hills {
+    animation-play-state: paused;
+  }
 }
 
 @keyframes hills-scroll {
@@ -257,8 +260,10 @@
 }
 
 /* Hold still while the pointer is in the scene so a monument can actually be hovered */
-.footer-scene.is-in-view:hover .skyline-track {
-  animation-play-state: paused;
+@media (hover: hover) {
+  .footer-scene.is-in-view:hover .skyline-track {
+    animation-play-state: paused;
+  }
 }
 
 @keyframes monument-scroll {
@@ -433,12 +438,9 @@
   }
 }
 
+/* The skyline keeps moving even when the visitor asks for reduced motion, like the other auto-scrolling
+   rows (index.css); only the monuments' hover zoom is turned off */
 @media (prefers-reduced-motion: reduce) {
-  .skyline-track,
-  .footer-hills {
-    animation: none;
-  }
-
   .skyline-item img {
     transition: none;
   }

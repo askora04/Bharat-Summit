@@ -29,7 +29,7 @@ npm run dev       # http://localhost:5173
 | Script | What it does |
 |---|---|
 | `npm run dev` | Start the dev server with hot reload |
-| `npm run dev:iphone` | The same, reachable from a phone on the same Wi-Fi (open the printed Network URL on the iPhone); iPhone frames at `/src/mobile/preview.html` |
+| `npm run dev:iphone` | The same, reachable from a phone on the same Wi-Fi (open the printed Network URL on the iPhone); iPhone frames at `/src/iphone/preview.html` |
 | `npm run build` | Production build into `dist/` |
 | `npm run preview` | Serve the production build locally |
 | `npm run lint` | Run ESLint (clean with 0 errors/warnings) |
@@ -81,9 +81,11 @@ bharat-summit/
 │   ├── gallery-captions.json # one-line captions for single photos
 │   └── build-videos.mjs      # event videos -> public/videos/
 ├── src/
-│   ├── main.jsx              # Entry: loads the desktop or the mobile layout (<= 700px)
+│   ├── main.jsx              # Entry: loads the desktop layout, or the mobile one on phones (<= 700px) other than iPhones
 │   ├── desktop/              # Desktop layout: App (header, routes), pages, sections, stylesheets
 │   ├── mobile/               # Phone layout, a tuned copy of desktop/ (preview.html: dev-only phone frame)
+│   ├── iphone/               # iPhone view: the desktop layout scaled to the screen (1200px viewport, index.html);
+│   │                         #   iphone.css: Safari fixes; preview.html: iPhone SE, 12/13/14, 15/16, 16 Pro Max
 │   ├── data/                 # Content: speakers, schedule, organisers, media coverage, footer hills
 │   └── lib/                  # Shared logic: router, motion, gallery/videos loaders, asset URL helper
 ├── .env.example              # Optional VITE_GALLERY_URL / VITE_VIDEOS_URL (S3 or CDN)

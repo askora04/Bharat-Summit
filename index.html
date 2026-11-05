@@ -4,6 +4,24 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/assets/logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- iPhones show the desktop layout scaled to the screen: a 1200px-wide page, the width with only the full
+         desktop rules (src/iphone/iphone.css). Set here, before the page is laid out, so it never shows narrow.
+         The scale is fixed to exactly fit the width and is also the smallest allowed, so the page can't be zoomed
+         out past its edges (no blank space beside or below the footer); pinching in still works. -->
+    <script>
+      if (/iPhone|iPod/.test(navigator.userAgent)) {
+        const viewport = document.querySelector('meta[name=viewport]')
+        const fit = () => {
+          const type = (screen.orientation && screen.orientation.type) || ''
+          const landscape = type ? type.startsWith('landscape') : Math.abs(window.orientation || 0) === 90
+          const width = landscape ? Math.max(screen.width, screen.height) : Math.min(screen.width, screen.height)
+          const scale = (width / 1200).toFixed(4)
+          viewport.content = `width=1200, initial-scale=${scale}, minimum-scale=${scale}`
+        }
+        fit()
+        addEventListener('orientationchange', fit)
+      }
+    </script>
     <!-- body font (Jost), fetched first so text doesn't re-flow when it arrives -->
     <link rel="preload" href="/assets/fonts/Jost.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />

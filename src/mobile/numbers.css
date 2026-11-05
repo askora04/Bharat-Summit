@@ -89,11 +89,4 @@
   100% { opacity: 0; transform: translate(-50%, -50%) rotate(var(--a)) translateX(var(--d)) scale(.3); }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .sin-rise, .sin-fly, .sin-num, .sin-lbl, .sin-grow { opacity: 1 !important; transform: none !important; transition: none !important; }
-  .sin-halo { opacity: 1 !important; transform: translate(-50%, -50%) scale(1) !important; transition: none !important; }
-  .sin-core { transform: translate(-50%, -50%) scale(1) !important; animation: none !important; }
-  .sin-line { stroke-dashoffset: 0 !important; animation: none !important; }
-  .sin-wave, .sin-p { display: none; }
-  .sin-spin, .sin-spin-r, .is-in .sin-bob, .is-in .sin-seed { animation: none !important; }
-}
+/* plays in full even when the visitor asks for reduced motion, like the auto-scrolling rows (index.css) */

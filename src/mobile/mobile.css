@@ -7,8 +7,10 @@
 
 :root { --mobile-w: 385px; --mobile-h: 890px; }
 
-/* iOS: keep text at its set size when a phone is turned to landscape */
-html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+/* Text at its set size, never enlarged by the browser. iOS Safari enlarges text in blocks wider than the screen,
+   which the zoomed-out sections (.dz, laid out 1100px wide) are: it scaled their text up ~2.8× and undid the zoom.
+   Only `none` stops it there (100% doesn't) */
+html { -webkit-text-size-adjust: none; text-size-adjust: none; }
 
 /* Header: phone-sized bar, 48px instead of the desktop 61px, with a smaller logo, name and menu button;
    the links are behind the menu button */

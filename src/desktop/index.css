@@ -449,7 +449,10 @@ html { scroll-behavior: smooth; }
 @keyframes fade { from { opacity: 0; } }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; }
+  /* except the Summit in Numbers graphic (.sin, numbers.css) and the footer skyline (.footer-scene, footer.css),
+     which always play */
+  *:not(.sin, .sin *, .footer-scene, .footer-scene *),
+  *:not(.sin *, .footer-scene *)::before, *:not(.sin *, .footer-scene *)::after { animation: none !important; transition: none !important; }
   .reveal > * { opacity: 1; transform: none; filter: none; }
   /* the auto-scrolling rows keep moving, at half speed */
   .marquee-track { animation: marquee calc(var(--dur, 40s) * 2) linear infinite !important; }
@@ -515,8 +518,10 @@ html { scroll-behavior: smooth; }
    the card never changes size. On hover a floating copy of its details (.sp-float, placed by startSpeakerFloat
    in shared.jsx) sits over the card from the name down and opens downward over what's below, showing the
    designation, session, time and "Click to view more" in the card's own layout. The photo never changes size,
-   and the other cards in the row don't move or gain space. --plain-h is the closed height (just the name). */
-@media (hover: hover) {
+   and the other cards in the row don't move or gain space. --plain-h is the closed height (just the name).
+   Touch screens (iPhones, which show this layout, and tablets) get the same card, with a tap standing in for
+   the hover (startSpeakerTaps in shared.jsx), as in the mobile layout; so this applies everywhere. */
+@media all {
   /* cards in a row share one height: where a card has less text (a one-line name, no Moderator badge), its
      photo grows to fill the room, so every card's foot lines up and the gap between rows stays even */
   .sp-card-photo { flex: 1 0 auto; }

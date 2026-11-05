@@ -1,6 +1,6 @@
 <!doctype html>
-<!-- Dev only: the phone layout in a phone-sized frame. Open /src/mobile/preview.html on the dev server.
-     The iPhone frames load the site with ?iphone, so it shows the iPhone fixes (iphone.css) as on a real iPhone.
+<!-- Dev only: the phone layout (src/mobile/, phones other than iPhones) in a phone-sized frame. Open
+     /src/mobile/preview.html on the dev server; the iPhone layout has its own, /src/iphone/preview.html.
      Not part of the build (vite only builds the root index.html). -->
 <html lang="en">
 <head>
@@ -15,12 +15,10 @@
       background: #e8eff7; font: 500 14px system-ui, sans-serif; color: #082852;
     }
     .phone {
-      position: relative; box-sizing: content-box;
-      width: 385px; height: 890px; max-width: 100%;
+      box-sizing: content-box; width: 385px; height: 890px; max-width: 100%;
       border: 10px solid #111; border-radius: 36px; overflow: hidden;
       background: #fff; box-shadow: 0 20px 48px rgba(8, 40, 82, .25);
     }
-    .phone.is-iphone { border-radius: 52px; }
     iframe { display: block; width: 100%; height: 100%; border: 0; }
     nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
     nav :is(a, button) {
@@ -33,9 +31,8 @@
 <body>
   <nav id="devices">
     <button type="button" data-w="385" data-h="890" aria-pressed="true">Reference 385 × 890</button>
-    <button type="button" data-w="375" data-h="667" data-iphone>iPhone SE</button>
-    <button type="button" data-w="393" data-h="852" data-iphone>iPhone 16</button>
-    <button type="button" data-w="440" data-h="956" data-iphone>iPhone 16 Pro Max</button>
+    <button type="button" data-w="360" data-h="800">Small Android 360 × 800</button>
+    <button type="button" data-w="412" data-h="915">Large Android 412 × 915</button>
   </nav>
   <nav id="pages">
     <a href="/">Home</a>
@@ -46,22 +43,18 @@
   </nav>
   <!-- the border sits outside the screen -->
   <div class="phone" id="phone"><iframe id="screen" src="/" title="Site in a phone-sized frame"></iframe></div>
-  <span id="size">385 × 890px</span>
+  <span id="size">Reference 385 × 890px</span>
 
   <script>
     const phone = document.getElementById('phone')
     const screen = document.getElementById('screen')
     let page = '/'
-    const show = () => {
-      // ?iphone turns on the iPhone fixes; a reload either way, as the site picks its layout when it loads
-      screen.src = page + (phone.classList.contains('is-iphone') ? '?iphone' : '')
-    }
+    const show = () => { screen.src = page }
     document.querySelectorAll('#devices button').forEach((b) => b.addEventListener('click', () => {
       document.querySelectorAll('#devices button').forEach((o) => o.setAttribute('aria-pressed', o === b))
       phone.style.width = b.dataset.w + 'px'
       phone.style.height = b.dataset.h + 'px'
-      phone.classList.toggle('is-iphone', 'iphone' in b.dataset)
-      document.getElementById('size').textContent = `${b.textContent} · ${b.dataset.w} × ${b.dataset.h}px`
+      document.getElementById('size').textContent = b.textContent
       show()
     }))
     document.querySelectorAll('#pages a').forEach((a) => a.addEventListener('click', (e) => {

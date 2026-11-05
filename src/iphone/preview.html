@@ -1,0 +1,81 @@
+<!doctype html>
+<!-- Dev only: the iPhone view in the four supported iPhone sizes. Open /src/iphone/preview.html on the dev server.
+     An iPhone lays the site out 1200px wide (index.html) and scales it to its screen; each frame here does the
+     same: a 1200px-wide page, scaled down to the phone's width. Not part of the build. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iPhone Preview</title>
+  <style>
+    body {
+      margin: 0; min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+      padding: 24px 16px; box-sizing: border-box;
+      background: #e8eff7; font: 500 14px system-ui, sans-serif; color: #082852;
+    }
+    .phone {
+      box-sizing: content-box; width: 393px; height: 852px;
+      border: 10px solid #111; border-radius: 52px; overflow: hidden;
+      background: #fff; box-shadow: 0 20px 48px rgba(8, 40, 82, .25);
+    }
+    .phone.is-se { border-radius: 36px; }
+    /* the page at 1200px, scaled to the phone's width (script below) */
+    iframe { display: block; width: 1200px; border: 0; transform-origin: 0 0; }
+    nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+    nav :is(a, button) {
+      padding: 4px 10px; border: 0; border-radius: 999px;
+      background: #fff; color: inherit; font: inherit; text-decoration: none; cursor: pointer;
+    }
+    nav button[aria-pressed='true'] { background: #082852; color: #fff; }
+  </style>
+</head>
+<body>
+  <!-- screen sizes in points, as Safari sees them (src/iphone/iphone.css lists the models) -->
+  <nav id="devices">
+    <button type="button" data-w="375" data-h="667" data-se>iPhone SE</button>
+    <button type="button" data-w="390" data-h="844">iPhone 12 / 13 / 14</button>
+    <button type="button" data-w="393" data-h="852" aria-pressed="true">iPhone 15 / 16</button>
+    <button type="button" data-w="440" data-h="956">iPhone 16 Pro Max</button>
+  </nav>
+  <nav id="pages">
+    <a href="/">Home</a>
+    <a href="/about-us">About</a>
+    <a href="/schedule">Schedule</a>
+    <a href="/speakers">Speakers</a>
+    <a href="/events">Archives</a>
+  </nav>
+  <!-- the border sits outside the screen -->
+  <div class="phone" id="phone"><iframe id="screen" src="/?iphone=393" title="Site as an iPhone shows it"></iframe></div>
+  <span id="size"></span>
+
+  <script>
+    const PAGE_W = 1200 // the iPhone viewport width set in index.html
+    const phone = document.getElementById('phone')
+    const screen = document.getElementById('screen')
+    let page = '/'
+    let current = 393 // the model's width, passed as ?iphone=<width> so popups are sized for it (main.jsx)
+    const fit = (w, h, label) => {
+      const scale = w / PAGE_W
+      phone.style.width = w + 'px'
+      phone.style.height = h + 'px'
+      screen.style.height = h / scale + 'px'
+      screen.style.transform = `scale(${scale})`
+      document.getElementById('size').textContent = `${label} · ${w} × ${h}pt · scale ${scale.toFixed(3)}`
+    }
+    document.querySelectorAll('#devices button').forEach((b) => b.addEventListener('click', () => {
+      document.querySelectorAll('#devices button').forEach((o) => o.setAttribute('aria-pressed', o === b))
+      phone.classList.toggle('is-se', 'se' in b.dataset)
+      fit(+b.dataset.w, +b.dataset.h, b.textContent)
+      current = +b.dataset.w
+      screen.src = page + '?iphone=' + current
+    }))
+    document.querySelectorAll('#pages a').forEach((a) => a.addEventListener('click', (e) => {
+      e.preventDefault()
+      page = a.getAttribute('href')
+      screen.src = page + '?iphone=' + current
+    }))
+    fit(393, 852, 'iPhone 15 / 16')
+  </script>
+</body>
+</html>

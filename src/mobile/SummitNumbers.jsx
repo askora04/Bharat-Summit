@@ -39,7 +39,6 @@ const NODES = [
   },
 ]
 
-const reducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
 
 // Odometer: one reel per digit. The ones reel spins continuously; a higher reel only
 // rolls forward during the last unit before the place below it wraps, like a real counter.
@@ -103,7 +102,6 @@ export default function SummitNumbers() {
   const [t, setT] = useState(0)
 
   const start = useCallback(() => {
-    if (reducedMotion()) return setStarted(true), setT(1e9)
     setStarted(true)
     setT(0)
     const t0 = performance.now()
@@ -117,7 +115,8 @@ export default function SummitNumbers() {
   }, [])
 
   useEffect(() => {
-    if (reducedMotion() || typeof IntersectionObserver === 'undefined') return start()
+    // always animates, even with reduced motion asked for (numbers.css)
+    if (typeof IntersectionObserver === 'undefined') return start()
     const io = new IntersectionObserver((entries) => {
       if (entries.some((e) => e.isIntersecting)) { io.disconnect(); start() }
     }, { threshold: 0.25 })

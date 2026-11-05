@@ -431,7 +431,10 @@ html { scroll-behavior: smooth; }
 @keyframes fade { from { opacity: 0; } }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; }
+  /* except the Summit in Numbers graphic (.sin, numbers.css) and the footer skyline (.footer-scene, footer.css),
+     which always play */
+  *:not(.sin, .sin *, .footer-scene, .footer-scene *),
+  *:not(.sin *, .footer-scene *)::before, *:not(.sin *, .footer-scene *)::after { animation: none !important; transition: none !important; }
   .reveal > * { opacity: 1; transform: none; filter: none; }
   /* the auto-scrolling rows keep moving, at half speed */
   .marquee-track { animation: marquee calc(var(--dur, 40s) * 2) linear infinite !important; }
