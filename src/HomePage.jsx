@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
-import { a, Title, Portrait, TriBar, dragMarquee, measureCover } from './shared.jsx'
+import { a, Title, Portrait, TriBar, dragMarquee } from './shared.jsx'
 import { Link } from './router.jsx'
 import './home.css'
 import SummitNumbers from './SummitNumbers.jsx'
 import { SPEAKERS } from './speakersData.js'
+import { SpeakerCard } from './SpeakersPage.jsx'
 import OrganizedBy from './OrganizedBy.jsx'
 import { useGallery, photoUrl } from './gallery.js'
 
@@ -65,27 +66,6 @@ function HomeHero() {
   )
 }
 
-function SpeakerCard({ speaker, copy }) {
-  return (
-    <Link className="h-speaker" to={`/speakers/${speaker.id}`} aria-hidden={copy || undefined} tabIndex={copy ? -1 : undefined}
-      aria-label={copy ? undefined : `${speaker.name}, ${speaker.role}. View profile`}
-      onPointerEnter={measureCover} onFocus={measureCover}>
-      <Portrait bg={speaker.bg} src={speaker.img} className="h-portrait">{!speaker.img && <span className="sp-initials">{speaker.initials}</span>}</Portrait>
-      <span className="h-speaker-body">
-        <span className="h-speaker-name">{speaker.name}</span>
-        <span className="h-card-arrow" aria-hidden><Icon name="arrowRight" size={16} strokeWidth={1.75} /></span>
-      </span>
-      {/* on hover: the name with the designation, session and time from the profile, over the card's lower part */}
-      <span className="h-speaker-body sp-hover" aria-hidden>
-        <span className="h-speaker-name">{speaker.name}</span>
-        <span className="h-role">{speaker.role}</span>
-        <span className="h-note">{speaker.session}</span>
-        {speaker.when && <span className="sp-card-when">{speaker.when}</span>}
-        <span className="sp-more">Click to view more →</span>
-      </span>
-    </Link>
-  )
-}
 
 function Speakers() {
   return (
@@ -105,7 +85,7 @@ function Speakers() {
             <div className="h-marquee-track" onPointerDown={dragMarquee}>
               {[0, 1].map((copy) =>
                 row.map((sp, i) => (
-                  <SpeakerCard key={`${copy}-${i}`} speaker={sp} copy={copy === 1} />
+                  <SpeakerCard key={`${copy}-${i}`} speaker={sp} index={i} copy={copy === 1} className="sp-card-row" />
                 )),
               )}
             </div>

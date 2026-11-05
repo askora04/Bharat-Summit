@@ -294,7 +294,7 @@ section[id] { scroll-margin-top: 61px; }
 .leaders { padding: 54px 0 19px; display: flex; flex-direction: column; align-items: center; }
 /* auto-scrolling row (Marquee); five cards fill the container */
 .speakers { --gap: 10px; margin-top: 23px; }
-.speakers .marquee-item { width: 242px; }
+.speakers .marquee-item { width: 300px; } /* the Speakers page card (SpeakerCard), at a row's width */
 .speaker {
   display: flex; flex-direction: column; justify-content: flex-start;
   min-height: 310px; padding: 0 10px 14px;
@@ -475,7 +475,7 @@ html { scroll-behavior: smooth; }
   .stat { width: min(100%, 420px); justify-content: flex-start; }
   .about-lede { padding-inline: 20px; }
   .org-marquee .marquee-item { width: 260px; }
-  .speakers .marquee-item { width: 220px; }
+  .speakers .marquee-item { width: 280px; }
   .venue-grid { flex-direction: column; }
   .venue-media, .venue-panel { flex: none; }
   .venue-panel { min-height: 0; }
@@ -498,6 +498,13 @@ html { scroll-behavior: smooth; }
 }
 :is(.sp-card, .speaker) .sp-hover > * { text-align-last: center; }
 .h-speaker .sp-hover > * { text-align-last: left; }
+/* The Speakers page card in the homepage carousel and the About page row: a fixed width in the moving row,
+   the same card otherwise (SpeakerCard in SpeakersPage.jsx) */
+.h-marquee-track > .sp-card-row { flex: none; width: 300px; }
+.h-marquee .h-marquee-row { padding-block: 12px 18px; } /* room for the card's lift and shadow when its details open */
+.sp-card-country {
+  display: block; min-height: 1.4em; margin-top: 4px; font-size: 12px; font-weight: 600; line-height: 1.4; letter-spacing: .06em; text-transform: uppercase; color: var(--navy);
+}
 .sp-more { display: block; margin-top: 8px; font: 700 13px/1.3 var(--font-body); color: var(--navy); }
 /* Only the details panel (.sp-hover) is shown: the plain copy (name only) is hidden */
 :is(.sp-card, .speaker, .h-speaker) > :is(.sp-card-body, .speaker-body, .h-speaker-body):not(.sp-hover) { display: none; }
@@ -517,6 +524,25 @@ html { scroll-behavior: smooth; }
   /* closed, only the name (and badge) shows: nothing of the next line peeks in */
   :is(.sp-card, .speaker, .h-speaker):not(.sp-float) .sp-hover > :not(:first-child, .sp-mod) { visibility: hidden; }
   /* the card stays lifted while the pointer is on its open details */
+  /* Speakers page: a closed card shows the name, designation and country (its own details, not the panel);
+     the panel with the session, time and "Click to view more" opens over them on hover (shared.jsx) */
+  .sp-card[class] > .sp-card-body:not(.sp-hover) { display: flex; flex: 1 0 auto; justify-content: flex-start; }
+  .sp-card[class]:not(.sp-float) > .sp-hover { display: none; }
+  /* Every Speakers page card is the same size: the photo panel keeps its 3:2 frame (it doesn't grow to fill
+     the card), and the details below take the same room on every card. The name is one line, the designation
+     always has room for two lines (one-line designations leave the second empty), the country sits on the
+     line after, and the Moderator badge sits on the photo's corner instead of adding a line. */
+  .sp-card[class]:not(.sp-float) > .sp-card-photo { flex: none; }
+  .sp-card > .sp-card-body:not(.sp-hover) .sp-card-name {
+    max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+  }
+  .sp-card > .sp-card-body:not(.sp-hover) .sp-card-role {
+    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden;
+    min-height: 2.8em; /* two lines at its 1.4 line height */
+  }
+  .sp-card > .sp-card-body:not(.sp-hover) .sp-mod { position: absolute; top: 12px; left: 12px; z-index: 2; }
+  /* the designation is already showing, so only what's new fades in as the panel opens */
+  .sp-card.sp-float .sp-hover > .sp-card-role { opacity: 1; }
   /* A card lifts only while its details are open (.is-open, from shared.jsx), never from plain :hover: a
      hover lift would make cards rise and drop as the page scrolls past a still pointer. [class] and the
      :not() outweigh the hover rules in motion.css, speakers.css and home.css. */

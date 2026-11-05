@@ -59,15 +59,21 @@ function Initials({ speaker, className }) {
   )
 }
 
-function SpeakerCard({ speaker, index }) {
+// The speaker card, shared by the Speakers page, the homepage carousel and the About page row.
+// `copy` marks the second set in a looping row: hidden from screen readers and the keyboard.
+export function SpeakerCard({ speaker, index = 0, copy = false, className = '' }) {
   return (
-    <Link className="sp-card" style={{ '--i': index % 10 }} to={`/speakers/${speaker.id}`}
+    <Link className={`sp-card${className ? ` ${className}` : ''}`} style={{ '--i': index % 10 }} to={`/speakers/${speaker.id}`}
+      aria-hidden={copy || undefined} tabIndex={copy ? -1 : undefined}
       onPointerEnter={measureCover} onFocus={measureCover}
       aria-label={`${speaker.name}${speaker.moderator ? ' (Moderator)' : ''}${speaker.role ? `, ${speaker.role}` : ''}. View profile`}>
       <Initials speaker={speaker} className="sp-card-photo" />
+      {/* shown by default: the name, designation and country */}
       <span className="sp-card-body">
         <span className="sp-card-name">{speaker.name}</span>
         {speaker.moderator && <span className="sp-mod">Moderator</span>}
+        {speaker.role && <span className="sp-card-role">{speaker.role}</span>}
+        <span className="sp-card-country">{speaker.country}</span>{/* kept when empty: every card the same height */}
       </span>
       {/* on hover: the name with the designation, session and time from the profile, over the card's lower part */}
       <span className="sp-card-body sp-hover" aria-hidden>

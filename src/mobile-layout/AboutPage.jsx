@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
-import { a, Title, Lines, Portrait, Marquee, measureCover } from './shared.jsx'
+import { a, Title, Lines, Portrait, Marquee } from './shared.jsx'
 import { Link } from '../router.jsx'
 import { SPEAKERS } from '../speakersData.js'
+import { SpeakerCard } from './SpeakersPage.jsx'
 import MediaCoverage from './MediaCoverage.jsx'
 
 const TOPICS = [
@@ -166,23 +167,7 @@ export default function AboutPage() {
           <Title light="WORLD" bold="LEADERS, VISIONARIES, CHANGEMAKERS" />
           <p className="lede">Global leaders, renowned scholars, and change makers from across the world.</p>
           <div className="container">
-            <Marquee className="speakers" drag clickableCopy items={SPEAKERS.slice(0, 10)} render={(s, copy) => (
-              <Link className="speaker" to={`/speakers/${s.id}`} tabIndex={copy ? -1 : undefined}
-                aria-label={`${s.name}, ${s.role}. View profile`} onPointerEnter={measureCover} onFocus={measureCover}>
-                <Portrait bg={s.bg} src={s.img} className="speaker-portrait">{!s.img && <span className="sp-initials">{s.initials}</span>}</Portrait>
-                <span className="speaker-body">
-                  <span className="speaker-name">{s.name}</span>
-                </span>
-                {/* on hover: the name with the designation, session and time from the profile, over the card's lower part */}
-                <span className="speaker-body sp-hover" aria-hidden>
-                  <span className="speaker-name">{s.name}</span>
-                  <span className="speaker-role">{s.role}</span>
-                  <span className="speaker-country">{s.session}</span>
-                  {s.when && <span className="sp-card-when">{s.when}</span>}
-                  <span className="sp-more">Click to view more →</span>
-                </span>
-              </Link>
-            )} />
+            <Marquee className="speakers" drag clickableCopy items={SPEAKERS.slice(0, 10)} render={(s, copy, i) => <SpeakerCard speaker={s} index={i} copy={copy === 1} className="sp-card-row" />} />
           </div>
           <Link className="btn btn-primary leaders-btn" to="/speakers">Click to Know More&nbsp;&nbsp;→</Link>
         </section>

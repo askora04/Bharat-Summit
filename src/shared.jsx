@@ -64,12 +64,18 @@ export function startSpeakerFloat() {
   let settle = 0
 
   const inside = (r) => pointer.x >= r.left && pointer.x <= r.right && pointer.y >= r.top && pointer.y <= r.bottom
+  // what the card shows under its photo when closed: on the Speakers page its own details (name, designation,
+  // country), elsewhere the panel itself cut down to the name; the open panel starts exactly over it
+  const base = (c) => {
+    const plain = c.querySelector(':scope > :is(.sp-card-body, .speaker-body, .h-speaker-body):not(.sp-hover)')
+    return plain && plain.getClientRects().length ? plain : c.querySelector('.sp-hover')
+  }
   // follows the card while it moves on the page (its lift, the homepage carousel's drift)
   const place = () => {
     if (!card) return
     if (!card.isConnected) return close(true)
     const box = card.getBoundingClientRect()
-    const panel = card.querySelector('.sp-hover').getBoundingClientRect()
+    const panel = base(card).getBoundingClientRect()
     float.style.left = `${box.left + window.scrollX}px`
     float.style.top = `${panel.top + window.scrollY}px`
     float.style.width = `${box.width}px`
@@ -87,7 +93,9 @@ export function startSpeakerFloat() {
     card.classList.add('is-open')
     // the card's own classes give the copy the card's type, text styles and border
     float.className = `${[...card.classList].filter((c) => c !== 'is-open').join(' ')} sp-float is-shown`
-    float.style.setProperty('--plain-h', card.style.getPropertyValue('--plain-h'))
+    const shown = base(card)
+    float.style.setProperty('--plain-h', shown.classList.contains('sp-hover')
+      ? card.style.getPropertyValue('--plain-h') : `${shown.getBoundingClientRect().height}px`)
     float.replaceChildren(card.querySelector('.sp-hover').cloneNode(true))
     place()
     float.getBoundingClientRect() // start closed, then open
@@ -214,7 +222,7 @@ export function Marquee({ items, render, className = '', secs = 6, clickableCopy
         {[0, 1].map((copy) => items.map((item, i) => (
           <div className="marquee-item" key={`${copy}-${i}`} aria-hidden={copy === 1 || undefined}
             inert={(copy === 1 && !clickableCopy) || undefined}>
-            {render(item, copy)}
+            {render(item, copy, i)}
           </div>
         )))}
       </div>

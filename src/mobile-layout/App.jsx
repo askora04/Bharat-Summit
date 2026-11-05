@@ -1,6 +1,6 @@
 import './index.css'
 import { useEffect, useState } from 'react'
-import { a, TriBar } from './shared.jsx'
+import { a, TriBar, startSpeakerTaps } from './shared.jsx'
 import { Link, usePath, returnScroll } from '../router.jsx'
 import HomePage from './HomePage.jsx'
 import AboutPage from './AboutPage.jsx'
@@ -163,6 +163,7 @@ export default function App() {
   }, [page, route])
 
   useEffect(() => startMotion(), [])
+  useEffect(startSpeakerTaps, []) // speaker cards open their details on a tap (shared.jsx)
 
   // zoom for the sections shown in their desktop layout (.dz, mobile.css): the 1100px layout fits the screen
   useEffect(() => {

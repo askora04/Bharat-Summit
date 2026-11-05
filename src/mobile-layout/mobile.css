@@ -159,58 +159,6 @@ section[id] { scroll-margin-top: 48px; }
   .sin-title { font-size: 18px; }
 }
 
-/* Speakers page cards: the details are short lines in a narrow card, so justifying them stretched the gaps between
-   words (worst in the letter-spaced uppercase panel name). Here they're centred with balanced line lengths, and
-   spaced evenly: name, title, then the session block with a little more air, then the link. */
-
-.sp-card .sp-hover :is(.sp-card-name, .sp-card-role, .sp-card-session, .sp-card-when) {
-  text-align: center; text-align-last: center; hyphens: manual; text-wrap: balance;
-}
-.sp-card .sp-hover .sp-mod { margin-top: 6px; }
-.sp-card .sp-hover .sp-card-role { margin-top: 6px; line-height: 1.45; }
-.sp-card .sp-hover .sp-card-session { line-height: 1.45; letter-spacing: .04em; }
-.sp-card .sp-hover .sp-card-when { margin-top: 4px; }
-.sp-card .sp-hover .sp-more { margin-top: 14px; }
-
-/* Homepage speaker carousel: the cards match the Speakers page cards (above): the same light card, the details
-   centred with balanced lines, the same type sizes and the same spacing. On phones only the details copy (.sp-hover)
-   shows, which has no arrow, so its padding is even on both sides. */
-.h-speaker { border-color: #e6ebf1; background: #f5f7fa; }
-.h-speaker .sp-hover { display: flex; flex-direction: column; align-items: center; padding: 14px 16px 18px; }
-.h-speaker .sp-hover :is(.h-speaker-name, .h-role, .h-note, .sp-card-when) {
-  text-align: center; text-align-last: center; hyphens: manual; text-wrap: balance;
-}
-.h-speaker .sp-hover .h-speaker-name { font: 700 17px/1.3 var(--font-display); color: var(--navy); }
-.h-speaker .sp-hover .h-role { margin-top: 6px; font-size: 14px; line-height: 1.45; }
-.h-speaker .sp-hover .h-note { font-size: 12px; line-height: 1.45; letter-spacing: .04em; }
-.h-speaker .sp-hover .sp-card-when { margin-top: 4px; }
-.h-speaker .sp-hover .sp-more { margin-top: 14px; }
-
-/* Speaker cards, everywhere on phones (Speakers page, homepage carousel, About page leaders): every card is the same
-   height whatever the length of the speaker's title or panel. The photo keeps a fixed height; the details below it
-   always take the same room: the title up to 3 lines and the panel name up to 2 (the full text is on the profile),
-   with the panel, time and "Click to view more" held at the foot, so they line up across a row. */
-:is(.sp-card, .h-speaker, .speaker) .sp-hover {
-  display: flex; flex-direction: column; align-items: center; gap: 0;
-  flex: 1 0 auto; min-height: 228px; box-sizing: border-box;
-}
-.h-portrait { flex: 0 0 215px; }
-.speaker-portrait { flex: 0 0 226px; }
-:is(.sp-card, .h-speaker, .speaker) .sp-hover :is(.sp-card-role, .h-role, .speaker-role) {
-  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden;
-}
-:is(.sp-card, .h-speaker, .speaker) .sp-hover :is(.sp-card-session, .h-note, .speaker-country) {
-  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden;
-  margin-top: auto; padding-top: 12px; /* pushed to the foot; never closer than 12px to the title */
-}
-:is(.sp-card, .h-speaker, .speaker) .sp-hover .sp-card-when { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
-/* About page leaders: the same centred, balanced text and spacing as the other speaker cards */
-.speaker .sp-hover { padding: 14px 6px 4px; }
-.speaker .sp-hover :is(.speaker-name, .speaker-role, .speaker-country, .sp-card-when) {
-  text-align: center; text-align-last: center; hyphens: manual; text-wrap: balance;
-}
-.speaker .sp-hover .speaker-name { margin-top: 0; }
-.speaker .sp-hover .speaker-role { margin-top: 6px; font-size: 14px; line-height: 1.45; }
-.speaker .sp-hover .speaker-country { line-height: 1.45; letter-spacing: .04em; }
-.speaker .sp-hover .sp-card-when { margin-top: 4px; }
-.speaker .sp-hover .sp-more { margin-top: 14px; }
+/* Speaker cards open their details on a tap (shared.jsx); inside the zoomed desktop layout the panel is
+   placed in the .dz box, so it is zoomed with the card it belongs to */
+.dz { position: relative; }
