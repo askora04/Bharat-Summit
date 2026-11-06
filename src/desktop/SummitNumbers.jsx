@@ -24,7 +24,7 @@ const NODES = [
     numSize: 'clamp(30px, 9.2cqw, 64px)', lbl: { fontSize: 'clamp(10px, 1.8cqw, 13px)', letterSpacing: '0.22em', color: '#8CC8E4' },
   },
   {
-    key: 'spk', target: 100, suffix: '+', label: ['COUNTRIES'],
+    key: 'spk', target: 70, suffix: '+', label: ['COUNTRIES'],
     pos: { left: '73%', top: '26%', width: '31.9%' }, fly: { '--fx': '-72%', '--fy': '75%', '--dl': '.8s' }, bob: '5.4s',
     tint: '#2A9DAA', dots: '#7CCBC1', dotsW: 0.8, spin: 'sin-spin-r', track: '#2A9DAA', arc: '#2A9DAA', r: 40.5, sw: 3.8, core: 35, seed: 5.5,
     numSize: 'clamp(26px, 7.4cqw, 52px)', lbl: { fontSize: 'clamp(10px, 1.7cqw, 13px)', letterSpacing: '0.22em', color: '#8ED8DE' },
@@ -141,7 +141,7 @@ export default function SummitNumbers() {
         <div className="sin-right">
           <ul className="sr-only">
             <li>500+ delegates.</li>
-            <li>100+ countries.</li>
+            <li>70+ countries.</li>
             <li>2nd annual conference.</li>
           </ul>
           <div className="sin-stage" aria-hidden="true">
