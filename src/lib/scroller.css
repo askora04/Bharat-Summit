@@ -1,0 +1,26 @@
+/* Sideways-scrolling row (Scroller.jsx): native scrolling with snap, arrow buttons at either end */
+.hs { position: relative; }
+.hs-row {
+  display: flex; overflow-x: auto; overflow-y: hidden;
+  scroll-snap-type: x mandatory; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; cursor: grab;
+}
+.hs-row::-webkit-scrollbar { display: none; }
+.hs-row > * { flex: none; scroll-snap-align: start; }
+.hs-row.is-dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+.hs-row.is-dragging > * { pointer-events: none; }
+.hs-row.is-settling { scroll-snap-type: none; } /* while gliding to an item after a drag (Scroller.jsx) */
+.hs-row:focus-visible { outline: 2px solid #13345f; outline-offset: 4px; }
+
+.hs-arrow {
+  position: absolute; top: 50%; z-index: 4; translate: 0 -50%;
+  display: grid; place-items: center; width: 44px; height: 44px; padding: 0;
+  border: 1px solid #dce5ee; border-radius: 999px;
+  background: #fff; color: #13345f; cursor: pointer;
+  box-shadow: 0 6px 18px rgba(8, 40, 82, .18);
+  transition: opacity .2s, background .2s, color .2s;
+}
+.hs-arrow:hover { background: #13345f; color: #fff; }
+.hs-arrow:disabled { opacity: 0; pointer-events: none; }
+.hs-prev { left: 8px; }
+.hs-next { right: 8px; }

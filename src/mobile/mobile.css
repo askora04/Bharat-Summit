@@ -191,3 +191,10 @@ section[id] { scroll-margin-top: 48px; }
 /* Speaker cards open their details on a tap (shared.jsx); inside the zoomed desktop layout the panel is
    placed in the .dz box, so it is zoomed with the card it belongs to */
 .dz { position: relative; }
+
+/* Summit Archives clips, a row scrolled by hand (Scroller): in the zoomed-out page each card is enlarged ~2.4×, to
+   about 200px on the phone with readable titles, and the arrows to a thumb-sized ~44px */
+.dz .vd-clips-row > .vd-clip { zoom: 2.4; }
+.dz .vd-clips-row { gap: 36px; }
+.dz .vd-clips .hs-arrow { width: 124px; height: 124px; border-width: 3px; }
+.dz .vd-clips .hs-arrow svg { width: 56px; height: 56px; }

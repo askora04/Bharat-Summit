@@ -95,7 +95,8 @@ bharat-summit/
 │   ├── iphone/               # iPhone view: the desktop layout scaled to the screen (1200px viewport, index.html);
 │   │                         #   iphone.css: Safari fixes; preview.html: iPhone SE, 12/13/14, 15/16, 16 Pro Max
 │   ├── data/                 # Content: speakers, schedule, organisers, media coverage, footer hills
-│   └── lib/                  # Shared logic: router, motion, gallery/videos loaders, asset URL helper
+│   └── lib/                  # Shared logic: router, motion, gallery/videos loaders, asset URL helper, and
+│                             #   Scroller (the hand-scrolled rows: archive clips, About's social posts)
 ├── .env.example              # Optional VITE_GALLERY_URL / VITE_VIDEOS_URL (S3 or CDN)
 ├── index.html
 ├── vercel.json               # Build, SPA routing, caching and security headers

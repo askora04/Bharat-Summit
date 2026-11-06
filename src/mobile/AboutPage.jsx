@@ -4,6 +4,7 @@ import { Link } from '../lib/router.jsx'
 import { SPEAKERS } from '../data/speakersData.js'
 import { SpeakerCard } from './SpeakersPage.jsx'
 import MediaCoverage from './MediaCoverage.jsx'
+import Scroller from '../lib/Scroller.jsx'
 
 const TOPICS = [
   { label: ['Political Justice'], img: 'topic-political-justice.webp', ring: 'ring-1.svg', ink: '#e0705c' },
@@ -69,17 +70,22 @@ const loadScript = (src) => (scripts[src] ??= new Promise((resolve, reject) => {
 
 // One post in its platform's official embed. X and Instagram turn a blockquote into a self-sizing frame;
 // Facebook's post plugin is a plain frame. Until a frame loads, or if it's blocked, the link to the post shows.
-function SocialEmbed({ platform, url }) {
+// The embeds (and the platforms' scripts) load only once the section is near the screen (`load`, from Posts).
+// A clear layer over the post (.post-cover) is the page's own: the wheel, a trackpad, a drag or a swipe over a
+// post scroll the page and the row as anywhere else (the platforms' frames would keep them), and a click opens
+// the post on its platform in a new tab.
+function SocialEmbed({ platform, url, load }) {
   const box = useRef(null)
   useEffect(() => {
+    if (!load) return
     if (platform === 'X') {
       loadScript('https://platform.twitter.com/widgets.js').then(() => window.twttr?.widgets.load(box.current), () => {})
     } else if (platform === 'Instagram') {
       loadScript('https://www.instagram.com/embed.js').then(() => window.instgrm?.Embeds.process(), () => {})
     }
-  }, [platform])
+  }, [platform, load])
 
-  const fallback = <a href={url} target="_blank" rel="noopener noreferrer">View this post on {platform}</a>
+  const fallback = <a href={url} target="_blank" rel="noopener noreferrer" tabIndex={-1}>View this post on {platform}</a>
   return (
     <div className="post-embed" ref={box}>
       {platform === 'X' && <blockquote className="twitter-tweet" data-dnt="true">{fallback}</blockquote>}
@@ -88,36 +94,34 @@ function SocialEmbed({ platform, url }) {
           {fallback}
         </blockquote>
       )}
-      {platform === 'Facebook' && (
-        <iframe title="Bharat Summit on Facebook" loading="lazy" allow="encrypted-media; clipboard-write"
+      {platform === 'Facebook' && load && (
+        <iframe title="Bharat Summit on Facebook" loading="lazy" allow="encrypted-media; clipboard-write" tabIndex={-1}
           src={`https://www.facebook.com/plugins/post.php?href=${encodeURIComponent(url)}&show_text=true&width=350&height=560`} />
       )}
+      <a className="post-cover" href={url} target="_blank" rel="noopener noreferrer"
+        aria-label={`View this post on ${platform} (opens in a new tab)`} />
     </div>
   )
 }
 
-// The posts one at a time, swiped sideways (mobile.css); the dots show which one is in view and jump to a post
+// The posts in a row scrolled sideways by hand (Scroller, src/lib): a swipe, the wheel or a trackpad, a mouse drag,
+// the arrow buttons or the dots below, over the posts too (SocialEmbed's cover). The arrows and dots show while
+// the posts don't all fit (always, with the desktop's 460px cards and on phones).
 function Posts() {
-  const row = useRef(null)
-  const [current, setCurrent] = useState(0)
-  const onScroll = () => {
-    const el = row.current
-    const step = el.scrollWidth / POSTS.length
-    setCurrent(Math.min(POSTS.length - 1, Math.round(el.scrollLeft / step)))
-  }
-  const go = (i) => row.current.children[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
+  const wrap = useRef(null)
+  const [load, setLoad] = useState(false)
+  useEffect(() => {
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setLoad(true); io.disconnect() } }, { rootMargin: '800px 0px' })
+    io.observe(wrap.current)
+    return () => io.disconnect()
+  }, [])
   return (
-    <>
-      <div className="container card-row" ref={row} onScroll={onScroll}>
-        {POSTS.map((p) => <SocialEmbed key={p.platform} {...p} />)}
-      </div>
-      <div className="post-dots">
-        {POSTS.map((p, i) => (
-          <button key={p.platform} type="button" className={i === current ? 'is-on' : ''}
-            aria-label={`Show the ${p.platform} post`} aria-current={i === current} onClick={() => go(i)} />
-        ))}
-      </div>
-    </>
+    <div ref={wrap}>
+    <Scroller className="posts" rowClassName="card-row" label="Bharat Summit on social media"
+      dots={POSTS.map((p) => `Show the ${p.platform} post`)}>
+      {POSTS.map((p) => <SocialEmbed key={p.platform} {...p} load={load} />)}
+    </Scroller>
+    </div>
   )
 }
 

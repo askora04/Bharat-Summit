@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { Title, TriBar, Marquee } from './shared.jsx'
+import { Title, TriBar } from './shared.jsx'
 import { useVideos, videoUrl, posterUrl, formatDuration } from '../lib/videos.js'
+import Scroller from '../lib/Scroller.jsx'
 import './videos.css'
 
 const ICONS = {
@@ -145,7 +146,7 @@ function ClipViewer({ clips, index, onStep, onClose }) {
 }
 
 // Its own band on the Events page, above the photo gallery: the films, then the vertical
-// interviews and clips (an auto-scrolling row that pauses on hover)
+// interviews and clips (a row scrolled sideways by hand)
 export default function EventVideos() {
   const videos = useVideos()
   const [playing, setPlaying] = useState(null) // the film playing in place, by id
@@ -173,21 +174,20 @@ export default function EventVideos() {
         {clips.length > 0 && (
           <div className="vd-clips-block">
             <h3 className="vd-kicker vd-head">Interviews &amp; moments</h3>
-            {/* the looped copy must take clicks too: half the cards on screen are copies.
-                The clips are listed twice so the first always follows the last with no gap, however wide the row */}
-            <Marquee className="vd-clips" drag clickableCopy secs={3}
-              items={[...clips, ...clips].map((v, k) => ({ v, i: k % clips.length }))} render={({ v, i }, copy) => (
-              <div className="vd-clip">
-                <Player video={v} playing={false} onPlay={() => openClipAt(i)} className="vd-clip-frame"
-                  tabIndex={copy ? -1 : undefined}>
-                  <span className="vd-duration">{formatDuration(v.duration)}</span>
-                  <span className="vd-clip-title">
-                    {v.title}
-                    {v.subtitle && <span className="vd-clip-sub">{v.subtitle}</span>}
-                  </span>
-                </Player>
-              </div>
-            )} />
+            {/* a row scrolled by hand (swipe, trackpad, mouse drag or the arrows), one card at a time */}
+            <Scroller className="vd-clips" rowClassName="vd-clips-row" label="Interviews and moments">
+              {clips.map((v, i) => (
+                <div className="vd-clip" key={v.id}>
+                  <Player video={v} playing={false} onPlay={() => openClipAt(i)} className="vd-clip-frame">
+                    <span className="vd-duration">{formatDuration(v.duration)}</span>
+                    <span className="vd-clip-title">
+                      {v.title}
+                      {v.subtitle && <span className="vd-clip-sub">{v.subtitle}</span>}
+                    </span>
+                  </Player>
+                </div>
+              ))}
+            </Scroller>
           </div>
         )}
 

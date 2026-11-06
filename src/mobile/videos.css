@@ -78,9 +78,11 @@
 /* Interviews & moments: vertical cards, title over the picture */
 .vd-clips-block { margin-top: 56px; }
 .vd-head { margin-bottom: 6px; }
-/* Auto-scrolling row (Marquee in shared.jsx); this sets each card's width */
-.vd-clips { --gap: 16px; }
-.vd-clips .marquee-item { width: 200px; }
+/* A row scrolled sideways by hand (Scroller, src/lib); six cards are wider than the page, so it always scrolls.
+   The padding leaves room for a card's lift and shadow on hover. */
+.vd-clips-row { gap: 16px; padding: 8px 0 28px; scroll-padding-inline: 0; }
+.vd-clips-row > .vd-clip { width: 236px; }
+.vd-clips .hs-arrow { top: calc(50% - 10px); }
 .vd-clip { display: flex; flex-direction: column; gap: 10px; }
 .vd-clip-frame { box-shadow: 0 14px 34px -14px rgba(8, 40, 82, .45); transition: transform .45s cubic-bezier(.2, .8, .2, 1), box-shadow .45s; }
 .vd-clip-frame:hover { transform: translateY(-4px); box-shadow: 0 22px 40px -14px rgba(8, 40, 82, .5); }

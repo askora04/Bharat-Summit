@@ -351,11 +351,19 @@ section[id] { scroll-margin-top: 61px; }
 .social .card-row { align-items: flex-start; }
 .post-embed {
   flex: 1 1 0; min-width: 0; max-width: 410px;
-  /* all three the same size: a longer post scrolls inside its box */
-  height: 640px; overflow: hidden auto; overscroll-behavior: contain;
+  /* all three the same size; a longer post fades out at the foot (the full post is a click away) */
+  position: relative; height: 640px; overflow: hidden;
   border: 1px solid #dce5ee; border-radius: 16px; background: #fff;
-  scrollbar-width: thin; scrollbar-color: #c3cfdb transparent;
+  transition: box-shadow .25s, border-color .25s;
 }
+.post-embed::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; height: 64px; pointer-events: none;
+  background: linear-gradient(rgba(255, 255, 255, 0), #fff 85%);
+}
+/* the page's own layer over the post (AboutPage.jsx): scrolling works over it, a click opens the post */
+.post-cover { position: absolute; inset: 0; z-index: 2; border-radius: inherit; }
+.post-cover:focus-visible { outline: 3px solid var(--navy); outline-offset: -3px; }
+.post-embed:hover { border-color: #b9c9da; box-shadow: 0 14px 30px -16px rgba(8, 40, 82, .35); }
 .post-embed > a { display: grid; place-items: center; height: 100%; color: #00549c; font-weight: 700; }
 /* the box draws the border, so the platforms' own borders are trimmed off */
 .post-embed :is(.twitter-tweet, .instagram-media) { margin: 0 !important; }
@@ -363,14 +371,11 @@ section[id] { scroll-margin-top: 61px; }
 .post-embed .twitter-tweet iframe { width: 100% !important; max-width: none !important; }
 .post-embed .instagram-media { min-width: 0 !important; width: 100% !important; max-width: none !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; }
 .post-embed iframe[src*="facebook.com"] { display: block; width: 100%; height: 100%; border: 0; }
-/* The posts scroll sideways (Posts, AboutPage.jsx): all three in a row where they fit, otherwise swiped (or
-   scrolled with a trackpad) one card at a time, with dots below that mark the post in view */
-.social .card-row {
-  flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
-  scrollbar-width: none;
-}
-.social .card-row::-webkit-scrollbar { display: none; }
-.social .post-embed { flex: 0 0 min(410px, 85%); scroll-snap-align: start; }
+/* The posts scroll sideways by hand (Posts in AboutPage.jsx, Scroller in src/lib): 460px cards, so even on the
+   widest page the third one peeks in at the edge, with the arrows and dots to move along. Always from the left
+   edge: a centred row wider than its box would push the first post out of reach. */
+.social .card-row { flex-wrap: nowrap; justify-content: flex-start; }
+.social .post-embed { flex: 0 0 min(460px, 85%); max-width: none; }
 .post-dots { display: flex; justify-content: center; gap: 4px; margin-top: 12px; }
 .post-dots button { width: 24px; height: 24px; padding: 0; border: 0; background: none; cursor: pointer; }
 .post-dots button::before {
