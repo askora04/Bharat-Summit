@@ -2,6 +2,7 @@ import './index.css'
 import { useEffect, useState } from 'react'
 import { a, TriBar, startSpeakerTaps } from './shared.jsx'
 import { Link, usePath, returnScroll } from '../lib/router.jsx'
+import { SPEAKERS } from '../data/speakersData.js'
 import HomePage from './HomePage.jsx'
 import AboutPage from './AboutPage.jsx'
 import SchedulePage from './SchedulePage.jsx'
@@ -143,7 +144,13 @@ export default function App() {
     if (kept != null) window.scrollTo({ top: kept, behavior: 'instant' })
     else if (target) target.scrollIntoView()
     else window.scrollTo(0, 0)
-    document.title = ({
+    // An address that isn't a page shows the nearest one (an unknown path: the home page; an unknown speaker: the
+    // speakers list); the address bar is corrected to match, so it can be shared or bookmarked as is
+    const speaker = page === 'speakers' && route.split('/')[2] !== undefined
+      ? SPEAKERS.find((s) => s.id === Number(route.split('/')[2])) : null
+    const shown = page === 'home' ? '' : page === 'speakers' && !speaker ? '/speakers' : route
+    if (shown !== route) window.history.replaceState(window.history.state, '', (shown || '/') + window.location.hash)
+    document.title = (speaker ? `${speaker.name} · ` : '') + ({
       about: 'About Us · ',
       speakers: 'Speakers · ',
       schedule: 'Agenda & Schedule · ',

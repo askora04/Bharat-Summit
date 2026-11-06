@@ -90,9 +90,52 @@ function SocialEmbed({ platform, url }) {
       )}
       {platform === 'Facebook' && (
         <iframe title="Bharat Summit on Facebook" loading="lazy" allow="encrypted-media; clipboard-write"
-          src={`https://www.facebook.com/plugins/post.php?href=${encodeURIComponent(url)}&show_text=true&width=400&height=638`} />
+          src={`https://www.facebook.com/plugins/post.php?href=${encodeURIComponent(url)}&show_text=true&${FB_SIZE}`} />
       )}
     </div>
+  )
+}
+
+// Facebook draws its post at a set width: the card's, on iPhones the phone-size card (iphone.css)
+const FB_SIZE = document.documentElement.classList.contains('iphone') ? 'width=350&height=560' : 'width=400&height=638'
+
+// The posts in a row that scrolls sideways (swipe, trackpad or the dots), one card at a time. The dots show only
+// when the row is wider than the screen (always on phones); they mark the post in view and jump to a post.
+function Posts() {
+  const row = useRef(null)
+  const [current, setCurrent] = useState(0)
+  const [scrollable, setScrollable] = useState(false)
+  useEffect(() => {
+    const el = row.current
+    const check = () => setScrollable(el.scrollWidth > el.clientWidth + 1)
+    check()
+    const ro = new ResizeObserver(check)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
+  const onScroll = () => {
+    const el = row.current
+    const max = el.scrollWidth - el.clientWidth
+    setCurrent(max > 0 ? Math.round((el.scrollLeft / max) * (POSTS.length - 1)) : 0)
+  }
+  const go = (i) => {
+    const el = row.current
+    el.scrollTo({ left: el.children[i].offsetLeft - el.children[0].offsetLeft, behavior: 'smooth' })
+  }
+  return (
+    <>
+      <div className="container card-row" ref={row} onScroll={onScroll}>
+        {POSTS.map((p) => <SocialEmbed key={p.platform} {...p} />)}
+      </div>
+      {scrollable && (
+        <div className="post-dots">
+          {POSTS.map((p, i) => (
+            <button key={p.platform} type="button" className={i === current ? 'is-on' : ''}
+              aria-label={`Show the ${p.platform} post`} aria-current={i === current} onClick={() => go(i)} />
+          ))}
+        </div>
+      )}
+    </>
   )
 }
 
@@ -181,9 +224,7 @@ export default function AboutPage() {
             {/* listed twice so one set always fills the box's width */}
             <Marquee className="hashtags" items={[...HASHTAGS, ...HASHTAGS]} secs={3} render={(h) => <span className="hashtag">{h}</span>} />
           </div>
-          <div className="container card-row">
-            {POSTS.map((p) => <SocialEmbed key={p.platform} {...p} />)}
-          </div>
+          <Posts />
         </section>
 
         <section className="venue reveal" id="about-venue">

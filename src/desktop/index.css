@@ -363,6 +363,21 @@ section[id] { scroll-margin-top: 61px; }
 .post-embed .twitter-tweet iframe { width: 100% !important; max-width: none !important; }
 .post-embed .instagram-media { min-width: 0 !important; width: 100% !important; max-width: none !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; }
 .post-embed iframe[src*="facebook.com"] { display: block; width: 100%; height: 100%; border: 0; }
+/* The posts scroll sideways (Posts, AboutPage.jsx): all three in a row where they fit, otherwise swiped (or
+   scrolled with a trackpad) one card at a time, with dots below that mark the post in view */
+.social .card-row {
+  flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+.social .card-row::-webkit-scrollbar { display: none; }
+.social .post-embed { flex: 0 0 min(410px, 85%); scroll-snap-align: start; }
+.post-dots { display: flex; justify-content: center; gap: 4px; margin-top: 12px; }
+.post-dots button { width: 24px; height: 24px; padding: 0; border: 0; background: none; cursor: pointer; }
+.post-dots button::before {
+  content: ''; display: block; width: 8px; height: 8px; margin: auto; border-radius: 999px;
+  background: #c3cfdb; transition: width .25s, background .25s;
+}
+.post-dots button.is-on::before { width: 20px; background: var(--navy); }
 
 /* Venue */
 .venue { padding: 54px 0 27px; background: #fafbfd; }

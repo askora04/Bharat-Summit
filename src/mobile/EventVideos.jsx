@@ -175,7 +175,7 @@ export default function EventVideos() {
             <h3 className="vd-kicker vd-head">Interviews &amp; moments</h3>
             {/* the looped copy must take clicks too: half the cards on screen are copies.
                 The clips are listed twice so the first always follows the last with no gap, however wide the row */}
-            <Marquee className="vd-clips" clickableCopy secs={3}
+            <Marquee className="vd-clips" drag clickableCopy secs={3}
               items={[...clips, ...clips].map((v, k) => ({ v, i: k % clips.length }))} render={({ v, i }, copy) => (
               <div className="vd-clip">
                 <Player video={v} playing={false} onPlay={() => openClipAt(i)} className="vd-clip-frame"

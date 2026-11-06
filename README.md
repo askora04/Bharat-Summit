@@ -49,7 +49,15 @@ Everything else comes from `vercel.json`:
   the website build doesn't need it (verified: clean install + build works with scripts skipped).
 - **Routing:** every page path serves `index.html`, so reloading `/speakers/3` or `/events` works. Paths with a
   file extension never do, so a missing image or file is a real 404, not the homepage. Trailing slashes redirect
-  to the path without one (`/speakers/` -> `/speakers`).
+  to the path without one (`/speakers/` -> `/speakers`). Don't turn on `cleanUrls`: it stops the rewrite to
+  `/index.html` from resolving, and every page but the home page then 404s on reload. An address that isn't a page
+  shows the nearest one and the address bar is corrected to it (an unknown path -> `/`, an unknown speaker ->
+  `/speakers`); each speaker page is titled with the speaker's name.
+- **Search and sharing:** `index.html` has the description, canonical URL and Open Graph / Twitter card tags (for
+  `https://bharatsummit.co`; change them if the domain changes). The share image is `public/assets/og-image.jpg`
+  (1200 × 630, made from the banner's last frame) and the iPhone home-screen icon `public/apple-touch-icon.png`;
+  both are JPG/PNG on purpose, as link previews and iOS don't take WebP or SVG. `dist/sitemap.xml` is written at
+  build time (`vite.config.js`) with every page and speaker page; `public/robots.txt` points to it.
 - **Caching:** pages always revalidate, so a deploy shows at once; the hashed JS/CSS bundles (`/static/`) are
   cached for a year; images in `/assets/` for an hour (served stale for a day while revalidating) and the font for
   30 days; gallery photos and videos for a week (their `gallery.json` / `videos.json` lists for 5 minutes).

@@ -99,3 +99,20 @@ html, body { overscroll-behavior: none; overflow-x: hidden; }
 .sp-prev { left: calc(50% - 60px * var(--k, 3)); }
 .sp-next { right: calc(50% - 60px * var(--k, 3)); }
 .sp-close svg, .sp-step svg { width: calc(22px * var(--k, 3)); height: calc(22px * var(--k, 3)); }
+
+/* About, Join the Conversation: as in the mobile layout, at phone size (main.jsx zooms the section up by --k and lays
+   it out a phone wide, so sizes here are screen points): the hashtags drifting in their box, then the X, Instagram
+   and Facebook posts one at a time, swiped sideways, with the next one peeking in and dots below (AboutPage.jsx). */
+html.iphone .social { padding: 32px 0 28px; }
+html.iphone .social .section-title { font-size: 22px; letter-spacing: -.4px; }
+html.iphone .social .lede { margin-top: 8px; padding-inline: 16px; font-size: 13px; text-align: center; }
+html.iphone .social .hashtags-box { width: calc(100% - 32px); margin-top: 16px; padding: 0 6px; border-radius: 12px; }
+html.iphone .social .hashtags { --gap: 8px; padding-block: 8px; }
+html.iphone .social .hashtag { width: 136px; height: 30px; font-size: 12px; }
+html.iphone .social .card-row {
+  justify-content: flex-start; gap: 12px;
+  width: 100%; margin: 16px 0 0; padding-inline: 16px; scroll-padding-inline: 16px;
+}
+/* 350pt: the width the Facebook post is drawn at on iPhones (AboutPage.jsx) */
+html.iphone .social .post-embed { flex: 0 0 min(350px, 100% - 32px); max-width: none; height: 560px; }
+html.iphone .social .post-dots { margin-top: 8px; }

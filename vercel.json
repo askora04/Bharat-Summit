@@ -4,7 +4,6 @@
   "installCommand": "npm ci --ignore-scripts",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
     { "source": "/((?!static/|assets/|gallery/|videos/)[^.]*)", "destination": "/index.html" }
