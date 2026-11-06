@@ -175,7 +175,7 @@ export default function EventVideos() {
           <div className="vd-clips-block">
             <h3 className="vd-kicker vd-head">Interviews &amp; moments</h3>
             {/* a carousel: slides on its own (one card every 3s, looping) and by hand (swipe, trackpad, mouse drag) */}
-            <Scroller className="vd-clips" rowClassName="vd-clips-row" label="Interviews and moments" auto={3} arrows={false}>
+            <Scroller className="vd-clips" rowClassName="vd-clips-row" label="Interviews and moments" auto={3}>
               {clips.map((v, i) => (
                 <div className="vd-clip" key={v.id}>
                   <Player video={v} playing={false} onPlay={() => openClipAt(i)} className="vd-clip-frame">

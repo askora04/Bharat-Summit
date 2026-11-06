@@ -2,18 +2,18 @@ import { Children, useEffect, useRef, useState } from 'react'
 import './scroller.css'
 
 // A row that scrolls sideways by hand, with every kind of input: a swipe on touch screens, a sideways trackpad
-// swipe or Shift + wheel, dragging with the mouse, the arrow keys once it has focus, the arrow buttons at either
-// end (`arrows`) and, with `dots`, a dot per item. Used by the Summit Archives clips and About's social posts.
+// swipe or Shift + wheel, dragging with the mouse, the arrow keys once it has focus and, with `dots`, a dot per
+// item. Used by the Summit Archives clips and About's social posts.
 //
 // auto: the row also slides on its own, as a carousel, about one item every `auto` seconds, looping without end
 //   (the items are shown twice; when the first set has slid out, the row jumps back by one set, which looks the
 //   same). It holds while the visitor is on it (the mouse over it, a drag, a swipe, the wheel, keyboard focus) and
 //   goes on 2s after they let go; it also holds while the row is off screen or the tab is hidden.
-// className: the wrapper (where the arrows sit); rowClassName: the scrolling row; label: names it for screen
+// className: the wrapper; rowClassName: the scrolling row; label: names it for screen
 // readers; dots: an aria label per item, for the dots under the row.
-export default function Scroller({ className = '', rowClassName = '', label, dots, arrows = true, auto = 0, children }) {
+export default function Scroller({ className = '', rowClassName = '', label, dots, auto = 0, children }) {
   const row = useRef(null)
-  const [state, setState] = useState({ scrollable: false, atStart: true, atEnd: false, current: 0 })
+  const [state, setState] = useState({ scrollable: false, current: 0 })
   const items = Children.toArray(children)
   const count = items.length
 
@@ -32,7 +32,7 @@ export default function Scroller({ className = '', rowClassName = '', label, dot
   const step = (dir) => row.current.scrollBy({ left: dir * stepSize(), behavior: 'smooth' })
   const go = (i) => row.current.scrollTo({ left: itemLeft(i), behavior: 'smooth' })
 
-  // the arrows' and dots' state: set only when it changes, not on every scrolled frame
+  // the dots' state: set only when it changes, not on every scrolled frame
   useEffect(() => {
     const el = row.current
     let last = ''
@@ -40,8 +40,6 @@ export default function Scroller({ className = '', rowClassName = '', label, dot
       const max = el.scrollWidth - el.clientWidth
       const next = {
         scrollable: max > 1,
-        atStart: el.scrollLeft <= 1,
-        atEnd: el.scrollLeft >= max - 1,
         current: max > 1 ? Math.round((el.scrollLeft / max) * (count - 1)) : 0,
       }
       const key = JSON.stringify(next)
@@ -145,7 +143,7 @@ export default function Scroller({ className = '', rowClassName = '', label, dot
   }
   const mouse = (fn) => (e) => { if (e.pointerType === 'mouse') fn() }
 
-  const { scrollable, atStart, atEnd, current } = state
+  const { scrollable, current } = state
   return (
     <div className={`hs ${scrollable ? 'is-scrollable' : ''} ${auto ? 'is-auto' : ''} ${className}`}
       onPointerEnter={mouse(() => { hold.current.hover = true })}
@@ -162,16 +160,6 @@ export default function Scroller({ className = '', rowClassName = '', label, dot
           <div className="hs-copy" key={`copy-${i}`} aria-hidden="true">{item}</div>
         ))}
       </div>
-      {arrows && scrollable && (
-        <>
-          <button type="button" className="hs-arrow hs-prev" onClick={() => step(-1)} disabled={atStart} aria-label="Scroll back">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="m15 18-6-6 6-6" /></svg>
-          </button>
-          <button type="button" className="hs-arrow hs-next" onClick={() => step(1)} disabled={atEnd} aria-label="Scroll forward">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="m9 18 6-6-6-6" /></svg>
-          </button>
-        </>
-      )}
       {dots && scrollable && (
         <div className="post-dots">
           {dots.map((name, i) => (

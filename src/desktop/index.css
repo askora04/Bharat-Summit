@@ -372,7 +372,7 @@ section[id] { scroll-margin-top: 61px; }
 .post-embed .instagram-media { min-width: 0 !important; width: 100% !important; max-width: none !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; }
 .post-embed iframe[src*="facebook.com"] { display: block; width: 100%; height: 100%; border: 0; }
 /* The posts scroll sideways by hand (Posts in AboutPage.jsx, Scroller in src/lib): 460px cards, so even on the
-   widest page the third one peeks in at the edge, with the arrows and dots to move along. Always from the left
+   widest page the third one peeks in at the edge, with dots to move along. Always from the left
    edge: a centred row wider than its box would push the first post out of reach. */
 .social .card-row { flex-wrap: nowrap; justify-content: flex-start; }
 .social .post-embed { flex: 0 0 min(460px, 85%); max-width: none; }

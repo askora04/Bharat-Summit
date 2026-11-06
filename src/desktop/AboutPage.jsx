@@ -108,7 +108,7 @@ function SocialEmbed({ platform, url, load }) {
 const FB_SIZE = document.documentElement.classList.contains('iphone') ? 'width=350&height=560' : 'width=460&height=638'
 
 // The posts in a row scrolled sideways by hand (Scroller, src/lib): a swipe, the wheel or a trackpad, a mouse drag,
-// the arrow buttons or the dots below, over the posts too (SocialEmbed's cover). The arrows and dots show while
+// or the dots below, over the posts too (SocialEmbed's cover). The dots show while
 // the posts don't all fit (always, with the desktop's 460px cards and on phones).
 function Posts() {
   const wrap = useRef(null)
