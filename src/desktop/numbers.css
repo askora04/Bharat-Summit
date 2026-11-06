@@ -31,23 +31,20 @@
 .sin-node { position: absolute; aspect-ratio: 1 / 1; transform: translate(-50%, -50%); }
 .sin-text { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
 
-/* 1. each bubble is thrown out of the centre as a small seed */
+/* 1. each bubble is thrown out of the centre */
 .sin-fly { position: absolute; inset: 0; opacity: 0; transform: translate(var(--fx), var(--fy)) scale(0); }
 .is-in .sin-fly { opacity: 1; transform: none; transition: opacity 1s ease var(--dl), transform 2.4s cubic-bezier(.22, 1, .36, 1) var(--dl); }
 .sin-bob { position: absolute; inset: 0; }
 .is-in .sin-bob { animation: sinBob var(--bob) ease-in-out 5s infinite; }
 @keyframes sinBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2.4%); } }
 
-/* 2. then its rings emerge outward from the seed, one after another */
+/* 2. then its rings emerge outward from its centre, one after another */
 .sin-grow { transform-origin: 50px 50px; transform: scale(var(--s0)); opacity: 0; }
 .is-in .sin-grow { transform: scale(1); opacity: 1; transition: transform 1.3s cubic-bezier(.22, 1, .36, 1) calc(var(--dl) + var(--gd)), opacity .7s ease calc(var(--dl) + var(--gd)); }
 .sin-spin, .sin-spin-r { transform-origin: 50px 50px; }
 .is-in .sin-spin { animation: sinSpin 28s linear calc(var(--dl, 0s) + 3.6s) infinite; }
 .is-in .sin-spin-r { animation: sinSpin 20s linear calc(var(--dl, 0s) + 3.6s) infinite reverse; }
 @keyframes sinSpin { to { transform: rotate(360deg); } }
-.sin-seed { transform-origin: 50px 50px; }
-.is-in .sin-seed { animation: sinSeed 1.2s ease var(--dl) forwards; }
-@keyframes sinSeed { 0% { transform: scale(1); } 55% { transform: scale(1.6); } 100% { transform: scale(1); } }
 
 /* 3. the number rolls in like an odometer */
 .sin-num { display: inline-flex; align-items: center; line-height: 1; font-weight: 800; letter-spacing: -.02em; color: #fff; font-variant-numeric: tabular-nums; opacity: 0; transform: translateY(12%); }

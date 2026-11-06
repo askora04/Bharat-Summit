@@ -20,19 +20,19 @@ const NODES = [
   {
     key: 'del', target: 500, suffix: '+', label: ['DELEGATES'],
     pos: { left: '27%', top: '30%', width: '40%' }, fly: { '--fx': '57.5%', '--fy': '50%', '--dl': '.5s' }, bob: '6.2s',
-    tint: '#1E6A90', dots: '#7CCBC1', dotsW: 0.7, spin: 'sin-spin', track: '#1E6A90', arc: '#2C8FC0', r: 41, sw: 3.4, core: 36, seed: 5,
+    tint: '#1E6A90', dots: '#7CCBC1', dotsW: 0.7, spin: 'sin-spin', track: '#1E6A90', arc: '#2C8FC0', r: 41, sw: 3.4, core: 36,
     numSize: 'clamp(30px, 9.2cqw, 64px)', lbl: { fontSize: 'clamp(10px, 1.8cqw, 13px)', letterSpacing: '0.22em', color: '#8CC8E4' },
   },
   {
     key: 'spk', target: 70, suffix: '+', label: ['COUNTRIES'],
     pos: { left: '73%', top: '26%', width: '31.9%' }, fly: { '--fx': '-72%', '--fy': '75%', '--dl': '.8s' }, bob: '5.4s',
-    tint: '#2A9DAA', dots: '#7CCBC1', dotsW: 0.8, spin: 'sin-spin-r', track: '#2A9DAA', arc: '#2A9DAA', r: 40.5, sw: 3.8, core: 35, seed: 5.5,
+    tint: '#2A9DAA', dots: '#7CCBC1', dotsW: 0.8, spin: 'sin-spin-r', track: '#2A9DAA', arc: '#2A9DAA', r: 40.5, sw: 3.8, core: 35,
     numSize: 'clamp(26px, 7.4cqw, 52px)', lbl: { fontSize: 'clamp(10px, 1.7cqw, 13px)', letterSpacing: '0.22em', color: '#8ED8DE' },
   },
   {
     key: 'par', target: 2, suffix: 'nd', label: ['ANNUAL', 'CONFERENCE'],
     pos: { left: '50%', top: '76%', width: '27.8%' }, fly: { '--fx': '0%', '--fy': '-93.5%', '--dl': '1.1s' }, bob: '6.8s',
-    tint: '#EE6A2A', dots: '#F4CFA3', dotsW: 0.9, spin: 'sin-spin', track: '#EE6A2A', arc: '#EE6A2A', r: 40, sw: 4, core: 34, seed: 6,
+    tint: '#EE6A2A', dots: '#F4CFA3', dotsW: 0.9, spin: 'sin-spin', track: '#EE6A2A', arc: '#EE6A2A', r: 40, sw: 4, core: 34,
     numSize: 'clamp(22px, 6.3cqw, 46px)', lbl: { fontSize: 'clamp(9px, 1.4cqw, 11px)', letterSpacing: '0.16em', lineHeight: 1.3, color: '#F8B48E' },
   },
 ]
@@ -68,7 +68,6 @@ function Bubble({ node, progress }) {
                 strokeDasharray="100" strokeDashoffset={(100 - progress * 100).toFixed(2)} transform="rotate(-90 50 50)" />
             </g>
             <circle className="sin-grow" style={{ '--gd': '.2s', '--s0': 0 }} cx="50" cy="50" r={n.core} fill="#1B2536" />
-            <circle className="sin-seed" cx="50" cy="50" r={n.seed} fill={n.arc} />
           </svg>
           <div className="sin-text">
             <span className="sin-num" style={{ '--dl': n.fly['--dl'], fontSize: n.numSize }}>
