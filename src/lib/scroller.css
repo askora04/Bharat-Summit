@@ -24,3 +24,8 @@
 .hs-arrow:disabled { opacity: 0; pointer-events: none; }
 .hs-prev { left: 8px; }
 .hs-next { right: 8px; }
+
+/* Carousel (auto): slides continuously, so no snapping; the copies' wrappers leave their items in the row */
+.hs.is-auto .hs-row { scroll-snap-type: none; }
+.hs-copy { display: contents; }
+.hs-copy > * { flex: none; }

@@ -119,11 +119,9 @@ html.iphone .social .card-row {
 html.iphone .social .post-embed { flex: 0 0 min(350px, 100% - 32px); max-width: none; height: 560px; }
 html.iphone .social .post-dots { margin-top: 8px; }
 
-/* Summit Archives clips, a row scrolled by hand (Scroller, src/lib): enlarged ~2.4× so each card is about 200pt
-   wide on the phone with readable titles, and the arrows thumb-sized (~44pt) */
-.vd-clips-row > .vd-clip { zoom: 2.4; }
+/* Summit Archives clips, a carousel that also slides by hand (Scroller, src/lib): enlarged ~2.4× so each card is
+   about 200pt wide on the phone with readable titles */
+.vd-clips-row .vd-clip { zoom: 2.4; }
 .vd-clips-row { gap: 36px; }
-.vd-clips .hs-arrow { width: 134px; height: 134px; border-width: 3px; }
-.vd-clips .hs-arrow svg { width: 60px; height: 60px; }
 /* About posts: the scrolling row spans the phone-size section (the page's .container would narrow it) */
 html.iphone .social .posts { width: 100%; }
