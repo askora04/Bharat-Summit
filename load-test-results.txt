@@ -1,0 +1,85 @@
+BHARAT SUMMIT WEBSITE - LOAD TEST RESULTS
+==========================================
+
+Website:    https://bharatsummit.co
+Date:       6 November 2026
+Tool:       Grafana k6 v2.3.0
+Duration:   8 minutes
+Peak load:  200 visitors on the site at the same time
+Served by:  Vercel (Mumbai data centre)
+
+
+RESULT: PASSED - NO ERRORS
+--------------------------
+
+Simulated visits completed ......... 3,801
+Total requests ..................... 154,683  (about 309 per second)
+Failed requests .................... 0  (0.00%)
+Peak visitors at the same time ..... 202
+Data downloaded .................... 9.8 GB
+
+
+SERVER RESPONSE TIME
+--------------------
+(how long the server takes to start answering)
+
+                              Typical   95% of requests   Slowest
+Opening a page ............   173 ms    506 ms            1.9 s
+Small data requests .......   159 ms    373 ms            1.19 s
+With no load (comparison) .   ~70 ms    ~90 ms            -
+
+
+PASS / FAIL TARGETS
+-------------------
+
+[PASS]  Less than 1% of requests fail ............... 0.00%
+[PASS]  95% of small requests answered within 0.8 s .. 0.37 s
+[PASS]  95% of pages answered within 1 s ............. 0.51 s
+[PASS]  Stayed under the 15 GB safety limit .......... 9.8 GB
+
+
+WHAT IT MEANS
+-------------
+
+1. The website easily handles 200 visitors at the same time, with no failed
+   requests and responses well under one second.
+
+2. Full download time per file (median 0.38 s, 95% under 2.3 s) was limited
+   mostly by the test computer's own internet connection, not by the website.
+   Real visitors each use their own connection.
+
+3. The real limit is monthly bandwidth, not speed. Each visit used about
+   2.6 MB:
+     - Vercel Hobby plan (100 GB a month):  about 38,000 visits a month
+     - Vercel Pro plan (1 TB a month):      about 380,000 visits a month
+   Videos use the most bandwidth.
+
+4. This test itself used about 9.8 GB of the site's Vercel bandwidth.
+
+
+HOW THE TEST WORKED
+-------------------
+
+Each simulated visitor:
+  - opened the Home page (page, scripts, styles, font, images and the
+    banner video),
+  - then visited one or two more pages (About, Schedule, Speakers, a speaker
+    page or Summit Archives), pausing 3-8 seconds between pages like a real
+    person.
+On Summit Archives, visitors also loaded gallery photos and video posters,
+and one in four started a video (the first 1 MB, as a browser does when
+"play" is pressed).
+
+A separate steady stream of 2 small requests per second measured how quickly
+the server answered as the load increased.
+
+Limits of this test: it ran from one computer in India, so it does not show
+speed from other countries or with thousands of visitors at once.
+
+
+HOW TO RUN IT AGAIN
+-------------------
+
+  k6 run scripts/load-test.js                  full test (200 visitors, ~8 min, ~10 GB)
+  k6 run -e PEAK=50 scripts/load-test.js       lighter test (50 visitors)
+  k6 run -e SMOKE=1 scripts/load-test.js       quick 40-second check

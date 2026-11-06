@@ -30,17 +30,30 @@ export function Lines({ lines }) {
 // downward to the designation, session and time. Each card gets --plain-h (the panel's height with only the
 // name) and --cover (how much more the open panel needs), so the panel opens to exactly fit (see index.css).
 const CARDS = '.sp-card, .speaker, .h-speaker'
-function measureCard(card) {
+// A card's two heights, read from the page (reads only: no writes in between, see writeCard)
+function readCard(card) {
   const panel = card.querySelector('.sp-hover')
   // closed, the panel shows the name (and the Moderator badge, where there is one)
   const name = panel?.querySelector(':scope > .sp-mod') || panel?.firstElementChild
-  if (!name) return
+  if (!name) return null
   const pad = parseFloat(getComputedStyle(panel).paddingBottom) || 0
   const plain = Math.ceil(name.getBoundingClientRect().bottom - panel.getBoundingClientRect().top + pad)
-  card.style.setProperty('--plain-h', `${plain}px`)
-  card.style.setProperty('--cover', `${Math.max(0, panel.scrollHeight - plain)}px`)
+  return { plain: `${plain}px`, cover: `${Math.max(0, panel.scrollHeight - plain)}px` }
 }
-export function measureCover(e) { measureCard(e.currentTarget) }
+// written only when changed: each write makes the browser lay the page out again before the next read
+function writeCard(card, m) {
+  if (!m) return
+  if (card.style.getPropertyValue('--plain-h') !== m.plain) card.style.setProperty('--plain-h', m.plain)
+  if (card.style.getPropertyValue('--cover') !== m.cover) card.style.setProperty('--cover', m.cover)
+}
+// All cards: every read first, then every write, so the page is laid out once, not once per card (a read after
+// a write forces a fresh layout; with 150 cards that froze slower computers while the page loaded)
+function measureCards() {
+  const cards = [...document.querySelectorAll(CARDS)]
+  const sizes = cards.map(readCard)
+  cards.forEach((card, i) => writeCard(card, sizes[i]))
+}
+export function measureCover(e) { writeCard(e.currentTarget, readCard(e.currentTarget)) }
 
 // The open details float over the page instead of growing the card: the card and its row keep their size,
 // so the other cards don't move or gain space. One panel serves every card: when the mouse moves onto a card
@@ -90,7 +103,7 @@ export function startSpeakerFloat() {
   const open = (next) => {
     close(true)
     card = next
-    measureCard(card)
+    writeCard(card, readCard(card))
     card.classList.add('is-open')
     // the card's own classes give the copy the card's type, text styles and border
     float.className = `${[...card.classList].filter((c) => c !== 'is-open').join(' ')} sp-float is-shown`
@@ -258,9 +271,13 @@ export function watchSpeakerCards() {
   let frame = 0
   const run = () => {
     cancelAnimationFrame(frame)
-    frame = requestAnimationFrame(() => document.querySelectorAll(CARDS).forEach(measureCard))
+    frame = requestAnimationFrame(measureCards)
   }
-  const added = new MutationObserver(run)
+  // only when speaker cards are added (a page or a row of them), not on every change to the page
+  const hasCards = (n) => n.nodeType === 1 && (n.matches(CARDS) || n.querySelector(CARDS))
+  const added = new MutationObserver((records) => {
+    if (records.some((r) => [...r.addedNodes].some(hasCards))) run()
+  })
   added.observe(document.body, { childList: true, subtree: true })
   window.addEventListener('resize', run)
   document.fonts?.ready.then(run)

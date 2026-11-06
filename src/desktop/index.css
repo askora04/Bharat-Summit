@@ -609,3 +609,11 @@ html { scroll-behavior: smooth; }
 .sp-float.is-open .sp-hover > * { opacity: 1; transition-delay: .08s; }
 @media (prefers-reduced-motion: reduce) { .sp-float[class][aria-hidden], .sp-float .sp-hover > * { transition: none; } }
 
+
+/* Off-screen parts of long pages are laid out and drawn only as they come near the screen (the browser keeps a
+   placeholder of their last size), which keeps slower computers responsive while a page loads: the Speakers
+   page's session blocks, the Home page's sections below the numbers, and the footer. Their hover effects stay inside
+   their own boxes (this setting clips at the edges; the speaker details panel is drawn outside them). */
+.sp-session, .site-footer, .organised, .h-curated, .h-speakers, .h-moments, .h-venue {
+  content-visibility: auto; contain-intrinsic-size: auto 560px;
+}

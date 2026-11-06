@@ -30,4 +30,6 @@ export default [
       ],
     },
   },
+  // the k6 load test runs in k6, which provides __ENV
+  { files: ['scripts/load-test.js'], languageOptions: { globals: { __ENV: 'readonly' } } },
 ]

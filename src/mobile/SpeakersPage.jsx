@@ -119,36 +119,47 @@ function AutoScrollRow({ children }) {
   useEffect(() => {
     const el = row.current
     if (!loop || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    let visible = false, touching = false, last = 0, pos = el.scrollLeft, written = pos, prev = 0, frame
+    let visible = false, touching = false, hovered = false, focused = false, last = 0, pos = el.scrollLeft, written = pos, prev = 0, frame
+    // one set's width: how far the copy's first card sits from the first card. Measured once and on resize, not
+    // every frame: a measurement right after moving the row forces the browser to lay the page out again
+    let set = 0
+    const measureSet = () => { set = el.lastElementChild.firstElementChild.offsetLeft - el.firstElementChild.offsetLeft }
+    measureSet()
+    const ro = new ResizeObserver(measureSet)
+    ro.observe(el)
     const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting })
     io.observe(el)
+    // the visitor's hand on it, tracked by events rather than asked every frame (asking restyles the page)
     const down = () => { touching = true }
     const up = () => { touching = false; last = performance.now() }
     const wheel = () => { last = performance.now() }
-    const events = [['touchstart', down], ['touchend', up], ['touchcancel', up], ['wheel', wheel]]
+    const enter = (e) => { if (e.pointerType === 'mouse') hovered = true }
+    const leave = (e) => { if (e.pointerType === 'mouse') { hovered = false; last = performance.now() } }
+    const focusIn = (e) => { focused = e.target.matches(':focus-visible') }
+    const focusOut = () => { focused = false }
+    const events = [['touchstart', down], ['touchend', up], ['touchcancel', up], ['wheel', wheel],
+      ['pointerenter', enter], ['pointerleave', leave], ['focusin', focusIn], ['focusout', focusOut]]
     events.forEach(([t, f]) => el.addEventListener(t, f, { passive: true }))
 
     const tick = (now) => {
       frame = requestAnimationFrame(tick)
       const dt = prev ? Math.min(now - prev, 100) / 1000 : 0
       prev = now
-      // the visitor scrolled it themselves: carry on from there
-      if (Math.abs(el.scrollLeft - written) > 1) pos = el.scrollLeft
-      written = el.scrollLeft
+      // the visitor scrolled it themselves: carry on from there (read before any write this frame: no forced layout)
+      if (Math.abs(el.scrollLeft - written) > 2) pos = el.scrollLeft
       // hold off while they're on it, and for a moment after, so a swipe's momentum plays out
-      if (!visible || document.hidden || touching || now - last < 800 || el.matches(':hover') || el.querySelector(':focus-visible')) return
-      // one set's width: how far the copy's first card sits from the first card
-      const set = el.lastElementChild.firstElementChild.offsetLeft - el.firstElementChild.offsetLeft
+      if (!visible || document.hidden || touching || hovered || focused || now - last < 800 || !set) { written = el.scrollLeft; return }
       pos += GLIDE * dt
       if (pos >= set) pos -= set
       el.scrollLeft = pos
-      written = el.scrollLeft
+      written = pos
     }
     frame = requestAnimationFrame(tick)
 
     return () => {
       cancelAnimationFrame(frame)
       io.disconnect()
+      ro.disconnect()
       events.forEach(([t, f]) => el.removeEventListener(t, f))
     }
   }, [loop])

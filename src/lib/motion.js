@@ -10,16 +10,22 @@ const MAGNETIC = '.btn, .h-btn, .h-btn-pill, .h-maps-btn, .ev-album, .ar-link, .
 // Called once: the listeners live for the whole visit.
 export function startMotion() {
   if (reduced()) return () => {}
-  const root = document.documentElement
   const off = []
   const on = (target, type, fn, opts) => { target.addEventListener(type, fn, opts); off.push(() => target.removeEventListener(type, fn, opts)) }
 
-  // --sy: how far the page has scrolled (capped), read by CSS for parallax and the hero fade
+  // --sy: how far the page has scrolled (capped), read by CSS for the banners' parallax (motion.css). Set only on
+  // the elements that use it, and only when it changes: set on the page's root, every element inherits it and
+  // the browser restyles the whole page on every scrolled frame, which slower computers can't keep up with.
   let ticking = false
+  const PARALLAX = '.h-hero, .hero-bg'
   const onScroll = () => {
     if (ticking) return
     ticking = true
-    requestAnimationFrame(() => { root.style.setProperty('--sy', Math.min(window.scrollY, 1400)); ticking = false })
+    requestAnimationFrame(() => {
+      ticking = false
+      const sy = String(Math.min(Math.round(window.scrollY), 1400))
+      document.querySelectorAll(PARALLAX).forEach((el) => { if (el.style.getPropertyValue('--sy') !== sy) el.style.setProperty('--sy', sy) })
+    })
   }
   onScroll()
   on(window, 'scroll', onScroll, { passive: true })
