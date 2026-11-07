@@ -1,59 +1,47 @@
 import { useState } from 'react'
 import { TriBar } from './shared.jsx'
 import { MonumentHero } from './SpeakersPage.jsx'
-import { DAYS, THEMES, EXHIBITIONS } from '../data/scheduleData.js'
+import { DAYS, KINDS, LEGEND } from '../data/scheduleData.js'
 import './schedule.css'
 
-// Day buttons over a Time / Session / Theme / Description table, as in the agenda document
-const tabLabel = (t) => `${t.tab} — ${t.short.split(' ').slice(1).join(' ')}`
-const EXPO = 'expo' // the tab after the days: Expo & Exhibitions
+// The agenda as in the content document: a colour key, day buttons, then each day's table with Sl. No. / Agenda /
+// Name & Details / Time. Every row is shaded by its kind of session (panel, plenary, expo, Telangana Rising),
+// in the document's colours, the agenda cell a shade deeper. On phones the rows stack into cards (schedule.css).
+const tabLabel = (d) => `${d.tab} — ${d.short.split(' ').slice(1).join(' ')}`
 
-// Rows take their theme's colour for the hover accent; untagged ones use navy.
-// data-label names each cell when rows stack into cards on phones (see schedule.css)
-function Row({ time, timeLabel, label, title, theme, desc, showTheme, color = '#082852', ink = '#082852' }) {
-  const t = THEMES[theme]
+// the details in the document's order: lines of text, and lists (Speakers, Panelists...), Moderator on one line
+function Details({ title, parts = [] }) {
   return (
-    <tr className="sc-row" style={{ '--c': t?.color ?? color, '--ink': t?.ink ?? ink }}>
-      <td className="sc-row-time" data-label={timeLabel}>{time}</td>
-      <td className="sc-row-session" data-label="Session"><span>{label}:</span> {title}</td>
-      {showTheme && <td className="sc-row-theme" data-label="Theme">{t?.name}</td>}
-      <td className="sc-row-desc" data-label="Description">{desc}</td>
-    </tr>
+    <>
+      <p className="sc-title">{title}</p>
+      {parts.map((p, i) => p.text ? <p className="sc-text" key={i}>{p.text}</p>
+        : p.items.length === 1 && /moderator/i.test(p.label || '') ? (
+          <p className="sc-moderator" key={i}><span>{p.label}:</span> {p.items[0]}</p>
+        ) : (
+          <div className="sc-group" key={i}>
+            {p.label && <p className="sc-group-label">{p.label}</p>}
+            <ol>{p.items.map((it) => <li key={it}>{it}</li>)}</ol>
+          </div>
+        ))}
+    </>
   )
 }
 
-// Expo & Exhibitions: Date / Exhibition / Description
-function ExpoTable() {
+function Row({ no, kind, agenda, place, title, parts, time }) {
+  const k = KINDS[kind]
   return (
-    <table className="sc-table sc-expo-table" aria-labelledby="sc-heading">
-      <thead>
-        <tr>
-          <th scope="col">Date</th>
-          <th scope="col">Exhibition</th>
-          <th scope="col">Description</th>
-        </tr>
-      </thead>
-      <tbody key={EXPO}>
-        {EXHIBITIONS.map(({ date, title, theme, desc }) => {
-          const t = THEMES[theme]
-          return (
-            <tr className="sc-row" key={title} style={{ '--c': t?.color ?? '#082852', '--ink': t?.ink ?? '#082852' }}>
-              <td className="sc-row-time" data-label="Date">{date}</td>
-              <td className="sc-row-session" data-label="Exhibition">{title}</td>
-              <td className="sc-row-desc" data-label="Description">{desc}</td>
-            </tr>
-          )
-        })}
-      </tbody>
-    </table>
+    <tr className={`sc-row is-${kind}`} style={{ '--row': k.row, '--agenda': k.agenda }}>
+      <td className="sc-no" data-label="Sl. No.">{no}</td>
+      <td className="sc-agenda" data-label="Agenda">{agenda}{place && <span className="sc-place">{place}</span>}</td>
+      <td className="sc-details" data-label="Name / Details"><Details title={title} parts={parts} /></td>
+      <td className="sc-time" data-label="Time">{time}</td>
+    </tr>
   )
 }
 
 export default function SchedulePage() {
   const [tab, setTab] = useState(DAYS[0].id) // opens on the first day, Day 0
   const day = DAYS.find((d) => d.id === tab)
-  // a day with no themed sessions (Day 0) has no Theme column
-  const showTheme = day?.sessions.some((s) => s.theme)
 
   return (
     <>
@@ -64,37 +52,35 @@ export default function SchedulePage() {
       </MonumentHero>
 
       <main className="sc-page" id="programme">
+        <ul className="sc-legend" aria-label="Colour key">
+          {LEGEND.map((kind) => (
+            <li key={kind} style={{ '--agenda': KINDS[kind].agenda }}><span aria-hidden />{KINDS[kind].label}</li>
+          ))}
+        </ul>
+
         <div className="sc-days" role="tablist" aria-label="Programme days">
-          {DAYS.map((t) => (
-            <button key={t.id} role="tab" aria-selected={tab === t.id} className="sc-day"
-              onClick={() => setTab(t.id)}>
-              {tabLabel(t)}
+          {DAYS.map((d) => (
+            <button key={d.id} role="tab" aria-selected={tab === d.id} className="sc-day" onClick={() => setTab(d.id)}>
+              {tabLabel(d)}
             </button>
           ))}
-          <button role="tab" aria-selected={tab === EXPO} className="sc-day" onClick={() => setTab(EXPO)}>
-            Expo &amp; Exhibitions
-          </button>
         </div>
 
-        <h2 className="sc-heading" id="sc-heading">
-          {day ? `${day.tab} — ${day.date}` : 'Expo & Exhibitions — 12–14 November 2026'}
-        </h2>
+        <h2 className="sc-heading" id="sc-heading">{day.tab} · {day.date}</h2>
 
-        {day ? (
-          <table className={showTheme ? 'sc-table' : 'sc-table sc-no-theme'} aria-labelledby="sc-heading">
-            <thead>
-              <tr>
-                <th scope="col">Time</th>
-                <th scope="col">Session</th>
-                {showTheme && <th scope="col">Theme</th>}
-                <th scope="col">Description</th>
-              </tr>
-            </thead>
-            <tbody key={tab}>
-              {day.sessions.map((s) => <Row key={s.label + s.title} timeLabel="Time" showTheme={showTheme} {...s} />)}
-            </tbody>
-          </table>
-        ) : <ExpoTable />}
+        <table className="sc-table" aria-labelledby="sc-heading">
+          <thead>
+            <tr>
+              <th scope="col" className="sc-no">Sl. No.</th>
+              <th scope="col">Agenda</th>
+              <th scope="col">Name / Details</th>
+              <th scope="col">Time</th>
+            </tr>
+          </thead>
+          <tbody key={tab}>
+            {day.sessions.map((s) => <Row key={s.no} {...s} />)}
+          </tbody>
+        </table>
       </main>
     </>
   )

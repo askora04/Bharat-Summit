@@ -130,7 +130,7 @@ function Hero() {
     <section className="hero" id="top">
       {/* the banner video, sized to its own frame; the photo shows until it starts. Bump ?v= in the src when the
           video is replaced: /videos/ files are cached for a week (vercel.json) */}
-      <video className="hero-img" src="/videos/about-banner.mp4?v=2" poster="/assets/about-hero.webp"
+      <video className="hero-img" src="/videos/about-banner.mp4?v=3" poster="/assets/about-banner-poster.webp"
         autoPlay muted loop playsInline preload="auto" aria-hidden />
       <h1 className="sr-only">Bharat Summit 2026</h1>
     </section>

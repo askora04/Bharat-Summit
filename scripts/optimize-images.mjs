@@ -1,5 +1,6 @@
 // Converts the full-size PNG/JPG originals in assets-original/ into WebP in public/assets/,
 // at the same path. Run after adding or replacing an original: npm run images
+// Only some files: npm run images -- speakers/jane-doe.png speakers/john-doe.png (paths inside assets-original/)
 import { readdir, mkdir, stat } from 'node:fs/promises'
 import { dirname, extname, join, relative } from 'node:path'
 import sharp from 'sharp'
@@ -12,6 +13,10 @@ const MAX_WIDTH = 2000
 const MAX_WIDTH_FOR = {
   'hicc.png': 1320, // venue photo, shown at most ~660px wide (2x)
 }
+// speaker cut-outs: all 512px square, 2x the largest card they're shown in
+const SPEAKER_WIDTH = 512
+const toSlash = (p) => p.split('\\').join('/')
+const ONLY = process.argv.slice(2).map(toSlash)
 
 // Visually lossless: WebP at these settings is indistinguishable from the original at display size
 const WEBP = { quality: 78, alphaQuality: 85, effort: 6, smartSubsample: true }
@@ -69,11 +74,12 @@ let before = 0
 let after = 0
 for await (const src of walk(SRC)) {
   const rel = relative(SRC, src)
+  if (ONLY.length && !ONLY.includes(toSlash(rel))) continue
   const out = join(OUT, rel.slice(0, -extname(rel).length) + '.webp')
   await mkdir(dirname(out), { recursive: true })
 
   const { width } = await sharp(src).metadata()
-  const max = MAX_WIDTH_FOR[rel] ?? MAX_WIDTH
+  const max = MAX_WIDTH_FOR[rel] ?? (SPEAKERS.test(rel) ? SPEAKER_WIDTH : MAX_WIDTH)
   const input = SPEAKERS.test(rel) ? await (await frameSpeaker(src)).png().toBuffer() : src
   await sharp(input)
     .resize({ width: Math.min(width, max), withoutEnlargement: true })

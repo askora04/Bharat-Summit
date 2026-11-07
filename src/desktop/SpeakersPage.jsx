@@ -89,18 +89,21 @@ export function SpeakerCard({ speaker, index = 0, copy = false, className = '' }
 }
 
 // A session's card row that glides along on its own at a steady pace, like the homepage marquee:
-// the cards repeat once, and the row jumps back by one set as it reaches the copy, so the loop is
-// seamless. It's a real scrolling row, so visitors can still move it themselves (trackpad, wheel,
-// swipe) and it carries on from wherever they leave it. It holds still while the pointer is over it,
-// while it has keyboard focus, while a finger is on it, while it's off screen, and for visitors who
-// ask for reduced motion. Rows that already fit don't move or repeat.
+// the cards repeat, and the row jumps back by one set as it reaches the first copy, so the loop is
+// seamless. Every panel glides, however few speakers it has: a set narrower than the row is repeated
+// enough times to fill it. It's a real scrolling row, so visitors can still move it themselves
+// (trackpad, wheel, swipe) and it carries on from wherever they leave it. It holds still while the
+// pointer is over it, while it has keyboard focus, while a finger is on it, while it's off screen,
+// and for visitors who ask for reduced motion.
 const GLIDE = 40 // px per second
 
 function AutoScrollRow({ children }) {
   const row = useRef(null)
-  const [loop, setLoop] = useState(false)
+  const [copies, setCopies] = useState(0) // how many times the set is repeated after itself
+  const loop = copies > 0
 
-  // repeat the cards only when one set is wider than the row
+  // enough copies that the row is always full: one set plus the copies must cover the row's width plus one set
+  // (the row scrolls up to one set before jumping back)
   useEffect(() => {
     const el = row.current
     const count = Array.isArray(children) ? children.length : 1
@@ -108,7 +111,8 @@ function AutoScrollRow({ children }) {
       const card = el.firstElementChild
       if (!card) return
       const gap = parseFloat(getComputedStyle(el).columnGap) || 0
-      setLoop(count * card.getBoundingClientRect().width + (count - 1) * gap > el.clientWidth + 1)
+      const set = count * (card.getBoundingClientRect().width + gap) // one set, with the gap before the next
+      setCopies(set > 0 ? Math.max(1, Math.ceil(el.clientWidth / set)) : 0)
     }
     measure()
     const ro = new ResizeObserver(measure)
@@ -123,7 +127,7 @@ function AutoScrollRow({ children }) {
     // one set's width: how far the copy's first card sits from the first card. Measured once and on resize, not
     // every frame: a measurement right after moving the row forces the browser to lay the page out again
     let set = 0
-    const measureSet = () => { set = el.lastElementChild.firstElementChild.offsetLeft - el.firstElementChild.offsetLeft }
+    const measureSet = () => { set = el.querySelector(':scope > .sp-grid-copy').firstElementChild.offsetLeft - el.firstElementChild.offsetLeft }
     measureSet()
     const ro = new ResizeObserver(measureSet)
     ro.observe(el)
@@ -167,8 +171,8 @@ function AutoScrollRow({ children }) {
   return (
     <div className="sp-grid sp-grid-auto" ref={row}>
       {children}
-      {/* the repeat: out of the tab order and hidden from screen readers */}
-      {loop && <div className="sp-grid-copy" inert aria-hidden>{children}</div>}
+      {/* the repeats: out of the tab order and hidden from screen readers */}
+      {Array.from({ length: copies }, (_, i) => <div className="sp-grid-copy" key={i} inert aria-hidden>{children}</div>)}
     </div>
   )
 }
@@ -257,16 +261,10 @@ export default function SpeakersPage() {
                     <h3>{se.title}</h3>
                     {se.about && <p className="sp-session-about">{se.about}</p>}
                   </div>
-                  {/* Part I's rows also scroll on their own; the rest scroll by hand only */}
-                  {part === PARTS[0].part ? (
-                    <AutoScrollRow>
-                      {se.speakers.map((sp, i) => <SpeakerCard key={sp.id} speaker={sp} index={i} />)}
-                    </AutoScrollRow>
-                  ) : (
-                    <div className="sp-grid">
-                      {se.speakers.map((sp, i) => <SpeakerCard key={sp.id} speaker={sp} index={i} />)}
-                    </div>
-                  )}
+                  {/* every panel's row glides on its own (and scrolls by hand) */}
+                  <AutoScrollRow>
+                    {se.speakers.map((sp, i) => <SpeakerCard key={sp.id} speaker={sp} index={i} />)}
+                  </AutoScrollRow>
                 </section>
               ))}
             </section>

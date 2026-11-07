@@ -40,26 +40,31 @@ body { overflow-x: clip; }
 .h-marquee::after { right: 0; background: linear-gradient(270deg, #fff, rgba(255, 255, 255, 0)); }
 .h-marquee-track, .h-gallery-track { will-change: transform; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
 
-/* Schedule: as in the mobile layout (src/mobile/schedule.css), each session is a stacked card with readable text
-   (coloured left edge, then time, session, theme and description one under another) instead of the wide table.
-   The mobile sizes are for its 1100px layout; this page is 1200px wide, so they are scaled by 1200 / 1100 to show
-   at the same size on the phone (~1/3: 60px here is ~20px on the screen). */
-.sc-page { width: calc(100% - 130px); padding: 104px 0; }
+/* Schedule: as in the mobile layout (src/mobile/schedule.css), each session is a card in its colours with readable
+   text. The mobile sizes scaled by 1200 / 1100 (this page is 1200px wide), to show at the same size on the phone. */
+.sc-page { width: calc(100% - 131px); padding: 105px 0; }
+.sc-legend { justify-content: flex-start; gap: 22px 44px; margin-bottom: 61px; }
+.sc-legend li { gap: 17px; font-size: 33px; }
+.sc-legend span { width: 48px; height: 31px; border-radius: 9px; }
 .sc-days { gap: 22px; margin-bottom: 61px; }
 .sc-day { padding: 24px 39px; border-radius: 17px; font-size: 33px; }
 .sc-heading { margin-bottom: 44px; font-size: 46px; }
-.sc-table, .sc-table tbody, .sc-table tr, .sc-table td { display: block; width: auto; }
+.sc-table { border-spacing: 0; }
 .sc-table thead { display: none; }
-.sc-table .sc-row {
-  margin-bottom: 39px; padding: 52px 48px; overflow: hidden;
-  border: 2px solid #e6ebf1; border-left: 11px solid var(--c); border-radius: 22px; background: #fff;
-}
-.sc-table .sc-row td, .sc-table .sc-row:nth-child(even) td, .sc-row:hover td { width: auto; padding: 0; border: 0; background: none; box-shadow: none; }
-.sc-table .sc-row td + td { margin-top: 17px; }
-.sc-row-time { font-size: 33px; white-space: normal; }
-.sc-row-session { font-size: 39px; }
-.sc-row-theme { font-size: 33px; }
-.sc-row-desc { font-size: 35px; line-height: 1.6; }
+.sc-table, .sc-table tbody, .sc-table tr, .sc-table td { display: block; width: auto; }
+.sc-table .sc-row { margin-bottom: 39px; border-radius: 26px; overflow: hidden; background: var(--row); }
+.sc-table td { padding: 13px 48px; border-radius: 0 !important; white-space: normal; text-align: left; }
+.sc-table td.sc-no { display: none; }
+.sc-table td.sc-agenda { padding: 31px 48px; font-size: 37px; }
+.sc-place { margin-top: 7px; font-size: 31px; }
+.sc-table td.sc-details { padding-top: 31px; }
+.sc-title { font-size: 41px; }
+.sc-text, .sc-group li, .sc-moderator { font-size: 35px; line-height: 1.55; }
+.sc-group { margin-top: 24px; }
+.sc-group-label, .sc-moderator span { font-size: 28px; }
+.sc-group ol { padding-left: 52px; }
+.sc-moderator { margin-top: 24px; }
+.sc-table td.sc-time { padding: 22px 48px 39px; font-size: 35px; }
 
 /* Speaker page (/speakers/:id): as in the mobile layout (src/mobile/speakers.css), the photo on top and the details
    centred beneath it, in large text. The mobile sizes scaled by 1200 / 1100, as for the schedule above. */

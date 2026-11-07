@@ -60,7 +60,7 @@ function HomeHero() {
 
   return (
     <section className="h-hero" id="top">
-      <video className="hero-media" ref={video} src="/videos/hero-banner.mp4?v=8" poster="/assets/home/hero-banner-poster.webp" muted playsInline preload="auto" aria-hidden />
+      <video className="hero-media" ref={video} src="/videos/hero-banner.mp4?v=9" poster="/assets/home/hero-banner-poster.webp" muted playsInline preload="auto" aria-hidden />
       <h1 className="sr-only">Bharat Summit 2026</h1>
     </section>
   )

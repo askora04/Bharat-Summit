@@ -72,7 +72,7 @@
 .sp-grid::-webkit-scrollbar { height: 6px; }
 .sp-grid::-webkit-scrollbar-thumb { background: #2f477b; border-radius: 6px; }
 .sp-grid { --per: 3; --gap: 20px; margin-top: 16px; }
-/* Part I's rows glide on their own (and move by trackpad, wheel or swipe), so they hide the
+/* Every panel's row glides on its own (and moves by trackpad, wheel or swipe), so they hide the
    scrollbar and don't snap: snapping would tug against the glide */
 .sp-grid.sp-grid-auto { scrollbar-width: none; scroll-snap-type: none; }
 .sp-grid-copy { display: contents; }

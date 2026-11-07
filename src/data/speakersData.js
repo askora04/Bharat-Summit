@@ -178,55 +178,108 @@ const RAW = [
     part: 'Part II: Telangana Rising Panels',
     sessions: [
       {
-        title: 'Telangana Rising: Future City & Urbanisation', when: `${FRI} | 11:00 am - 12:30 pm`,
+        title: 'Panel A: Future City & Urbanisation', when: `${FRI} | 11:00 am - 12:30 pm`,
         speakers: [
-          ['Shaik Salauddin', 'National General Secretary, Indian Federation of App Based Transport Workers', 'Shaik Salauddin is the National General Secretary of the Indian Federation of App Based Transport Workers (IFAT), a coalition he helped found in 2019. He also founded the Telangana Four Wheeler Drivers\' Association and is the founder president of the Telangana Gig and Platform Workers Union (TGPWU). He has spoken publicly on fare regulation during nationwide app-based driver strikes.'],
+          ['D. Sridhar Babu', 'Minister of IT, Govt of Telangana', 'D. Sridhar Babu, Minister of IT, Govt of Telangana, speaks at Panel A: Future City & Urbanisation.'],
           ['Tikender Singh Panwar', 'Former Deputy Mayor of Shimla; Senior Fellow, IMPRI', 'Tikender Singh Panwar is a Senior Fellow at IMPRI, a New Delhi-based think tank, and a former Deputy Mayor of Shimla. He has been an expert member of a working group of the Ministry of Housing and Urban Affairs drafting a model municipal act. He is the author of Cities in Transition, a collection on urban planning, governance and climate issues in India. He has also spoken at COP21, UN Habitat III and the BRICS conference.'],
+          ['Vijay Mahajan', 'CEO, Rajiv Gandhi Foundation', 'Vijay Mahajan, CEO, Rajiv Gandhi Foundation, speaks at Panel A: Future City & Urbanisation.'],
+          ['Shaik Salauddin', 'National General Secretary, Indian Federation of App Based Transport Workers', 'Shaik Salauddin is the National General Secretary of the Indian Federation of App Based Transport Workers (IFAT), a coalition he helped found in 2019. He also founded the Telangana Four Wheeler Drivers\' Association and is the founder president of the Telangana Gig and Platform Workers Union (TGPWU). He has spoken publicly on fare regulation during nationwide app-based driver strikes.'],
+          ['Sajjad Shahid', 'Historian', 'Sajjad Shahid, Historian, speaks at Panel A: Future City & Urbanisation.'],
+          ['Divya Spandana', 'Former MP, Lok Sabha', 'Divya Spandana, Former MP, Lok Sabha, speaks at Panel A: Future City & Urbanisation.'],
+          ['Dr Ajoy Kumar', 'Former IPS & AICC In-charge of Tripura, Nagaland & Sikkim', 'Dr Ajoy Kumar, Former IPS & AICC In-charge of Tripura, Nagaland & Sikkim, speaks at Panel A: Future City & Urbanisation.'],
         ],
       },
       {
-        title: 'Telangana Rising: Economic Justice', when: `${FRI} | 11:00 am - 12:30 pm`,
+        title: 'Panel B: Telangana Rising – Economic Justice', when: `${FRI} | 11:00 am - 12:30 pm`,
         speakers: [
+          ['B. Mahesh Kumar Goud', 'President, TPCC', 'B. Mahesh Kumar Goud, President, TPCC, speaks at Panel B: Telangana Rising – Economic Justice.'],
+          ['Dr Venkat Balmoor', 'MLC, Telangana & Whip, Telangana Legislative Council', 'Dr Venkat Balmoor, MLC, Telangana & Whip, Telangana Legislative Council, speaks at Panel B: Telangana Rising – Economic Justice.'],
+          ['Dr Rathin Roy', 'Former Member, EAC to PM & Former Director, NIPFP', 'Dr Rathin Roy, Former Member, EAC to PM & Former Director, NIPFP, speaks at Panel B: Telangana Rising – Economic Justice.'],
           ['Himanshu', 'Associate Professor, Centre for Economic Studies and Planning, Jawaharlal Nehru University', 'Himanshu is an Associate Professor at the Centre for Economic Studies and Planning, Jawaharlal Nehru University, New Delhi. His research covers poverty, inequality, employment, food security and agrarian change. He has served on government bodies including the Expert Group on Measurement of Poverty (Tendulkar Committee) and the National Statistical Commission. He has held visiting fellowships at the London School of Economics and UNU-WIDER, and received the Sanjay Thakur Young Economist Award.'],
-        ],
-      },
-      {
-        title: 'Telangana Rising: Social Justice', when: `${FRI} | 2:00 pm - 3:30 pm`,
-        speakers: [
-          ['Bhangya Bhukya', 'Professor of History, University of Hyderabad', 'Bhangya Bhukya is Professor of History at the University of Hyderabad. He previously taught at the English and Foreign Languages University, Hyderabad, and at Osmania University. His research focuses on the tribal histories of the Deccan, including the Banjara (Lambada) and Gond communities. His books include Subjugated Nomads: The Lambadas under the Rule of the Nizams (2010) and A Cultural History of Telangana (2017). He holds a PhD from the University of Warwick.'],
-          ['Kancha Ilaiah Shepherd', 'Political theorist, writer and Dalit rights activist', 'Kancha Ilaiah Shepherd is a political theorist, writer and Dalit rights activist. He was a professor of political science at Osmania University, where he headed the department, and a former Director of the Centre for the Study of Social Exclusion and Inclusive Policy at Maulana Azad National Urdu University. He has served on the National Research Committee of the Ministry of Social Justice and the Indian Council of Social Science Research. He received the Mahatma Jyotirao Phule Award in 2000 and is the author of Why I Am Not a Hindu (1996).'],
-        ],
-      },
-      {
-        title: 'Telangana Rising: Welfare Policies', when: `${FRI} | 2:00 pm - 3:30 pm`,
-        speakers: [
-          ['K. Raju', 'Indian National Congress leader', 'K. Raju is a leader of the Indian National Congress.'],
-          ['Shantha Sinha', 'Professor, Hyderabad Central University; Founder, MV Foundation', 'Shantha Sinha is a child rights activist and Professor in the Department of Political Science at Hyderabad Central University. She founded the MV Foundation, an organisation working against child labour. She was the first Chairperson of the National Commission for Protection of Child Rights (NCPCR), serving two consecutive three-year terms from 2007. She received the Ramon Magsaysay Award in 2003 and the Padma Shri.'],
-        ],
-      },
-      {
-        title: 'Telangana Rising: Federalism', when: `${SAT} | 10:00 am - 11:30 am`,
-        speakers: [
+          ['Prof. Santosh Mehrotra', 'Former Professor, JNU', 'Prof. Santosh Mehrotra, Former Professor, JNU, speaks at Panel B: Telangana Rising – Economic Justice.'],
+          ['Dr Kadiyam Kavya', 'MP, Lok Sabha', 'Dr Kadiyam Kavya, MP, Lok Sabha, speaks at Panel B: Telangana Rising – Economic Justice.'],
           ['Amir Ullah Khan', 'Economist; Member, Telangana Public Service Commission', 'Amir Ullah Khan is an economist and a Member of the Telangana Public Service Commission. He is also a member of the Government of India\'s Technical Advisory Committee on Prices and Cost of Living, and a visiting professor at the Indian School of Business, the Tata Institute of Social Sciences and NALSAR, Hyderabad. He is co-editor of SAGE\'s Journal of Development Policy and Practice. He was previously Founder-Vice Chancellor of Glocal University and Executive Director and Editor at Encyclopaedia Britannica.'],
+        ],
+      },
+      {
+        title: 'Panel C: Telangana Rising – Social Justice', when: `${FRI} | 2:00 pm - 3:30 pm`,
+        speakers: [
+          ['Ponnam Prabhakar Goud', 'Minister of Transport, Govt of Telangana', 'Ponnam Prabhakar Goud, Minister of Transport, Govt of Telangana, speaks at Panel C: Telangana Rising – Social Justice.'],
+          ['Danasari Seethakka', 'Minister of Women and Child Welfare, Govt of Telangana', 'Danasari Seethakka, Minister of Women and Child Welfare, Govt of Telangana, speaks at Panel C: Telangana Rising – Social Justice.'],
+          ['Justice B. Sudarshan Reddy', 'Former Judge, Supreme Court of India', 'Justice B. Sudarshan Reddy, Former Judge, Supreme Court of India, speaks at Panel C: Telangana Rising – Social Justice.'],
+          ['Kancha Ilaiah Shepherd', 'Political theorist, writer and Dalit rights activist', 'Kancha Ilaiah Shepherd is a political theorist, writer and Dalit rights activist. He was a professor of political science at Osmania University, where he headed the department, and a former Director of the Centre for the Study of Social Exclusion and Inclusive Policy at Maulana Azad National Urdu University. He has served on the National Research Committee of the Ministry of Social Justice and the Indian Council of Social Science Research. He received the Mahatma Jyotirao Phule Award in 2000 and is the author of Why I Am Not a Hindu (1996).'],
+          ['Bhangya Bhukya', 'Professor of History, University of Hyderabad', 'Bhangya Bhukya is Professor of History at the University of Hyderabad. He previously taught at the English and Foreign Languages University, Hyderabad, and at Osmania University. His research focuses on the tribal histories of the Deccan, including the Banjara (Lambada) and Gond communities. His books include Subjugated Nomads: The Lambadas under the Rule of the Nizams (2010) and A Cultural History of Telangana (2017). He holds a PhD from the University of Warwick.'],
+          ['Prof. Sujatha Surepally', 'Professor, Satavahana University', 'Prof. Sujatha Surepally, Professor, Satavahana University, speaks at Panel C: Telangana Rising – Social Justice.'],
+          ['Alka Lamba', 'President, All India Mahila Congress', 'Alka Lamba, President, All India Mahila Congress, speaks at Panel C: Telangana Rising – Social Justice.'],
+        ],
+      },
+      {
+        title: 'Panel D: Telangana Rising – Welfare Policies', when: `${FRI} | 2:00 pm - 3:30 pm`,
+        speakers: [
+          ['Adluri Laxman Kumar', 'MLA, Telangana', 'Adluri Laxman Kumar, MLA, Telangana, speaks at Panel D: Telangana Rising – Welfare Policies.'],
+          ['Dr P. Vinay Kumar', 'Gastroenterological Surgeon & Social Activist', 'Dr P. Vinay Kumar, Gastroenterological Surgeon & Social Activist, speaks at Panel D: Telangana Rising – Welfare Policies.'],
+          ['Shantha Sinha', 'Professor, Hyderabad Central University; Founder, MV Foundation', 'Shantha Sinha is a child rights activist and Professor in the Department of Political Science at Hyderabad Central University. She founded the MV Foundation, an organisation working against child labour. She was the first Chairperson of the National Commission for Protection of Child Rights (NCPCR), serving two consecutive three-year terms from 2007. She received the Ramon Magsaysay Award in 2003 and the Padma Shri.'],
+          ['Ram Murthy Sunkari', 'Senior Journalist', 'Ram Murthy Sunkari, Senior Journalist, speaks at Panel D: Telangana Rising – Welfare Policies.'],
+          ['K. Raju', 'AICC In-charge, Jharkhand & National Coordinator, SC, ST, OBC and Minorities Department', 'K. Raju is AICC In-charge for Jharkhand and National Coordinator of the Congress SC, ST, OBC and Minorities Department.'],
+          ['Dr Kota Neelima', 'Vice President, TPCC', 'Dr Kota Neelima, Vice President, TPCC, speaks at Panel D: Telangana Rising – Welfare Policies.'],
+          ['Dr Arathi Krishna', 'MLC, Karnataka', 'Dr Arathi Krishna, MLC, Karnataka, speaks at Panel D: Telangana Rising – Welfare Policies.'],
+        ],
+      },
+      {
+        title: 'Plenary 1: Interactive Session with Leaders', when: `${FRI} | 4:00 pm - 5:30 pm`,
+        speakers: [
+          ['Mallu Bhatti Vikramarka', 'Deputy Chief Minister, Govt of Telangana', 'Mallu Bhatti Vikramarka, Deputy Chief Minister, Govt of Telangana, speaks at Plenary 1: Interactive Session with Leaders.'],
+          ['D. Sridhar Babu', 'Minister of IT, Govt of Telangana', 'D. Sridhar Babu, Minister of IT, Govt of Telangana, speaks at Plenary 1: Interactive Session with Leaders.'],
+          ['N. Uttam Kumar Reddy', 'Minister of Irrigation, Food & Civil Supplies, Govt of Telangana', 'N. Uttam Kumar Reddy, Minister of Irrigation, Food & Civil Supplies, Govt of Telangana, speaks at Plenary 1: Interactive Session with Leaders.'],
+        ],
+      },
+      {
+        title: 'Panel E: Telangana Rising – Cooperative Federalism', when: `${SAT} | 10:00 am - 11:30 am`,
+        speakers: [
+          ['N. Uttam Kumar Reddy', 'Minister of Irrigation, Food & Civil Supplies, Govt of Telangana', 'N. Uttam Kumar Reddy, Minister of Irrigation, Food & Civil Supplies, Govt of Telangana, speaks at Panel E: Telangana Rising – Cooperative Federalism.'],
+          ['Chamala Kiran Kumar Reddy', 'MP, Lok Sabha', 'Chamala Kiran Kumar Reddy, MP, Lok Sabha, speaks at Panel E: Telangana Rising – Cooperative Federalism.'],
+          ['Ghulam Ahmad Mir', 'AICC In-charge, Tamil Nadu & Puducherry', 'Ghulam Ahmad Mir, AICC In-charge, Tamil Nadu & Puducherry, speaks at Panel E: Telangana Rising – Cooperative Federalism.'],
+          ['Prof. Ganesh Devy', 'Author & Linguist', 'Prof. Ganesh Devy, Author & Linguist, speaks at Panel E: Telangana Rising – Cooperative Federalism.'],
+          ['Aditi Mehta', 'Former IAS', 'Aditi Mehta, Former IAS, speaks at Panel E: Telangana Rising – Cooperative Federalism.'],
           ['Madhu Yaskhi Goud', 'Chairperson, All India Professionals Congress', 'Madhu Yaskhi Goud is Chairperson of the All India Professionals Congress, a post he took up in September 2026. He served as a Member of Parliament in the Lok Sabha for Nizamabad, Telangana, from 2004 to 2014. He has been an official spokesperson of the All India Congress Committee and was an acting AICC secretary from 2007. He contested the L.B. Nagar seat for the Congress in the 2023 Telangana Assembly election.'],
+          ['Shilpi Neha Tirkey', 'Minister of Agriculture, Animal Husbandry & Co-operative, Govt of Jharkhand', 'Shilpi Neha Tirkey, Minister of Agriculture, Animal Husbandry & Co-operative, Govt of Jharkhand, speaks at Panel E: Telangana Rising – Cooperative Federalism.'],
         ],
       },
       {
-        title: 'Telangana Rising: Culture & Society', when: `${SAT} | 10:00 am - 11:30 am`,
+        title: 'Panel F: Telangana Rising – Culture & Society', when: `${SAT} | 10:00 am - 11:30 am`,
         speakers: [
+          ['Prof. M. Kodandaram', 'Chairperson, Telangana Joint Action Committee', 'Prof. M. Kodandaram, Chairperson, Telangana Joint Action Committee, speaks at Panel F: Telangana Rising – Culture & Society.'],
+          ['Dr Alekhya Punjala', 'Classical Dancer', 'Dr Alekhya Punjala, Classical Dancer, speaks at Panel F: Telangana Rising – Culture & Society.'],
           ['Ajay Gudavarthy', 'Associate Professor, Centre for Political Studies, Jawaharlal Nehru University', 'Ajay Gudavarthy is an Associate Professor at the Centre for Political Studies, Jawaharlal Nehru University, New Delhi, where he has taught since 2006. He previously taught at the National Law School of India University, Bangalore, and at the National University of Juridical Sciences, Kolkata. He was a Charles Wallace Visiting Fellow at SOAS, University of London, in 2008, and has held visiting fellowships at Goldsmiths, University of London, and the University of Aberdeen.'],
+          ['Sandeep Dikshit', 'Chairperson, Rachnatmak Congress', 'Sandeep Dikshit, Chairperson, Rachnatmak Congress, speaks at Panel F: Telangana Rising – Culture & Society.'],
+          ['Seema Chishti', 'Chief Editor, The Wire', 'Seema Chishti, Chief Editor, The Wire, speaks at Panel F: Telangana Rising – Culture & Society.'],
+          ['Krishna Rao', 'Cultural Minister', 'Krishna Rao, Cultural Minister, speaks at Panel F: Telangana Rising – Culture & Society.'],
+          ['Prof. Apoorvanand', 'Delhi University', 'Prof. Apoorvanand, Delhi University, speaks at Panel F: Telangana Rising – Culture & Society.'],
         ],
       },
       {
-        title: 'Telangana Rising: Youth & Sports', when: `${SAT} | 12:00 pm - 1:30 pm`,
+        title: 'Panel G: Telangana Rising – Youth & Sports', when: `${SAT} | 12:00 pm - 1:30 pm`,
         speakers: [
-          ['Manish Sharma', 'Indian National Congress leader', 'Manish Sharma is a leader of the Indian National Congress.'],
+          ['Vakiti Srihari', 'MLA, Telangana', 'Vakiti Srihari, MLA, Telangana, speaks at Panel G: Telangana Rising – Youth & Sports.'],
+          ['Mohammad Azharuddin', 'Minister for Minority Welfare and Public Enterprises, Govt of Telangana', 'Mohammad Azharuddin, Minister for Minority Welfare and Public Enterprises, Govt of Telangana, speaks at Panel G: Telangana Rising – Youth & Sports.'],
+          ['Vamsi Krishna Gaddam', 'MP, Lok Sabha', 'Vamsi Krishna Gaddam, MP, Lok Sabha, speaks at Panel G: Telangana Rising – Youth & Sports.'],
+          ['Vinesh Phogat', 'MLA, Haryana', 'Vinesh Phogat, MLA, Haryana, speaks at Panel G: Telangana Rising – Youth & Sports.'],
+          ['Manish Sharma', 'In-charge, Indian Youth Congress', 'Manish Sharma is In-charge of the Indian Youth Congress.'],
+          ['Dr Vikrant Bhuria', 'Chairman, AICC Adivasi Department', 'Dr Vikrant Bhuria, Chairman, AICC Adivasi Department, speaks at Panel G: Telangana Rising – Youth & Sports.'],
+          ['Brijendra Singh', 'Vice Chairman, AICC Foreign Affairs', 'Brijendra Singh, Vice Chairman, AICC Foreign Affairs, speaks at Panel G: Telangana Rising – Youth & Sports.'],
+          ['Anil Kumar Yadav', 'MP', 'Anil Kumar Yadav, MP, speaks at Panel G: Telangana Rising – Youth & Sports.'],
         ],
       },
       {
-        title: 'Electoral Integrity: Telangana & India', when: `${SAT} | 12:00 pm - 1:30 pm`,
+        title: 'Panel H: Electoral Integrity, Telangana & India', when: `${SAT} | 12:00 pm - 1:30 pm`,
         speakers: [
-          ['SDJM Prasad', 'Indian National Congress leader', 'SDJM Prasad is a leader of the Indian National Congress.'],
+          ['Nikhil Dey', 'Founder Member, MKSS', 'Nikhil Dey, Founder Member, MKSS, speaks at Panel H: Electoral Integrity, Telangana & India.'],
+          ['Anjali Bhardwaj', 'Transparency Rights Activist', 'Anjali Bhardwaj, Transparency Rights Activist, speaks at Panel H: Electoral Integrity, Telangana & India.'],
+          ['Tara Rao', 'Eddelu, Karnataka', 'Tara Rao, Eddelu, Karnataka, speaks at Panel H: Electoral Integrity, Telangana & India.'],
+          ['Dr Sirivella Prasad', 'AICC In-charge, Maharashtra', 'Dr Sirivella Prasad, AICC In-charge, Maharashtra, speaks at Panel H: Electoral Integrity, Telangana & India.'],
+          ['Dr Parnika Reddy', 'MLA', 'Dr Parnika Reddy, MLA, speaks at Panel H: Electoral Integrity, Telangana & India.'],
+          ['Prof. Mukulika Banerjee', 'Professor, London School of Economics', 'Prof. Mukulika Banerjee, Professor, London School of Economics, speaks at Panel H: Electoral Integrity, Telangana & India.'],
+          ['Sashikant Senthil', 'MP, Lok Sabha', 'Sashikant Senthil, MP, Lok Sabha, speaks at Panel H: Electoral Integrity, Telangana & India.'],
         ],
       },
     ],
@@ -308,14 +361,63 @@ const COUNTRY = {
   'Madhu Yaskhi Goud': 'India',
   'Ajay Gudavarthy': 'India',
   'Manish Sharma': 'India',
-  'SDJM Prasad': 'India',
+  'Dr Sirivella Prasad': 'India',
+  // Telangana Rising panellists added from the agenda document (Prof. Mukulika Banerjee, LSE: not confirmed)
+  'D. Sridhar Babu': 'India',
+  'Vijay Mahajan': 'India',
+  'Sajjad Shahid': 'India',
+  'Divya Spandana': 'India',
+  'Dr Ajoy Kumar': 'India',
+  'B. Mahesh Kumar Goud': 'India',
+  'Dr Venkat Balmoor': 'India',
+  'Dr Rathin Roy': 'India',
+  'Prof. Santosh Mehrotra': 'India',
+  'Dr Kadiyam Kavya': 'India',
+  'Ponnam Prabhakar Goud': 'India',
+  'Danasari Seethakka': 'India',
+  'Justice B. Sudarshan Reddy': 'India',
+  'Prof. Sujatha Surepally': 'India',
+  'Alka Lamba': 'India',
+  'Adluri Laxman Kumar': 'India',
+  'Dr P. Vinay Kumar': 'India',
+  'Ram Murthy Sunkari': 'India',
+  'Dr Kota Neelima': 'India',
+  'Dr Arathi Krishna': 'India',
+  'Mallu Bhatti Vikramarka': 'India',
+  'N. Uttam Kumar Reddy': 'India',
+  'Chamala Kiran Kumar Reddy': 'India',
+  'Ghulam Ahmad Mir': 'India',
+  'Prof. Ganesh Devy': 'India',
+  'Aditi Mehta': 'India',
+  'Shilpi Neha Tirkey': 'India',
+  'Prof. M. Kodandaram': 'India',
+  'Dr Alekhya Punjala': 'India',
+  'Sandeep Dikshit': 'India',
+  'Seema Chishti': 'India',
+  'Krishna Rao': 'India',
+  'Prof. Apoorvanand': 'India',
+  'Vakiti Srihari': 'India',
+  'Mohammad Azharuddin': 'India',
+  'Vamsi Krishna Gaddam': 'India',
+  'Vinesh Phogat': 'India',
+  'Dr Vikrant Bhuria': 'India',
+  'Brijendra Singh': 'India',
+  'Anil Kumar Yadav': 'India',
+  'Nikhil Dey': 'India',
+  'Anjali Bhardwaj': 'India',
+  'Tara Rao': 'India',
+  'Dr Parnika Reddy': 'India',
+  'Sashikant Senthil': 'India',
 }
 
-const NO_PHOTO = new Set([])
+// No photo yet (initials instead): Panel C's two photos are both labelled Sujatha Surepally, one probably Alka Lamba.
+// Remove a name here once its photo is in public/assets/speakers/.
+const NO_PHOTO = new Set(['Prof. Sujatha Surepally', 'Alka Lamba'])
 // "María José Pizarro" -> "maria-jose-pizarro", the photo's file name
 const slug = (name) => name.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 
-const initials = (name) => name.replace(/^(Dr\.?|M\.V\.)\s*/, '').split(/\s+/).filter((w) => /^\p{Lu}/u.test(w)).slice(0, 2).map((w) => w[0]).join('')
+// leading titles are skipped: "Prof. Sujatha Surepally" -> "SS"
+const initials = (name) => name.replace(/^((Dr|Prof|Justice)\.?\s+|M\.V\.\s*)+/, '').split(/\s+/).filter((w) => /^\p{Lu}/u.test(w)).slice(0, 2).map((w) => w[0]).join('')
   || name.slice(0, 2).toUpperCase()
 
 let n = 0
