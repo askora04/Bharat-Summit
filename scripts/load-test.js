@@ -2,6 +2,11 @@
 //   k6 run scripts/load-test.js                          # bharatsummit.co, up to 200 visitors, ~8 min
 //   k6 run -e PEAK=50 -e BASE_URL=https://staging... scripts/load-test.js
 //   k6 run -e SMOKE=1 scripts/load-test.js               # ~40s with 4 visitors: checks the script works
+//   k6 cloud run -e PEAK=5000 -e LITE=1 -e CAP_GB=40 scripts/load-test.js
+//                                                        # Grafana Cloud k6: 5000 visitors from its servers
+//                                                        # (see load-test-5000-users.txt for the steps)
+// Options: PEAK (visitors at the peak), LITE=1 (pages, scripts, styles and data only: no images or videos, about
+// a tenth of the bandwidth), CAP_GB (stop the test once it has downloaded this much; 15 by default).
 //
 // Two scenarios run together:
 //   visitors  simulated people: open the home page (the page, its scripts and styles, the font, images and the
@@ -11,7 +16,7 @@
 //   probe     a steady 2 small requests a second (the page, the video and photo lists) to show how quickly the
 //             server answers as the load rises (probe_ttfb), apart from download times.
 // Videos are requested as a browser starts them: the first 1 MB (a Range request); the rest would stream while
-// the visitor watches. The test stops itself if it downloads more than 15 GB (Vercel bandwidth).
+// the visitor watches. The test stops itself once it has downloaded CAP_GB (Vercel bandwidth).
 import http from 'k6/http'
 import { check, sleep } from 'k6'
 import { Trend } from 'k6/metrics'
@@ -20,6 +25,8 @@ const BASE = __ENV.BASE_URL || 'https://bharatsummit.co'
 const SMOKE = !!__ENV.SMOKE // a ~30s run with a few visitors, to check the script: k6 run -e SMOKE=1 scripts/load-test.js
 const PEAK = SMOKE ? 4 : Number(__ENV.PEAK || 200)
 const T = (min) => (SMOKE ? `${min * 5}s` : `${min}m`) // stage lengths
+const LITE = !!__ENV.LITE // no images or videos
+const CAP_GB = Number(__ENV.CAP_GB || 15)
 
 const probeTtfb = new Trend('probe_ttfb', true)
 const pageTtfb = new Trend('page_ttfb', true)
@@ -41,10 +48,16 @@ export const options = {
     http_req_failed: ['rate<0.01'], // fewer than 1% of requests fail
     probe_ttfb: ['p(95)<800'], // the server answers 95% of small requests within 0.8s
     page_ttfb: ['p(95)<1000'],
-    data_received: [{ threshold: 'count<15000000000', abortOnFail: true }], // safety cap: 15 GB
+    data_received: [{ threshold: `count<${CAP_GB * 1e9}`, abortOnFail: true }], // safety cap: CAP_GB
   },
   summaryTrendStats: ['avg', 'min', 'med', 'p(90)', 'p(95)', 'p(99)', 'max'],
   userAgent: 'k6 load test (Bharat Summit site owner)',
+  // Grafana Cloud k6 (k6 cloud run): the test's name there, and where the load comes from: Mumbai, next to the
+  // Vercel data centre that serves India. Ignored by a local k6 run.
+  cloud: {
+    name: `Bharat Summit, ${PEAK} visitors${LITE ? ' (lite)' : ''}`,
+    distribution: { mumbai: { loadZone: 'amazon:in:mumbai', percent: 100 } },
+  },
 }
 
 const pick = (list, n) => { const a = [...list]; const out = []; while (a.length && out.length < n) out.push(a.splice(Math.floor(Math.random() * a.length), 1)[0]); return out }
@@ -75,19 +88,21 @@ function home(d) {
   const res = http.get(BASE + '/', { tags: { kind: 'page' } })
   ok(res); pageTtfb.add(res.timings.waiting)
   batch([...d.code.map((p) => req(p, 'static')), req('/assets/fonts/Jost.woff2', 'static'), req('/assets/logo.svg', 'image')])
+  if (LITE) return
   batch(pick(d.images, 18).map((p) => req(p, 'image')))
-  ok(http.get(BASE + '/videos/hero-banner.mp4?v=8', { tags: { kind: 'video' } })) // the banner plays on every visit
+  ok(http.get(BASE + '/videos/hero-banner.mp4?v=9', { tags: { kind: 'video' } })) // the banner plays on every visit
 }
 
 function page(d) {
   const r = Math.random()
   if (r < 0.2) { // Summit Archives: gallery thumbnails, a few larger photos, the video posters; some start a video
     batch([req('/gallery/gallery.json', 'data'), req('/videos/videos.json', 'data')])
+    if (LITE) return
     batch([...pick(d.photos, 24).map((id) => req(`/gallery/${id}-480.webp`, 'image')), ...pick(d.photos, 4).map((id) => req(`/gallery/${id}-960.webp`, 'image'))])
     batch(d.videos.map((id) => req(`/videos/${id}.webp`, 'image')))
     if (Math.random() < 0.25) ok(http.get(`${BASE}/videos/${pick(d.videos, 1)[0]}.mp4`, { headers: { Range: 'bytes=0-1048575' }, tags: { kind: 'video' } }))
   } else { // About, Schedule, Speakers, a speaker: the page's images (the scripts are already loaded)
-    batch(pick(d.images, 14).map((p) => req(p, 'image')))
+    if (!LITE) batch(pick(d.images, 14).map((p) => req(p, 'image')))
   }
 }
 

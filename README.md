@@ -37,6 +37,7 @@ npm run dev       # http://localhost:5173
 | `npm run gallery -- <folders>` | Build the photo gallery into `public/gallery/` (see below) |
 | `npm run videos -- <folder>` | Build the event videos into `public/videos/` (see below) |
 | `k6 run scripts/load-test.js` | Load-test the live site with [Grafana k6](https://k6.io) (up to 200 visitors, ~8 min; `-e PEAK=50` for fewer, `-e SMOKE=1` for a 40 s check). Uses real bandwidth: the 200-visitor run downloads ~10 GB |
+| `k6 cloud run -e PEAK=5000 -e LITE=1 -e CAP_GB=40 scripts/load-test.js` | The 5000-visitor test on Grafana Cloud k6 (load from Mumbai, no images or videos). Steps and costs: [load-test-5000-users.txt](load-test-5000-users.txt) |
 
 Routing uses the History API (`/about-us`, `/schedule`, `/speakers`, `/events`), so the host must serve `index.html` for unknown paths (SPA fallback). `vercel.json` already does this for Vercel.
 

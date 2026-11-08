@@ -3,7 +3,7 @@ import { a, Title, Portrait, TriBar, dragMarquee } from './shared.jsx'
 import { Link } from '../lib/router.jsx'
 import './home.css'
 import SummitNumbers from './SummitNumbers.jsx'
-import { SPEAKERS } from '../data/speakersData.js'
+import { ALL_SPEAKERS } from '../data/speakersData.js'
 import { SpeakerCard } from './SpeakersPage.jsx'
 import OrganizedBy from './OrganizedBy.jsx'
 import { useGallery, photoUrl } from '../lib/gallery.js'
@@ -12,7 +12,7 @@ const h = (name) => a(`home/${name}`)
 const ADDRESS = 'Novotel & HICC Complex, Near HITEC City, Kondapur, Hyderabad, Telangana 500081, India'
 const MAPS_URL = 'https://www.google.com/maps/search/?api=1&query=17.4730,78.3740'
 
-const SPEAKER_ROWS = [SPEAKERS.slice(0, 8), SPEAKERS.slice(8, 16)]
+const SPEAKER_ROWS = [ALL_SPEAKERS.slice(0, 8), ALL_SPEAKERS.slice(8, 16)]
 
 const SBF_URL = 'https://www.samruddhabharat.in/'
 // From the foundation's own site (samruddhabharat.in)

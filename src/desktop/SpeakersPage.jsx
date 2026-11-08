@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { a, TriBar, measureCover } from './shared.jsx'
 import { Link, usePath } from '../lib/router.jsx'
-import { PARTS, SPEAKERS } from '../data/speakersData.js'
+import { ALL_SPEAKERS, PARTS, SPEAKERS } from '../data/speakersData.js'
 import './speakers.css'
 
 // Footer line art standing along the banner's lower right, out to the edge.
@@ -66,19 +66,17 @@ export function SpeakerCard({ speaker, index = 0, copy = false, className = '' }
     <Link className={`sp-card${className ? ` ${className}` : ''}`} style={{ '--i': index % 10 }} to={`/speakers/${speaker.id}`}
       aria-hidden={copy || undefined} tabIndex={copy ? -1 : undefined}
       onPointerEnter={measureCover} onFocus={measureCover}
-      aria-label={`${speaker.name}${speaker.moderator ? ' (Moderator)' : ''}${speaker.role ? `, ${speaker.role}` : ''}. View profile`}>
+      aria-label={`${speaker.name}${speaker.role ? `, ${speaker.role}` : ''}. View profile`}>
       <Initials speaker={speaker} className="sp-card-photo" />
       {/* shown by default: the name, designation and country */}
       <span className="sp-card-body">
         <span className="sp-card-name">{speaker.name}</span>
-        {speaker.moderator && <span className="sp-mod">Moderator</span>}
         {speaker.role && <span className="sp-card-role">{speaker.role}</span>}
         <span className="sp-card-country">{speaker.country}</span>{/* kept when empty: every card the same height */}
       </span>
       {/* on hover: the name with the designation, session and time from the profile, over the card's lower part */}
       <span className="sp-card-body sp-hover" aria-hidden>
         <span className="sp-card-name">{speaker.name}</span>
-        {speaker.moderator && <span className="sp-mod">Moderator</span>}
         {speaker.role && <span className="sp-card-role">{speaker.role}</span>}
         {speaker.session && <span className="sp-card-session">{speaker.session}</span>}
         {speaker.when && <span className="sp-card-when">{speaker.when}</span>}
@@ -198,7 +196,6 @@ function SpeakerDetail({ speaker }) {
         <Initials speaker={speaker} className="sp-detail-photo" />
         <div className="sp-detail-info">
           <h1>{speaker.name}</h1>
-          {speaker.moderator && <span className="sp-mod">Moderator</span>}
           {speaker.role && <p className="sp-detail-role">{speaker.role}</p>}
           <p className="sp-detail-country">{speaker.session}</p>
           <p className="sp-detail-when">{speaker.when}</p>
@@ -249,7 +246,7 @@ export default function SpeakersPage() {
 
           {filter === 'all' ? (
             <div className="sp-grid sp-grid-all">
-              {SPEAKERS.map((sp, i) => <SpeakerCard key={sp.id} speaker={sp} index={i} />)}
+              {ALL_SPEAKERS.map((sp, i) => <SpeakerCard key={sp.id} speaker={sp} index={i} />)}
             </div>
           ) : parts.map(({ part, sessions }) => (
             <section className="sp-part" key={part}>

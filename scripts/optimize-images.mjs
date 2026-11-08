@@ -13,8 +13,8 @@ const MAX_WIDTH = 2000
 const MAX_WIDTH_FOR = {
   'hicc.png': 1320, // venue photo, shown at most ~660px wide (2x)
 }
-// speaker cut-outs: all 512px square, 2x the largest card they're shown in
-const SPEAKER_WIDTH = 512
+// speaker cut-outs: up to 1024px square, 2x the largest the profile shows them (525px tall)
+const SPEAKER_WIDTH = 1024
 const toSlash = (p) => p.split('\\').join('/')
 const ONLY = process.argv.slice(2).map(toSlash)
 
@@ -45,7 +45,8 @@ async function measureHead(src) {
   let top = 0
   while (top < info.height - 1 && !span(top)) top++
   const rows = []
-  for (let y = top; y <= Math.min(top + 110, info.height - 1); y += 2) { const r = span(y); if (r) rows.push(r) }
+  const depth = Math.round(info.height * 110 / 512), step = Math.max(2, Math.round(depth / 55)) // the top of the head, whatever the size
+  for (let y = top; y <= Math.min(top + depth, info.height - 1); y += step) { const r = span(y); if (r) rows.push(r) }
   return { top, centre: rows.reduce((s, [a, b]) => s + (a + b) / 2, 0) / rows.length }
 }
 

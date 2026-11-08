@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { a, Title, Lines, Portrait, Marquee } from './shared.jsx'
 import { Link } from '../lib/router.jsx'
-import { SPEAKERS } from '../data/speakersData.js'
+import { ALL_SPEAKERS } from '../data/speakersData.js'
 import { SpeakerCard } from './SpeakersPage.jsx'
 import MediaCoverage from './MediaCoverage.jsx'
 import Scroller from '../lib/Scroller.jsx'
@@ -196,7 +196,7 @@ export default function AboutPage() {
           <Title light="WORLD" bold="LEADERS, VISIONARIES, CHANGEMAKERS" />
           <p className="lede">Global leaders, renowned scholars, and change makers from across the world.</p>
           <div className="container">
-            <Marquee className="speakers" drag clickableCopy items={SPEAKERS.slice(0, 10)} render={(s, copy, i) => <SpeakerCard speaker={s} index={i} copy={copy === 1} className="sp-card-row" />} />
+            <Marquee className="speakers" drag clickableCopy items={ALL_SPEAKERS.slice(0, 10)} render={(s, copy, i) => <SpeakerCard speaker={s} index={i} copy={copy === 1} className="sp-card-row" />} />
           </div>
           <Link className="btn btn-primary leaders-btn" to="/speakers">Click to Know More&nbsp;&nbsp;→</Link>
         </section>

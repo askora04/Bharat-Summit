@@ -33,7 +33,7 @@ const CARDS = '.sp-card, .speaker, .h-speaker'
 // A card's two heights, read from the page (reads only: no writes in between, see writeCard)
 function readCard(card) {
   const panel = card.querySelector('.sp-hover')
-  // closed, the panel shows the name (and the Moderator badge, where there is one)
+  // closed, the panel shows the name
   const name = panel?.querySelector(':scope > .sp-mod') || panel?.firstElementChild
   if (!name) return null
   const pad = parseFloat(getComputedStyle(panel).paddingBottom) || 0

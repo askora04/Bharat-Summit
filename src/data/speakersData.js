@@ -1,7 +1,7 @@
 import { a } from '../lib/asset.js'
 
 // Bharat Summit 2026: sessions and confirmed speakers, from "Website Content" (speaker list as of
-// 26 October 2026). Photos are the document's, background removed (assets-original/speakers/);
+// 26 October 2026), with the new speakers of 8 November 2026. Photos are the documents', background removed (assets-original/speakers/);
 // speakers it marks "[photo needed]" show their initials instead.
 
 // Brand navy (from the colour sheet): every card's background.
@@ -21,6 +21,7 @@ const RAW = [
         about: 'India’s growing economic, political and diplomatic weight gives it an increasingly important role in debates about the future of the international order. This plenary will bring together perspectives on India’s place in a changing world and examine how India can engage with the Global South, major powers and emerging international institutions while pursuing its own interests. This is the India-focused bridge between domestic priorities and the international system. While other panels examine global politics, economics or geopolitics generally, this one asks specifically: where does India fit into all of this, and what role can it play?',
         speakers: [
           ['Salman Khurshid', 'Senior Advocate; Indian National Congress; former Minister of External Affairs of India (2012-2014)', 'Salman Khurshid is a designated senior advocate and a leading member of the Indian National Congress. He served as Minister of External Affairs of India from 28 October 2012 to 25 May 2014 in the government of Prime Minister Manmohan Singh, and was elected to the Lok Sabha from Farrukhabad in 2009. He is also an author and law teacher, and was later appointed to chair the party\'s foreign affairs department.'],
+          ['Pushparaj Deshpande', 'Director, Samruddha Bharat Foundation', 'Pushparaj Deshpande is Director of the Samruddha Bharat Foundation, a public policy organisation based in New Delhi. He has edited the Foundation\'s Rethinking India series of books on public policy.', MOD],
         ],
       },
       {
@@ -29,6 +30,9 @@ const RAW = [
         speakers: [
           ['Christina Wiremu-Brook', 'iTech Policy, Australia', 'Christina Wiremu-Brook works with iTech Policy.'],
           ['Francesco Lapenta', 'Founding Director, Institute of Future and Innovation Studies, John Cabot University, Rome', 'Francesco Lapenta is Founding Director of the Institute of Future and Innovation Studies at John Cabot University in Rome. His work covers emerging technologies, technology governance and future scenario analysis. He has spoken at the ImPACT Coalition session of the UN Summit of the Future in New York and gave a keynote at the Next Generation AI Summit 2025 in Milan.'],
+          ['D. Sridhar Babu', 'Minister for IT, Government of Telangana', 'D. Sridhar Babu is Minister for Information Technology, Industries and Legislative Affairs in the Government of Telangana, and a leader of the Indian National Congress. He represents Manthani in the Telangana Legislative Assembly.'],
+          ['Frédéric Zgainski', 'Former MP, Democratic Movement (MoDem), France', 'Frédéric Zgainski is a French politician of the Democratic Movement (MoDem). He served as a member of the French National Assembly for the Gironde department from 2017 to 2022.'],
+          ['Jesse Marks', 'Rihla Research & Advisory, Australia', 'Jesse Marks works with Rihla Research & Advisory.'],
           ['Supriya Shrinate', 'Chairperson, Social Media and Digital Platforms, Indian National Congress; National Spokesperson', 'Supriya Shrinate chairs the Indian National Congress\'s department of social media and digital platforms, a role she has held since June 2022, and is a national spokesperson for the party. A former journalist with around 18 years in print and electronic media, she worked as an anchor and editor before entering politics. She was appointed a member of the Congress Working Committee in 2023.', MOD],
         ],
       },
@@ -40,6 +44,8 @@ const RAW = [
           ['Ivan Scalfarotto', 'Member of the Italian Parliament (Italia Viva); former Undersecretary of State', 'Ivan Scalfarotto is an Italian politician and a member of Italia Viva. He has been a member of the Italian Parliament since 2013. He served as Undersecretary of State for Constitutional Reforms and Relations with Parliament in the Renzi government, and later as Undersecretary for Economic Development and for Foreign Affairs. He is a long-standing campaigner for LGBT rights in Italy.'],
           ['Jayati Ghosh', 'Professor of Economics, University of Massachusetts Amherst', 'Jayati Ghosh is Professor of Economics at the University of Massachusetts Amherst, a post she has held since January 2021. She is an Indian development economist who taught at Jawaharlal Nehru University, New Delhi, for nearly 35 years. Her research covers international economics and globalisation, employment in developing countries, macroeconomic policy, and gender and development.'],
           ['Thomas Piketty', 'Professor of Economics, EHESS and Paris School of Economics; Co-Director, World Inequality Lab', 'Thomas Piketty is a French economist and Professor at the School for Advanced Studies in the Social Sciences (EHESS), and associate chair at the Paris School of Economics, where he has taught since 2007. He co-directs the World Inequality Lab and the World Inequality Database, and is a Centennial Professor at the International Inequalities Institute of the London School of Economics. His book Capital in the Twenty-First Century became an international bestseller and reshaped public debate on wealth and inequality.'],
+          ['Sir Iqbal Sacranie', 'CEO, Global Group of Companies', 'Sir Iqbal Sacranie is a British businessman and community leader and CEO of the Global Group of Companies. He served as Secretary-General of the Muslim Council of Britain from 2002 to 2006 and was knighted in 2005 for services to community relations.'],
+          ['Deepender Hooda', 'Member of Parliament, Lok Sabha (Rohtak); Indian National Congress', 'Deepender Singh Hooda is a Member of the Lok Sabha for Rohtak, Haryana, for the Indian National Congress. First elected in 2005, he represented Rohtak until 2019, served in the Rajya Sabha from 2020 to 2024, and returned to the Lok Sabha in the 2024 general election.', MOD],
         ],
       },
       {
@@ -50,8 +56,8 @@ const RAW = [
           ['Dariana Polo', 'Coordinator, Progressive Alliance Gender Equality Working Group, Venezuela', 'Dariana Polo is Coordinator of the Progressive Alliance Gender Equality Working Group.'],
           ['Eduardo Zanatta', 'City Councillor (Vereador), Balneario Camboriu, Brazil', 'Eduardo Zanatta is a city councillor (vereador) in Balneario Camboriu, Santa Catarina, Brazil. He holds a degree in International Relations and a master\'s degree in Territorial Planning. Public sources differ on his party affiliation, so it is not stated here.'],
           ['Jessali Andrea de Jesus Zarazua Ramirez', 'Secretary General, International Union of Socialist Youth (IUSY)', 'Jessali Zarazua is Secretary General of the International Union of Socialist Youth (IUSY), an international youth organisation with about 136 member organisations. She is a youth leader from Mexico who was elected to lead the union at its congress.'],
-          ['María José Pizarro', 'Former Senator, Historic Pact, Colombia', 'María José Pizarro is a Colombian politician who served in the Chamber of Representatives from 2018 to 2022 and as a Senator for the Historic Pact from 2022 until her departure from Congress in 2026. She is the daughter of Carlos Pizarro Leongómez, former leader of the M-19 guerrilla movement, who later stood as a presidential candidate before his assassination in 1990.'],
           ['Yves Bunkulu Zola', 'Member, Union pour la Démocratie et le Progrès Social (UDPS), DR Congo; former Minister of Tourism', 'Yves Bunkulu Zola is a member of the Union pour la Démocratie et le Progrès Social (UDPS) in the Democratic Republic of the Congo and a member of parliament. He was appointed Minister of Tourism in the Ilunga government, which served from September 2019 to April 2021, and is listed as Minister of Youth from 2021.'],
+          ['Krishna Allavaru', 'AICC In-charge, Bihar', 'Krishna Allavaru is the All India Congress Committee In-charge for Bihar. He was previously the AICC In-charge of the Indian Youth Congress.', MOD],
         ],
       },
       {
@@ -62,6 +68,9 @@ const RAW = [
           ['Humberto Costa', 'Senator for Pernambuco, Brazil (Workers\' Party); former Minister of Health', 'Humberto Costa is a Brazilian medical doctor and politician of the Workers\' Party (PT). He has represented Pernambuco in the Federal Senate since 2011 and was re-elected in October 2026 for a third consecutive term. He served as Minister of Health from 2003 to 2005 under President Luiz Inacio Lula da Silva, where he oversaw programmes including Farmacia Popular and SAMU. He previously served as a federal deputy for Pernambuco.'],
           ['Karol Cariola', 'Senator for Valparaiso Region, Chile', 'Karol Cariola is a Chilean midwife and politician, and Senator for the Valparaiso Region for 2026 to 2034. She represents the Communist Party of Chile and chairs the Senate\'s permanent committee on water resources, desertification and drought. She was elected to the Chamber of Deputies in 2013 and served as its President from 2024 to 2025.'],
           ['Machris Cabreros', 'Progressive Alliance, Philippines', 'Machris Cabreros works with the Progressive Alliance, the global network of social democratic, socialist and labour parties and organisations.'],
+          ['María José Pizarro', 'Former Senator, Historic Pact, Colombia', 'María José Pizarro is a Colombian politician who served in the Chamber of Representatives from 2018 to 2022 and as a Senator for the Historic Pact from 2022 until her departure from Congress in 2026. She is the daughter of Carlos Pizarro Leongómez, former leader of the M-19 guerrilla movement, who later stood as a presidential candidate before his assassination in 1990.'],
+          ['Gurdeep Singh Sappal', 'Admin In-charge, All India Congress Committee', 'Gurdeep Singh Sappal is Admin In-charge at the All India Congress Committee. He was earlier the founding Chief Executive and Editor-in-Chief of Rajya Sabha TV.'],
+          ['Joshua Osih', 'President, Social Democratic Front, Cameroon, and Member of Parliament', 'Joshua Osih is a Cameroonian politician, a member of the National Assembly and President of the Social Democratic Front (SDF), elected in 2023 to succeed the party\'s founder, John Fru Ndi. He was the SDF\'s candidate in the 2018 presidential election.'],
           ['Saptagiri Ulaka', 'Member of Parliament, Lok Sabha (Koraput); AICC In-charge, Tripura, Manipur, Nagaland and Sikkim', 'Saptagiri Ulaka is a Member of the Lok Sabha representing Koraput, Odisha, for the Indian National Congress, first elected in 2019 and re-elected in 2024. He chairs the Standing Committee on Rural Development and Panchayati Raj and serves as AICC In-charge for Tripura, Manipur, Nagaland and Sikkim. He previously worked as a Senior Project Manager at Infosys in the United States, and earlier with Ranbaxy and HCL Technologies.', MOD],
         ],
       },
@@ -71,6 +80,9 @@ const RAW = [
         speakers: [
           ['Javier Eduardo Monge Matamoros', 'Energy and Climate Change Consultant, Costa Rica', 'Javier Eduardo Monge Matamoros is a Costa Rican consultant on energy and climate change. He has led national and business plans on these issues in Latin America and the Caribbean. His public candidacy profile promotes a green economy that generates decent employment in Costa Rica\'s regions.'],
           ['Jo Leinen', 'Former Member of the European Parliament, Germany (1999-2019)', 'Jo Leinen is a German politician and a member of the Social Democratic Party (SPD). He served as a Member of the European Parliament from 1999 to 2019, sitting on the Committee on Constitutional Affairs, the Committee on Foreign Affairs and the Committee on the Environment, Public Health and Food Safety. He was a prominent voice on constitutional reform and environmental policy during his time in the Parliament.'],
+          ['Akiko Kamei', 'Former Member of the House of Representatives, Japan', 'Akiko Kamei is a former Member of the House of Representatives of Japan. She was first elected to the House in 2017, serving until 2021, and returned to the House after winning the Shimane 1st district by-election in 2024. Her term ended in 2026. She is a member of the Constitutional Democratic Party of Japan (CDP), where she has served as Director of the International Department. Her father, Hisaoki Kamei, was also a member of the House of Representatives.'],
+          ['Gautam Narasimhan', 'Global Lead for Climate, Energy and Environment, UNICEF', 'Gautam Narasimhan is UNICEF\'s Global Lead for Climate, Energy and Environment, working on how climate change affects children and how countries can respond to it.'],
+          ['Kasthuriraani Patto', 'Former Member of Parliament, Malaysia (DAP)', 'Kasthuriraani Patto is a Malaysian politician of the Democratic Action Party (DAP). She was the Member of Parliament for Batu Kawan, Penang, from 2013 to 2022.'],
           ['M.V. Rajeev Gowda', 'Professor, Indian Institute of Management Bangalore; National Spokesperson, Indian National Congress', 'M.V. Rajeev Gowda is a Professor at the Indian Institute of Management Bangalore and a National Spokesperson of the Indian National Congress. He is also an Advisor to Bridge India, a London-based think tank, and Chairman of the Congress Research Department. He served as a Member of the Rajya Sabha for Karnataka from 2014 to 2020, and earlier as a Director on the Central Board of the Reserve Bank of India from 2011 to 2014.', MOD],
         ],
       },
@@ -83,6 +95,8 @@ const RAW = [
           ['Oh Song', 'Secretariat, International Conference of Asian Political Parties (ICAPP)', 'Oh Song works with the Secretariat of the International Conference of Asian Political Parties (ICAPP), a forum of political parties from Asia and Oceania launched in Manila in 2000.'],
           ['Paolo Guerrieri', 'Professor of Economics, Sapienza University of Rome; former Senator, Italian Republic', 'Paolo Guerrieri Paleotti is a professor of economics at Sapienza University of Rome, where he graduated in economics in 1970. He was elected to the Italian Senate in 2013 for the Partito Democratico, representing Liguria, and served until 2018, sitting on the Budget and European Policies committees. He has held visiting posts at institutions including the University of California, Berkeley and the College of Europe, and has published widely on international economics and European integration.'],
           ['Salil Shetty', 'Former Secretary General, Amnesty International; Senior Fellow, Carr Center for Human Rights Policy, Harvard University', 'Salil Shetty served as Secretary General of Amnesty International from 2010 to 2018, the organization\'s eighth holder of the post, and oversaw a shift of its operations towards the global South. Before Amnesty he was Chief Executive of ActionAid International and directed the UN Millennium Campaign from 2003 to 2010. He has been a Senior Fellow at the Carr Center for Human Rights Policy at Harvard University since 2018. He studied at the Indian Institute of Management, Ahmedabad and the London School of Economics.'],
+          ['Maria Joao Rodrigues', 'President, Foundation for European Progressive Studies (FEPS)', 'Dr. Maria João Rodrigues is President of the Foundation for European Progressive Studies (FEPS), a Brussels-based think tank affiliated with the Party of European Socialists, a post she has held since 2017. She was the first woman to lead the foundation. She is a former Member of the European Parliament and former Vice-President of the Socialist and Democratic Group. She also served as Portuguese Minister for Employment.'],
+          ['Anand Sharma', 'MP, Rajya Sabha; Former Union Cabinet Minister, Government of India', 'Anand Sharma is a senior leader of the Indian National Congress. He served as Union Minister of Commerce and Industry from 2009 to 2014, and earlier as Minister of State for External Affairs. A long-serving Member of the Rajya Sabha, he was Deputy Leader of the Opposition there.'],
           ['Gaurav Gogoi', 'Deputy Leader of the Indian National Congress in the Lok Sabha; Member of Parliament, Jorhat, Assam', 'Gaurav Gogoi is Deputy Leader of the Indian National Congress in the Lok Sabha, a post he has held since July 2024, and Member of Parliament for Jorhat, Assam. He previously represented Kaliabor in the Lok Sabha from 2014 to 2024. In 2025 he was elected President of the Assam Pradesh Congress Committee. As Deputy Leader, he serves alongside Rahul Gandhi, the Leader of the Opposition in the Lok Sabha.', MOD],
         ],
       },
@@ -94,6 +108,10 @@ const RAW = [
           ['Hella Ben Youssef', 'Deputy Chair, Socialist International Women; former Deputy Minister, Tunisia', 'Hella Ben Youssef is a Tunisian jurist, feminist activist and politician. She served as Deputy Minister for Women, Family and Children. She is Deputy Chair of Socialist International Women, and she has worked on women\'s and human rights in both Tunisia and France.'],
           ['Martha Tagle Martínez', 'Director, Institute for Citizen Training, Movimiento Ciudadano, Mexico', 'Martha Tagle Martínez is Director of the Institute for Citizen Training of Movimiento Ciudadano, Mexico, a party she helped found. She served as a Senator from 2015 to 2018 and as a Federal Deputy from 2018 to 2021. She is a feminist activist and politician, and was the first national leader of the party\'s women\'s group, Mujeres en Movimiento.'],
           ['Nurima Alkatiri', 'Member of Parliament and Deputy Leader, FRETILIN, Timor-Leste', 'Nurima Alkatiri is a Member of Parliament in Timor-Leste and Deputy Leader of FRETILIN, the Revolutionary Front for an Independent East Timor.'],
+          ['Catherine Arnold', 'National Executive, Labour Party UK', 'Catherine Arnold is a member of the National Executive of the UK Labour Party.'],
+          ['Ntombikayise Sibhidla', 'ANC National Executive Member; ANC Women\'s League, South Africa', 'Ntombikayise Sibhidla is a member of the National Executive of the African National Congress and of the ANC Women\'s League in South Africa.'],
+          ['Renuka Chaudhary', 'INC MP & Former Union Minister, India', 'Renuka Chaudhary is a Member of Parliament for the Indian National Congress, elected to the Rajya Sabha from Telangana in 2024. She served as Union Minister of State (Independent Charge) for Women and Child Development from 2006 to 2009, and earlier as Minister of State for Tourism.'],
+          ['Daša Šašić Šilović', 'Chair, CEE Network for Gender Issues, Croatia', 'Daša Šašić Šilović chairs the CEE Network for Gender Issues, a network working on gender equality in Central and Eastern Europe, and is based in Croatia.'],
           ['Jothimani', 'Member of Parliament (Lok Sabha), Karur, Tamil Nadu; Indian National Congress', 'Jothimani (Sennimalai Jothimani) is a Member of Parliament in the Lok Sabha for Karur, Tamil Nadu, representing the Indian National Congress. She was first elected in 2019, defeating AIADMK leader M. Thambidurai, and was re-elected in 2024. A writer and social worker, she has held party roles including Vice President of the Tamil Nadu Youth Congress and General Secretary of the Indian Youth Congress (2009-2012).', MOD],
         ],
       },
@@ -105,6 +123,7 @@ const RAW = [
           ['Febe Potgieter-Gqubule', 'Head of Policy and Research, African National Congress; former Ambassador to Poland', 'Febe Potgieter-Gqubule is Head of Policy and Research of the African National Congress, a post she has held since 2023. She was elected Secretary-General of the ANC Youth League in 1996, the first woman to hold the post. She served as South Africa\'s Ambassador to Poland from 2005 to 2009, and from 2012 to 2017 she worked at the African Union Commission, latterly as Deputy Chief of Staff to the Chairperson.'],
           ['Pablo Daniel Oribe Decuadra', 'Secretary General, Partido Socialista de Uruguay', 'Pablo Daniel Oribe Decuadra is Secretary General of the Partido Socialista de Uruguay, elected in 2025 with 55.9 per cent of the vote. A history teacher, he previously held the territorial development and communication secretariats under his predecessor, Gonzalo Civila. He began his political career in Buenos Aires as political secretary of the Vivian Trías Socialist Centre.'],
           ['Peangpanor Boonklum', 'Senior Executive Vice President and General Counsel, PTT Public Company Limited, Thailand', 'Peangpanor Boonklum is Senior Executive Vice President and General Counsel at PTT Public Company Limited, Thailand\'s state-owned energy group, where she leads the Office of General Counsel and sits on the company\'s Management Committee. She joined PTT in 2017 after a career in private legal practice, including as a partner at White & Case. Her responsibilities include advising senior management on growth and acquisitions and on corporate governance, and she serves on subsidiary boards including IRPC and Thai Oil.'],
+          ['Dr Mario Aguja', 'Akbayan Executive Committee Member, Philippines', 'Dr Mario Aguja is a member of the Executive Committee of Akbayan, the progressive party of the Philippines.'],
           ['Amitabh Dubey', 'In-charge, Research and Monitoring, Communications Department, All India Congress Committee (AICC)', 'Amitabh Dubey is in charge of research and monitoring in the Communications Department of the All India Congress Committee, a role he was given in a June 2022 appointment. He leads the Delhi branch of the All India Professionals Congress and was a member of the party\'s 2024 manifesto committee. He is a childhood friend of Rahul Gandhi and has been part of the party\'s communications operation for several years, including its research and monitoring work.', MOD],
         ],
       },
@@ -117,6 +136,7 @@ const RAW = [
           ['Nika Kovač', 'Founder and Director, 8th of March Institute, Slovenia', 'Nika Kovač is a Slovenian anthropologist, sociologist and activist. She founded and directs the 8th of March Institute (Inštitut 8. marec), a civil society organisation working on democratic participation and inequality. She holds a master\'s degree in social and cultural anthropology from the University of Ljubljana. She was named Slovenian Woman of the Year 2021 by the magazine Jana.'],
           ['Oyvind Wenensland', 'Head of Strategy and International Secretary, Norwegian Labour Party', 'Øyvind Grøslie Wennesland is Head of Strategy and International Secretary of the Norwegian Labour Party. In 2026 he served as acting State Secretary in the Office of the Prime Minister of Norway, under Prime Minister Jonas Gahr Støre.'],
           ['Pedro Uczai', 'Federal Deputy for Santa Catarina, Chamber of Deputies, Brazil; member, Workers\' Party (PT)', 'Pedro Uczai is a Federal Deputy in the Chamber of Deputies of Brazil, representing Santa Catarina and serving since 2011. He is a member of the Workers\' Party (PT), which he joined in 1989. He served as mayor of Chapecó from 2002 to 2004 and has sat in the Legislative Assembly of Santa Catarina. He is a university professor by background and was born in Descanso, Santa Catarina.'],
+          ['Praveen Chakravarty', 'MP, Indian National Congress; Chairman, All India Professionals\' Congress', 'Praveen Chakravarty is Chairman of the All India Professionals\' Congress. An economist and former investment banker, he has written widely on India\'s economy and politics.', MOD],
         ],
       },
       {
@@ -125,10 +145,11 @@ const RAW = [
         speakers: [
           ['Dan Herman', 'Senior Director, National Security, Accountability and Reform, Center for American Progress', 'Dan Herman is Senior Director for National Security, Accountability and Reform at the Center for American Progress, where he works on democracy and foreign policy issues. From 2018 to 2021 he was Director of Advocacy and Campaigns at National Security Action. He previously served as Senior Adviser for Accountability to the Commissioner of U.S. Customs and Border Protection, and worked at the Department of Defense on counterterrorism and intelligence oversight.'],
           ['Maszlee Malik', 'Member, Johor State Legislative Assembly, Malaysia; Former Minister of Education', 'Dr Maszlee Malik is a Member of the Johor State Legislative Assembly for Puteri Wangsa, a seat he won in the 2026 Johor state election. He served as Minister of Education of Malaysia from 2018 to 2020 under Prime Minister Mahathir Mohamad. He holds a PhD in Political Science from Durham University and was previously an Assistant Professor at the International Islamic University Malaysia.'],
-          ['Guillaume Long', 'Senior Diplomatic Advisor, The Hague Group; Senior Fellow, Center for Economic and Policy Research', 'Guillaume Long is Senior Diplomatic Advisor to The Hague Group, a coalition of states committed to upholding international law in relation to Palestine, a role he has held since 2025. He is also a Senior Fellow at the Center for Economic and Policy Research in Washington, D.C. Born in France, he served as Ecuador\'s Minister of Foreign Affairs and Human Mobility from 2016 to 2017 and as its Permanent Representative to the United Nations in Geneva until his resignation in January 2018.'],
           ['Jonas Kalambayi Katshiobo', 'Senator, Parliament of the Democratic Republic of the Congo', 'Jonas Kalambayi Katshiobo is a Senator in the Parliament of the Democratic Republic of the Congo.'],
           ['Nancy Okail', 'President and CEO, Center for International Policy, USA', 'Nancy Okail is President and CEO of the Center for International Policy, United States. She previously served as Executive Director of the Tahrir Institute for Middle East Policy and directed Freedom House\'s Egypt programme. She has worked for more than two decades on human rights, democracy and security in the Middle East and North Africa, and holds a PhD from the University of Sussex.'],
-          ['Patrick Gaspard', 'President and CEO, Center for American Progress; former United States Ambassador to South Africa', 'Patrick Gaspard is President and Chief Executive Officer of the Center for American Progress and of the Center for American Progress Action Fund, a position he has held since 2021. He previously served as United States Ambassador to South Africa and led the Open Society Foundations. Earlier he held senior political roles in the White House, including director of political affairs under President Barack Obama. He is a former diplomat and community activist.'],
+          ['Giuseppe Provenzano', 'Former Minister for the South & Territorial Cohesion; Member of Parliament, Italy', 'Giuseppe Provenzano is an Italian politician of the Democratic Party (PD) and a member of the Chamber of Deputies. He served as Minister for the South and Territorial Cohesion from 2019 to 2021 in the second Conte government.'],
+          ['Kent Härstedt', 'Vice President, OSCE Parliamentary Assembly', 'Kent Härstedt is a Swedish Social Democratic politician, a member of the Swedish Riksdag and Vice President of the OSCE Parliamentary Assembly. He is a survivor of the sinking of the MS Estonia in 1994.'],
+          ['Sachin Pilot', 'General Secretary, AICC; Former Deputy Chief Minister of Rajasthan & Former Union Minister', 'Sachin Pilot is a General Secretary of the All India Congress Committee and a Member of the Rajasthan Legislative Assembly for Tonk. He served as Deputy Chief Minister of Rajasthan from 2018 to 2020 and as Union Minister of State for Corporate Affairs, and was President of the Rajasthan Pradesh Congress Committee from 2014 to 2020.', MOD],
         ],
       },
       {
@@ -139,6 +160,8 @@ const RAW = [
           ['Chung Eui-yong', 'Former Minister of Foreign Affairs, Republic of Korea', 'Chung Eui-yong is a South Korean diplomat and politician. He served as Director of the National Security Office from 2017 to 2020 under President Moon Jae-in, and took part in the 2018 diplomatic engagement with North Korea. He was elected to the National Assembly in 2004 as a proportional representative of the Uri Party. He served as Minister of Foreign Affairs from 2021 to 2022, and earlier as South Korea\'s Ambassador to the United Nations in Geneva and as Deputy Minister for Trade.'],
           ['Clara López Obregón', 'National Co-Chair, Alianza por la Vida, Colombia', 'Clara López Obregón is a Colombian economist and politician. She served as Acting Mayor of Bogotá from 2011 to 2012 and was president of the Democratic Pole party. She was previously active in the Patriotic Union party. She is National Co-Chair of Alianza por la Vida, Colombia.'],
           ['Damian Murphy', 'Senior Vice President for National Security and International Policy, Center for American Progress, USA', 'Damian Murphy is the senior vice president for National Security and International Policy at American Progress. He is also a lecturer in International Affairs at George Washington University. He has more than 25 years of international affairs experience as a chief policy adviser, program director, analyst, and political party trainer.'],
+          ['Guillaume Long', 'Senior Diplomatic Advisor, The Hague Group; Senior Fellow, Center for Economic and Policy Research', 'Guillaume Long is Senior Diplomatic Advisor to The Hague Group, a coalition of states committed to upholding international law in relation to Palestine, a role he has held since 2025. He is also a Senior Fellow at the Center for Economic and Policy Research in Washington, D.C. Born in France, he served as Ecuador\'s Minister of Foreign Affairs and Human Mobility from 2016 to 2017 and as its Permanent Representative to the United Nations in Geneva until his resignation in January 2018.'],
+          ['Priyank Kharge', 'Home Minister, Government of Karnataka', 'Priyank Kharge is a Minister in the Government of Karnataka and represents Chittapur in the Karnataka Legislative Assembly for the Indian National Congress.'],
           ['Manish Tewari', 'Member of Parliament, Lok Sabha (Chandigarh); Indian National Congress', 'Manish Tewari is a Member of the Lok Sabha representing Chandigarh for the Indian National Congress, a seat he has held since 2024. He previously represented Anandpur Sahib from 2019 to 2024 and Ludhiana from 2009 to 2014. He served as Minister of State (Independent Charge) for Information and Broadcasting from 2012 to 2014, and was earlier President of the Indian Youth Congress. He holds degrees in law from the University of Delhi.', MOD],
         ],
       },
@@ -149,12 +172,16 @@ const RAW = [
           ['Helle Lyng', 'Journalist and Commentator, Dagsavisen, Norway', 'Helle Lyng (Helle Lyng Svendsen) is a Norwegian journalist and commentator for the Oslo daily Dagsavisen. She has also worked as a freelance journalist for several Norwegian publications and digital platforms. Her commentary covers international affairs, public policy and Norwegian social issues.'],
           ['Leonard Novy', 'Policy Fellow, Das Progressive Zentrum, Germany', 'Leonard Novy is a German political adviser and journalist focusing on democracy and political communication. He is a Policy Fellow at Das Progressive Zentrum and a Senior Advisor at NewsGuard. Until 2025 he directed the Cologne-based Institute for Media and Communication Policy (IfM). He earned his doctorate in international politics at Cambridge, has held research fellowships at Harvard, and teaches at the Hertie School.'],
           ['Rajdeep Sardesai', 'Consulting Editor and Anchor, India Today Group', 'Rajdeep Sardesai is a consulting editor with the India Today Group and anchors a prime-time news show. He joined The Times of India in 1988 and moved to television in 1994 as political editor at NDTV. He was formerly Editor-in-Chief of the TV18 news channels, including CNN-News18 and News18 India. He received the Padma Shri in 2008 and is the author of the bestselling 2014: The Election that Changed India.'],
+          ['Dr Mustafa Hamarneh', 'President, Jordanian Academy for Government Administration; Former Chairperson, Jordan Radio & TV', 'Dr Mustafa Hamarneh is President of the Jordanian Academy for Government Administration. He is a former Chairperson of Jordan Radio and Television and previously directed the Center for Strategic Studies at the University of Jordan.'],
+          ['Sangeeta Barooah Pisharoty', 'President, Press Club of India', 'Sangeeta Barooah Pisharoty is President of the Press Club of India. A senior journalist, she has reported for The Wire and The Hindu, writing on politics and Northeast India.'],
+          ['Pawan Khera', 'MP, Indian National Congress; Chairperson, INC Communications', 'Pawan Khera is a Member of Parliament for the Indian National Congress and Chairperson of the party\'s Communications department. He is one of the party\'s best-known spokespersons.', MOD],
         ],
       },
       {
         title: 'Valedictory Session: Launch of the Our World Institute', when: `${SAT} | 2:30 pm - 5:30 pm`,
         speakers: [
           ['Maria Joao Rodrigues', 'President, Foundation for European Progressive Studies (FEPS)', 'Dr. Maria João Rodrigues is President of the Foundation for European Progressive Studies (FEPS), a Brussels-based think tank affiliated with the Party of European Socialists, a post she has held since 2017. She was the first woman to lead the foundation. She is a former Member of the European Parliament and former Vice-President of the Socialist and Democratic Group. She also served as Portuguese Minister for Employment.'],
+          ['Salman Khurshid', 'Senior Advocate; Indian National Congress; former Minister of External Affairs of India (2012-2014)', 'Salman Khurshid is a designated senior advocate and a leading member of the Indian National Congress. He served as Minister of External Affairs of India from 28 October 2012 to 25 May 2014 in the government of Prime Minister Manmohan Singh, and was elected to the Lok Sabha from Farrukhabad in 2009. He is also an author and law teacher, and was later appointed to chair the party\'s foreign affairs department.'],
         ],
       },
       {
@@ -164,12 +191,14 @@ const RAW = [
           ['Iván Cepeda', 'Senator, Pacto Historico, Colombia; 2026 presidential candidate', 'Ivan Cepeda Castro is a Colombian politician, human rights activist and philosopher. He has served in the Senate of Colombia since 2014 and is a leading figure of the Pacto Historico (Historic Pact) on the Colombian left. He was the Historic Pact candidate in the 2026 presidential election, finishing second in the runoff. He founded the Manuel Cepeda Foundation, named after his father, who was assassinated in 1994, and previously served in the Chamber of Representatives from 2010 to 2014.'],
           ['Junya Ogawa', 'Japanese Politician; former Secretary-General, Constitutional Democratic Party', 'Junya Ogawa is a Japanese politician who served as Secretary-General of the Constitutional Democratic Party of Japan. In February 2026 he was elected leader of the Centrist Reform Alliance, a party formed by the Constitutional Democratic Party and Komeito ahead of the general election. He won the leadership vote against Takeshi Shina.'],
           ['Thanathorn Juangroongruangkit', 'Chairperson, Progressive Movement, Thailand; co-founder and former leader, Future Forward Party', 'Thanathorn Juangroongruangkit is Chairperson of the Progressive Movement in Thailand, which he co-founded in 2020 after the Future Forward Party was dissolved. He co-founded Future Forward in 2018 and was elected its leader that year, serving until 2020. A Thai businessman and former politician, he holds a joint-honours B.Eng. in mechanical engineering from Thammasat University and the University of Nottingham.'],
-        ],
-      },
-      {
-        title: 'Other Confirmed Speakers', when: 'Session to be announced',
-        speakers: [
-          ['Akiko Kamei', 'Former Member of the House of Representatives, Japan', 'Akiko Kamei is a former Member of the House of Representatives of Japan. She was first elected to the House in 2017, serving until 2021, and returned to the House after winning the Shimane 1st district by-election in 2024. Her term ended in 2026. She is a member of the Constitutional Democratic Party of Japan (CDP), where she has served as Director of the International Department. Her father, Hisaoki Kamei, was also a member of the House of Representatives.'],
+          ['Patrick Gaspard', 'President and CEO, Center for American Progress; former United States Ambassador to South Africa', 'Patrick Gaspard is President and Chief Executive Officer of the Center for American Progress and of the Center for American Progress Action Fund, a position he has held since 2021. He previously served as United States Ambassador to South Africa and led the Open Society Foundations. Earlier he held senior political roles in the White House, including director of political affairs under President Barack Obama. He is a former diplomat and community activist.'],
+          ['A. Revanth Reddy', 'Chief Minister of Telangana', 'A. Revanth Reddy is the Chief Minister of Telangana, in office since December 2023, leading the Indian National Congress government in the state. He was President of the Telangana Pradesh Congress Committee and earlier a Member of the Lok Sabha for Malkajgiri.'],
+          ['Mallu Bhatti Vikramarka', 'Deputy Chief Minister of Telangana', 'Mallu Bhatti Vikramarka is Deputy Chief Minister of Telangana and Minister for Finance, Planning and Energy, in office since December 2023. He represents Madhira in the Telangana Legislative Assembly and was Leader of the Opposition from 2019 to 2023.'],
+          ['Mallikarjun Kharge', 'President, Indian National Congress', 'Mallikarjun Kharge has been President of the Indian National Congress since October 2022 and is Leader of the Opposition in the Rajya Sabha. A veteran of Karnataka politics, he served as Union Minister of Labour and Employment and of Railways, and led the Congress in the Lok Sabha from 2014 to 2019.'],
+          ['Rahul Gandhi', 'Leader of the Opposition, Lok Sabha', 'Rahul Gandhi is Leader of the Opposition in the Lok Sabha, a post he has held since June 2024, and Member of Parliament for Rae Bareli. He was President of the Indian National Congress from 2017 to 2019 and led the Bharat Jodo Yatra, a march across India, in 2022-23.'],
+          ['Asiedu Nketia', 'National Chairman, National Democratic Congress (NDC), Ghana', 'Johnson Asiedu Nketia is National Chairman of the National Democratic Congress (NDC), Ghana\'s governing party, a post he has held since 2022. He was previously the party\'s General Secretary for many years.'],
+          ['Elly Schlein', 'Secretary, Partito Democratico; Member of the Chamber of Deputies, Italy', 'Elly Schlein has been Secretary of Italy\'s Democratic Party (Partito Democratico) since March 2023 and is a member of the Chamber of Deputies. She was previously a Member of the European Parliament, from 2014 to 2019, and Vice President of the Emilia-Romagna region.'],
+          ['Giacomo Filibeck', 'Secretary General, Party of European Socialists', 'Giacomo Filibeck is Secretary General of the Party of European Socialists (PES), the European party of social democratic, socialist and labour parties.'],
         ],
       },
     ],
@@ -408,11 +437,40 @@ const COUNTRY = {
   'Tara Rao': 'India',
   'Dr Parnika Reddy': 'India',
   'Sashikant Senthil': 'India',
+  'Pushparaj Deshpande': 'India',
+  'Frédéric Zgainski': 'France',
+  'Jesse Marks': 'Australia',
+  'Sir Iqbal Sacranie': 'United Kingdom',
+  'Deepender Hooda': 'India',
+  'Krishna Allavaru': 'India',
+  'Gurdeep Singh Sappal': 'India',
+  'Joshua Osih': 'Cameroon',
+  'Kasthuriraani Patto': 'Malaysia',
+  'Anand Sharma': 'India',
+  'Catherine Arnold': 'United Kingdom',
+  'Ntombikayise Sibhidla': 'South Africa',
+  'Renuka Chaudhary': 'India',
+  'Dr Mario Aguja': 'Philippines',
+  'Praveen Chakravarty': 'India',
+  'Giuseppe Provenzano': 'Italy',
+  'Kent Härstedt': 'Sweden',
+  'Sachin Pilot': 'India',
+  'Priyank Kharge': 'India',
+  'Dr Mustafa Hamarneh': 'Jordan',
+  'Sangeeta Barooah Pisharoty': 'India',
+  'Pawan Khera': 'India',
+  'A. Revanth Reddy': 'India',
+  'Mallikarjun Kharge': 'India',
+  'Rahul Gandhi': 'India',
+  'Asiedu Nketia': 'Ghana',
+  'Elly Schlein': 'Italy',
+  'Giacomo Filibeck': 'Italy',
+  'Daša Šašić Šilović': 'Croatia',
 }
 
 // No photo yet (initials instead): Panel C's two photos are both labelled Sujatha Surepally, one probably Alka Lamba.
 // Remove a name here once its photo is in public/assets/speakers/.
-const NO_PHOTO = new Set(['Prof. Sujatha Surepally', 'Alka Lamba'])
+const NO_PHOTO = new Set(['Prof. Sujatha Surepally', 'Alka Lamba', 'Krishna Allavaru', 'Ntombikayise Sibhidla', 'Dr Mario Aguja', 'Daša Šašić Šilović'])
 // "María José Pizarro" -> "maria-jose-pizarro", the photo's file name
 const slug = (name) => name.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 
@@ -436,3 +494,7 @@ export const PARTS = RAW.map(({ part, sessions }) => ({
 }))
 
 export const SPEAKERS = PARTS.flatMap((p) => p.sessions.flatMap((s) => s.speakers))
+
+// Each person once, at their first session: for "All sessions" and the Home and About rows. Someone in several
+// sessions (D. Sridhar Babu, for one) keeps a card in each session's own list.
+export const ALL_SPEAKERS = SPEAKERS.filter((s, i) => SPEAKERS.findIndex((t) => t.name === s.name) === i)

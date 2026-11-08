@@ -1,0 +1,102 @@
+BHARAT SUMMIT WEBSITE - 5000-USER LOAD TEST ON GRAFANA CLOUD
+=============================================================
+
+Website:  https://bharatsummit.co
+Tool:     Grafana Cloud k6 (the load comes from Grafana's servers, not your computer)
+Script:   scripts/load-test.js (in this project)
+
+
+WHY GRAFANA CLOUD
+-----------------
+
+5000 people at once can't be simulated from one computer: its internet line fills up long
+before that (the 200-visitor test already used about 20 MB/s), so the results would measure
+the computer's connection, not the website. Grafana Cloud generates the 5000 visitors from its
+own servers in Mumbai, next to the Vercel data centre that serves India.
+
+
+WHAT THE TEST DOES
+------------------
+
+- Ramps up to 5000 visitors on the site at the same time:
+    1 minute  0 -> 1250 visitors
+    2 minutes 1250 -> 5000
+    3 minutes at 5000
+    2 minutes 5000 -> 0           (about 8 minutes in all)
+- Each visitor opens the Home page, then one or two more pages (About, Schedule, Speakers,
+  a speaker page or Summit Archives), pausing 3-8 seconds between pages like a real person.
+- "Lite" mode (recommended, used in the command below): pages, scripts, styles and data files
+  only, no images or videos. This tests whether the site and Vercel cope with 5000 people at
+  once, without using huge amounts of bandwidth.
+- A separate steady stream of 2 small requests a second measures how quickly the server answers
+  as the load rises.
+- Safety stop: the test stops itself once it has downloaded 40 GB.
+
+
+BEFORE YOU RUN IT: COSTS AND LIMITS
+-----------------------------------
+
+1. Vercel bandwidth. Every request is real traffic on your Vercel plan.
+     Lite mode (recommended):   roughly 15-25 GB
+     Full mode (with images and videos): roughly 250 GB
+   Vercel's free Hobby plan includes 100 GB a month, so run Lite mode. The full mode could get
+   the site paused on Hobby, or billed as extra usage on Pro.
+
+2. Grafana Cloud usage. Grafana Cloud k6 counts "virtual user hours" (VUh). This test uses
+   about 450 VUh (the average number of visitors x the hours they run). Check that your Grafana
+   Cloud plan allows this and allows 5000 virtual users in one test before running it.
+
+3. Vercel may treat a sudden flood of requests from a few servers as an attack and slow it down
+   or challenge it. If many requests fail with status 429 or 403, that is Vercel's protection,
+   not the site breaking. Running it at a quiet time and telling Vercel support in advance
+   avoids this.
+
+
+STEPS
+-----
+
+1. Create a free Grafana Cloud account: https://grafana.com (Sign up), then open
+   "Testing & synthetics" -> "Performance" (k6) in your Grafana Cloud stack.
+
+2. Get your k6 API token: in Grafana Cloud k6, open Settings -> "Grafana Stack API token"
+   (or "Personal API token") and copy it. Keep it private.
+
+3. Install k6 on your computer (once): open PowerShell and run
+     winget install GrafanaLabs.k6
+   (approve the Windows prompt), then close and reopen PowerShell.
+
+4. Log in to Grafana Cloud from k6 (once):
+     k6 cloud login --token YOUR_TOKEN
+
+5. Check the script first (40 seconds, 4 visitors, runs on your computer):
+     cd D:\govt\bharat
+     k6 run -e SMOKE=1 -e LITE=1 scripts/load-test.js
+   Every check should pass.
+
+6. Run the 5000-visitor test on Grafana Cloud:
+     k6 cloud run -e PEAK=5000 -e LITE=1 -e CAP_GB=40 scripts/load-test.js
+   k6 prints a link to the test's live results page. The run takes about 8 minutes.
+
+   For a smaller first try (recommended): -e PEAK=1000 instead of 5000.
+
+
+AFTER THE TEST
+--------------
+
+Grafana Cloud shows the results on the test's page: response times, requests per second,
+errors and the number of visitors over time.
+
+Send me the results and I'll write the full report (text or PDF), like load-test-results.txt
+for the 200-visitor test. Any of these works:
+  - the link to the test's results page (if you've shared it), or
+  - screenshots of the results page, or
+  - the summary k6 prints in PowerShell at the end of the run (copy and paste it).
+
+
+WHAT GOOD RESULTS LOOK LIKE
+---------------------------
+
+- Failed requests below 1%
+- Server response time (time to first byte): 95% of requests under 1 second
+- No rise in errors at the 5000-visitor peak
+These are the pass/fail targets built into the script; k6 marks each one PASS or FAIL.
