@@ -35,6 +35,7 @@ export default function OrganizedBy({ sectionId = 'organised' }) {
               <Portrait bg={o.bg} src={a(o.img)} className="org-portrait" />
               <span className="org-body">
                 <span className="org-name">{o.name}</span>
+                <span className="org-role">{o.role}</span>
               </span>
               <img className="org-arrow" src={a('card-arrow.svg')} width="30" height="30" alt="" />
             </button>
