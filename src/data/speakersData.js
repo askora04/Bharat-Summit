@@ -109,9 +109,7 @@ const RAW = [
           ['Martha Tagle Martínez', 'Director, Institute for Citizen Training, Movimiento Ciudadano, Mexico', 'Martha Tagle Martínez is Director of the Institute for Citizen Training of Movimiento Ciudadano, Mexico, a party she helped found. She served as a Senator from 2015 to 2018 and as a Federal Deputy from 2018 to 2021. She is a feminist activist and politician, and was the first national leader of the party\'s women\'s group, Mujeres en Movimiento.'],
           ['Nurima Alkatiri', 'Member of Parliament and Deputy Leader, FRETILIN, Timor-Leste', 'Nurima Alkatiri is a Member of Parliament in Timor-Leste and Deputy Leader of FRETILIN, the Revolutionary Front for an Independent East Timor.'],
           ['Catherine Arnold', 'National Executive, Labour Party UK', 'Catherine Arnold is a member of the National Executive of the UK Labour Party.'],
-          ['Ntombikayise Sibhidla', 'ANC National Executive Member; ANC Women\'s League, South Africa', 'Ntombikayise Sibhidla is a member of the National Executive of the African National Congress and of the ANC Women\'s League in South Africa.'],
           ['Renuka Chaudhary', 'INC MP & Former Union Minister, India', 'Renuka Chaudhary is a Member of Parliament for the Indian National Congress, elected to the Rajya Sabha from Telangana in 2024. She served as Union Minister of State (Independent Charge) for Women and Child Development from 2006 to 2009, and earlier as Minister of State for Tourism.'],
-          ['Daša Šašić Šilović', 'Chair, CEE Network for Gender Issues, Croatia', 'Daša Šašić Šilović chairs the CEE Network for Gender Issues, a network working on gender equality in Central and Eastern Europe, and is based in Croatia.'],
           ['Jothimani', 'Member of Parliament (Lok Sabha), Karur, Tamil Nadu; Indian National Congress', 'Jothimani (Sennimalai Jothimani) is a Member of Parliament in the Lok Sabha for Karur, Tamil Nadu, representing the Indian National Congress. She was first elected in 2019, defeating AIADMK leader M. Thambidurai, and was re-elected in 2024. A writer and social worker, she has held party roles including Vice President of the Tamil Nadu Youth Congress and General Secretary of the Indian Youth Congress (2009-2012).', MOD],
         ],
       },
@@ -448,7 +446,6 @@ const COUNTRY = {
   'Kasthuriraani Patto': 'Malaysia',
   'Anand Sharma': 'India',
   'Catherine Arnold': 'United Kingdom',
-  'Ntombikayise Sibhidla': 'South Africa',
   'Renuka Chaudhary': 'India',
   'Dr Mario Aguja': 'Philippines',
   'Praveen Chakravarty': 'India',
@@ -465,12 +462,11 @@ const COUNTRY = {
   'Asiedu Nketia': 'Ghana',
   'Elly Schlein': 'Italy',
   'Giacomo Filibeck': 'Italy',
-  'Daša Šašić Šilović': 'Croatia',
 }
 
-// No photo yet (initials instead): Panel C's two photos are both labelled Sujatha Surepally, one probably Alka Lamba.
+// No photo yet (initials instead)
 // Remove a name here once its photo is in public/assets/speakers/.
-const NO_PHOTO = new Set(['Prof. Sujatha Surepally', 'Alka Lamba', 'Krishna Allavaru', 'Ntombikayise Sibhidla', 'Dr Mario Aguja', 'Daša Šašić Šilović'])
+const NO_PHOTO = new Set([])
 // "María José Pizarro" -> "maria-jose-pizarro", the photo's file name
 const slug = (name) => name.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 

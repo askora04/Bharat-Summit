@@ -330,9 +330,7 @@ export const DAYS = [
               "Catherine Arnold (National Executive, Labour Party UK)",
               "Renuka Chaudhary (INC MP & Former Union Minister, India)",
               "Hella Ben Youssef (Former Minister, Tunisia)",
-              "Nurima Alkatiri (Member of Parliament and Deputy Leader, Timor-Leste)",
-              "Ntombikayise Sibhida (ANC National Executive Member & ANC Women's League)",
-              "Daša Šašić Šilović (Chair, CEE Network for Gender Issues, Croatia)"
+              "Nurima Alkatiri (Member of Parliament and Deputy Leader, Timor-Leste)"
             ]
           },
           {
