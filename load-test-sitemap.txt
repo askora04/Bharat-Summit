@@ -1,0 +1,178 @@
+BHARAT SUMMIT WEBSITE - SITE MAP AND LOAD-TEST DETAILS (GRAFANA k6)
+====================================================================
+
+Website:     https://bharatsummit.co
+Checked:     8 November 2026, against the live site and the project code
+k6 script:   scripts/load-test.js (in this project; ready to run)
+Run steps:   load-test-5000-users.txt (Grafana Cloud account, token, commands, costs)
+
+
+1. HOW THE SITE WORKS (WHAT A LOAD TEST ACTUALLY HITS)
+------------------------------------------------------
+
+- A single-page React app (built with Vite), hosted on Vercel. Requests are answered by
+  Vercel's CDN; for India that is the Mumbai edge (bom1).
+- There is NO back end: no API, no database, no login, no forms. The "Connect" contact link
+  is an email (mailto:) link.
+- Every page address returns the same small HTML file (index.html, about 3.9 KB). The page's
+  content is then drawn in the browser by JavaScript, which loads the page's images, data
+  files and videos.
+- So a load test measures how well Vercel's CDN serves static files (HTML, JS, CSS, images,
+  videos) to many people at once, and how much bandwidth that uses.
+- k6 doesn't run the page's JavaScript, so a test must request each file itself, as a browser
+  would. scripts/load-test.js does this, and reads the current file names from the live site at
+  the start of each run.
+- Two layouts share the same addresses: phones narrower than 700px get the mobile layout,
+  everything else (including iPhones) the desktop layout. They load different App-*.js and
+  App-*.css files of the same size, so the load is the same either way.
+
+
+2. SITE MAP (162 PAGES)
+-----------------------
+
+The live list of every page is at https://bharatsummit.co/sitemap.xml. It's regenerated on
+every deploy.
+
+  Address              Page              What the browser loads after the HTML
+  -------------------  ----------------  --------------------------------------------------------
+  /                    Home              App scripts and styles, font, logo, about 18 images,
+                                         banner video /videos/hero-banner.mp4 (1.3 MB, plays on
+                                         every visit), speaker photos
+  /about-us            About Us          About banner video /videos/about-banner.mp4 (0.6 MB),
+                                         topic and venue images, speaker photo row
+  /schedule            Schedule          Text only (data is inside the app's script); a few icons
+  /speakers            Speakers          Up to 151 speaker photos (about 39 KB each, loaded as
+                                         they scroll into view)
+  /speakers/1 ...      Speaker profile   One large speaker photo, name, role, biography
+  /speakers/157        (157 pages)
+  /events              Summit Archives   /gallery/gallery.json and /videos/videos.json, then
+                                         gallery thumbnails, larger photos and video posters;
+                                         a video only if the visitor presses play
+
+  Unknown addresses (for example /abc) also return the home page with status 200, so a status
+  check can't spot a mistyped address. Check the content instead (see section 6).
+
+
+3. FILES BEHIND THE PAGES
+-------------------------
+
+  Group                   Address pattern                         Count  Typical size  Caching
+  ----------------------  --------------------------------------  -----  ------------  ---------------------
+  Page HTML               / and every page address                    1        3.9 KB  none (always fresh)
+  App scripts and styles  /static/index-*.js, App-*.js, App-*.css,     8  4-226 KB      1 year (file names
+                          motion-*.js                                       (~0.6 MB)     change on each deploy)
+  Font                    /assets/fonts/Jost.woff2                    1         49 KB  30 days
+  Site images             /assets/*.webp, *.svg, home/, footer/,     ~40      ~58 KB   1 hour
+                          organizers/
+  Speaker photos          /assets/speakers/<name>.webp               146       39 KB   1 hour
+  Data files              /gallery/gallery.json (66 photos)            2     2-6 KB    5 minutes
+                          /videos/videos.json (8 videos)
+  Gallery photos          /gallery/<day>/<photo>-480/-960/-1600.webp  198   62-92 KB   7 days
+  Video posters           /videos/<name>.webp                          8       58 KB   7 days
+  Videos                  /videos/<name>.mp4                          10   0.6-22 MB   7 days
+                                                                            (avg 7 MB)
+
+  Outside the site, not to be load-tested: Google Fonts (fonts.googleapis.com,
+  fonts.gstatic.com). These belong to Google.
+
+
+4. WHAT ONE VISITOR DOWNLOADS (APPROXIMATE)
+-------------------------------------------
+
+  Home page, first visit:       ~3 MB   (about half of it the banner video)
+  Each further page:            ~0.5-1.5 MB of images (scripts are already loaded)
+  Summit Archives:              ~2.5 MB; plus 1 MB to 22 MB if a video is played
+  Typical visit (3 pages):      ~4-6 MB
+
+  For sizing a test (from the 200-visitor run on 7 November 2026: 9.8 GB downloaded):
+    Full test (images and videos):     ~50 MB per peak visitor per 8-minute run
+                                       5000 visitors -> ~250 GB
+    Lite test (no images or videos):   about a tenth of that
+                                       5000 visitors -> ~15-25 GB
+
+  Vercel's free Hobby plan includes 100 GB of bandwidth a month; extra usage on Pro is billed.
+
+
+5. USER JOURNEYS IN THE k6 SCRIPT
+---------------------------------
+
+scripts/load-test.js runs two scenarios at once:
+
+  visitors (simulated people)
+    1. Open the Home page: HTML, scripts, styles, font, logo, 18 images, banner video.
+    2. Wait 3-8 seconds (reading time).
+    3. Open one more page:
+         80%: About, Schedule, Speakers or a speaker profile (14 of that page's images)
+         20%: Summit Archives (data files, 24 thumbnails, 4 larger photos, 8 video posters;
+              a quarter of these visitors start a video: the first 1 MB, as a browser does)
+    4. Wait 3-8 seconds; half the visitors open a third page.
+    Number of visitors over time (PEAK = 5000 for the big test):
+      1 min  0 -> 25% of PEAK
+      2 min  -> 100% of PEAK
+      3 min  hold at PEAK
+      2 min  -> 0                              (8 minutes in all)
+
+  probe (response-time monitor)
+    2 small requests a second (the page HTML and the two data files) throughout, to show how
+    quickly the server answers as the load rises, apart from download time.
+
+  Options (pass with -e NAME=value):
+    BASE_URL   site to test (default https://bharatsummit.co)
+    PEAK       visitors at the peak (default 200)
+    LITE=1     pages, scripts, styles and data only: no images or videos
+    CAP_GB     stop the test once it has downloaded this many GB (default 15)
+    SMOKE=1    40-second check with 4 visitors, to make sure the script works
+
+  On Grafana Cloud the load is generated from Mumbai (amazon:in:mumbai), next to the Vercel
+  data centre that serves India.
+
+
+6. PASS / FAIL TARGETS (BUILT INTO THE SCRIPT)
+----------------------------------------------
+
+  Metric            Target                         Meaning
+  ----------------  -----------------------------  ---------------------------------------------
+  http_req_failed   below 1%                       almost every request succeeds
+  probe_ttfb        95% under 0.8 s                the server starts answering quickly
+  page_ttfb         95% under 1 s                  page HTML starts arriving within a second
+  checks            status 200 (206 for videos)    each file was served
+  data_received     below CAP_GB                   safety stop for bandwidth
+
+  Baseline from the live site (8 Nov 2026, one request each from this computer, served by
+  Vercel's Mumbai edge): time to first byte 0.19-0.59 s for pages, data files, font and video.
+
+  Because unknown addresses also return status 200 (section 2), a stricter check for pages is
+  that the response is HTML containing "/static/index-", and for files that the content type
+  is right (image/webp, video/mp4, application/json).
+
+
+7. COMMANDS
+-----------
+
+  From this project folder (D:\govt\bharat):
+
+  Check the script (40 s, 4 visitors, on your computer):
+    k6 run -e SMOKE=1 -e LITE=1 scripts/load-test.js
+
+  Small test from your computer (up to 200 visitors, full, ~10 GB):
+    k6 run scripts/load-test.js
+
+  5000 visitors on Grafana Cloud k6 (recommended: lite, ~15-25 GB):
+    k6 cloud login --token YOUR_TOKEN
+    k6 cloud run -e PEAK=5000 -e LITE=1 -e CAP_GB=40 scripts/load-test.js
+
+  A smaller first cloud run is a good idea: -e PEAK=1000
+
+
+8. BEFORE RUNNING A BIG TEST
+----------------------------
+
+- Bandwidth costs: see section 4. Use LITE=1 for large runs.
+- Grafana Cloud: the 5000-visitor test uses about 450 virtual-user hours (VUh). Check that the
+  plan allows that and 5000 virtual users in one test.
+- Vercel protection: a sudden flood from a few servers can be treated as an attack and slowed
+  or blocked. Many 429 or 403 responses mean Vercel's firewall stepped in, not that the site
+  failed. Run at a quiet time, and tell Vercel support beforehand for a large test.
+- Deploys: file names under /static/ change on every deploy. The script reads them from the
+  live site at the start, so don't deploy during a test.
+- Don't load-test Google Fonts or any other outside service.

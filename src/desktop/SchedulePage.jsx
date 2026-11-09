@@ -47,7 +47,7 @@ export default function SchedulePage() {
     <>
       <MonumentHero className="sc-hero" kicker="BHARAT SUMMIT 2026" title={<>AGENDA &amp; <strong>SCHEDULE</strong></>}>
         <p className="sc-hero-lede">A programme of plenary sessions, panel discussions and exhibitions<br />exploring a more just and inclusive global order.</p>
-        <p className="sc-hero-meta">12–14 November 2026 · HICC, Hyderabad</p>
+        <p className="sc-hero-meta">13–14 November 2026 · HICC, Hyderabad</p>
         <TriBar className="sc-hero-bar" />
       </MonumentHero>
 

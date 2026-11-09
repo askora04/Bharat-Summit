@@ -211,7 +211,7 @@ function Venue() {
       </div>
 
       <ul className="h-facts">
-        <li><span className="h-fact-icon"><Icon name="calendar" size={22} strokeWidth={1.75} /></span>12 – 14 NOV 2026</li>
+        <li><span className="h-fact-icon"><Icon name="calendar" size={22} strokeWidth={1.75} /></span>13 – 14 NOV 2026</li>
         <li>
           <a href={MAPS_URL} target="_blank" rel="noreferrer">
             <span className="h-fact-icon"><Icon name="train" size={22} strokeWidth={1.75} /></span>Kondapur, Hyderabad

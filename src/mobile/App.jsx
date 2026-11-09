@@ -116,7 +116,7 @@ function Header({ page }) {
             </nav>
             <div className="menu-foot">
               <TriBar className="menu-bar" />
-              <p className="menu-date">12–14 November 2026</p>
+              <p className="menu-date">13–14 November 2026</p>
               <p className="menu-venue">HICC, Hyderabad, Telangana</p>
             </div>
           </div>

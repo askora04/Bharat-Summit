@@ -25,7 +25,7 @@ const POSTS = [
 const HASHTAGS = ['#BharatSummit', '#GlobalJustice', '#InclusiveFuture', '#TelanganaGlobal', '#YouthForChange']
 
 const FACTS = [
-  ['Date', 'NOV 12 – 14, 2026'],
+  ['Date', 'NOV 13 – 14, 2026'],
   ['Venue', 'HICC, Hyderabad'],
 ]
 

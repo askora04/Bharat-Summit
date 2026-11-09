@@ -135,7 +135,7 @@ export default function SummitNumbers() {
           <TriBar className="sin-rise d1 sin-tribar" />
           <h2 id="sin-title" className="sin-rise d2 section-title sin-title">BHARAT <strong>SUMMIT</strong></h2>
           <p className="sin-rise d3 sin-intro">Amid rising threats to democracy and an increasingly fragmented world order, the Bharat Summit brings together global leaders, thinkers, and changemakers to shape progressive solutions for common challenges. Organised by the Telangana Government to mark 80 years of Independence and Nehru’s 137th birth anniversary, it also explores how India can lead the way toward a more just and inclusive world.</p>
-          <p className="sin-rise d4 sin-date"><strong>Date:</strong> NOV 12–14, 2026</p>
+          <p className="sin-rise d4 sin-date"><strong>Date:</strong> NOV 13–14, 2026</p>
           <div className="sin-rise d4 sin-rule" />
         </div>
 
