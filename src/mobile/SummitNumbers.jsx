@@ -20,13 +20,13 @@ const PARTICLES = Array.from({ length: 45 }, (_, i) => ({
 // numbers and labels scale with it (no px minimums) and the labels are tracked tighter to fit inside their bubbles
 const NODES = [
   {
-    key: 'del', target: 500, suffix: '+', label: ['DELEGATES'],
+    key: 'del', target: 70, suffix: '+', label: ['COUNTRIES'],
     pos: { left: '26%', top: '28%', width: '44%' }, fly: { '--fx': '54.5%', '--fy': '50%', '--dl': '.5s' }, bob: '6.2s',
     tint: '#1E6A90', dots: '#7CCBC1', dotsW: 0.7, spin: 'sin-spin', track: '#1E6A90', arc: '#2C8FC0', r: 41, sw: 3.4, core: 36,
     numSize: 'min(10.4cqw, 64px)', lbl: { fontSize: 'min(3.6cqw, 13px)', letterSpacing: '0.08em', color: '#8CC8E4' },
   },
   {
-    key: 'spk', target: 70, suffix: '+', label: ['COUNTRIES'],
+    key: 'spk', target: 1000, suffix: '+', label: ['DELEGATES'],
     pos: { left: '75%', top: '27%', width: '36%' }, fly: { '--fx': '-69.4%', '--fy': '63.9%', '--dl': '.8s' }, bob: '5.4s',
     tint: '#2A9DAA', dots: '#7CCBC1', dotsW: 0.8, spin: 'sin-spin-r', track: '#2A9DAA', arc: '#2A9DAA', r: 40.5, sw: 3.8, core: 35,
     numSize: 'min(8.4cqw, 52px)', lbl: { fontSize: 'min(3.3cqw, 13px)', letterSpacing: '0.08em', color: '#8ED8DE' },
@@ -141,7 +141,7 @@ export default function SummitNumbers() {
 
         <div className="sin-right">
           <ul className="sr-only">
-            <li>500+ delegates.</li>
+            <li>1000+ delegates.</li>
             <li>70+ countries.</li>
             <li>2nd annual conference.</li>
           </ul>

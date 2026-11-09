@@ -171,7 +171,7 @@ export default function AboutPage() {
           <div className="stats">
             <Stat img="about-parties.webp" value="100+" label={['Progressive parties']} />
             <span className="stats-divider" />
-            <Stat img="about-delegates.webp" value="500+" label={['Delegates from across', 'the world']} />
+            <Stat img="about-delegates.webp" value="1000+" label={['Delegates from across', 'the world']} />
           </div>
         </section>
 
