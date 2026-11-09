@@ -27,7 +27,7 @@ const NODES = [
     key: 'spk', target: 1000, suffix: '+', label: ['DELEGATES'],
     pos: { left: '73%', top: '26%', width: '31.9%' }, fly: { '--fx': '-72%', '--fy': '75%', '--dl': '.8s' }, bob: '5.4s',
     tint: '#2A9DAA', dots: '#7CCBC1', dotsW: 0.8, spin: 'sin-spin-r', track: '#2A9DAA', arc: '#2A9DAA', r: 40.5, sw: 3.8, core: 35,
-    numSize: 'clamp(26px, 7.4cqw, 52px)', lbl: { fontSize: 'clamp(10px, 1.7cqw, 13px)', letterSpacing: '0.22em', color: '#8ED8DE' },
+    numSize: 'clamp(22px, 6cqw, 42px)', lbl: { fontSize: 'clamp(10px, 1.7cqw, 13px)', letterSpacing: '0.22em', color: '#8ED8DE' },
   },
   {
     key: 'par', target: 2, suffix: 'nd', label: ['ANNUAL', 'CONFERENCE'],

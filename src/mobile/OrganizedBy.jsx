@@ -27,6 +27,7 @@ export default function OrganizedBy({ sectionId = 'organised' }) {
           return (
             <button
               className="org-card"
+              style={{ '--fs': o.fit.s, '--fx': o.fit.x, '--fy': o.fit.y }}
               type="button"
               tabIndex={copy ? -1 : undefined}
               aria-label={`${o.name}. View profile`}

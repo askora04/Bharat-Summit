@@ -2,17 +2,18 @@ import { a } from '../lib/asset.js'
 
 // Background-free cutouts framed alike (same head size and position) over each card's colour.
 // bio: the profile's text; highlight: the part of it shown in bold, the person's name
+// fit: per-photo scale and offset so every head is the same size, height and centre on the card (measured from the cutouts)
 export const ORGANIZERS = [
-  { name: 'SRI ANUMULA REVANTH REDDY', role: 'Honourable Chief Minister, Telangana', bg: '#db5f3d', img: 'organizers/revanth-reddy.webp',
+  { name: 'SRI ANUMULA REVANTH REDDY', role: 'Honourable Chief Minister, Telangana', bg: '#db5f3d', img: 'organizers/revanth-reddy.webp', fit: { s: 1, x: '0.8%', y: '3%' },
     bio: 'Anumula Revanth Reddy is an Indian politician who is serving as the second and current Chief Minister of Telangana. He is also the minister for Municipal Administration and Urban Development, General Administration, Law & Order.',
     highlight: 'Anumula Revanth Reddy' },
-  { name: 'SRI BHATTI VIKRAMARKA MALLU', role: 'Honourable Deputy Chief Minister, Telangana', bg: '#c8a046', img: 'organizers/bhatti-vikramarka.webp',
+  { name: 'SRI BHATTI VIKRAMARKA MALLU', role: 'Honourable Deputy Chief Minister, Telangana', bg: '#c8a046', img: 'organizers/bhatti-vikramarka.webp', fit: { s: 1, x: '-0.6%', y: '2.6%' },
     bio: 'Mallu Bhatti Vikramarka is currently serving as the Deputy Chief Minister of Telangana since December 2023. He represents Madhira constituency in the Telangana Legislative assembly.',
     highlight: 'Mallu Bhatti Vikramarka' },
-  { name: 'SRI DUDDILLA SRIDHAR BABU', role: 'Minister for IT, Electronics & Communications, Industries & Commerce', bg: '#105755', img: 'organizers/sridhar-babu.webp',
+  { name: 'SRI DUDDILLA SRIDHAR BABU', role: 'Minister for IT, Electronics & Communications, Industries & Commerce', bg: '#105755', img: 'organizers/sridhar-babu.webp', fit: { s: 1.05, x: '1.6%', y: '-5%' },
     bio: 'Duddilla Sridhar Babu is Minister in the Telangana Government holding the crucial portfolios of Information Technology, Electronics & Communication, Industry & Commerce and Legislative Affairs.',
     highlight: 'Duddilla Sridhar Babu' },
-  { name: 'SRI NALAMADA UTTAM KUMAR REDDY', role: 'Minister for Irrigation, Food & Civil Supplies', bg: '#13345f', img: 'organizers/uttam-kumar-reddy.webp',
+  { name: 'SRI NALAMADA UTTAM KUMAR REDDY', role: 'Minister for Irrigation, Food & Civil Supplies', bg: '#13345f', img: 'organizers/uttam-kumar-reddy.webp', fit: { s: 1.14, x: '-7.3%', y: '-2.3%' },
     bio: 'Nalamada Uttam Kumar Reddy is Minister of Irrigation, Food & Civil Supplies in Government of Telangana.',
     highlight: 'Nalamada Uttam Kumar Reddy' },
 ]

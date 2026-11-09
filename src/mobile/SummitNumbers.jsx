@@ -29,7 +29,7 @@ const NODES = [
     key: 'spk', target: 1000, suffix: '+', label: ['DELEGATES'],
     pos: { left: '75%', top: '27%', width: '36%' }, fly: { '--fx': '-69.4%', '--fy': '63.9%', '--dl': '.8s' }, bob: '5.4s',
     tint: '#2A9DAA', dots: '#7CCBC1', dotsW: 0.8, spin: 'sin-spin-r', track: '#2A9DAA', arc: '#2A9DAA', r: 40.5, sw: 3.8, core: 35,
-    numSize: 'min(8.4cqw, 52px)', lbl: { fontSize: 'min(3.3cqw, 13px)', letterSpacing: '0.08em', color: '#8ED8DE' },
+    numSize: 'min(6.8cqw, 42px)', lbl: { fontSize: 'min(3.3cqw, 13px)', letterSpacing: '0.08em', color: '#8ED8DE' },
   },
   {
     key: 'par', target: 2, suffix: 'nd', label: ['ANNUAL', 'CONFERENCE'],
