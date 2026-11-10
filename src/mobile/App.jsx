@@ -2,6 +2,7 @@ import './index.css'
 import { useEffect, useState } from 'react'
 import { a, TriBar, startSpeakerTaps } from './shared.jsx'
 import { Link, usePath, returnScroll } from '../lib/router.jsx'
+import { applyPageMeta } from '../lib/seo.js'
 import { SPEAKERS } from '../data/speakersData.js'
 import HomePage from './HomePage.jsx'
 import AboutPage from './AboutPage.jsx'
@@ -150,13 +151,7 @@ export default function App() {
       ? SPEAKERS.find((s) => s.id === Number(route.split('/')[2])) : null
     const shown = page === 'home' ? '' : page === 'speakers' && !speaker ? '/speakers' : page === 'events' ? '/summit-gallery' : route
     if (shown !== route) window.history.replaceState(window.history.state, '', (shown || '/') + window.location.hash)
-    document.title = (speaker ? `${speaker.name} · ` : '') + ({
-      about: 'About Us · ',
-      speakers: 'Speakers · ',
-      schedule: 'Agenda & Schedule · ',
-      events: 'Summit Gallery · ',
-      home: '',
-    }[page] || '') + 'Bharat Summit 2026'
+    applyPageMeta(page, speaker, shown)
 
     // Sections fade up when entering the viewport (children staggered 150ms in CSS).
     const io = new IntersectionObserver(
