@@ -100,7 +100,12 @@ export const DAYS = [
               "Dr Rathin Roy (Former Member, EAC to PM & Former Director, NIPFP)",
               "Prof. Himanshu (Professor, JNU)",
               "Prof. Santosh Mehrotra (Former Professor, JNU)",
-              "Dr Kadiyam Kavya (MP, Lok Sabha)",
+              "Dr Kadiyam Kavya (MP, Lok Sabha)"
+            ]
+          },
+          {
+            label: "Moderator",
+            items: [
               "Prof. Amirullah Khan (Professor, MCRHRDI, Govt of Telangana)"
             ]
           }

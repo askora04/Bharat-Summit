@@ -117,7 +117,7 @@ export default function EventsPage() {
 
   return (
     <>
-      <MonumentHero kicker="BHARAT SUMMIT 2025" title="SUMMIT GALLERY">
+      <MonumentHero kicker="BHARAT SUMMIT 2026" title="SUMMIT GALLERY">
         <p>A glimpse into the ideas, conversations, and people shaping a stronger, smarter India.</p>
       </MonumentHero>
 
