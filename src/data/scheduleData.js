@@ -47,8 +47,7 @@ export const DAYS = [
           {
             label: "Speakers",
             items: [
-              "Salman Khurshid",
-              "Priyanka Gandhi Vadra (MP, INC)"
+              "Salman Khurshid"
             ]
           },
           {
@@ -74,9 +73,13 @@ export const DAYS = [
               "Tikendar Singh Panwar (Former Mayor, Shimla & Urban Expert)",
               "Vijay Mahajan (CEO, Rajiv Gandhi Foundation)",
               "Shaikh Salauddin (Indian Federation of App-Based Transport Workers)",
-              "Sajjad Shahid (Historian)",
-              "Divya Spandana (Former MP, Lok Sabha)",
-              "Dr Ajoy Kumar (Former IPS & AICC In-charge of Tripura, Nagaland & Sikkim)"
+              "Sajjad Shahid (Historian)"
+            ]
+          },
+          {
+            label: "Moderator",
+            items: [
+              "Divya Spandana (Former MP, Lok Sabha)"
             ]
           }
         ],
@@ -158,14 +161,13 @@ export const DAYS = [
             items: [
               "Ebrahim Patel (Former Minister, South Africa)",
               "Prof Jayati Ghosh (UN High-level Advisory Board on Economic and Social Affairs)",
-              "Prof Thomas Piketty (online)",
-              "Ivan Scalfarotto (Senator and Former Deputy Minister, Ministry of Economic Development, Italy)"
+              "Prof Thomas Piketty (online)"
             ]
           },
           {
             label: "Moderator",
             items: [
-              "Deepender Hooda (MP) or Vivek Tankha (MP)"
+              "Deepender Hooda (MP)"
             ]
           }
         ],
@@ -208,11 +210,15 @@ export const DAYS = [
             items: [
               "Ponnam Prabhakar Goud (Minister of Transport, Govt of Telangana)",
               "Danasari Seethakka (Minister of Women and Child Welfare, Govt of Telangana)",
-              "Justice B. Sudarshan Reddy (Former Judge, Supreme Court of India)",
               "Prof. Kancha Ilaiah Shepherd (Former Director, CSSEIP, MANUU, Hyderabad)",
-              "Prof. Bhangya Bhukya (Professor, University of Hyderabad)",
               "Prof. Sujatha Surepally (Professor, Satavahana University)",
               "Alka Lamba (President, All India Mahila Congress)"
+            ]
+          },
+          {
+            label: "Moderator",
+            items: [
+              "Prof. Bhangya Bhukya (Professor, University of Hyderabad)"
             ]
           }
         ],
@@ -233,7 +239,12 @@ export const DAYS = [
               "Prof. Shantha Sinha (Child Rights Activist)",
               "Ram Murthy Sunkari (Senior Journalist)",
               "K. Raju (AICC In-charge, Jharkhand & National Coordinator, SC, ST, OBC and Minorities Dept.)",
-              "Dr Kota Neelima (Vice President, TPCC)",
+              "Dr Kota Neelima (Vice President, TPCC)"
+            ]
+          },
+          {
+            label: "Moderator",
+            items: [
               "Dr Arathi Krishna (MLC, Karnataka)"
             ]
           }
@@ -330,7 +341,8 @@ export const DAYS = [
               "Catherine Arnold (National Executive, Labour Party UK)",
               "Renuka Chaudhary (INC MP & Former Union Minister, India)",
               "Hella Ben Youssef (Former Minister, Tunisia)",
-              "Nurima Alkatiri (Member of Parliament and Deputy Leader, Timor-Leste)"
+              "Nurima Alkatiri (Member of Parliament and Deputy Leader, Timor-Leste)",
+              "Ntombikayise Sibhidla (NEC member, ANC Women's League)"
             ]
           },
           {
@@ -380,11 +392,15 @@ export const DAYS = [
             items: [
               "N. Uttam Kumar Reddy (Minister of Irrigation, Food & Civil Supplies, Govt of Telangana)",
               "Chamala Kiran Kumar Reddy (MP, Lok Sabha)",
-              "Ghulam Ahmad Mir (AICC In-charge, Tamil Nadu & Puducherry)",
               "Prof. Ganesh Devy (Author & Linguist)",
               "Aditi Mehta (Former IAS)",
-              "Madhu Y. Goud (Chairperson, AIPC)",
               "Shilpi Neha Tirkey (Minister of Agriculture, Animal Husbandry & Co-operative, Govt of Jharkhand)"
+            ]
+          },
+          {
+            label: "Moderator",
+            items: [
+              "Madhu Y. Goud (Chairperson, AIPC)"
             ]
           }
         ],
@@ -404,9 +420,14 @@ export const DAYS = [
               "Dr Alekhya Punjala (Classical Dancer)",
               "Prof. Ajay Gudavarthy (Professor, JNU)",
               "Sandeep Dikshit (Chairperson, Rachnatmak Congress)",
-              "Seema Chishti (Chief Editor, The Wire)",
               "Krishna Rao (Cultural Minister)",
               "Prof. Apoorvanand (Delhi University)"
+            ]
+          },
+          {
+            label: "Moderator",
+            items: [
+              "Seema Chishti (Chief Editor, The Wire)"
             ]
           }
         ],
@@ -448,8 +469,7 @@ export const DAYS = [
               "Nika Kovač (D-Hub, Slovenia)",
               "Johan Hassel (Center for American Progress, USA)",
               "Kunthida Rungruengkiat (Former MP, People's Party, Thailand)",
-              "Øyvind Wenensland (Head of Strategy, Norwegian Labour Party)",
-              "Prof Pedro Uczai (Congressman & PT Floor Leader, Brazil)"
+              "Øyvind Wenensland (Head of Strategy, Norwegian Labour Party)"
             ]
           },
           {
@@ -475,10 +495,14 @@ export const DAYS = [
               "Mohammad Azharuddin (Minister for Minority Welfare and Public Enterprises, Govt of Telangana)",
               "Vamsi Krishna Gaddam (MP, Lok Sabha)",
               "Vinesh Phogat (MLA, Haryana)",
-              "Manish Sharma (In-charge, IYC)",
-              "Dr Vikrant Bhuria (Chairman, AICC Adivasi Department)",
               "Brijendra Singh (Vice Chairman, AICC Foreign Affairs)",
               "Anil Kumar Yadav (MP)"
+            ]
+          },
+          {
+            label: "Moderator",
+            items: [
+              "Manish Sharma (In-charge, IYC)"
             ]
           }
         ],
@@ -494,13 +518,18 @@ export const DAYS = [
           {
             label: "Panelists",
             items: [
-              "Nikhil Dey (Founder Member, MKSS)",
               "Anjali Bhardwaj (Transparency Rights Activist)",
               "Tara Rao (Eddelu, Karnataka)",
               "Dr Sirivella Prasad (AICC In-charge, Maharashtra)",
               "Dr Parnika Reddy (MLA)",
               "Prof. Mukulika Banerjee (Professor, London School of Economics)",
               "Sashikant Senthil (MP, Lok Sabha)"
+            ]
+          },
+          {
+            label: "Moderator",
+            items: [
+              "Nikhil Dey (Founder Member, MKSS)"
             ]
           }
         ],
@@ -540,7 +569,6 @@ export const DAYS = [
           {
             label: "Speakers",
             items: [
-              "Chung Eui-yong (Former Foreign Minister & NSA, South Korea)",
               "Priyank Kharge (Home Minister, Karnataka)",
               "Basem Kamel (Senator, Egypt)",
               "Guillaume Long (Former Minister of Foreign Affairs and Human Mobility of Ecuador)",
@@ -566,7 +594,6 @@ export const DAYS = [
             label: "Speakers",
             items: [
               "Helle Lyng (Journalist, Norway)",
-              "Rajdeep Sardesai (Journalist, India)",
               "Leonard Novy (Director, Institute for Media & Communications, Germany)",
               "Sangeeta Baruah Pisharoty (President, Press Club of India)",
               "Dr Mustafa Hamarneh (President, Jordanian Academy for Government Administration & Former Chairperson, Jordan Radio & TV)"
@@ -602,15 +629,13 @@ export const DAYS = [
             ]
           },
           {
-            label: "Speeches (10 speeches, 5 minutes each)",
+            label: "Speeches",
             items: [
               "Patrick Gaspard (USA)",
-              "Edinho Silva (President, Workers Party, Brazil)",
               "Thanathorn Juangroongruangkit (Chairperson, Progressive Movement Foundation & Former Leader, Future Forward Party, Thailand)",
               "Junya Ogawa (President, Democratic Reform Party, Japan)",
               "Elly Schlein (Member of the Chamber of Deputies of Italy)",
-              "Giacomo Filibeck (Secretary General, PES)",
-              "Asiedu Nketia (National Chairman, National Democratic Congress (NDC), Ghana)"
+              "Giacomo Filibeck (Secretary General, PES)"
             ]
           },
           {

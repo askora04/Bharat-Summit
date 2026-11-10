@@ -45,7 +45,7 @@ every deploy.
                                          they scroll into view)
   /speakers/1 ...      Speaker profile   One large speaker photo, name, role, biography
   /speakers/157        (157 pages)
-  /events              Summit Archives   /gallery/gallery.json and /videos/videos.json, then
+  /summit-gallery      Summit Gallery    /gallery/gallery.json and /videos/videos.json, then
                                          gallery thumbnails, larger photos and video posters;
                                          a video only if the visitor presses play
 
@@ -81,7 +81,7 @@ every deploy.
 
   Home page, first visit:       ~3 MB   (about half of it the banner video)
   Each further page:            ~0.5-1.5 MB of images (scripts are already loaded)
-  Summit Archives:              ~2.5 MB; plus 1 MB to 22 MB if a video is played
+  Summit Gallery:              ~2.5 MB; plus 1 MB to 22 MB if a video is played
   Typical visit (3 pages):      ~4-6 MB
 
   For sizing a test (from the 200-visitor run on 7 November 2026: 9.8 GB downloaded):
@@ -103,7 +103,7 @@ scripts/load-test.js runs two scenarios at once:
     2. Wait 3-8 seconds (reading time).
     3. Open one more page:
          80%: About, Schedule, Speakers or a speaker profile (14 of that page's images)
-         20%: Summit Archives (data files, 24 thumbnails, 4 larger photos, 8 video posters;
+         20%: Summit Gallery (data files, 24 thumbnails, 4 larger photos, 8 video posters;
               a quarter of these visitors start a video: the first 1 MB, as a browser does)
     4. Wait 3-8 seconds; half the visitors open a third page.
     Number of visitors over time (PEAK = 5000 for the big test):

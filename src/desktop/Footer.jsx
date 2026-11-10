@@ -11,7 +11,7 @@ const NAV_LINKS = [
   { label: 'About Us', page: '/about-us', color: 'var(--teal)' },
   { label: 'Schedule', page: '/schedule', color: 'var(--saffron)' },
   { label: 'Speakers', page: '/speakers', color: 'var(--coral)' },
-  { label: 'Summit Archives', page: '/events', color: 'var(--teal)' },
+  { label: 'Summit Gallery', page: '/summit-gallery', color: 'var(--teal)' },
 ]
 
 // shortcut: generic platform URLs, replace with the real Bharat Summit profile links before launch

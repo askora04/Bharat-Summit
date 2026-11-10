@@ -12,8 +12,8 @@ import Footer from './Footer.jsx'
 import { startMotion, watchInView } from '../lib/motion.js'
 import './motion.css'
 
-const NAV = ['HOME', 'ABOUT US', 'SCHEDULE', 'SPEAKERS', 'SUMMIT ARCHIVES', 'CONNECT']
-const MENU = ['HOME', 'ABOUT', 'SCHEDULES', 'SPEAKERS', 'SUMMIT ARCHIVES', 'CONNECT']
+const NAV = ['HOME', 'ABOUT US', 'SCHEDULE', 'SPEAKERS', 'SUMMIT GALLERY', 'CONNECT']
+const MENU = ['HOME', 'ABOUT', 'SCHEDULES', 'SPEAKERS', 'SUMMIT GALLERY', 'CONNECT']
 
 function NavLink({ label, onClick }) {
   const path = usePath().replace(/\/$/, '') || '/'
@@ -21,7 +21,7 @@ function NavLink({ label, onClick }) {
     : label.startsWith('ABOUT') ? '/about-us'
     : label === 'SPEAKERS' ? '/speakers'
     : label.startsWith('SCHEDULE') ? '/schedule'
-    : label === 'SUMMIT ARCHIVES' ? '/events'
+    : label === 'SUMMIT GALLERY' ? '/summit-gallery'
     : null
 
   if (page) {
@@ -114,7 +114,7 @@ export default function App() {
   const page = route === '/about-us' ? 'about'
     : route.startsWith('/speakers') ? 'speakers'
     : route === '/schedule' ? 'schedule'
-    : route === '/events' ? 'events'
+    : route === '/summit-gallery' || route === '/events' ? 'events'
     : 'home'
 
   useEffect(watchSpeakerCards, []) // speaker cards: measure their details (shared.jsx)
@@ -134,13 +134,13 @@ export default function App() {
     // speakers list); the address bar is corrected to match, so it can be shared or bookmarked as is
     const speaker = page === 'speakers' && route.split('/')[2] !== undefined
       ? SPEAKERS.find((s) => s.id === Number(route.split('/')[2])) : null
-    const shown = page === 'home' ? '' : page === 'speakers' && !speaker ? '/speakers' : route
+    const shown = page === 'home' ? '' : page === 'speakers' && !speaker ? '/speakers' : page === 'events' ? '/summit-gallery' : route
     if (shown !== route) window.history.replaceState(window.history.state, '', (shown || '/') + window.location.hash)
     document.title = (speaker ? `${speaker.name} · ` : '') + ({
       about: 'About Us · ',
       speakers: 'Speakers · ',
       schedule: 'Agenda & Schedule · ',
-      events: 'Summit Archives · ',
+      events: 'Summit Gallery · ',
       home: '',
     }[page] || '') + 'Bharat Summit 2026'
 

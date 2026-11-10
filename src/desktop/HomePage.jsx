@@ -133,7 +133,7 @@ function Moments() {
         <TriBar />
         <Title light="MOMENTS FROM" bold="BHARAT SUMMIT" className="h-two-line" />
         <p className="h-sub">A glimpse into the ideas, conversations, and people shaping a stronger, smarter India.</p>
-        <Link to="/events" className="h-btn">View Full Gallery <Icon name="arrowRight" size={14} /></Link>
+        <Link to="/summit-gallery" className="h-btn">View Summit Gallery <Icon name="arrowRight" size={14} /></Link>
       </div>
       {/* Columns drift up and down alternately; three copies keep each column filled while it loops */}
       <div className="h-gallery" aria-label="Photos from previous editions">

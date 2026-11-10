@@ -26,6 +26,8 @@ const ALBUMS = [
     caption: 'Panels and conversations on day two' },
   { folder: 'Final Day', id: 'final-day', title: 'Final Day', date: '2025-04-26',
     caption: 'The final day, with Rahul Gandhi on the main stage at HICC' },
+  { folder: 'IMages', id: 'bharat-summit-2026', title: 'Bharat Summit 2026', credit: '© Bharat Summit',
+    caption: 'Press conference ahead of Bharat Summit 2026' },
 ]
 
 // Optional per-photo lines, replacing the album caption: { "day-2/250425mw0154": "..." }
@@ -52,8 +54,8 @@ const previous = (await exists(join(OUT, 'gallery.json')))
   : {}
 
 // 250425mw0154LowRessRGB.jpg -> 250425mw0154, 2F2A0009(1).JPG -> 2f2a0009-1
-const photoId = (file) => file.replace(/\.jpe?g$/i, '').replace(/(LowRessRGB|HighAdobeRGB|AdobeHigh|LOWres)$/i, '')
-  .replace(/\s*\((\d+)\)$/, '-$1').toLowerCase()
+const photoId = (file) => file.replace(/\.(jpe?g|png)$/i, '').replace(/(LowRessRGB|HighAdobeRGB|AdobeHigh|LOWres)$/i, '')
+  .replace(/\s*\((\d+)\)$/, '-$1').replace(/\s+/g, '-').toLowerCase()
 
 async function convert(src, id, credit) {
   const last = join(OUT, `${id}-${SIZES.at(-1)}.webp`)
@@ -86,7 +88,7 @@ for (const album of ALBUMS) {
   // a byte-identical copy of an earlier file (e.g. "DSC_1764 (1).JPG" beside "DSC_1764.JPG") is left out
   const seen = new Set()
   const files = []
-  for (const f of (await readdir(dir)).filter((f) => /\.jpe?g$/i.test(f)).sort()) {
+  for (const f of (await readdir(dir)).filter((f) => /\.(jpe?g|png)$/i.test(f)).sort()) {
     const hash = createHash('md5').update(await readFile(join(dir, f))).digest('hex')
     if (!seen.has(hash)) { seen.add(hash); files.push(f) }
   }

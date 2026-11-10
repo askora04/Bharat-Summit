@@ -133,7 +133,7 @@ section[id] { scroll-margin-top: 48px; }
    screen width. --dz = screen width / 1100 is set in App.jsx; home.css and footer.css here are the
    desktop stylesheets, without their narrow-screen rules. */
 .dz { width: 1100px; zoom: var(--dz, .35); }
-/* The other pages (About, Schedule, Speakers, Summit Archives) are zoomed out whole. Their banners make room
+/* The other pages (About, Schedule, Speakers, Summit Gallery) are zoomed out whole. Their banners make room
    for the desktop 61px header; zoomed out, the 48px phone header covers calc(48px / var(--dz)) of the page */
 .dz .sp-hero { height: calc(229px + 48px / var(--dz, .35)); padding-top: calc(48px / var(--dz, .35)); }
 .dz .sp-hero.sc-hero { height: auto; padding-top: calc(48px / var(--dz, .35) + 51px); }
@@ -192,7 +192,7 @@ section[id] { scroll-margin-top: 48px; }
    placed in the .dz box, so it is zoomed with the card it belongs to */
 .dz { position: relative; }
 
-/* Summit Archives clips, a carousel that also slides by hand (Scroller): in the zoomed-out page each card is
+/* Summit Gallery clips, a carousel that also slides by hand (Scroller): in the zoomed-out page each card is
    enlarged ~2.4×, to about 200px on the phone with readable titles */
 .dz .vd-clips-row .vd-clip { zoom: 2.4; }
 .dz .vd-clips-row { gap: 36px; }

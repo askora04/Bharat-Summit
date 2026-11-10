@@ -3,7 +3,7 @@ import './scroller.css'
 
 // A row that scrolls sideways by hand, with every kind of input: a swipe on touch screens, a sideways trackpad
 // swipe or Shift + wheel, dragging with the mouse, the arrow keys once it has focus and, with `dots`, a dot per
-// item. Used by the Summit Archives clips and About's social posts.
+// item. Used by the Summit Gallery clips and About's social posts.
 //
 // auto: the row also slides on its own, as a carousel, about one item every `auto` seconds, looping without end
 //   (the items are shown twice; when the first set has slid out, the row jumps back by one set, which looks the

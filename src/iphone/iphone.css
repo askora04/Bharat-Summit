@@ -124,7 +124,7 @@ html.iphone .social .card-row {
 html.iphone .social .post-embed { flex: 0 0 min(350px, 100% - 32px); max-width: none; height: 560px; }
 html.iphone .social .post-dots { margin-top: 8px; }
 
-/* Summit Archives clips, a carousel that also slides by hand (Scroller, src/lib): enlarged ~2.4× so each card is
+/* Summit Gallery clips, a carousel that also slides by hand (Scroller, src/lib): enlarged ~2.4× so each card is
    about 200pt wide on the phone with readable titles */
 .vd-clips-row .vd-clip { zoom: 2.4; }
 .vd-clips-row { gap: 36px; }

@@ -17,7 +17,7 @@ const TOPICS = [
 
 // Real posts, shown with each platform's own embed (see SocialEmbed)
 const POSTS = [
-  { platform: 'X', url: 'https://x.com/BharatSummit_25/status/1917447562639876256' },
+  { platform: 'X', url: 'https://x.com/Bharat_Summit/status/2120043924781961289' },
   { platform: 'Instagram', url: 'https://www.instagram.com/p/DI6Ua6TOjhS/' },
   { platform: 'Facebook', url: 'https://www.facebook.com/photo?fbid=122109985046838327&set=a.122099998124838327' },
 ]

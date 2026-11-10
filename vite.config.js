@@ -11,7 +11,7 @@ function sitemap() {
     name: 'sitemap',
     apply: 'build',
     closeBundle() {
-      const paths = ['/', '/about-us', '/schedule', '/speakers', '/events', ...SPEAKERS.map((s) => `/speakers/${s.id}`)]
+      const paths = ['/', '/about-us', '/schedule', '/speakers', '/summit-gallery', ...SPEAKERS.map((s) => `/speakers/${s.id}`)]
       const urls = paths.map((p) => `  <url><loc>${SITE}${p === '/' ? '/' : p}</loc></url>`).join('\n')
       writeFileSync('dist/sitemap.xml',
         `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`)

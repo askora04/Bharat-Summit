@@ -14,7 +14,7 @@ const HERO_MONUMENTS = [
   ['landmarks', 'charminar', 120],
 ]
 
-// Page banner with the monuments along its lower right; the Summit Archives and Schedule pages use it too
+// Page banner with the monuments along its lower right; the Summit Gallery and Schedule pages use it too
 export function MonumentHero({ kicker, title, className, children }) {
   const row = useRef(null)
   // the monuments drift after the pointer (-1..1 across the banner); taller ones are "nearer" and move more
