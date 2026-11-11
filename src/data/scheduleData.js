@@ -143,7 +143,8 @@ export const DAYS = [
               "Jeese Marks (Rihla Research & Advisory, Australia)",
               "Francesco Lapenta (Founding Director, Institute of Future and Innovation Studies)",
               "Sridhar Babu (Minister for IT, Telangana)",
-              "Frédéric Zgainski (Former MP, Democratic Movement, France)"
+              "Frédéric Zgainski (Former MP, Democratic Movement, France)",
+              "Monty All (Policy Analyst for Digital Policy, FEPS)"
             ]
           },
           {
@@ -166,7 +167,8 @@ export const DAYS = [
             items: [
               "Ebrahim Patel (Former Minister, South Africa)",
               "Prof Jayati Ghosh (UN High-level Advisory Board on Economic and Social Affairs)",
-              "Prof Thomas Piketty (online)"
+              "Prof Thomas Piketty (online)",
+              "Guillaume Long (Former Foreign Minister, Ecuador)"
             ]
           },
           {
@@ -267,7 +269,7 @@ export const DAYS = [
             items: [
               "Anies Baswedan (Former Education Minister, Indonesia)",
               "Machris Cabreros (Global Coordinator, Progressive Alliance)",
-              "Karol Cariola (Speaker of Assembly, Chile)",
+              "Nurul Izzah Anwar (Executive Chair, Suluh Centre & Former MP)",
               "Josh Osih (President, Social Democratic Front, Cameroon, and Member of Parliament)",
               "Maria Jose Pizarro (Former Senator, representing the Instituto de Pensamiento Progresista (IPP))",
               "Gurdeep Sappal (Admin In-charge, AICC)"
@@ -318,8 +320,6 @@ export const DAYS = [
             items: [
               "Bert Koenders (Former Foreign Minister, Netherlands)",
               "Salil Shetty (Former Amnesty International Secretary-General)",
-              "Amb. Oh Song (ICAPP)",
-              "Paolo Guerrieri (Senator, Italy)",
               "Allison McManus (Managing Director for National Security, CAP)",
               "Dr Maria João Rodrigues (Former FEPS President & Former Portuguese Minister)",
               "Anand Sharma (MP, Rajya Sabha & Former Union Cabinet Minister, GoI)"
@@ -346,7 +346,6 @@ export const DAYS = [
               "Catherine Arnold (National Executive, Labour Party UK)",
               "Renuka Chaudhary (INC MP & Former Union Minister, India)",
               "Hella Ben Youssef (Former Minister, Tunisia)",
-              "Nurima Alkatiri (Member of Parliament and Deputy Leader, Timor-Leste)",
               "Ntombikayise Sibhidla (NEC member, ANC Women's League)"
             ]
           },
@@ -448,7 +447,7 @@ export const DAYS = [
             label: "Speakers",
             items: [
               "Antton Rönnholm (Former Vice President, Social Democratic Party, Finland)",
-              "Prof Pablo Oribe (Secretary General, Socialist Party, Uruguay)",
+              "Christian Salm (Head of Democracy, FEPS)",
               "Peangpanor Boonklum (Advisor to the Leader of the Opposition, People's Party)",
               "Dr Mario Aguja (Akbayan Executive Committee Member)"
             ]
@@ -474,7 +473,8 @@ export const DAYS = [
               "Nika Kovač (D-Hub, Slovenia)",
               "Johan Hassel (Center for American Progress, USA)",
               "Kunthida Rungruengkiat (Former MP, People's Party, Thailand)",
-              "Øyvind Wenensland (Head of Strategy, Norwegian Labour Party)"
+              "Øyvind Wenensland (Head of Strategy, Norwegian Labour Party)",
+              "Maria Iñiguez (Congresswoman, Ecuador)"
             ]
           },
           {
@@ -552,8 +552,7 @@ export const DAYS = [
               "Nancy Okail (Centre for International Policy)",
               "Jonas Kalambayi (Senator, Democratic Republic of the Congo)",
               "Kent Härstedt (Vice President of the OSCE Parliamentary Assembly)",
-              "Dan Herman (Senior Director for National Security, Accountability, and Reform)",
-              "Giuseppe Provenzano (Former Minister for the South & Territorial Cohesion & MP, Italy)"
+              "Driss Lachgar (First Secretary, USFP, Morocco)"
             ]
           },
           {
@@ -577,7 +576,8 @@ export const DAYS = [
               "Priyank Kharge (Home Minister, Karnataka)",
               "Basem Kamel (Senator, Egypt)",
               "Guillaume Long (Former Minister of Foreign Affairs and Human Mobility of Ecuador)",
-              "Clara Lopez Obregon (Former Minister of Labour, Colombia)"
+              "Naseer Hussain (Deputy Whip, Rajya Sabha & MP)",
+              "Dr Maria João Rodrigues (Former FEPS President & Former Portuguese Minister)"
             ]
           },
           {
@@ -601,7 +601,7 @@ export const DAYS = [
               "Helle Lyng (Journalist, Norway)",
               "Leonard Novy (Director, Institute for Media & Communications, Germany)",
               "Sangeeta Baruah Pisharoty (President, Press Club of India)",
-              "Dr Mustafa Hamarneh (President, Jordanian Academy for Government Administration & Former Chairperson, Jordan Radio & TV)"
+              "Francesco Lapenta (Founding Director, Institute of Future and Innovation Studies)"
             ]
           },
           {
@@ -639,8 +639,11 @@ export const DAYS = [
               "Patrick Gaspard (USA)",
               "Thanathorn Juangroongruangkit (Chairperson, Progressive Movement Foundation & Former Leader, Future Forward Party, Thailand)",
               "Junya Ogawa (President, Democratic Reform Party, Japan)",
-              "Elly Schlein (Member of the Chamber of Deputies of Italy)",
-              "Giacomo Filibeck (Secretary General, PES)"
+              "Giacomo Filibeck (Secretary General, PES)",
+              "Pascal Affi N’Guessan (Former Prime Minister, Côte d’Ivoire)",
+              "Supra Mahumapelo (Deputy Secretary General, ANC)",
+              "Bert Koenders (Former Foreign Minister, Netherlands)",
+              "Anies Baswedan (Former Minister, Indonesia)"
             ]
           },
           {
