@@ -432,8 +432,7 @@ const COUNTRY = {
 
 // No photo yet (initials instead)
 // Remove a name here once its photo is in public/assets/speakers/.
-const NO_PHOTO = new Set(['Monty All', 'Nurul Izzah Anwar', 'Christian Salm', 'Maria Iñiguez', 'Driss Lachgar', 'Naseer Hussain',
-  'Pascal Affi N’Guessan', 'Supra Mahumapelo'])
+const NO_PHOTO = new Set([])
 // "María José Pizarro" -> "maria-jose-pizarro", the photo's file name
 const slug = (name) => name.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 
