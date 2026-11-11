@@ -440,6 +440,10 @@ const slug = (name) => name.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').to
 const initials = (name) => name.replace(/^((Dr|Prof|Justice)\.?\s+|M\.V\.\s*)+/, '').split(/\s+/).filter((w) => /^\p{Lu}/u.test(w)).slice(0, 2).map((w) => w[0]).join('')
   || name.slice(0, 2).toUpperCase()
 
+// Protocol order: these lead any session they are in (RG > CM > DCM > Salman Khurshid > Sridhar Babu > Pushparaj); the rest keep their order
+const LEADS = ['Rahul Gandhi', 'A. Revanth Reddy', 'Mallu Bhatti Vikramarka', 'Salman Khurshid', 'D. Sridhar Babu', 'Pushparaj Deshpande']
+const rank = (name) => (LEADS.includes(name) ? LEADS.indexOf(name) : LEADS.length)
+
 let n = 0
 // [{ part, sessions: [{ title, when, about, speakers: [speaker] }] }]
 export const PARTS = RAW.map(({ part, sessions }) => ({
@@ -451,7 +455,7 @@ export const PARTS = RAW.map(({ part, sessions }) => ({
       return { id: n, name, role, country: COUNTRY[name] || '', bio, moderator: !!moderator, session: s.title, when: s.when, initials: initials(name),
         img: NO_PHOTO.has(name) ? null : a(`speakers/${slug(name)}.webp`),
         bg: SPEAKER_BG }
-    }),
+    }).sort((x, y) => rank(x.name) - rank(y.name)), // after numbering, so /speakers/:id links stay the same
   })),
 }))
 
@@ -460,3 +464,4 @@ export const SPEAKERS = PARTS.flatMap((p) => p.sessions.flatMap((s) => s.speaker
 // Each person once, at their first session: for "All sessions" and the Home and About rows. Someone in several
 // sessions (D. Sridhar Babu, for one) keeps a card in each session's own list.
 export const ALL_SPEAKERS = SPEAKERS.filter((s, i) => SPEAKERS.findIndex((t) => t.name === s.name) === i)
+  .sort((x, y) => rank(x.name) - rank(y.name))
