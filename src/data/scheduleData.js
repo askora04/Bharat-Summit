@@ -300,7 +300,7 @@ export const DAYS = [
             items: [
               "Bert Koenders (Former Foreign Minister, Netherlands)",
               "Salil Shetty (Former Amnesty International Secretary-General)",
-              "Allison McManus (Managing Director for National Security, CAP)",
+              "Allison McManus (Managing Director for National Security, Center for American Progress Action Fund (CAP Action))",
               "Dr Maria João Rodrigues (Former FEPS President & Former Portuguese Minister)",
               "Anand Sharma (MP, Rajya Sabha & Former Union Cabinet Minister, GoI)"
             ]
@@ -451,7 +451,7 @@ export const DAYS = [
             label: "Speakers",
             items: [
               "Nika Kovač (D-Hub, Slovenia)",
-              "Johan Hassel (Center for American Progress, USA)",
+              "Johan Hassel (Center for American Progress Action Fund (CAP Action), USA)",
               "Kunthida Rungruengkiat (Former MP, People's Party, Thailand)",
               "Øyvind Wenensland (Head of Strategy, Norwegian Labour Party)",
               "Maria Iñiguez (Congresswoman, Ecuador)"
