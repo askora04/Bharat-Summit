@@ -13,33 +13,13 @@ export const LEGEND = ["panel","plenary","expo","telangana"]
 
 export const DAYS = [
   {
-    id: "day-0",
-    tab: "Day 0",
-    short: "Thu 12 Nov",
-    date: "Thursday, 12 November 2026",
-    sessions: [
-      {
-        no: 1,
-        kind: "expo",
-        agenda: "Field visit",
-        title: "Optional – Departure for Field Visits",
-        parts: [
-          {
-            text: "Hosted by the Telangana government, this organised field visit takes guests to sites of historical and political importance (State Assembly, NREGA work-site etc.)."
-          }
-        ],
-        time: "01:00 pm – 06:00 pm"
-      }
-    ]
-  },
-  {
     id: "day-1",
     tab: "Day 1",
     short: "Fri 13 Nov",
     date: "Friday, 13 November 2026",
     sessions: [
       {
-        no: 2,
+        no: 1,
         kind: "plenary",
         agenda: "Discussion 1",
         title: "Plenary Session: Navigating the New World Order — View from India",
@@ -60,7 +40,7 @@ export const DAYS = [
         time: "10:30 am – 11:30 am"
       },
       {
-        no: 3,
+        no: 2,
         kind: "telangana",
         agenda: "Telangana Rising Panel",
         place: "Panel A",
@@ -86,7 +66,7 @@ export const DAYS = [
         time: "11:00 am – 12:30 pm"
       },
       {
-        no: 4,
+        no: 3,
         kind: "telangana",
         agenda: "Telangana Rising Panel",
         place: "Panel B",
@@ -113,7 +93,7 @@ export const DAYS = [
         time: "11:00 am – 12:30 pm"
       },
       {
-        no: 5,
+        no: 4,
         kind: "expo",
         agenda: "Opening of Expo",
         title: "India and the World",
@@ -131,7 +111,7 @@ export const DAYS = [
         time: "11:30 am – 12:30 pm"
       },
       {
-        no: 6,
+        no: 5,
         kind: "panel",
         agenda: "Panel Discussion 1",
         place: "Plenary Hall",
@@ -157,7 +137,7 @@ export const DAYS = [
         time: "01:30 pm – 02:30 pm"
       },
       {
-        no: 7,
+        no: 6,
         kind: "panel",
         agenda: "Panel Discussion 2",
         title: "Panel 2: A New Economic Deal for the World",
@@ -181,7 +161,7 @@ export const DAYS = [
         time: "01:30 pm – 02:30 pm"
       },
       {
-        no: 8,
+        no: 7,
         kind: "panel",
         agenda: "Panel Discussion 3",
         title: "Panel 3: Youth & Politics of Tomorrow",
@@ -206,7 +186,7 @@ export const DAYS = [
         time: "01:30 pm – 02:30 pm"
       },
       {
-        no: 9,
+        no: 8,
         kind: "telangana",
         agenda: "Telangana Rising Panel",
         place: "Panel C",
@@ -232,7 +212,7 @@ export const DAYS = [
         time: "02:00 pm – 03:30 pm"
       },
       {
-        no: 10,
+        no: 9,
         kind: "telangana",
         agenda: "Telangana Rising Panel",
         place: "Panel D",
@@ -259,7 +239,7 @@ export const DAYS = [
         time: "02:00 pm – 03:30 pm"
       },
       {
-        no: 11,
+        no: 10,
         kind: "panel",
         agenda: "Panel Discussion 4",
         title: "Panel 4: South–South Cooperation in a New World Order",
@@ -285,7 +265,7 @@ export const DAYS = [
         time: "03:00 pm – 04:00 pm"
       },
       {
-        no: 12,
+        no: 11,
         kind: "panel",
         agenda: "Panel Discussion 5",
         title: "Panel 5: Climate Change",
@@ -310,7 +290,7 @@ export const DAYS = [
         time: "03:00 pm – 04:00 pm"
       },
       {
-        no: 13,
+        no: 12,
         kind: "panel",
         agenda: "Panel Discussion 6",
         title: "Panel 6: Reform of Multilateral Institutions",
@@ -335,7 +315,7 @@ export const DAYS = [
         time: "04:00 pm – 05:15 pm"
       },
       {
-        no: 14,
+        no: 13,
         kind: "panel",
         agenda: "Panel Discussion 7",
         title: "Panel 7: Gender Justice & a Feminist Future",
@@ -359,7 +339,7 @@ export const DAYS = [
         time: "04:00 pm – 05:15 pm"
       },
       {
-        no: 16,
+        no: 15,
         kind: "telangana",
         agenda: "Telangana Rising Plenary",
         place: "Plenary 1",
@@ -385,7 +365,7 @@ export const DAYS = [
     date: "Saturday, 14 November 2026",
     sessions: [
       {
-        no: 17,
+        no: 16,
         kind: "telangana",
         agenda: "Telangana Rising Panel",
         place: "Panel E",
@@ -411,7 +391,7 @@ export const DAYS = [
         time: "10:00 am – 11:30 am"
       },
       {
-        no: 18,
+        no: 17,
         kind: "telangana",
         agenda: "Telangana Rising Panel",
         place: "Panel F",
@@ -438,7 +418,7 @@ export const DAYS = [
         time: "10:00 am – 11:30 am"
       },
       {
-        no: 19,
+        no: 18,
         kind: "panel",
         agenda: "Panel Discussion 8",
         title: "Panel 8: Progressivism & Accountability",
@@ -462,7 +442,7 @@ export const DAYS = [
         time: "10:30 am – 11:30 am"
       },
       {
-        no: 20,
+        no: 19,
         kind: "panel",
         agenda: "Panel Discussion 9",
         title: "Panel 9: Innovative Ideas for Progressives",
@@ -487,7 +467,7 @@ export const DAYS = [
         time: "10:30 am – 11:30 am"
       },
       {
-        no: 21,
+        no: 20,
         kind: "telangana",
         agenda: "Telangana Rising Panel",
         place: "Panel G",
@@ -514,7 +494,7 @@ export const DAYS = [
         time: "12:00 pm – 01:30 pm"
       },
       {
-        no: 22,
+        no: 21,
         kind: "telangana",
         agenda: "Telangana Rising Panel",
         place: "Panel H",
@@ -541,7 +521,7 @@ export const DAYS = [
         time: "12:00 pm – 01:30 pm"
       },
       {
-        no: 23,
+        no: 22,
         kind: "panel",
         agenda: "Panel Discussion 10",
         title: "Panel 10: The New World Order",
@@ -565,7 +545,7 @@ export const DAYS = [
         time: "01:00 pm – 02:00 pm"
       },
       {
-        no: 24,
+        no: 23,
         kind: "panel",
         agenda: "Panel Discussion 11",
         title: "Panel 11: Peace in the New World Order",
@@ -590,7 +570,7 @@ export const DAYS = [
         time: "01:00 pm – 02:00 pm"
       },
       {
-        no: 25,
+        no: 24,
         kind: "panel",
         agenda: "Panel Discussion 12",
         title: "Panel 12: The Future of Media",
@@ -614,7 +594,7 @@ export const DAYS = [
         time: "01:00 pm – 02:00 pm"
       },
       {
-        no: 26,
+        no: 25,
         kind: "plenary",
         agenda: "Valedictory session",
         title: "Valedictory Session: Delivering Global Justice",

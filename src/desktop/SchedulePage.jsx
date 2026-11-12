@@ -40,7 +40,7 @@ function Row({ no, kind, agenda, place, title, parts, time }) {
 }
 
 export default function SchedulePage() {
-  const [tab, setTab] = useState(DAYS[0].id) // opens on the first day, Day 0
+  const [tab, setTab] = useState(DAYS[0].id) // opens on the first day
   const day = DAYS.find((d) => d.id === tab)
 
   return (
