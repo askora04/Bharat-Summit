@@ -241,7 +241,7 @@ const RAW = [
         ],
       },
       {
-        title: 'Plenary 1: Interactive Session with Leaders', when: `${FRI} | 4:00 pm - 5:30 pm`,
+        title: 'Plenary 1: Interactive Session with Leaders', when: `${FRI} | 5:30 pm - 6:30 pm`,
         speakers: [
           ['Mallu Bhatti Vikramarka', 'Deputy Chief Minister, Govt of Telangana', 'Mallu Bhatti Vikramarka, Deputy Chief Minister, Govt of Telangana, speaks at Plenary 1: Interactive Session with Leaders.'],
           ['D. Sridhar Babu', 'Minister of IT, Govt of Telangana', 'D. Sridhar Babu, Minister of IT, Govt of Telangana, speaks at Plenary 1: Interactive Session with Leaders.'],

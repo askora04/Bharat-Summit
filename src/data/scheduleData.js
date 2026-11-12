@@ -374,7 +374,7 @@ export const DAYS = [
             ]
           }
         ],
-        time: "04:00 pm – 05:30 pm"
+        time: "05:30 pm – 06:30 pm"
       }
     ]
   },
