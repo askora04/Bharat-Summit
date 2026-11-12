@@ -294,7 +294,7 @@ export const DAYS = [
             label: "Speakers",
             items: [
               "Jo Leinen (Former Member of the European Parliament)",
-              "Gautam Narasimhan (Global Lead for Climate, Energy and Environment, UNICEF)",
+              "Gautam Narasimha (Climate Adaptation Advisor)",
               "Javier Monge-Matamoros (Senior Analyst, Climate Lead Group, Costa Rica)",
               "Kasthuriraani Patto (Former Member of Parliament, Malaysia)",
               "Akiko Kamei (Former Member of the House of Representatives, Japan)"
