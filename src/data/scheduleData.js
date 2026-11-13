@@ -529,7 +529,6 @@ export const DAYS = [
           {
             label: "Speakers",
             items: [
-              "Nancy Okail (Centre for International Policy)",
               "Jonas Kalambayi (Senator, Democratic Republic of the Congo)",
               "Kent Härstedt (Vice President of the OSCE Parliamentary Assembly)",
               "Driss Lachgar (First Secretary, USFP, Morocco)"

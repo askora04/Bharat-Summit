@@ -136,7 +136,6 @@ const RAW = [
         about: 'The international balance of power is being reshaped by new alliances, economic competition, technological change and the growing influence of countries outside the traditional centres of power. This panel will examine what these shifts mean for global politics and how the emerging international system may be structured. It is a big-picture geopolitics panel, and asks what the emerging global order actually looks like, rather than focusing on one institution, region or conflict.',
         speakers: [
           ['Jonas Kalambayi Katshiobo', 'Senator, Parliament of the Democratic Republic of the Congo', 'Jonas Kalambayi Katshiobo is a Senator in the Parliament of the Democratic Republic of the Congo.'],
-          ['Nancy Okail', 'President and CEO, Center for International Policy, USA', 'Nancy Okail is President and CEO of the Center for International Policy, United States. She previously served as Executive Director of the Tahrir Institute for Middle East Policy and directed Freedom House\'s Egypt programme. She has worked for more than two decades on human rights, democracy and security in the Middle East and North Africa, and holds a PhD from the University of Sussex.'],
           ['Driss Lachgar', 'First Secretary, Socialist Union of Popular Forces (USFP), Morocco', 'Driss Lachgar is First Secretary of the Socialist Union of Popular Forces (USFP), Morocco\'s social democratic party, a post he has held since 2012. A lawyer, he served as Minister of Relations with Parliament from 2010 to 2012.'],
           ['Kent Härstedt', 'Vice President, OSCE Parliamentary Assembly', 'Kent Härstedt is a Swedish Social Democratic politician, a member of the Swedish Riksdag and Vice President of the OSCE Parliamentary Assembly. He is a survivor of the sinking of the MS Estonia in 1994.'],
           ['Sachin Pilot', 'General Secretary, AICC; Former Deputy Chief Minister of Rajasthan & Former Union Minister', 'Sachin Pilot is a General Secretary of the All India Congress Committee and a Member of the Rajasthan Legislative Assembly for Tonk. He served as Deputy Chief Minister of Rajasthan from 2018 to 2020 and as Union Minister of State for Corporate Affairs, and was President of the Rajasthan Pradesh Congress Committee from 2014 to 2020.', MOD],
@@ -341,7 +340,6 @@ const COUNTRY = {
   'Oyvind Wenensland': 'Norway',
   'Guillaume Long': 'Ecuador',
   'Jonas Kalambayi Katshiobo': 'DR Congo',
-  'Nancy Okail': 'USA',
   'Patrick Gaspard': 'USA',
   'Basem Kamel': 'Egypt',
   'Manish Tewari': 'India',
