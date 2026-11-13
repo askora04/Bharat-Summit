@@ -54,7 +54,7 @@
 
 .sc-no { width: 64px; text-align: center; font: 700 15px/1.4 var(--font-display); color: var(--navy); }
 .sc-table td.sc-no { color: var(--navy); }
-.sc-agenda { width: 190px; font: 700 14px/1.4 var(--font-display); color: var(--navy); }
+.sc-agenda { width: 176px; font: 700 14px/1.4 var(--font-display); color: var(--navy); }
 .sc-table td.sc-agenda { background: var(--agenda); }
 .sc-place { display: block; margin-top: 4px; font: 600 12.5px/1.4 var(--font-body); color: rgb(19 52 95 / .72); }
 .sc-time { width: 170px; font-weight: 600; color: var(--navy); white-space: nowrap; }
