@@ -94,3 +94,7 @@
 .sc-group ol { padding-left: 48px; }
 .sc-moderator { margin-top: 22px; }
 .sc-table td.sc-time { padding: 20px 44px 36px; font-size: 32px; }
+
+/* one line spacing for all schedule content; session details justified */
+.sc-table td, .sc-table td * { line-height: 1.55; }
+.sc-table td.sc-details { text-align: justify; hyphens: auto; }

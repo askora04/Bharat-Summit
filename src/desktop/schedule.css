@@ -83,3 +83,7 @@
   .sc-table td.sc-no { display: none; }
   .sc-table td.sc-time { padding-bottom: 14px; }
 }
+
+/* one line spacing for all schedule content; session details justified */
+.sc-table td, .sc-table td * { line-height: 1.55; }
+.sc-table td.sc-details { text-align: justify; hyphens: auto; }

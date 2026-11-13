@@ -641,9 +641,6 @@ export const DAYS = [
               "D. Sridhar Babu (Industry Minister, Telangana)",
               "Uttam Kumar Reddy (Irrigation Minister, Telangana)"
             ]
-          },
-          {
-            text: "Photo Op for the Press and Family Photo"
           }
         ],
         time: "03:00 pm – 05:00 pm"
