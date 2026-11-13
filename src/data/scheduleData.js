@@ -33,7 +33,7 @@ export const DAYS = [
           {
             label: "Moderator",
             items: [
-              "Pushparaj Deshpande"
+              "Pushparaj Deshpande (Director, Samruddha Bharat Foundation)"
             ]
           }
         ],
