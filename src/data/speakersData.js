@@ -42,7 +42,6 @@ const RAW = [
         speakers: [
           ['Ebrahim Patel', 'Former Minister of Trade, Industry and Competition, South Africa', 'Ebrahim Patel is a South African politician, former trade unionist and member of the African National Congress. He served as Minister of Trade, Industry and Competition from 2019 to 2024 and, before that, as Minister of Economic Development from 2009 to 2019. Earlier in his career he was secretary-general of the Southern African Clothing and Textile Workers\' Union, from 1993 to 2009. He left the Cabinet after the 2024 general election.'],
           ['Jayati Ghosh', 'Professor of Economics, University of Massachusetts Amherst', 'Jayati Ghosh is Professor of Economics at the University of Massachusetts Amherst, a post she has held since January 2021. She is an Indian development economist who taught at Jawaharlal Nehru University, New Delhi, for nearly 35 years. Her research covers international economics and globalisation, employment in developing countries, macroeconomic policy, and gender and development.'],
-          ['Thomas Piketty', 'Professor of Economics, EHESS and Paris School of Economics; Co-Director, World Inequality Lab', 'Thomas Piketty is a French economist and Professor at the School for Advanced Studies in the Social Sciences (EHESS), and associate chair at the Paris School of Economics, where he has taught since 2007. He co-directs the World Inequality Lab and the World Inequality Database, and is a Centennial Professor at the International Inequalities Institute of the London School of Economics. His book Capital in the Twenty-First Century became an international bestseller and reshaped public debate on wealth and inequality.'],
           ['Guillaume Long', 'Senior Diplomatic Advisor, The Hague Group; Senior Fellow, Center for Economic and Policy Research', 'Guillaume Long is Senior Diplomatic Advisor to The Hague Group, a coalition of states committed to upholding international law in relation to Palestine, a role he has held since 2025. He is also a Senior Fellow at the Center for Economic and Policy Research in Washington, D.C. Born in France, he served as Ecuador\'s Minister of Foreign Affairs and Human Mobility from 2016 to 2017 and as its Permanent Representative to the United Nations in Geneva until his resignation in January 2018.'],
           ['Sir Iqbal Sacranie', 'CEO, Global Group of Companies', 'Sir Iqbal Sacranie is a British businessman and community leader and CEO of the Global Group of Companies. He served as Secretary-General of the Muslim Council of Britain from 2002 to 2006 and was knighted in 2005 for services to community relations.'],
           ['Deepender Hooda', 'Member of Parliament, Lok Sabha (Rohtak); Indian National Congress', 'Deepender Singh Hooda is a Member of the Lok Sabha for Rohtak, Haryana, for the Indian National Congress. First elected in 2005, he represented Rohtak until 2019, served in the Rajya Sabha from 2020 to 2024, and returned to the Lok Sabha in the 2024 general election.', MOD],
@@ -56,7 +55,7 @@ const RAW = [
           ['Dariana Polo', 'Coordinator, Progressive Alliance Gender Equality Working Group, Venezuela', 'Dariana Polo is Coordinator of the Progressive Alliance Gender Equality Working Group.'],
           ['Eduardo Zanatta', 'City Councillor (Vereador), Balneario Camboriu, Brazil', 'Eduardo Zanatta is a city councillor (vereador) in Balneario Camboriu, Santa Catarina, Brazil. He holds a degree in International Relations and a master\'s degree in Territorial Planning. Public sources differ on his party affiliation, so it is not stated here.'],
           ['Jessali Andrea de Jesus Zarazua Ramirez', 'Secretary General, International Union of Socialist Youth (IUSY)', 'Jessali Zarazua is Secretary General of the International Union of Socialist Youth (IUSY), an international youth organisation with about 136 member organisations. She is a youth leader from Mexico who was elected to lead the union at its congress.'],
-          ['Yves Bunkulu Zola', 'Member, Union pour la Démocratie et le Progrès Social (UDPS), DR Congo; former Minister of Tourism', 'Yves Bunkulu Zola is a member of the Union pour la Démocratie et le Progrès Social (UDPS) in the Democratic Republic of the Congo and a member of parliament. He was appointed Minister of Tourism in the Ilunga government, which served from September 2019 to April 2021, and is listed as Minister of Youth from 2021.'],
+          ['Andisiwe Kumbaca', 'Member of the National Assembly of South Africa', 'Andisiwe Kumbaca is a Member of the National Assembly of South Africa.'],
           ['Krishna Allavaru', 'AICC In-charge, Bihar', 'Krishna Allavaru is the All India Congress Committee In-charge for Bihar. He was previously the AICC In-charge of the Indian Youth Congress.', MOD],
         ],
       },
@@ -66,9 +65,6 @@ const RAW = [
         speakers: [
           ['Anies Baswedan', 'Former Governor of Jakarta, Indonesia', 'Anies Baswedan is an Indonesian academic and politician. He served as the 14th Governor of Jakarta from 2017 to 2022 and previously as Minister of Education and Culture. He was a candidate in the 2024 Indonesian presidential election. He founded Indonesia Mengajar, a programme that places university graduates in one-year teaching posts across the country.'],
           ['Nurul Izzah Anwar', 'Executive Chair, Suluh Centre; former Member of Parliament, Malaysia', 'Nurul Izzah Anwar is a Malaysian politician of Parti Keadilan Rakyat (PKR) and Executive Chair of the Suluh Centre. She was a Member of Parliament for Lembah Pantai from 2008 to 2018 and for Permatang Pauh from 2018 to 2022.'],
-          ['Machris Cabreros', 'Progressive Alliance, Philippines', 'Machris Cabreros works with the Progressive Alliance, the global network of social democratic, socialist and labour parties and organisations.'],
-          ['María José Pizarro', 'Former Senator, Historic Pact, Colombia', 'María José Pizarro is a Colombian politician who served in the Chamber of Representatives from 2018 to 2022 and as a Senator for the Historic Pact from 2022 until her departure from Congress in 2026. She is the daughter of Carlos Pizarro Leongómez, former leader of the M-19 guerrilla movement, who later stood as a presidential candidate before his assassination in 1990.'],
-          ['Gurdeep Singh Sappal', 'Admin In-charge, All India Congress Committee', 'Gurdeep Singh Sappal is Admin In-charge at the All India Congress Committee. He was earlier the founding Chief Executive and Editor-in-Chief of Rajya Sabha TV.'],
           ['Joshua Osih', 'President, Social Democratic Front, Cameroon, and Member of Parliament', 'Joshua Osih is a Cameroonian politician, a member of the National Assembly and President of the Social Democratic Front (SDF), elected in 2023 to succeed the party\'s founder, John Fru Ndi. He was the SDF\'s candidate in the 2018 presidential election.'],
           ['Saptagiri Ulaka', 'Member of Parliament, Lok Sabha (Koraput); AICC In-charge, Tripura, Manipur, Nagaland and Sikkim', 'Saptagiri Ulaka is a Member of the Lok Sabha representing Koraput, Odisha, for the Indian National Congress, first elected in 2019 and re-elected in 2024. He chairs the Standing Committee on Rural Development and Panchayati Raj and serves as AICC In-charge for Tripura, Manipur, Nagaland and Sikkim. He previously worked as a Senior Project Manager at Infosys in the United States, and earlier with Ranbaxy and HCL Technologies.', MOD],
         ],
@@ -307,11 +303,9 @@ const COUNTRY = {
   'Supriya Shrinate': 'India',
   'Ebrahim Patel': 'South Africa',
   'Jayati Ghosh': 'India',
-  'Thomas Piketty': 'France',
   'Dariana Polo': 'Venezuela',
   'Eduardo Zanatta': 'Brazil',
-  'María José Pizarro': 'Colombia',
-  'Yves Bunkulu Zola': 'DR Congo',
+  'Andisiwe Kumbaca': 'South Africa',
   'Anies Baswedan': 'Indonesia',
   'Nurul Izzah Anwar': 'Malaysia',
   'Maria Iñiguez': 'Ecuador',
@@ -319,7 +313,6 @@ const COUNTRY = {
   'Naseer Hussain': 'India',
   'Pascal Affi N’Guessan': 'Côte d’Ivoire',
   'Supra Mahumapelo': 'South Africa',
-  'Machris Cabreros': 'Philippines',
   'Saptagiri Ulaka': 'India',
   'Javier Eduardo Monge Matamoros': 'Costa Rica',
   'Jo Leinen': 'Germany',
@@ -409,7 +402,6 @@ const COUNTRY = {
   'Sir Iqbal Sacranie': 'United Kingdom',
   'Deepender Hooda': 'India',
   'Krishna Allavaru': 'India',
-  'Gurdeep Singh Sappal': 'India',
   'Joshua Osih': 'Cameroon',
   'Kasthuriraani Patto': 'Malaysia',
   'Anand Sharma': 'India',
@@ -430,7 +422,7 @@ const COUNTRY = {
 
 // No photo yet (initials instead)
 // Remove a name here once its photo is in public/assets/speakers/.
-const NO_PHOTO = new Set([])
+const NO_PHOTO = new Set(['Andisiwe Kumbaca'])
 // "María José Pizarro" -> "maria-jose-pizarro", the photo's file name
 const slug = (name) => name.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 

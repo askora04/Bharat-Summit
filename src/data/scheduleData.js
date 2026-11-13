@@ -27,7 +27,7 @@ export const DAYS = [
           {
             label: "Speakers",
             items: [
-              "Salman Khurshid"
+              "Salman Khurshid (Former External Affairs Minister & Chair, INC Foreign Affairs Department)"
             ]
           },
           {
@@ -49,10 +49,10 @@ export const DAYS = [
           {
             label: "Panelists",
             items: [
-              "D. Sridhar Babu (Minister of IT, Govt of Telangana)",
+              "D. Sridhar Babu (Minister for Information Technology, Electronics & Communications, Industries & Commerce and Legislative Affairs, Govt. of Telangana)",
               "Tikendar Singh Panwar (Former Mayor, Shimla & Urban Expert)",
               "Vijay Mahajan (CEO, Rajiv Gandhi Foundation)",
-              "Shaikh Salauddin (Indian Federation of App-Based Transport Workers)",
+              "Shaikh Salauddin (National General Secretary, Indian Federation of App-Based Transport Workers)",
               "Sajjad Shahid (Historian)"
             ]
           },
@@ -99,12 +99,19 @@ export const DAYS = [
         title: "India and the World",
         parts: [
           {
+            text: "An exhibition and experience space at the venue entrance, open to all delegates and visitors."
+          },
+          {
+            label: "What you will find",
             items: [
-              "Exhibition: 140 years of INC",
-              "India and the world maps",
-              "Interactive booths (screen-printing Constitution, caricature artists, bangle workshops etc.)",
-              "Booths + explainers on Rights-Based Programmes (RTI, NREGA, RTE etc.)",
-              "Booths + explainers on INC state governments' flagship programmes (3)"
+              "India and the World (a country-by-country exhibition with murals tracing India’s historical, cultural, economic and diplomatic relations with nations across the world)",
+              "140 Years of the Indian National Congress (an exhibition on the party’s history and its role in India’s freedom struggle and nation-building)",
+              "Art (internationally significant artworks on display)",
+              "Food stalls (regional Indian and international cuisine)",
+              "Cultural stalls (crafts, textiles and traditions from across India)",
+              "Activity stalls (screen-printing the Constitution, caricature artists, bangle-making and other hands-on activities)",
+              "Book stalls (books on politics, history, policy and progressive thought)",
+              "Rights and governance (booths and explainers on electoral integrity, rights-based programmes (RTI, NREGA, RTE etc.) and the flagship programmes of INC state governments)"
             ]
           }
         ],
@@ -122,7 +129,7 @@ export const DAYS = [
             items: [
               "Jeese Marks (Rihla Research & Advisory, Australia)",
               "Francesco Lapenta (Founding Director, Institute of Future and Innovation Studies)",
-              "Sridhar Babu (Minister for IT, Telangana)",
+              "D. Sridhar Babu (Minister for Information Technology, Electronics & Communications, Industries & Commerce and Legislative Affairs, Govt. of Telangana)",
               "Frédéric Zgainski (Former MP, Democratic Movement, France)",
               "Monty All (Policy Analyst for Digital Policy, FEPS)"
             ]
@@ -147,7 +154,6 @@ export const DAYS = [
             items: [
               "Ebrahim Patel (Former Minister, South Africa)",
               "Prof Jayati Ghosh (UN High-level Advisory Board on Economic and Social Affairs)",
-              "Prof Thomas Piketty (online)",
               "Guillaume Long (Former Foreign Minister, Ecuador)"
             ]
           },
@@ -172,7 +178,7 @@ export const DAYS = [
               "Jessali Zarazúa (Secretary General, IUSY, Mexico)",
               "Eduardo Zanatta (Councillor, PT, Brazil)",
               "Alice Bernard-Montini (EDP)",
-              "Yves Bunkulu (Youth Minister, Democratic Republic of the Congo)",
+              "Andisiwe Kumbaca (Member of the National Assembly of South Africa)",
               "Dariana Polo (Coordinator, International Secretariat, Cambiemos Movement, Venezuela)"
             ]
           },
@@ -195,8 +201,8 @@ export const DAYS = [
           {
             label: "Panelists",
             items: [
-              "Ponnam Prabhakar Goud (Minister of Transport, Govt of Telangana)",
-              "Danasari Seethakka (Minister of Women and Child Welfare, Govt of Telangana)",
+              "Ponnam Prabhakar Goud (Minister of Transport and Backward Classes Welfare, Govt of Telangana)",
+              "Danasari Seethakka (Minister for Panchayat Raj & Rural Development, Women & Child Welfare, Govt. of Telangana)",
               "Prof. Kancha Ilaiah Shepherd (Former Director, CSSEIP, MANUU, Hyderabad)",
               "Prof. Sujatha Surepally (Professor, Satavahana University)",
               "Alka Lamba (President, All India Mahila Congress)"
@@ -221,7 +227,7 @@ export const DAYS = [
           {
             label: "Panelists",
             items: [
-              "Adluri Laxman Kumar (MLA, Telangana)",
+              "Adluri Laxman Kumar (Minister for Scheduled Castes Development Department, Tribal Welfare Department, Department for Empowerment of Persons with Disabilities, Senior Citizens and Transgender persons)",
               "Dr P. Vinay Kumar (Gastroenterological Surgeon & Social Activist)",
               "Prof. Shantha Sinha (Child Rights Activist)",
               "Ram Murthy Sunkari (Senior Journalist)",
@@ -232,7 +238,7 @@ export const DAYS = [
           {
             label: "Moderator",
             items: [
-              "Dr Arathi Krishna (MLC, Karnataka)"
+              "Dr. Arathi Krishna (MLC, Karnataka & Vice Chairperson, Department of Foreign Affairs, AICC)"
             ]
           }
         ],
@@ -248,11 +254,8 @@ export const DAYS = [
             label: "Speakers",
             items: [
               "Anies Baswedan (Former Education Minister, Indonesia)",
-              "Machris Cabreros (Global Coordinator, Progressive Alliance)",
               "Nurul Izzah Anwar (Executive Chair, Suluh Centre & Former MP)",
-              "Josh Osih (President, Social Democratic Front, Cameroon, and Member of Parliament)",
-              "Maria Jose Pizarro (Former Senator, representing the Instituto de Pensamiento Progresista (IPP))",
-              "Gurdeep Sappal (Admin In-charge, AICC)"
+              "Josh Osih (President, Social Democratic Front, Cameroon, and Member of Parliament)"
             ]
           },
           {
@@ -349,7 +352,7 @@ export const DAYS = [
             label: "Speakers",
             items: [
               "Mallu Bhatti Vikramarka (Deputy Chief Minister, Govt of Telangana)",
-              "D. Sridhar Babu (Minister of IT, Govt of Telangana)",
+              "D. Sridhar Babu (Minister for Information Technology, Electronics & Communications, Industries & Commerce and Legislative Affairs, Govt. of Telangana)",
               "N. Uttam Kumar Reddy (Minister of Irrigation, Food & Civil Supplies, Govt of Telangana)"
             ]
           }
@@ -629,7 +632,7 @@ export const DAYS = [
             label: "Launch of Our World Institute & Resolution",
             items: [
               "Dr Maria João Rodrigues (Former FEPS President & Former Portuguese Minister)",
-              "Salman Khurshid (INC)"
+              "Salman Khurshid (Former External Affairs Minister & Chair, INC Foreign Affairs Department)"
             ]
           },
           {
