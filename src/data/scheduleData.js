@@ -1,6 +1,7 @@
 // Agenda & Schedule, from the agenda tab of the "Bharat Summit 2026" content document (Google Docs).
 // Generated from the document; internal working notes in it are left out. Each session's kind sets its
 // colours, the document's own (KINDS); "place" is the line under the agenda name, e.g. the panel's letter.
+// Names and designations here are mirrored on the speakers page (speakersData.js): update both together.
 
 // The four kinds of session and their colours in the document: the agenda cell and the rest of the row
 export const KINDS = {
