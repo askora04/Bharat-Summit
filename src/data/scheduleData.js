@@ -271,7 +271,7 @@ export const DAYS = [
         no: 11,
         kind: "panel",
         agenda: "Panel Discussion 5",
-        title: "Panel 5: Climate Change",
+        title: "Panel 5: Climate Change & the Emerging World Order",
         parts: [
           {
             label: "Speakers",
@@ -286,7 +286,7 @@ export const DAYS = [
           {
             label: "Moderator",
             items: [
-              "Prof Rajeev Gowda (Former MP)"
+              "Prof Rajeev Gowda (Former MP & Head of INC Research Department)"
             ]
           }
         ],
@@ -328,7 +328,7 @@ export const DAYS = [
             items: [
               "Catherine Arnold (National Executive, Labour Party UK)",
               "Renuka Chaudhary (INC MP & Former Union Minister, India)",
-              "Hella Ben Youssef (Former Minister, Tunisia)",
+              "Khaoula Lachuar (International Secretary, USFP)",
               "Ntombikayise Sibhidla (NEC member, ANC Women's League)"
             ]
           },
@@ -351,13 +351,13 @@ export const DAYS = [
           {
             label: "Speakers",
             items: [
-              "Mallu Bhatti Vikramarka (Deputy Chief Minister, Govt of Telangana)",
+              "Mallu Bhatti Vikramarka (Deputy Chief Minister, Minister for Finance & Planning, Energy, Govt. of Telangana)",
               "D. Sridhar Babu (Minister for Information Technology, Electronics & Communications, Industries & Commerce and Legislative Affairs, Govt. of Telangana)",
               "N. Uttam Kumar Reddy (Minister of Irrigation, Food & Civil Supplies, Govt of Telangana)"
             ]
           }
         ],
-        time: "05:30 pm – 06:30 pm"
+        time: "05:00 pm – 06:30 pm"
       }
     ]
   },
@@ -403,12 +403,12 @@ export const DAYS = [
           {
             label: "Panelists",
             items: [
-              "Prof. M. Kodandaram (Chairperson, Telangana Joint Action Committee)",
+              "Prof. M. Kodandaram (MLC, Telangana & President, TJS)",
               "Dr Alekhya Punjala (Classical Dancer)",
               "Prof. Ajay Gudavarthy (Professor, JNU)",
               "Sandeep Dikshit (Chairperson, Rachnatmak Congress)",
-              "Krishna Rao (Cultural Minister)",
-              "Prof. Apoorvanand (Delhi University)"
+              "Jupally Krishna Rao (Minister for Tourism & Culture, Prohibition & Excise, Govt. of Telangana)",
+              "Prof. Nitin Sinha (Senior Research Fellow, Leibniz-Zentrum Moderner Orient (ZMO), Berlin)"
             ]
           },
           {
@@ -432,7 +432,8 @@ export const DAYS = [
               "Antton Rönnholm (Former Vice President, Social Democratic Party, Finland)",
               "Christian Salm (Head of Democracy, FEPS)",
               "Peangpanor Boonklum (Advisor to the Leader of the Opposition, People's Party)",
-              "Dr Mario Aguja (Akbayan Executive Committee Member)"
+              "Dr Mario Aguja (Akbayan Executive Committee Member)",
+              "Gábor Scheiring (Professor, Georgetown University in Qatar (Doha) & Former Member of Parliament, Hungary)"
             ]
           },
           {
@@ -453,7 +454,6 @@ export const DAYS = [
           {
             label: "Speakers",
             items: [
-              "Nika Kovač (D-Hub, Slovenia)",
               "Johan Hassel (Center for American Progress Action Fund (CAP Action), USA)",
               "Kunthida Rungruengkiat (Former MP, People's Party, Thailand)",
               "Øyvind Wenensland (Head of Strategy, Norwegian Labour Party)",
@@ -479,10 +479,10 @@ export const DAYS = [
           {
             label: "Panelists",
             items: [
-              "Vakiti Srihari (MLA, Telangana)",
+              "Vakiti Srihari (Minister for Animal Husbandry, Dairy Development & Fisheries, and Sports & Youth Services, Govt. of Telangana)",
               "Mohammad Azharuddin (Minister for Minority Welfare and Public Enterprises, Govt of Telangana)",
               "Vamsi Krishna Gaddam (MP, Lok Sabha)",
-              "Vinesh Phogat (MLA, Haryana)",
+              "Dr. Vikrant Bhuria (Chairman, AICC Adivasi Department)",
               "Brijendra Singh (Vice Chairman, AICC Foreign Affairs)",
               "Anil Kumar Yadav (MP)"
             ]
@@ -508,10 +508,10 @@ export const DAYS = [
             items: [
               "Anjali Bhardwaj (Transparency Rights Activist)",
               "Tara Rao (Eddelu, Karnataka)",
-              "Dr Sirivella Prasad (AICC In-charge, Maharashtra)",
-              "Dr Parnika Reddy (MLA)",
+              "Dr. Sirivella Prasad (AICC In-Charge, Maharashtra & Permanent Invitee, CWC)",
+              "Dr. Chittem Parnika Reddy (MLA, Telangana)",
               "Prof. Mukulika Banerjee (Professor, London School of Economics)",
-              "Sashikant Senthil (MP, Lok Sabha)"
+              "Prof. Muqtedar Khan (Professor, Delaware University)"
             ]
           },
           {
@@ -532,9 +532,9 @@ export const DAYS = [
           {
             label: "Speakers",
             items: [
-              "Jonas Kalambayi (Senator, Democratic Republic of the Congo)",
               "Kent Härstedt (Vice President of the OSCE Parliamentary Assembly)",
-              "Driss Lachgar (First Secretary, USFP, Morocco)"
+              "Driss Lachgar (First Secretary, USFP, Morocco)",
+              "Hana Jalloul (MEP & Vice President, Socialist International) (online)"
             ]
           },
           {
@@ -555,17 +555,16 @@ export const DAYS = [
           {
             label: "Speakers",
             items: [
-              "Priyank Kharge (Home Minister, Karnataka)",
               "Basem Kamel (Senator, Egypt)",
               "Guillaume Long (Former Minister of Foreign Affairs and Human Mobility of Ecuador)",
-              "Naseer Hussain (Deputy Whip, Rajya Sabha & MP)",
-              "Dr Maria João Rodrigues (Former FEPS President & Former Portuguese Minister)"
+              "Dr Maria João Rodrigues (Former FEPS President & Former Portuguese Minister)",
+              "Dakota Legoete (Member, ANC National Executive Committee, South Africa)"
             ]
           },
           {
             label: "Moderator from INC",
             items: [
-              "Manish Tewari (MP, INC)"
+              "M. M. Pallam Raju (Former Minister of Education of India)"
             ]
           }
         ],
@@ -580,7 +579,7 @@ export const DAYS = [
           {
             label: "Speakers",
             items: [
-              "Helle Lyng (Journalist, Norway)",
+              "Fredrico Assis (Special Envoy for Information Integrity, COP30)",
               "Leonard Novy (Director, Institute for Media & Communications, Germany)",
               "Sangeeta Baruah Pisharoty (President, Press Club of India)",
               "Francesco Lapenta (Founding Director, Institute of Future and Innovation Studies)"
@@ -618,14 +617,15 @@ export const DAYS = [
           {
             label: "Speeches",
             items: [
-              "Patrick Gaspard (USA)",
+              "Patrick Gaspard (Former Executive Director, Democratic National Committee)",
               "Thanathorn Juangroongruangkit (Chairperson, Progressive Movement Foundation & Former Leader, Future Forward Party, Thailand)",
               "Junya Ogawa (President, Democratic Reform Party, Japan)",
               "Giacomo Filibeck (Secretary General, PES)",
               "Pascal Affi N’Guessan (Former Prime Minister, Côte d’Ivoire)",
               "Supra Mahumapelo (Deputy Secretary General, ANC)",
               "Bert Koenders (Former Foreign Minister, Netherlands)",
-              "Anies Baswedan (Former Minister, Indonesia)"
+              "Anies Baswedan (Former Minister, Indonesia)",
+              "Justice B. Sudershan Reddy (Former Judge, Supreme Court of India)"
             ]
           },
           {
@@ -636,10 +636,17 @@ export const DAYS = [
             ]
           },
           {
+            label: "Closing remarks",
+            items: [
+              "D. Sridhar Babu (Industry Minister, Telangana)",
+              "Uttam Kumar Reddy (Irrigation Minister, Telangana)"
+            ]
+          },
+          {
             text: "Photo Op for the Press and Family Photo"
           }
         ],
-        time: "04:00 pm – 06:00 pm"
+        time: "03:00 pm – 05:00 pm"
       }
     ]
   }
