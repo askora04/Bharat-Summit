@@ -341,24 +341,6 @@ export const DAYS = [
           }
         ],
         time: "04:00 pm – 05:15 pm"
-      },
-      {
-        no: 15,
-        kind: "telangana",
-        agenda: "Telangana Rising Plenary",
-        place: "Plenary 1",
-        title: "Plenary 1: Interactive Session with Leaders",
-        parts: [
-          {
-            label: "Speakers",
-            items: [
-              "Mallu Bhatti Vikramarka (Deputy Chief Minister, Minister for Finance & Planning, Energy, Govt. of Telangana)",
-              "D. Sridhar Babu (Minister for Information Technology, Electronics & Communications, Industries & Commerce and Legislative Affairs, Govt. of Telangana)",
-              "N. Uttam Kumar Reddy (Minister of Irrigation, Food & Civil Supplies, Govt of Telangana)"
-            ]
-          }
-        ],
-        time: "05:00 pm – 06:30 pm"
       }
     ]
   },
@@ -369,7 +351,7 @@ export const DAYS = [
     date: "Saturday, 14 November 2026",
     sessions: [
       {
-        no: 16,
+        no: 14,
         kind: "telangana",
         agenda: "Telangana Rising Panel",
         place: "Panel E",
@@ -395,7 +377,7 @@ export const DAYS = [
         time: "10:00 am – 11:30 am"
       },
       {
-        no: 17,
+        no: 15,
         kind: "telangana",
         agenda: "Telangana Rising Panel",
         place: "Panel F",
@@ -422,7 +404,7 @@ export const DAYS = [
         time: "10:00 am – 11:30 am"
       },
       {
-        no: 18,
+        no: 16,
         kind: "panel",
         agenda: "Panel Discussion 8",
         title: "Panel 8: Progressivism & Accountability",
@@ -447,7 +429,7 @@ export const DAYS = [
         time: "10:30 am – 11:30 am"
       },
       {
-        no: 19,
+        no: 17,
         kind: "panel",
         agenda: "Panel Discussion 9",
         title: "Panel 9: Innovative Ideas for Progressives",
@@ -471,7 +453,7 @@ export const DAYS = [
         time: "10:30 am – 11:30 am"
       },
       {
-        no: 20,
+        no: 18,
         kind: "telangana",
         agenda: "Telangana Rising Panel",
         place: "Panel G",
@@ -498,7 +480,7 @@ export const DAYS = [
         time: "12:00 pm – 01:30 pm"
       },
       {
-        no: 21,
+        no: 19,
         kind: "telangana",
         agenda: "Telangana Rising Panel",
         place: "Panel H",
@@ -525,7 +507,7 @@ export const DAYS = [
         time: "12:00 pm – 01:30 pm"
       },
       {
-        no: 22,
+        no: 20,
         kind: "panel",
         agenda: "Panel Discussion 10",
         title: "Panel 10: The New World Order",
@@ -548,7 +530,7 @@ export const DAYS = [
         time: "01:00 pm – 02:00 pm"
       },
       {
-        no: 23,
+        no: 21,
         kind: "panel",
         agenda: "Panel Discussion 11",
         title: "Panel 11: Peace in the New World Order",
@@ -572,7 +554,7 @@ export const DAYS = [
         time: "01:00 pm – 02:00 pm"
       },
       {
-        no: 24,
+        no: 22,
         kind: "panel",
         agenda: "Panel Discussion 12",
         title: "Panel 12: The Future of Media",
@@ -596,7 +578,7 @@ export const DAYS = [
         time: "01:00 pm – 02:00 pm"
       },
       {
-        no: 25,
+        no: 23,
         kind: "plenary",
         agenda: "Valedictory session",
         title: "Valedictory Session: Delivering Global Justice",

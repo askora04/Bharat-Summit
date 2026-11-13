@@ -238,14 +238,6 @@ const RAW = [
         ],
       },
       {
-        title: 'Plenary 1: Interactive Session with Leaders', when: `${FRI} | 5:00 pm - 6:30 pm`,
-        speakers: [
-          ['Mallu Bhatti Vikramarka', 'Deputy Chief Minister, Minister for Finance & Planning, Energy, Govt. of Telangana', 'Mallu Bhatti Vikramarka, Deputy Chief Minister, Minister for Finance & Planning, Energy, Govt. of Telangana, speaks at Plenary 1: Interactive Session with Leaders.'],
-          ['D. Sridhar Babu', 'Minister for Information Technology, Electronics & Communications, Industries & Commerce and Legislative Affairs, Govt. of Telangana', 'D. Sridhar Babu, Minister for Information Technology, Electronics & Communications, Industries & Commerce and Legislative Affairs, Govt. of Telangana, speaks at Plenary 1: Interactive Session with Leaders.'],
-          ['N. Uttam Kumar Reddy', 'Minister of Irrigation, Food & Civil Supplies, Govt of Telangana', 'N. Uttam Kumar Reddy, Minister of Irrigation, Food & Civil Supplies, Govt of Telangana, speaks at Plenary 1: Interactive Session with Leaders.'],
-        ],
-      },
-      {
         title: 'Panel E: Telangana Rising – Cooperative Federalism', when: `${SAT} | 10:00 am - 11:30 am`,
         speakers: [
           ['N. Uttam Kumar Reddy', 'Minister of Irrigation, Food & Civil Supplies, Govt of Telangana', 'N. Uttam Kumar Reddy, Minister of Irrigation, Food & Civil Supplies, Govt of Telangana, speaks at Panel E: Telangana Rising – Cooperative Federalism.'],
@@ -422,8 +414,7 @@ const COUNTRY = {
 
 // No photo yet (initials instead)
 // Remove a name here once its photo is in public/assets/speakers/.
-const NO_PHOTO = new Set(['Andisiwe Kumbaca', 'Khaoula Lachuar', 'Gábor Scheiring', 'Hana Jalloul', 'Dakota Legoete', 'M. M. Pallam Raju',
-  'Fredrico Assis', 'Justice B. Sudershan Reddy', 'Prof. Nitin Sinha', 'Dr. Vikrant Bhuria', 'Prof. Muqtedar Khan'])
+const NO_PHOTO = new Set([])
 // "María José Pizarro" -> "maria-jose-pizarro", the photo's file name
 const slug = (name) => name.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 
