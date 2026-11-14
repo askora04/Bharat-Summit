@@ -120,7 +120,6 @@ const RAW = [
         title: 'Panel 9: Innovative Ideas for Progressives', when: `${SAT} | 10:30 am - 11:30 am`,
         about: 'Progressive movements need new ways of organising, communicating and building political support in an increasingly undemocratic political environment. This session will bring together ideas, experiments and practical approaches that can help progressive organisations connect with people beyond traditional political structures. It is the ideas and experimentation panel. Rather than focusing on one constituency or issue, it asks what progressives can actually do differently in organising, campaigning and political communication.',
         speakers: [
-          ['Johan Hassel', 'Center for American Progress Action Fund (CAP Action), USA', 'Johan Hassel is Senior Fellow and Director of Global Progress at the Center for American Progress Action Fund (CAP Action), where he leads work on democracy, accountability, inclusive growth and climate, and on a transatlantic progressive partnership. He served as International Secretary of the Swedish Social Democratic Party from 2018 to 2022. He was earlier CEO of the Swedish think tank Global Challenge (Global Utmaning) and Secretary-General of the International Union of Socialist Youth.'],
           ['Kunthida Rungruengkiat', 'Former MP, People\'s Party, Thailand', 'Kunthida Rungruengkiat is Director of the Progressive Movement Foundation in Thailand, which supports pro-democracy initiatives at national and local levels. She is a Thai academic and former politician who served as Deputy Leader of the Future Forward Party and as a member of the House of Representatives. After the party was dissolved in 2020, the Constitutional Court banned her from politics for ten years.'],
           ['Oyvind Wenensland', 'Head of Strategy, Norwegian Labour Party', 'Øyvind Grøslie Wennesland is Head of Strategy and International Secretary of the Norwegian Labour Party. In 2026 he served as acting State Secretary in the Office of the Prime Minister of Norway, under Prime Minister Jonas Gahr Støre.'],
           ['Maria Iñiguez', 'Congresswoman, Ecuador', 'Maria Iñiguez is a member of the National Assembly of Ecuador.'],
@@ -319,7 +318,6 @@ const COUNTRY = {
   'Antton Rönnholm': 'Finland',
   'Peangpanor Boonklum': 'Thailand',
   'Amitabh Dubey': 'India',
-  'Johan Hassel': 'USA',
   'Kunthida Rungruengkiat': 'Thailand',
   'Oyvind Wenensland': 'Norway',
   'Guillaume Long': 'Ecuador',

@@ -437,7 +437,6 @@ export const DAYS = [
           {
             label: "Speakers",
             items: [
-              "Johan Hassel (Center for American Progress Action Fund (CAP Action), USA)",
               "Kunthida Rungruengkiat (Former MP, People's Party, Thailand)",
               "Øyvind Wenensland (Head of Strategy, Norwegian Labour Party)",
               "Maria Iñiguez (Congresswoman, Ecuador)"
