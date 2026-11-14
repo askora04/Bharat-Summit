@@ -17,8 +17,8 @@ const NAV_LINKS = [
 // shortcut: generic platform URLs, replace with the real Bharat Summit profile links before launch
 const SOCIAL_LINKS = [
   { label: 'Facebook', href: 'https://www.facebook.com/bharatsummit2025', icon: icon('facebook') },
-  { label: 'Instagram', href: 'https://www.instagram.com/bharatsummit2025', icon: icon('instagram') },
-  { label: 'X', href: 'https://x.com/BharatSummit_25', icon: icon('x') },
+  { label: 'Instagram', href: 'https://www.instagram.com/bharat_summit', icon: icon('instagram') },
+  { label: 'X', href: 'https://x.com/Bharat_Summit', icon: icon('x') },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/company/bharatsummit/', icon: icon('linkedin') },
   { label: 'YouTube', href: 'https://www.youtube.com/@Bharat_Summit', icon: icon('youtube') },
 ]
