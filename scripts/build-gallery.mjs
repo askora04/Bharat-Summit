@@ -3,6 +3,7 @@
 //   public/gallery/gallery.json             what the site reads: albums, photos, captions
 //   public/gallery/<album>/<photo>-<w>.webp  each photo at every width in SIZES
 // Usage: npm run gallery -- <folder with album folders> [<another folder with album folders> ...]
+// An album whose folder isn't found keeps the photos it already has in gallery.json.
 //   e.g. npm run gallery -- "D:/govt/Photos for the website-20261028T204223Z-1-001/Photos for the website"
 // Re-running skips photos already converted, so new photos can be added to an album at any time.
 import { readdir, mkdir, readFile, writeFile, access } from 'node:fs/promises'
@@ -26,8 +27,17 @@ const ALBUMS = [
     caption: 'Panels and conversations on day two' },
   { folder: 'Final Day', id: 'final-day', title: 'Final Day', date: '2025-04-26',
     caption: 'The final day, with Rahul Gandhi on the main stage at HICC' },
-  { folder: 'IMages', id: 'bharat-summit-2026', title: 'Bharat Summit 2026', credit: '© Bharat Summit',
+  { folder: 'IMages', id: 'bharat-summit-2026', title: 'Bharat Summit 2025', credit: '© Bharat Summit',
     caption: 'Press conference ahead of Bharat Summit 2026' },
+  // Bharat Summit 2026: pass the folder that holds "Bharat Summit 2026" (e.g. C:/Users/askor/Downloads)
+  { folder: 'Bharat Summit 2026/Day 0', id: '2026-day-0', title: 'Day 0', credit: '© Bharat Summit',
+    caption: 'Day 0 of Bharat Summit 2026' },
+  { folder: 'Bharat Summit 2026/Day 1', id: '2026-day-1', title: 'Day 1', credit: '© Bharat Summit',
+    caption: 'Day 1 of Bharat Summit 2026' },
+  { folder: 'Bharat Summit 2026/Day 2', id: '2026-day-2', title: 'Day 2', credit: '© Bharat Summit',
+    caption: 'Day 2 of Bharat Summit 2026' },
+  { folder: 'Bharat Summit 2026/Valedictory', id: '2026-valedictory', title: 'Valedictory', credit: '© Bharat Summit',
+    caption: 'The valedictory session of Bharat Summit 2026' },
 ]
 
 // Optional per-photo lines, replacing the album caption: { "day-2/250425mw0154": "..." }
@@ -82,8 +92,16 @@ for (const album of ALBUMS) {
   let dir
   for (const src of SOURCES) if (!dir && (await exists(join(src, album.folder)))) dir = join(src, album.folder)
   if (!dir) {
-    console.error(`Album folder "${album.folder}" not found in: ${SOURCES.join(', ')}`)
-    process.exit(1)
+    const built = Object.values(previous).filter((p) => p.album === album.id)
+    if (!built.length) {
+      console.error(`Album folder "${album.folder}" not found in: ${SOURCES.join(', ')}`)
+      process.exit(1)
+    }
+    console.log(`${album.id.padEnd(22)} folder not given, keeping its ${built.length} built photos`)
+    photos.push(...built)
+    const { folder: _folder, ...info } = album
+    albums.push({ ...info, count: built.length })
+    continue
   }
   // a byte-identical copy of an earlier file (e.g. "DSC_1764 (1).JPG" beside "DSC_1764.JPG") is left out
   const seen = new Set()

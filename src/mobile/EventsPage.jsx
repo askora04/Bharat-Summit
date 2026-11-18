@@ -6,8 +6,12 @@ import { MonumentHero } from './SpeakersPage.jsx'
 import EventVideos from './EventVideos.jsx'
 import './events.css'
 
-// The only albums offered as filters, besides "All photos"
-const FILTER_ALBUMS = ['day-1', 'day-2', 'final-day', 'bharat-summit-2026']
+// Each edition and its albums, oldest first, each shown as a filter beside "All photos"
+const YEARS = {
+  2025: ['bharat-summit-2026', 'day-1', 'day-2', 'final-day'],
+  2026: ['2026-valedictory', '2026-day-0', '2026-day-1', '2026-day-2'],
+}
+const YEAR_LIST = Object.keys(YEARS)
 const PAGE = 24 // photos added per step as the visitor scrolls (divides evenly into 4, 3 and 2 columns)
 // Image width per viewport, matching the grid columns in events.css. Every tile is the same 3:2 frame
 // (nearly all the photos are 3:2; the few square or upright ones are cropped here and shown whole in
@@ -88,6 +92,7 @@ function Lightbox({ photos, index, gallery, onStep, onClose }) {
 
 export default function EventsPage() {
   const { gallery, error } = useGallery()
+  const [year, setYear] = useState(YEAR_LIST[0])
   const [albumId, setAlbumId] = useState('all')
   const [shown, setShown] = useState(PAGE)
   const [open, setOpen] = useState(null) // index into `photos`
@@ -96,10 +101,12 @@ export default function EventsPage() {
   const photos = useMemo(() => {
     if (!gallery) return []
     if (albumId !== 'all') return gallery.photos.filter((p) => p.album === albumId)
-    // "All" opens with the featured photos (one from across every album), then the rest in album order
-    const featured = new Set(gallery.featured)
-    return [...gallery.featured, ...gallery.photos.filter((p) => !featured.has(p))]
-  }, [gallery, albumId])
+    // "All" opens with the year's featured photos, then the rest in album order
+    const inYear = (p) => YEARS[year].includes(p.album)
+    const featured = gallery.featured.filter(inYear)
+    const first = new Set(featured)
+    return [...featured, ...gallery.photos.filter((p) => inYear(p) && !first.has(p))]
+  }, [gallery, year, albumId])
   const visible = photos.slice(0, shown)
   const more = photos.length - visible.length
 
@@ -115,6 +122,7 @@ export default function EventsPage() {
   }, [more, shown])
 
   const pick = (id) => { setAlbumId(id); setShown(PAGE) }
+  const pickYear = (y) => { setYear(y); pick('all') }
   const close = useCallback(() => setOpen(null), [])
   const step = useCallback((d) => setOpen((i) => (i + d + photos.length) % photos.length), [photos.length])
 
@@ -132,9 +140,14 @@ export default function EventsPage() {
           <TriBar />
           <Title light="PHOTO" bold="GALLERY" />
         </div>
+        <div className="ev-years" role="group" aria-label="Edition">
+          {YEAR_LIST.map((y) => (
+            <button key={y} type="button" className="ev-year" aria-pressed={year === y} onClick={() => pickYear(y)}>{y}</button>
+          ))}
+        </div>
         {gallery && (
           <div className="ev-albums" role="group" aria-label="Albums">
-            {[{ id: 'all', title: 'All photos' }, ...FILTER_ALBUMS.map((id) => gallery.albumById[id]).filter(Boolean)].map((al) => (
+            {[{ id: 'all', title: 'All photos' }, ...YEARS[year].map((id) => gallery.albumById[id]).filter(Boolean)].map((al) => (
               <button key={al.id} type="button" className="ev-album" aria-pressed={albumId === al.id} onClick={() => pick(al.id)}>
                 {al.title}
               </button>

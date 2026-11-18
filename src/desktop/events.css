@@ -11,6 +11,15 @@
 .ev-photos-head .lede { margin-top: 12px; font-size: 18px; }
 .ev-photos-head .section-title { margin-top: 14px; }
 
+/* Edition toggle: two halves of one pill, under the section title */
+.ev-years { display: flex; width: max-content; margin: 0 auto 24px; padding: 4px; border-radius: 999px; background: #eef1f4; }
+.ev-year {
+  min-width: 96px; padding: 10px 22px; border: 0; border-radius: 999px; background: transparent;
+  font: 700 15px/1.2 var(--font-body); color: var(--navy); cursor: pointer; transition: background .25s, color .25s;
+}
+.ev-year[aria-pressed='true'] { background: var(--navy); color: #fff; box-shadow: 0 4px 12px rgba(19, 52, 95, .2); }
+.ev-year:focus-visible { outline: 3px solid #fbaa12; outline-offset: 2px; }
+
 /* Album filter: one pill per album, with its photo count */
 /* one row; on screens too narrow for all albums it scrolls sideways instead of wrapping */
 .ev-albums {
