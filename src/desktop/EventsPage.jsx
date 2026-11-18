@@ -5,13 +5,13 @@ import { MonumentHero } from './SpeakersPage.jsx'
 import EventVideos from './EventVideos.jsx'
 import './events.css'
 
-// Each edition and its albums, oldest first, each shown as a filter beside "All photos"
+// Each edition and its albums, each shown as a filter beside "All photos"
 const YEARS = {
   2025: ['bharat-summit-2026', 'day-1', 'day-2', 'final-day'],
   2026: ['2026-valedictory', '2026-day-0', '2026-day-1', '2026-day-2'],
 }
-const YEAR_LIST = Object.keys(YEARS)
-const PAGE = 24 // photos added per step as the visitor scrolls (divides evenly into 4, 3 and 2 columns)
+const YEAR_LIST = Object.keys(YEARS).reverse() // newest first
+const PAGE = 24 // photos added per "Show more photos" click (divides evenly into 4, 3 and 2 columns)
 // Image width per viewport, matching the grid columns in events.css. Every tile is the same 3:2 frame
 // (nearly all the photos are 3:2; the few square or upright ones are cropped here and shown whole in
 // the full-screen view), so the rows line up.
@@ -93,7 +93,6 @@ export default function EventsPage() {
   const [albumId, setAlbumId] = useState('all')
   const [shown, setShown] = useState(PAGE)
   const [open, setOpen] = useState(null) // index into `photos`
-  const sentinel = useRef(null)
 
   const photos = useMemo(() => {
     if (!gallery) return []
@@ -107,17 +106,6 @@ export default function EventsPage() {
   const visible = photos.slice(0, shown)
   const more = photos.length - visible.length
 
-  // Load the next batch when the end of the grid comes near
-  useEffect(() => {
-    const el = sentinel.current
-    if (!el || !more) return
-    // not while the footer's contact block is on screen: loading then would push it away after a Contact jump
-    const atContact = () => document.getElementById('contact')?.getBoundingClientRect().top < innerHeight
-    const io = new IntersectionObserver(([e]) => e.isIntersecting && !atContact() && setShown((s) => s + PAGE), { rootMargin: '800px 0px' })
-    io.observe(el)
-    return () => io.disconnect()
-  }, [more, shown])
-
   const pick = (id) => { setAlbumId(id); setShown(PAGE) }
   const pickYear = (y) => { setYear(y); pick('all') }
   const close = useCallback(() => setOpen(null), [])
@@ -129,8 +117,8 @@ export default function EventsPage() {
         <p>A glimpse into the ideas, conversations, and people shaping a stronger, smarter India.</p>
       </MonumentHero>
 
-      {/* Videos get their own band, ahead of the photo gallery */}
-      <EventVideos />
+      {/* The films open the page; the interviews and clips follow the photo gallery */}
+      <EventVideos part="films" />
 
       <main className="ev-page" id="gallery">
         <div className="ev-photos-head">
@@ -164,13 +152,15 @@ export default function EventsPage() {
         </div>
 
         {more > 0 && (
-          <div className="ev-more" ref={sentinel}>
+          <div className="ev-more">
             <button type="button" className="ev-more-btn" onClick={() => setShown((s) => s + PAGE)}>
               Show more photos <span>{more} more</span>
             </button>
           </div>
         )}
       </main>
+
+      <EventVideos part="clips" />
 
       {open !== null && photos[open] && (
         <Lightbox photos={photos} index={open} gallery={gallery} onStep={step} onClose={close} />

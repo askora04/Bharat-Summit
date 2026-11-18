@@ -145,9 +145,9 @@ function ClipViewer({ clips, index, onStep, onClose }) {
   )
 }
 
-// Its own band on the Events page, above the photo gallery: the films, then the vertical
-// interviews and clips (a row scrolled sideways by hand)
-export default function EventVideos() {
+// A band on the Events page: part="films" (above the photo gallery) or part="clips", the vertical
+// interviews and clips (below it, a row scrolled sideways by hand)
+export default function EventVideos({ part }) {
   const videos = useVideos()
   const [playing, setPlaying] = useState(null) // the film playing in place, by id
   const [openClip, setOpenClip] = useState(null) // index of the clip open full screen
@@ -158,20 +158,23 @@ export default function EventVideos() {
 
   const films = videos.filter((v) => v.kind === 'film')
   const clips = videos.filter((v) => v.kind === 'clip')
-  // a clip opens full screen; any film playing in place stops
-  const openClipAt = (i) => { setPlaying(null); setOpenClip(i) }
+  // a clip opens full screen; any film playing in place (in the films band) pauses
+  const openClipAt = (i) => { document.querySelectorAll('.vd-main video').forEach((el) => el.pause()); setOpenClip(i) }
 
   return (
-    <section className="vd" id="videos">
+    <section className="vd" id={part === 'films' ? 'videos' : 'clips'}>
       <div className="vd-wrap">
-        <header className="vd-intro">
-          <TriBar />
-          <Title light="EVENT" bold="VIDEOS" />
-        </header>
+        {part === 'films' && films.length > 0 && (
+          <>
+            <header className="vd-intro">
+              <TriBar />
+              <Title light="EVENT" bold="VIDEOS" />
+            </header>
+            <Films films={films} playing={playing} setPlaying={setPlaying} />
+          </>
+        )}
 
-        {films.length > 0 && <Films films={films} playing={playing} setPlaying={setPlaying} />}
-
-        {clips.length > 0 && (
+        {part === 'clips' && clips.length > 0 && (
           <div className="vd-clips-block">
             <h3 className="vd-kicker vd-head">Interviews &amp; moments</h3>
             {/* a carousel: slides on its own (one card every 3s, looping) and by hand (swipe, trackpad, mouse drag) */}
