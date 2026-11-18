@@ -9,7 +9,7 @@ import './events.css'
 // Each edition and its albums, each shown as a filter beside "All photos"
 const YEARS = {
   2025: ['bharat-summit-2026', 'day-1', 'day-2', 'final-day'],
-  2026: ['2026-valedictory', '2026-day-0', '2026-day-1', '2026-day-2'],
+  2026: ['2026-day-0', '2026-day-1', '2026-day-2', '2026-valedictory'],
 }
 const YEAR_LIST = Object.keys(YEARS).reverse() // newest first
 const PAGE = 24 // photos added per "Show more photos" click (divides evenly into 4, 3 and 2 columns)
@@ -120,9 +120,6 @@ export default function EventsPage() {
         <p>A glimpse into the ideas, conversations, and people shaping a stronger, smarter India.</p>
       </MonumentHero>
 
-      {/* The films open the page; the interviews and clips follow the photo gallery */}
-      <EventVideos part="films" />
-
       <main className="ev-page" id="gallery">
         <div className="ev-photos-head">
           <TriBar />
@@ -163,7 +160,8 @@ export default function EventsPage() {
         )}
       </main>
 
-      <EventVideos part="clips" />
+      {/* Videos get their own band, after the photo gallery */}
+      <EventVideos />
 
       {open !== null && photos[open] && (
         <Lightbox photos={photos} index={open} gallery={gallery} onStep={step} onClose={close} />

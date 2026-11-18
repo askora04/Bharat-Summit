@@ -1,7 +1,7 @@
-/* Events page: the video bands, films above the photo gallery and clips below it.
+/* Events page: the video band below the photo gallery.
    Shares --ev-width with the hero and the gallery so every left edge lines up. */
 
-.vd { padding: 72px 0 80px; background: linear-gradient(#f3f8fc, #eef5fb); border-block: 1px solid #e1ebf4; }
+.vd { padding: 72px 0 80px; background: linear-gradient(#f3f8fc, #eef5fb); border-top: 1px solid #e1ebf4; }
 .vd-wrap { width: var(--ev-width); margin: 0 auto; }
 .vd-intro { display: flex; flex-direction: column; align-items: center; margin-bottom: 44px; text-align: center; }
 .vd-intro .section-title { margin-top: 14px; }
