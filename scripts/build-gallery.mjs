@@ -50,6 +50,8 @@ const FEATURED = [
   'final-day/dsc02063', 'final-day/dsc_2229', 'final-day/dsc02193', 'final-day/dsc02381', 'final-day/dsc_2284',
 ]
 const FEATURED_COUNT = 16
+// Photos taken off the site; the originals stay in their folders but are never converted
+const REMOVED = new Set(['2026-day-0/2ac5d2db09480e5e83084210ca3e835d40c73e72f91588b187a36031985bf401'])
 
 if (!SOURCES.length) {
   console.error('Usage: npm run gallery -- <folder with album folders> [<another folder with album folders> ...]')
@@ -114,7 +116,7 @@ for (const album of ALBUMS) {
 
   // a few at a time: each conversion already uses several cores
   const credit = album.credit ?? CREDIT
-  const queue = files.map((f) => [join(dir, f), `${album.id}/${photoId(f)}`, credit])
+  const queue = files.map((f) => [join(dir, f), `${album.id}/${photoId(f)}`, credit]).filter(([, id]) => !REMOVED.has(id))
   const done = []
   const workers = Array.from({ length: Math.max(2, availableParallelism() / 2) }, async () => {
     for (let job; (job = queue.shift());) {
