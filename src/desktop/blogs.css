@@ -46,3 +46,16 @@
   .bl-side { position: static; }
   .bl-post-title { font-size: 32px; }
 }
+
+/* dark-blue headings: justified, smaller so lines hold more words and the stretched gaps stay small, one even line height */
+.bl-card-title, .bl-post-title, .bl-recent-title, .bl-prose h2, .bl-prose h3 { text-align: justify; hyphens: auto; line-height: 1.4; }
+.bl-card-title { font-size: 20px; }
+.bl-post-title { font-size: 26px; line-height: 1.5; letter-spacing: 0; }
+.bl-recent-title { font-size: 13px; }
+.bl-recent { grid-template-columns: 76px minmax(0, 1fr); gap: 12px; }
+.bl-recent img { width: 76px; height: 60px; }
+.bl-prose h2 { font-size: 24px; }
+.bl-prose h3 { font-size: 19px; }
+@media (max-width: 760px) { .bl-post-title { font-size: 22px; } }
+/* post title: a block that fills the column edge to edge; useFitText sizes it so each line is nearly full before justify */
+.bl-post-title { line-height: 1; text-wrap: balance; text-align-last: justify; }

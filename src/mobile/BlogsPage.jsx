@@ -3,6 +3,7 @@ import { MonumentHero } from './SpeakersPage.jsx'
 import { Link } from '../lib/router.jsx'
 import { GALLERY_URL } from '../lib/gallery.js'
 import { POSTS } from '../data/blogData.js'
+import { useFitText } from '../lib/fitText.js'
 import './schedule.css' // the banner's .sc-hero sizing, shared with the Schedule page
 import './blogs.css'
 
@@ -14,6 +15,11 @@ function Cover({ post, sizes }) {
   // covers starting with / are local files in public/, the rest come from the gallery
   const src = (w) => `${post.cover.startsWith("/") ? "" : GALLERY_URL + "/"}${post.cover}-${w}.webp`
   return <img src={src(960)} srcSet={`${src(480)} 480w, ${src(960)} 960w, ${src(1600)} 1600w`} sizes={sizes} alt="" loading="lazy" decoding="async" />
+}
+
+function FitTitle({ text }) {
+  const ref = useFitText(text)
+  return <h1 ref={ref} className="bl-post-title">{text}</h1>
 }
 
 const Meta = ({ post }) => (
@@ -76,7 +82,7 @@ function Post({ post }) {
         <nav className="bl-crumbs" aria-label="Breadcrumb">
           <Link to="/">Home</Link> <span aria-hidden>›</span> <Link to="/blogs" back>Blogs</Link>
         </nav>
-        <h1 className="bl-post-title">{post.title}</h1>
+        <FitTitle text={post.title} />
         <Meta post={post} />
         <figure className="bl-post-cover"><Cover post={post} sizes="(max-width: 1100px) 100vw, 760px" /></figure>
         <div className="bl-prose">
