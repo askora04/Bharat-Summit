@@ -56,6 +56,5 @@
 .bl-recent img { width: 76px; height: 60px; }
 .bl-prose h2 { font-size: 24px; }
 .bl-prose h3 { font-size: 19px; }
-@media (max-width: 760px) { .bl-post-title { font-size: 22px; } }
 /* post title: a block that fills the column edge to edge; useFitText sizes it so each line is nearly full before justify */
 .bl-post-title { line-height: 1; text-wrap: balance; text-align-last: justify; }

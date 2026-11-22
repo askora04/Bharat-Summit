@@ -11,16 +11,20 @@ export function useFitText(text, { min = 20, max = 34, fill = 0.95 } = {}) {
     const fit = () => {
       el.style.fontSize = ''
       const base = parseFloat(getComputedStyle(el).fontSize)
-      const width = el.clientWidth
+      // on-screen sizes throughout: the phone layout scales the whole page, and mixing scaled with unscaled sizes misfits
+      const width = el.getBoundingClientRect().width
+      const scale = width / el.clientWidth
       el.style.whiteSpace = 'nowrap'
-      const natural = el.scrollWidth
-      el.style.whiteSpace = ''
+      el.style.width = 'max-content'
+      const natural = el.getBoundingClientRect().width
+      el.style.whiteSpace = el.style.width = ''
       if (!width || !natural) return
-      const lines = Math.max(1, Math.round(natural / width))
+      let lines = Math.max(1, Math.round(natural / width))
+      if (base * (lines * width * fill) / natural < min) lines++ // too small at this many lines: use one more
       let size = Math.min(max, Math.max(min, base * (lines * width * fill) / natural))
       el.style.fontSize = `${size}px`
-      const lineHeight = () => parseFloat(getComputedStyle(el).lineHeight)
-      for (let i = 0; i < 12 && size > min && Math.round(el.clientHeight / lineHeight()) > lines; i++) {
+      const count = () => Math.round(el.getBoundingClientRect().height / (parseFloat(getComputedStyle(el).lineHeight) * scale))
+      for (let i = 0; i < 12 && size > min && count() > lines; i++) {
         size = Math.max(min, size * 0.98)
         el.style.fontSize = `${size}px`
       }
