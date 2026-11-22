@@ -4,17 +4,19 @@ import { a, watchSpeakerCards, startSpeakerFloat, startSpeakerTaps } from './sha
 import { Link, usePath, returnScroll } from '../lib/router.jsx'
 import { applyPageMeta } from '../lib/seo.js'
 import { SPEAKERS } from '../data/speakersData.js'
+import { POSTS } from '../data/blogData.js'
 import HomePage from './HomePage.jsx'
 import AboutPage from './AboutPage.jsx'
 import SchedulePage from './SchedulePage.jsx'
 import SpeakersPage from './SpeakersPage.jsx'
 import EventsPage from './EventsPage.jsx'
+import BlogsPage from './BlogsPage.jsx'
 import Footer from './Footer.jsx'
 import { startMotion, watchInView } from '../lib/motion.js'
 import './motion.css'
 
-const NAV = ['HOME', 'ABOUT US', 'SCHEDULE', 'SPEAKERS', 'SUMMIT GALLERY', 'CONNECT']
-const MENU = ['HOME', 'ABOUT', 'SCHEDULES', 'SPEAKERS', 'SUMMIT GALLERY', 'CONNECT']
+const NAV = ['HOME', 'ABOUT US', 'SCHEDULE', 'SPEAKERS', 'SUMMIT GALLERY', 'BLOGS', 'CONNECT']
+const MENU = ['HOME', 'ABOUT', 'SCHEDULES', 'SPEAKERS', 'SUMMIT GALLERY', 'BLOGS', 'CONNECT']
 
 function NavLink({ label, onClick }) {
   const path = usePath().replace(/\/$/, '') || '/'
@@ -23,6 +25,7 @@ function NavLink({ label, onClick }) {
     : label === 'SPEAKERS' ? '/speakers'
     : label.startsWith('SCHEDULE') ? '/schedule'
     : label === 'SUMMIT GALLERY' ? '/summit-gallery'
+    : label === 'BLOGS' ? '/blogs'
     : null
 
   if (page) {
@@ -70,7 +73,7 @@ function Header({ page }) {
   return (
     <>
       {/* on-dark: pages whose banner is dark right under the header, so the tagline reads in white */}
-      <header className={`header ${scrolled ? 'is-scrolled' : ''} ${page === 'home' ? 'is-home' : ''} ${['speakers', 'schedule', 'events'].includes(page) ? 'on-dark' : ''}`}>
+      <header className={`header ${scrolled ? 'is-scrolled' : ''} ${page === 'home' ? 'is-home' : ''} ${['speakers', 'schedule', 'events', 'blogs'].includes(page) ? 'on-dark' : ''}`}>
         <div className="lockup">
           <Link to="/" className="logo" aria-label="Bharat Summit home">
             <img className="brand-logo" src={a('logo.svg')} width="52" height="52" alt="" />
@@ -116,6 +119,8 @@ export default function App() {
     : route.startsWith('/speakers') ? 'speakers'
     : route === '/schedule' ? 'schedule'
     : route === '/summit-gallery' || route === '/events' ? 'events'
+    : route === '/blogs' ? 'blogs'
+    : route.startsWith('/blogs/') ? 'blog' // one post: no dark banner under the header
     : 'home'
 
   useEffect(watchSpeakerCards, []) // speaker cards: measure their details (shared.jsx)
@@ -135,9 +140,11 @@ export default function App() {
     // speakers list); the address bar is corrected to match, so it can be shared or bookmarked as is
     const speaker = page === 'speakers' && route.split('/')[2] !== undefined
       ? SPEAKERS.find((s) => s.id === Number(route.split('/')[2])) : null
-    const shown = page === 'home' ? '' : page === 'speakers' && !speaker ? '/speakers' : page === 'events' ? '/summit-gallery' : route
+    const post = page === 'blog' ? POSTS.find((p) => p.slug === route.split('/')[2]) : null
+    const shown = page === 'home' ? '' : page === 'speakers' && !speaker ? '/speakers' : page === 'events' ? '/summit-gallery'
+      : page === 'blog' && !post ? '/blogs' : route
     if (shown !== route) window.history.replaceState(window.history.state, '', (shown || '/') + window.location.hash)
-    applyPageMeta(page, speaker, shown)
+    applyPageMeta(post ? 'blogs' : page, speaker, shown, post)
 
     // Sections fade up when entering the viewport (children staggered 150ms in CSS).
     const io = new IntersectionObserver(
@@ -161,6 +168,7 @@ export default function App() {
         : page === 'speakers' ? <SpeakersPage />
         : page === 'schedule' ? <SchedulePage />
         : page === 'events' ? <EventsPage />
+        : page === 'blogs' || page === 'blog' ? <BlogsPage slug={route.split('/')[2]} />
         : <HomePage />}
       <Footer />
     </div>

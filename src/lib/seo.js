@@ -25,14 +25,20 @@ const PAGES = {
     title: `Summit Gallery · ${NAME}`,
     description: 'Photos and videos from Bharat Summit, the global gathering of progressive leaders hosted by the Government of Telangana in Hyderabad.',
   },
+  blogs: {
+    title: `Blogs · ${NAME}`,
+    description: 'Recaps, analysis and stories from Bharat Summit: the conversations on democracy, global justice and international cooperation held in Hyderabad.',
+  },
 }
 
-const set = (selector, attr, value) => document.head.querySelector(selector)?.setAttribute(attr, value)
+const set =(selector, attr, value) => document.head.querySelector(selector)?.setAttribute(attr, value)
 
-// page: a key of PAGES; speaker: the open speaker profile, if any; path: the page's address, '' for home
-export function applyPageMeta(page, speaker, path) {
+// page: a key of PAGES; speaker: the open speaker profile, if any; path: the page's address, '' for home;
+// post: the open blog post, if any
+export function applyPageMeta(page, speaker, path, post) {
   const { title, description } = speaker
     ? { title: `${speaker.name} · ${NAME}`, description: `${speaker.name}, ${speaker.role}, speaks at ${speaker.session}, ${NAME}, Hyderabad.` }
+    : post ? { title: `${post.title} · Bharat Summit`, description: post.excerpt }
     : PAGES[page] ?? PAGES.home
   const url = SITE + (path || '/')
   document.title = title
