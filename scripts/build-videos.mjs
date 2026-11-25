@@ -20,6 +20,8 @@ const OUT = 'public/videos'
 // `poster`: seconds into the video for the poster frame. `kind`: 'film' (16:9, shown large) or 'clip' (9:16).
 // `subtitle`: an optional second line under a clip's title, such as the speaker's role.
 const VIDEOS = [
+  { file: 'Bharath Summit 16 9 Final.mp4', id: 'bharat-summit-2026-film', kind: 'film', poster: 104,
+    title: 'Bharat Summit 2026: the film', caption: '13–14 November 2026 · Hyderabad, Telangana' },
   { file: 'bs25_tvc_v4.mp4', id: 'bharat-summit-2025-tv-spot', kind: 'film', poster: 25.5,
     title: 'Bharat Summit 2025: TV spot', caption: '25–26 April 2025 · Hyderabad International Convention Centre' },
   { file: 'bs25_promo_2404.mp4', id: 'bharat-summit-2025-promo', kind: 'film', poster: 9.4,
